@@ -27,8 +27,8 @@ Projekt bude využívat:
 
 ## Časový harmonogram
 
-| Období              | Cíl                                                           |
+| Období              | Cíl                                                                             |
 |---------------------|---------------------------------------------------------------------------------|
-| **Léto (do září)**  | Návrh struktury aplikace, tvorba základního UI, napojení na databázi           |
-| **Podzim**          | Vylepšování vzhledu stránky (Tailwind), doplňování funkcí, testování a ladění  |
-| **Konec roku**      | Práce na volitelných funkcích, responzivita, nové nápady, příprava prezentace  |
+| **Do září**         | Návrh struktury aplikace, tvorba základního UI, napojení na databázi            |
+| **Podzim**          | Vylepšování vzhledu stránky (Tailwind), doplňování funkcí, testování a ladění   |
+| **Konec roku**      | Práce na volitelných funkcích, responzivita, nové nápady, příprava prezentace   |
