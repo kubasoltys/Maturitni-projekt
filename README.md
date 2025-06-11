@@ -1,6 +1,6 @@
-# 🟢 Tymio – Webová aplikace pro správu fotbalového týmu
+# Tymio – Webová aplikace pro správu fotbalového týmu
 
-## 🎯 Cíl projektu
+## Cíl projektu
 
 Cílem projektu **Tymio** je vytvořit moderní, přehlednou a responzivní webovou aplikaci, která umožní fotbalovým týmům (zejména amatérským a školním) efektivně spravovat své hráče, plánovat zápasy a tréninky, sledovat docházku a uchovávat základní statistiky.
 
@@ -8,7 +8,7 @@ Aplikace bude určena především pro trenéry a manažery týmů, ale může b
 
 ---
 
-## 🛠️ Použité technologie
+## Použité technologie
 
 Projekt bude realizován s využitím následujícího technologického stacku:
 
@@ -25,20 +25,10 @@ Projekt bude realizován s využitím následujícího technologického stacku:
 
 ---
 
-## 📅 Časový harmonogram
+## Časový harmonogram
 
-| Období              | Cíl / Aktivita                                                                 |
+| Období              | Cíl                                                           |
 |---------------------|---------------------------------------------------------------------------------|
 | **Léto (do září)**  | Návrh struktury aplikace, tvorba základního UI, napojení na databázi, login     |
 | **Podzim**          | Vylepšování vzhledu stránky (Tailwind), doplňování funkcí, testování a ladění  |
 | **Zima a dál**      | Práce na volitelných funkcích, responzivita, nové nápady, příprava prezentace  |
-
----
-
-## 🔮 Možné rozšíření projektu
-
-- Statistika výkonu hráčů (góly, asistence, docházka)
-- Export výsledků do PDF/Excel
-- Připomínky pro tréninky e-mailem
-- Víceúrovňová práva uživatelů (hráč/trenér/admin)
-- Responzivní mobilní verze
