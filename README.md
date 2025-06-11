@@ -2,7 +2,7 @@
 
 ## Cíl projektu
 
-Cílem projektu **Tymio** je vytvořit moderní, přehlednou a responzivní webovou aplikaci, která umožní fotbalovým týmům (zejména amatérským a školním) efektivně spravovat své hráče, plánovat zápasy a tréninky, sledovat docházku a uchovávat základní statistiky.
+Cílem projektu **Tymio** je vytvořit moderní, přehlednou a responzivní webovou aplikaci, která umožní fotbalovým týmům efektivně spravovat své hráče, plánovat zápasy a tréninky, sledovat docházku a uchovávat základní statistiky.
 
 Aplikace bude určena především pro trenéry a manažery týmů, ale může být rozšířena i o přístup pro samotné hráče.
 
@@ -10,10 +10,10 @@ Aplikace bude určena především pro trenéry a manažery týmů, ale může b
 
 ## Použité technologie
 
-Projekt bude realizován s využitím následujícího technologického stacku:
+Projekt bude využívat:
 
 - **Frontend:**
-  - `HTML5` – Struktura webových stránek
+  - `HTML` – Struktura webových stránek
   - `Tailwind CSS` – Moderní utility-first framework pro stylování
 
 - **Backend:**
@@ -21,7 +21,7 @@ Projekt bude realizován s využitím následujícího technologického stacku:
   - `Django` – Webový framework pro správu databáze, uživatelských účtů a logiky aplikace
 
 - **Databáze:**
-  - `SQLite` (nebo případně PostgreSQL pro nasazení) – Ukládání dat o hráčích, zápasech, statistikách a uživatelích
+  - `SQLite` – Ukládání dat o hráčích, zápasech, statistikách a uživatelích
 
 ---
 
@@ -29,6 +29,6 @@ Projekt bude realizován s využitím následujícího technologického stacku:
 
 | Období              | Cíl                                                           |
 |---------------------|---------------------------------------------------------------------------------|
-| **Léto (do září)**  | Návrh struktury aplikace, tvorba základního UI, napojení na databázi, login     |
+| **Léto (do září)**  | Návrh struktury aplikace, tvorba základního UI, napojení na databázi           |
 | **Podzim**          | Vylepšování vzhledu stránky (Tailwind), doplňování funkcí, testování a ladění  |
-| **Zima a dál**      | Práce na volitelných funkcích, responzivita, nové nápady, příprava prezentace  |
+| **Konec roku**      | Práce na volitelných funkcích, responzivita, nové nápady, příprava prezentace  |
