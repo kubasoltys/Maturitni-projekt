@@ -1,8 +1,8 @@
-# Tymio – Webová aplikace pro správu fotbalového týmu
+# Squadra – Webová aplikace pro správu fotbalového týmu
 
 ## Cíl projektu
 
-Cílem projektu **Tymio** je vytvořit moderní, přehlednou a responzivní webovou aplikaci, která umožní fotbalovým týmům efektivně spravovat své hráče, plánovat zápasy a tréninky, sledovat docházku a uchovávat základní statistiky.
+Cílem projektu **Squadra** je vytvořit moderní, přehlednou a responzivní webovou aplikaci, která umožní fotbalovým týmům efektivně spravovat své hráče, plánovat zápasy a tréninky, sledovat docházku a uchovávat základní statistiky.
 
 Aplikace bude určena především pro trenéry a manažery týmů, ale může být rozšířena i o přístup pro samotné hráče.
 
