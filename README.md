@@ -29,6 +29,6 @@ Projekt bude využívat:
 
 | Období              | Cíl                                                                             |
 |---------------------|---------------------------------------------------------------------------------|
-| **Do září**         | Návrh struktury aplikace, tvorba základního UI, napojení na databázi            |
+| **Září**         | Návrh struktury aplikace, tvorba základního UI, napojení na databázi            |
 | **Podzim**          | Vylepšování vzhledu stránky (Tailwind), doplňování funkcí, testování a ladění   |
 | **Konec roku**      | Práce na volitelných funkcích, responzivita, nové nápady, příprava prezentace   |
