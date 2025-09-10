@@ -26,9 +26,9 @@ Projekt bude využívat:
 
 ---
 
-## ✅ Minimum Viable Product (MVP)
+## ✅ Obsah aplikace v bodech
 
-Aplikace bude v základní verzi obsahovat:
+Chtěl bych, aby aplikace obsahovala:
 
 - **Uživatelský systém**
   - Registrace a přihlášení uživatelů
