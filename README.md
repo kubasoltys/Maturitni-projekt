@@ -1,6 +1,6 @@
 # Squadra – Webová aplikace pro správu fotbalového týmu
 
-## Cíl projektu
+## 📌 Cíl projektu
 
 Cílem projektu **Squadra** je vytvořit moderní, přehlednou a responzivní webovou aplikaci, která umožní fotbalovým týmům efektivně spravovat své hráče, plánovat zápasy a tréninky, sledovat docházku a uchovávat základní statistiky.
 
@@ -8,7 +8,7 @@ Aplikace bude určena především pro trenéry a manažery týmů, ale může b
 
 ---
 
-## Použité technologie
+## 🛠️ Použité technologie
 
 Projekt bude využívat:
 
@@ -21,14 +21,46 @@ Projekt bude využívat:
   - `Django` – Webový framework pro správu databáze, uživatelských účtů a logiky aplikace
 
 - **Databáze:**
-  - `SQLite` – Ukládání dat o hráčích, zápasech, statistikách a uživatelích
+  - `SQLite` – (Zkušební) Ukládání dat o hráčích, zápasech, statistikách a uživatelích
+  - `PostgreSQL` – Pouze cíl, hlavní databáze projektu
 
 ---
 
-## Časový harmonogram
+## ✅ Minimum Viable Product (MVP)
 
-| Období              | Cíl                                                                             |
-|---------------------|---------------------------------------------------------------------------------|
-| **Září**         | Návrh struktury aplikace, tvorba základního UI, napojení na databázi            |
-| **Podzim**          | Vylepšování vzhledu stránky (Tailwind), doplňování funkcí, testování a ladění   |
-| **Konec roku**      | Práce na volitelných funkcích, responzivita, nové nápady, příprava prezentace   |
+Aplikace bude v základní verzi obsahovat:
+
+- **Uživatelský systém**
+  - Registrace a přihlášení uživatelů
+  - Role: trenér (admin) a hráč
+  - Základní správa profilu (heslo, kontaktní údaje, profilová fotka)
+
+- **Správa hráčů**
+  - Přidávání, editace a mazání hráčů
+  - Evidování základních údajů (jméno, číslo dresu, pozice, věk, kontakt)
+  - Seznam hráčů s vyhledáváním a filtrováním
+
+- **Zápasy a tréninky**
+  - Vytváření událostí (datum, čas, soupeř, místo)
+  - Přehledný seznam všech akcí
+  - Detail zápasu s výsledkem a klíčovými statistikami
+
+- **Docházka**
+  - Možnost potvrdit účast hráče na zápasu/tréninku
+  - Přehled docházky pro trenéra
+
+- **Dashboard**
+  - Zobrazení nadcházejících zápasů a tréninků
+  - Souhrn základních statistik (počet hráčů, odehraných zápasů, výhry/prohry)
+
+---
+
+## 🗓️ Časový harmonogram
+
+| Období        | Cíl                                                                 |
+|---------------|---------------------------------------------------------------------|
+| **Září**      | Návrh struktury aplikace, tvorba základního UI, napojení na databázi |
+| **Podzim**    | Vylepšování vzhledu stránky (Tailwind), doplňování funkcí, testování a ladění |
+| **Konec roku**| Práce na volitelných funkcích, responzivita, nové nápady, příprava prezentace |
+
+---
