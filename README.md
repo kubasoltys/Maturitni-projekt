@@ -21,8 +21,7 @@ Projekt bude využívat:
   - `Django` – Webový framework pro správu databáze, uživatelských účtů a logiky aplikace
 
 - **Databáze:**
-  - `SQLite` – (Zkušební) Ukládání dat o hráčích, zápasech, statistikách a uživatelích
-  - `PostgreSQL` – Pouze cíl, hlavní databáze projektu
+  - `PostgreSQL` – Ukládání dat o hráčích, zápasech, statistikách a uživatelích
 
 ---
 
@@ -33,7 +32,7 @@ Chtěl bych, aby aplikace obsahovala:
 - **Uživatelský systém**
   - Registrace a přihlášení uživatelů
   - Role: trenér (admin) a hráč
-  - Základní správa profilu (heslo, kontaktní údaje, profilová fotka)
+  - Základní správa profilu (heslo, kontaktní údaje)
 
 - **Správa hráčů**
   - Přidávání, editace a mazání hráčů
