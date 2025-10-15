@@ -1,382 +1,504 @@
 [
   {
-    "model": "contenttypes.contenttype",
+    "model": "admin.logentry",
+    "pk": 1,
     "fields": {
-      "app_label": "admin",
-      "model": "logentry"
+      "action_time": "2025-09-17T20:58:27.276Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "2",
+      "object_repr": "hrac",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
     }
   },
   {
-    "model": "contenttypes.contenttype",
+    "model": "admin.logentry",
+    "pk": 2,
     "fields": {
-      "app_label": "auth",
-      "model": "permission"
+      "action_time": "2025-09-17T20:58:51.489Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "1",
+      "object_repr": "hrac - hrac",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
     }
   },
   {
-    "model": "contenttypes.contenttype",
+    "model": "admin.logentry",
+    "pk": 3,
     "fields": {
-      "app_label": "auth",
-      "model": "group"
+      "action_time": "2025-09-17T21:02:02.477Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "3",
+      "object_repr": "trener",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
     }
   },
   {
-    "model": "contenttypes.contenttype",
+    "model": "admin.logentry",
+    "pk": 4,
     "fields": {
-      "app_label": "auth",
-      "model": "user"
+      "action_time": "2025-09-17T21:02:13.959Z",
+      "user": 1,
+      "content_type": 7,
+      "object_id": "2",
+      "object_repr": "trener - trener",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
     }
   },
   {
-    "model": "contenttypes.contenttype",
+    "model": "admin.logentry",
+    "pk": 5,
     "fields": {
-      "app_label": "contenttypes",
-      "model": "contenttype"
+      "action_time": "2025-09-17T21:02:38.670Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "2",
+      "object_repr": "hrac",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
     }
   },
   {
-    "model": "contenttypes.contenttype",
+    "model": "admin.logentry",
+    "pk": 6,
     "fields": {
-      "app_label": "sessions",
-      "model": "session"
+      "action_time": "2025-10-13T07:56:38.016Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "2",
+      "object_repr": "hrac",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
     }
   },
   {
-    "model": "contenttypes.contenttype",
+    "model": "admin.logentry",
+    "pk": 7,
     "fields": {
-      "app_label": "aplikace",
-      "model": "profile"
+      "action_time": "2025-10-15T11:40:02.902Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "2",
+      "object_repr": "hrac",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
     }
   },
   {
-    "model": "sessions.session",
-    "pk": "k6hscpvcc17s2tpctgask855msfz88ra",
+    "model": "admin.logentry",
+    "pk": 8,
     "fields": {
-      "session_data": ".eJxVjDsOwjAQRO_iGln-fyjpcwbL2d3gAHKkOKkQdyeWUkA10rw382Yp71tJe6M1zciuTLLLbzdmeFLtAB-53hcOS93WeeRd4SdtfFiQXrfT_TsouZVjbQ3JbFVEhVpoD87EoEUURhggBxAIrbJuIumj7XnIkyNvpdRa6sA-X75dNr0:1uxtFu:LICvOVqDoSOxuq8RnHnyEtfpdSvziUAqKQKBU3bI7IE",
-      "expire_date": "2025-09-28T20:23:26.460Z"
+      "action_time": "2025-10-15T11:40:33.853Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "3",
+      "object_repr": "trener",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
     }
   },
   {
-    "model": "sessions.session",
-    "pk": "w8sj579nd7ct80tgiz4w6pyqhcrfhg1o",
+    "model": "admin.logentry",
+    "pk": 9,
     "fields": {
-      "session_data": ".eJxVjMsOwiAQRf-FtSE8OpVx6b7fQAYYpGogKe3K-O_apAvd3nPOfQlP21r81nnxcxIXYcTpdwsUH1x3kO5Ub03GVtdlDnJX5EG7nFri5_Vw_w4K9fKtiSljPmM2jvSgEUklVgYUseMYFKPTDDBAGjLTyKBJgUabeXTWWC3eH_61OAU:1uyzSa:gYpQ4qMo0uGwwcgxvsMroJ4-KrDcnfEm_ddTDxpfXtY",
-      "expire_date": "2025-10-01T21:13:04.253Z"
+      "action_time": "2025-10-15T13:58:59.820Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "3",
+      "object_repr": "trener",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 10,
     "fields": {
-      "name": "Can add log entry",
-      "content_type": [
-        "admin",
-        "logentry"
-      ],
-      "codename": "add_logentry"
+      "action_time": "2025-10-15T13:59:04.873Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "2",
+      "object_repr": "hrac",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 11,
     "fields": {
-      "name": "Can change log entry",
-      "content_type": [
-        "admin",
-        "logentry"
-      ],
-      "codename": "change_logentry"
+      "action_time": "2025-10-15T16:30:14.705Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "4",
+      "object_repr": "trener1",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 12,
     "fields": {
-      "name": "Can delete log entry",
-      "content_type": [
-        "admin",
-        "logentry"
-      ],
-      "codename": "delete_logentry"
+      "action_time": "2025-10-15T16:30:53.917Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "1",
+      "object_repr": "Jan Novák (Trenér)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 13,
     "fields": {
-      "name": "Can view log entry",
-      "content_type": [
-        "admin",
-        "logentry"
-      ],
-      "codename": "view_logentry"
+      "action_time": "2025-10-15T17:17:42.183Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "5",
+      "object_repr": "hrac1",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 14,
     "fields": {
-      "name": "Can add permission",
-      "content_type": [
-        "auth",
-        "permission"
-      ],
-      "codename": "add_permission"
+      "action_time": "2025-10-15T17:18:24.040Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "Petr Adamčík (Hráč)",
+      "action_flag": 1,
+      "change_message": "[{\"added\": {}}]"
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 15,
     "fields": {
-      "name": "Can change permission",
-      "content_type": [
-        "auth",
-        "permission"
-      ],
-      "codename": "change_permission"
+      "action_time": "2025-10-15T18:17:07.703Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "6",
+      "object_repr": "hrac2",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 16,
     "fields": {
-      "name": "Can delete permission",
-      "content_type": [
-        "auth",
-        "permission"
-      ],
-      "codename": "delete_permission"
+      "action_time": "2025-10-15T18:20:00.412Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "3",
+      "object_repr": "  (Hráč)",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 17,
     "fields": {
-      "name": "Can view permission",
-      "content_type": [
-        "auth",
-        "permission"
-      ],
-      "codename": "view_permission"
+      "action_time": "2025-10-15T18:20:08.254Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "7",
+      "object_repr": "hrac2",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 18,
     "fields": {
-      "name": "Can add group",
-      "content_type": [
-        "auth",
-        "group"
-      ],
-      "codename": "add_group"
+      "action_time": "2025-10-15T18:29:34.740Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "8",
+      "object_repr": "hrac2",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 19,
     "fields": {
-      "name": "Can change group",
-      "content_type": [
-        "auth",
-        "group"
-      ],
-      "codename": "change_group"
+      "action_time": "2025-10-15T18:33:33.492Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "9",
+      "object_repr": "hrac2",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 20,
     "fields": {
-      "name": "Can delete group",
-      "content_type": [
-        "auth",
-        "group"
-      ],
-      "codename": "delete_group"
+      "action_time": "2025-10-15T18:38:44.585Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "6",
+      "object_repr": "  (Hráč)",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 21,
     "fields": {
-      "name": "Can view group",
-      "content_type": [
-        "auth",
-        "group"
-      ],
-      "codename": "view_group"
+      "action_time": "2025-10-15T18:38:52.558Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "10",
+      "object_repr": "hrac2",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 22,
     "fields": {
-      "name": "Can add user",
-      "content_type": [
-        "auth",
-        "user"
-      ],
-      "codename": "add_user"
+      "action_time": "2025-10-15T19:16:06.810Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "10",
+      "object_repr": "zkouska zkouska (Hráč)",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 23,
     "fields": {
-      "name": "Can change user",
-      "content_type": [
-        "auth",
-        "user"
-      ],
-      "codename": "change_user"
+      "action_time": "2025-10-15T19:16:20.501Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "9",
+      "object_repr": "Vojtěch Vysoký (Hráč)",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 24,
     "fields": {
-      "name": "Can delete user",
-      "content_type": [
-        "auth",
-        "user"
-      ],
-      "codename": "delete_user"
+      "action_time": "2025-10-15T19:16:20.501Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "8",
+      "object_repr": "Lukáš Dlouhý (Hráč)",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 25,
     "fields": {
-      "name": "Can view user",
-      "content_type": [
-        "auth",
-        "user"
-      ],
-      "codename": "view_user"
+      "action_time": "2025-10-15T19:16:20.501Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "7",
+      "object_repr": "Pavel Novotný (Hráč)",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 26,
     "fields": {
-      "name": "Can add content type",
-      "content_type": [
-        "contenttypes",
-        "contenttype"
-      ],
-      "codename": "add_contenttype"
+      "action_time": "2025-10-15T19:16:20.501Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "1",
+      "object_repr": "Petr Adamčík (Hráč)",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 27,
     "fields": {
-      "name": "Can change content type",
-      "content_type": [
-        "contenttypes",
-        "contenttype"
-      ],
-      "codename": "change_contenttype"
+      "action_time": "2025-10-15T19:16:34.072Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "5",
+      "object_repr": "hrac1",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 28,
     "fields": {
-      "name": "Can delete content type",
-      "content_type": [
-        "contenttypes",
-        "contenttype"
-      ],
-      "codename": "delete_contenttype"
+      "action_time": "2025-10-15T19:16:34.072Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "12",
+      "object_repr": "hrac2",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 29,
     "fields": {
-      "name": "Can view content type",
-      "content_type": [
-        "contenttypes",
-        "contenttype"
-      ],
-      "codename": "view_contenttype"
+      "action_time": "2025-10-15T19:16:34.072Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "11",
+      "object_repr": "hrac3",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 30,
     "fields": {
-      "name": "Can add session",
-      "content_type": [
-        "sessions",
-        "session"
-      ],
-      "codename": "add_session"
+      "action_time": "2025-10-15T19:16:34.072Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "15",
+      "object_repr": "hrac4",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 31,
     "fields": {
-      "name": "Can change session",
-      "content_type": [
-        "sessions",
-        "session"
-      ],
-      "codename": "change_session"
+      "action_time": "2025-10-15T19:16:34.072Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "16",
+      "object_repr": "hrac5",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 32,
     "fields": {
-      "name": "Can delete session",
-      "content_type": [
-        "sessions",
-        "session"
-      ],
-      "codename": "delete_session"
+      "action_time": "2025-10-15T19:16:34.072Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "4",
+      "object_repr": "trener1",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 33,
     "fields": {
-      "name": "Can view session",
-      "content_type": [
-        "sessions",
-        "session"
-      ],
-      "codename": "view_session"
+      "action_time": "2025-10-15T19:16:34.072Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "13",
+      "object_repr": "trener2",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 34,
     "fields": {
-      "name": "Can add profile",
-      "content_type": [
-        "aplikace",
-        "profile"
-      ],
-      "codename": "add_profile"
+      "action_time": "2025-10-15T19:16:34.072Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "14",
+      "object_repr": "trener3",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 35,
     "fields": {
-      "name": "Can change profile",
-      "content_type": [
-        "aplikace",
-        "profile"
-      ],
-      "codename": "change_profile"
+      "action_time": "2025-10-15T19:31:45.473Z",
+      "user": 1,
+      "content_type": 9,
+      "object_id": "12",
+      "object_repr": "Pedro González López (Hráč)",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 36,
     "fields": {
-      "name": "Can delete profile",
-      "content_type": [
-        "aplikace",
-        "profile"
-      ],
-      "codename": "delete_profile"
+      "action_time": "2025-10-15T19:31:54.521Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "19",
+      "object_repr": "hrac2",
+      "action_flag": 3,
+      "change_message": ""
     }
   },
   {
-    "model": "auth.permission",
+    "model": "admin.logentry",
+    "pk": 37,
     "fields": {
-      "name": "Can view profile",
-      "content_type": [
-        "aplikace",
-        "profile"
-      ],
-      "codename": "view_profile"
+      "action_time": "2025-10-15T19:44:54.727Z",
+      "user": 1,
+      "content_type": 4,
+      "object_id": "21",
+      "object_repr": "trener2",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 38,
+    "fields": {
+      "action_time": "2025-10-15T19:45:06.645Z",
+      "user": 1,
+      "content_type": 8,
+      "object_id": "4",
+      "object_repr": "Hansi Flick (Trenér - FC Barcelona)",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"Jm\\u00e9no\"]}}]"
     }
   },
   {
     "model": "auth.user",
+    "pk": 1,
     "fields": {
       "password": "pbkdf2_sha256$1000000$a8MJBa7eVB5U52aSa0aGdh$ze9rkgpDtAT6tg9HZ7o5FuBaI2mOcJJ7llGJOR8/S1o=",
-      "last_login": "2025-09-17T21:12:47.818Z",
+      "last_login": "2025-10-15T19:44:29.754Z",
       "is_superuser": true,
       "username": "admin",
       "first_name": "",
@@ -391,146 +513,186 @@
   },
   {
     "model": "auth.user",
+    "pk": 17,
     "fields": {
-      "password": "pbkdf2_sha256$1000000$AnAOpmxsn7RJTQtVTWcUMD$DJQM27zeQpsSylCWsz3dY7F72AiPYofhnOhGtkJPaSg=",
-      "last_login": "2025-09-17T21:13:04.250Z",
+      "password": "pbkdf2_sha256$1000000$kORLJVfD0U3s2GsY32wqzu$EuZk9YVyTdD7WhwXH5p1Nb4m4Iuhpzu8qtT4fHqIy5U=",
+      "last_login": "2025-10-15T19:27:21.421Z",
       "is_superuser": false,
-      "username": "hrac",
+      "username": "trener1",
       "first_name": "",
       "last_name": "",
       "email": "",
       "is_staff": false,
       "is_active": true,
-      "date_joined": "2025-09-17T20:58:26.884Z",
+      "date_joined": "2025-10-15T19:27:21.016Z",
       "groups": [],
       "user_permissions": []
     }
   },
   {
     "model": "auth.user",
+    "pk": 18,
     "fields": {
-      "password": "pbkdf2_sha256$1000000$9xe59ISfc51io8UcVFllHF$/5CXVMoC1L5mhyOBLxdVBqytaMOadZ6kC3/nH6T74oE=",
-      "last_login": "2025-09-17T21:02:55.598Z",
+      "password": "pbkdf2_sha256$1000000$8G6mJ81MNoQANKkvRAaTKE$TyWih6eeNdaVtoFoVLD0IUQrkXOkNcPsjS6+HquGXqg=",
+      "last_login": "2025-10-15T19:47:59.267Z",
       "is_superuser": false,
-      "username": "trener",
+      "username": "hrac1",
       "first_name": "",
       "last_name": "",
       "email": "",
       "is_staff": false,
       "is_active": true,
-      "date_joined": "2025-09-17T21:02:02.081Z",
+      "date_joined": "2025-10-15T19:28:05.971Z",
       "groups": [],
       "user_permissions": []
     }
   },
   {
-    "model": "aplikace.profile",
-    "pk": 1,
+    "model": "auth.user",
+    "pk": 20,
     "fields": {
-      "user": [
-        "hrac"
-      ],
-      "role": "hrac"
+      "password": "pbkdf2_sha256$1000000$CliMi8Su0oRiZhOjYFBxUq$SN/WRUo+nJz7Ad7+QAWrYAbbMyDDCuQ7TrC5HkMOoKw=",
+      "last_login": "2025-10-15T19:32:23.553Z",
+      "is_superuser": false,
+      "username": "hrac2",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-10-15T19:32:23.112Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
-    "model": "aplikace.profile",
-    "pk": 2,
+    "model": "auth.user",
+    "pk": 21,
     "fields": {
-      "user": [
-        "trener"
-      ],
-      "role": "trener"
+      "password": "pbkdf2_sha256$1000000$J5D5QPF5SwPCe2l0TKUrfP$5P2HI0p9cfQ96abrseN4m3pdqsSkWfUfB1YLTylwEj0=",
+      "last_login": "2025-10-15T19:44:18.853Z",
+      "is_superuser": false,
+      "username": "trener2",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-10-15T19:41:09.129Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
-    "model": "admin.logentry",
-    "pk": 1,
+    "model": "auth.user",
+    "pk": 22,
     "fields": {
-      "action_time": "2025-09-17T20:58:27.276Z",
-      "user": [
-        "admin"
-      ],
-      "content_type": [
-        "auth",
-        "user"
-      ],
-      "object_id": "2",
-      "object_repr": "hrac",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
+      "password": "pbkdf2_sha256$1000000$Rvg5hfypQ0zvSFioTfaNBr$0iVeGDpnSgaTIMwZG4vpfgbm8mpHQL6ZVxtqhwQYpuU=",
+      "last_login": "2025-10-15T19:43:49.343Z",
+      "is_superuser": false,
+      "username": "hrac3",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-10-15T19:43:48.933Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
-    "model": "admin.logentry",
-    "pk": 2,
+    "model": "auth.user",
+    "pk": 23,
     "fields": {
-      "action_time": "2025-09-17T20:58:51.489Z",
-      "user": [
-        "admin"
-      ],
-      "content_type": [
-        "aplikace",
-        "profile"
-      ],
-      "object_id": "1",
-      "object_repr": "hrac - hrac",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
+      "password": "pbkdf2_sha256$1000000$tsPMoBVtTKxXLskMXjcvIv$/d5TJr/xVGUFdP4v67pc7c8/9tFx6qV2zWLVCLg7qAo=",
+      "last_login": "2025-10-15T19:46:27.120Z",
+      "is_superuser": false,
+      "username": "hrac4",
+      "first_name": "",
+      "last_name": "",
+      "email": "",
+      "is_staff": false,
+      "is_active": true,
+      "date_joined": "2025-10-15T19:46:26.710Z",
+      "groups": [],
+      "user_permissions": []
     }
   },
   {
-    "model": "admin.logentry",
-    "pk": 3,
+    "model": "sessions.session",
+    "pk": "gtk90e5fzt9e0oww0bilbe5ask08ufx1",
     "fields": {
-      "action_time": "2025-09-17T21:02:02.477Z",
-      "user": [
-        "admin"
-      ],
-      "content_type": [
-        "auth",
-        "user"
-      ],
-      "object_id": "3",
-      "object_repr": "trener",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
+      "session_data": ".eJxVjDsOwjAQRO_iGln-xD9Kes5grb1rHECOFCcV4u5gKQWUM-_NvFiEfatx77TGGdmZaXb67RLkB7UB8A7ttvC8tG2dEx8KP2jn1wXpeTncv4MKvY61kzlZn1Bbg1Acgk4KrVUyTBKJipFZgLJe0CT1N5IRJXjvdLYuFGDvD_xsOD8:1uz02v:9pxDUTW87S56gmgZu1lwPn3_1l2-HCI5BX41_UnXPKQ",
+      "expire_date": "2025-10-01T21:50:37.656Z"
     }
   },
   {
-    "model": "admin.logentry",
+    "model": "sessions.session",
+    "pk": "k6hscpvcc17s2tpctgask855msfz88ra",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQRO_iGln-fyjpcwbL2d3gAHKkOKkQdyeWUkA10rw382Yp71tJe6M1zciuTLLLbzdmeFLtAB-53hcOS93WeeRd4SdtfFiQXrfT_TsouZVjbQ3JbFVEhVpoD87EoEUURhggBxAIrbJuIumj7XnIkyNvpdRa6sA-X75dNr0:1uxtFu:LICvOVqDoSOxuq8RnHnyEtfpdSvziUAqKQKBU3bI7IE",
+      "expire_date": "2025-09-28T20:23:26.460Z"
+    }
+  },
+  {
+    "model": "aplikace.trenerprofile",
     "pk": 4,
     "fields": {
-      "action_time": "2025-09-17T21:02:13.959Z",
-      "user": [
-        "admin"
-      ],
-      "content_type": [
-        "aplikace",
-        "profile"
-      ],
-      "object_id": "2",
-      "object_repr": "trener - trener",
-      "action_flag": 1,
-      "change_message": "[{\"added\": {}}]"
+      "user": 17,
+      "first_name": "Hansi",
+      "last_name": "Flick",
+      "club": "FC Barcelona"
     }
   },
   {
-    "model": "admin.logentry",
+    "model": "aplikace.trenerprofile",
     "pk": 5,
     "fields": {
-      "action_time": "2025-09-17T21:02:38.670Z",
-      "user": [
-        "admin"
-      ],
-      "content_type": [
-        "auth",
-        "user"
-      ],
-      "object_id": "2",
-      "object_repr": "hrac",
-      "action_flag": 2,
-      "change_message": "[{\"changed\": {\"fields\": [\"password\"]}}]"
+      "user": 21,
+      "first_name": "Pep",
+      "last_name": "Guardiola",
+      "club": "Manchester City FC"
+    }
+  },
+  {
+    "model": "aplikace.hracprofile",
+    "pk": 11,
+    "fields": {
+      "user": 18,
+      "trener": 4,
+      "first_name": "Lamine",
+      "last_name": "Yamal"
+    }
+  },
+  {
+    "model": "aplikace.hracprofile",
+    "pk": 13,
+    "fields": {
+      "user": 20,
+      "trener": 4,
+      "first_name": "",
+      "last_name": "Pedri"
+    }
+  },
+  {
+    "model": "aplikace.hracprofile",
+    "pk": 14,
+    "fields": {
+      "user": 22,
+      "trener": 5,
+      "first_name": "Erling",
+      "last_name": "Haaland"
+    }
+  },
+  {
+    "model": "aplikace.hracprofile",
+    "pk": 15,
+    "fields": {
+      "user": 23,
+      "trener": 5,
+      "first_name": "Gianluigi",
+      "last_name": "Donnarumma"
     }
   }
 ]
