@@ -4,7 +4,9 @@
 
 <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-6">
     <h1 class="text-3xl font-bold text-gray-800 text-center">
-        Vítej {{ hrac.first_name }} {{ hrac.last_name }} na hráčském dashboardu
+        Vítej
+        <span class="bg-gradient-to-r from-blue-500 to-indigo-800 bg-clip-text text-transparent">{{ hrac.first_name }} {{ hrac.last_name }}</span>
+        na hráčském dashboardu!
     </h1>
 
     <a href="{% url 'logout' %}"

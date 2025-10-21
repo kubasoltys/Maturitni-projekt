@@ -7,35 +7,32 @@
 
     <form method="post" class="space-y-4">
       {% csrf_token %}
-      <input type="text" name="username" placeholder="Uživatelské jméno"
-             class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" required>
+      {{ form.non_field_errors }}
 
-      <input type="password" name="password" placeholder="Heslo"
-             class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-
-      <select name="role" class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400" required>
-        <option value="" disabled selected>Vyberte roli</option>
-        <option value="hrac">Hráč</option>
-        <option value="trener">Trenér</option>
-      </select>
+      {% for field in form %}
+        <div>
+          {{ field.errors }}
+          {{ field }}
+        </div>
+      {% endfor %}
 
       <button type="submit"
-                class="w-full inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
-                       bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
-                       hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
-            Pokračovat
-            </button>
+              class="w-full inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
+                     bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
+                     hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
+          Pokračovat
+      </button>
     </form>
 
     <a href="{% url 'login' %}"
-           class="w-full inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
-                  bg-gradient-to-r from-gray-400 to-gray-600 transform transition duration-300
-                  hover:from-gray-500 hover:to-gray-800 hover:scale-105 mt-4 text-center">
-            Zpět na přihlášení
-        </a>
+       class="w-full inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
+              bg-gradient-to-r from-gray-400 to-gray-600 transform transition duration-300
+              hover:from-gray-500 hover:to-gray-800 hover:scale-105 mt-4 text-center">
+        Zpět na přihlášení
+    </a>
 
-    {% if error %}
-      <p class="text-red-500 text-sm mt-4 text-center">{{ error }}</p>
+    {% if form.errors %}
+      <p class="text-red-500 text-sm mt-4 text-center">Zkontrolujte vyplněné údaje.</p>
     {% endif %}
   </div>
 </div>

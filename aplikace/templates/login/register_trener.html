@@ -1,36 +1,20 @@
 {% extends 'base.html' %}
-
 {% block content %}
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h2 class="text-2xl font-semibold mb-6 text-center">Doplň údaje</h2>
+        <h2 class="text-2xl font-semibold mb-6 text-center">Registrace trenéra</h2>
 
         <form method="post" class="space-y-4">
             {% csrf_token %}
-
-            <input type="text" name="first_name" placeholder="Jméno"
-                   class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-                   required>
-
-            <input type="text" name="last_name" placeholder="Příjmení"
-                   class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-                   required>
-
-            <input type="text" name="club" placeholder="Klub"
-                   class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-                   required>
+            {{ form.as_p }}
 
             <button type="submit"
                     class="w-full inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
-                       bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
-                       hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
-                Registrovat se
+                     bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
+                     hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
+                Dokončit registraci
             </button>
         </form>
-
-        {% if error %}
-        <p class="text-red-500 text-sm mt-4 text-center">{{ error }}</p>
-        {% endif %}
 
         <a href="{% url 'login' %}"
            class="w-full inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg

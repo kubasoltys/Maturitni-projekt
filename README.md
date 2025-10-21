@@ -64,3 +64,10 @@ Chtěl bych, aby aplikace obsahovala:
 | **Konec roku**| Práce na volitelných funkcích, responzivita, nové nápady, příprava prezentace |
 
 ---
+
+## 📚 Zdroje
+
+- **Jak změnit databázi na PostgreSQL** - https://www.youtube.com/watch?v=ZgRkGfoy2nE&t=589s
+- **Jak používat Tailwind** - https://tailwindcss.com/
+- **Django Authentication** - https://docs.djangoproject.com/en/5.2/topics/auth/
+                              https://docs.djangoproject.com/en/5.2/topics/auth/default/#groups

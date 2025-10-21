@@ -7,22 +7,7 @@
 
         <form method="post" class="space-y-4">
             {% csrf_token %}
-
-            <input type="text" name="first_name" placeholder="Jméno"
-                   class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400">
-
-            <input type="text" name="last_name" placeholder="Příjmení"
-                   class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-                   required>
-
-            <select name="trener"
-                    class="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
-                    required>
-                <option value="">Vyber trenéra</option>
-                {% for trener in treneri %}
-                <option value="{{ trener.id }}">{{ trener.first_name }} {{ trener.last_name }} ({{ trener.club }})</option>
-                {% endfor %}
-            </select>
+            {{ form.as_p }}
 
             <button type="submit"
                     class="w-full inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
@@ -31,10 +16,6 @@
                 Registrovat se
             </button>
         </form>
-
-        {% if error %}
-        <p class="text-red-500 text-sm mt-4 text-center">{{ error }}</p>
-        {% endif %}
 
         <a href="{% url 'login' %}"
            class="w-full inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
