@@ -1,9 +1,9 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
-from .models import HracProfile, TrenerProfile
-from .forms import LoginForm, RegisterForm, RegisterFormHrac, RegisterFormTrener
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from pyexpat.errors import messages
+from .forms import LoginForm, TrenerProfileForm, HracProfileForm
+from .models import TrenerProfile, HracProfile
 
 
 # hlavni stranka
@@ -20,105 +20,92 @@ def login_view(request):
             password = form.cleaned_data['password']
 
             user = authenticate(request, username=username, password=password)
-            if user is not None:
+            if user is not None and user.is_active:
                 login(request, user)
-                # Přesměrování podle role
-                if user.is_superuser:
-                    return redirect('/admin/')
+
+                # kontrola prvního přihlášení
+                if hasattr(user, 'trenerprofile'):
+                    profile = user.trenerprofile
+                    dashboard_url = 'trener/dashboard'
                 elif hasattr(user, 'hracprofile'):
-                    return redirect('hrac_dashboard')
-                elif hasattr(user, 'trenerprofile'):
-                    return redirect('trener_dashboard')
+                    profile = user.hracprofile
+                    dashboard_url = 'hrac/dashboard'
                 else:
-                    return redirect('index')
+                    profile = None
+                    dashboard_url = 'index'
+
+                if profile and not profile.first_name:
+                    return redirect('first_login_view')  # první doplnění profilu
+
+                return redirect(dashboard_url)
+
             else:
-                form.add_error(None, "Neplatné přihlašovací údaje")
+                messages.error(request, 'Neplatné uživatelské jméno nebo heslo.')
     else:
         form = LoginForm()
 
     return render(request, 'login/login.html', {'form': form})
 
 
-
-# 1. registrace
-def register_view(request):
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            role = form.cleaned_data.get('role')
-            password = form.cleaned_data.get('password1')
-            user = form.save(commit=False)
-            user.set_password(password)
-            user.save()
-            login(request, user)
-            if role == 'hrac':
-                HracProfile.objects.get_or_create(user=user)
-                return redirect('register_hrac', user_id=user.id)
-            elif role == 'trener':
-                TrenerProfile.objects.get_or_create(user=user)
-                return redirect('register_trener', user_id=user.id)
-
-            return redirect('index')
+# prvni prihlaseni a doplneni profilu
+def first_login_view(request):
+    user = request.user
+    if hasattr(user, 'trenerprofile'):
+        ProfileForm = TrenerProfileForm
+        instance = user.trenerprofile
+    elif hasattr(user, 'hracprofile'):
+        ProfileForm = HracProfileForm
+        instance = user.hracprofile
     else:
-        form = RegisterForm()
-
-    return render(request, 'login/register.html', {'form': form})
-
-
-# 2. registrace hrace
-@login_required
-def register_hrac(request, user_id):
-    user = get_object_or_404(User, id=user_id)
-    if request.user != user and not request.user.is_superuser:
-        return redirect('index')
-
-    hrac_profile, created = HracProfile.objects.get_or_create(user=user)
+        return redirect('dashboard')  # nebo 404
 
     if request.method == 'POST':
-        form = RegisterFormHrac(request.POST, instance=hrac_profile)
+        form = ProfileForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('hrac_dashboard')
+            return redirect('dashboard')
     else:
-        form = RegisterFormHrac(instance=hrac_profile)
+        form = ProfileForm(instance=instance)
 
-    treneri = TrenerProfile.objects.all()
-    return render(request, 'login/register_hrac.html', {'form': form, 'treneri': treneri})
-
-
-# 2. registrace trenera
-@login_required
-def register_trener(request, user_id):
-    user = get_object_or_404(User, id=user_id)
-    if request.user != user and not request.user.is_superuser:
-        return redirect('index')
-
-    trener_profile, created = TrenerProfile.objects.get_or_create(user=user)
-
-    if request.method == 'POST':
-        form = RegisterFormTrener(request.POST, instance=trener_profile)
-        if form.is_valid():
-            form.save()
-            return redirect('trener_dashboard')
-    else:
-        form = RegisterFormTrener(instance=trener_profile)
-
-    return render(request, 'login/register_trener.html', {'form': form})
+    return render(request, 'login/first_login.html', {'form': form})
 
 
 # dashboard hrace
 @login_required
 def hrac_dashboard(request):
-    hrac = request.user.hracprofile
-    return render(request, 'hrac/dashboard.html', {'hrac': hrac})
+    try:
+        hrac = request.user.hracprofile
+    except HracProfile.DoesNotExist:
+        # pokud uživatel nemá profil hráče, přesměruj někam
+        return render(request, 'error.html', {'message': 'Profil hráče nebyl nalezen.'})
+
+    trener = hrac.trener  # trenér hráče, pokud existuje
+
+    # Příprava dat pro dashboard
+    context = {
+        'hrac': hrac,
+        'trener': trener,
+        # sem lze později přidat zápasy, tréninky, hlasování apod.
+    }
+    return render(request, 'hrac/dashboard.html', context)
 
 
-# dashboard trenera
+# dahboard trenera
 @login_required
 def trener_dashboard(request):
-    trener = request.user.trenerprofile
-    hraci = HracProfile.objects.filter(trener=trener)
-    return render(request, 'trener/dashboard.html', {'trener': trener, 'hraci': hraci})
+    try:
+        trener = request.user.trenerprofile
+    except TrenerProfile.DoesNotExist:
+        return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
+
+    hraci = trener.hrac.all()  # všichni hráči tohoto trenéra
+
+    context = {
+        'trener': trener,
+        'hraci': hraci,
+        # sem lze později přidat zápasy, tréninky, hlasování apod.
+    }
+    return render(request, 'trener/dashboard.html', context)
 
 
 # logout
