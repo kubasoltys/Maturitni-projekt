@@ -71,3 +71,4 @@ Chtěl bych, aby aplikace obsahovala:
 - **Jak používat Tailwind** - https://tailwindcss.com/
 - **Django Authentication** - https://docs.djangoproject.com/en/5.2/topics/auth/
                               https://docs.djangoproject.com/en/5.2/topics/auth/default/#groups
+- **Custom Userm Model v Djangu** - https://testdriven.io/blog/django-custom-user-model/
