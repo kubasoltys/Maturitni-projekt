@@ -23,13 +23,15 @@ def login_view(request):
             if user is not None and user.is_active:
                 login(request, user)
 
+                if user.is_superuser:
+                    return redirect('/admin/')  # nebo reverse('admin:index')
                 # kontrola prvního přihlášení
                 if hasattr(user, 'trenerprofile'):
                     profile = user.trenerprofile
-                    dashboard_url = 'trener/dashboard'
+                    dashboard_url = 'trener_dashboard'
                 elif hasattr(user, 'hracprofile'):
                     profile = user.hracprofile
-                    dashboard_url = 'hrac/dashboard'
+                    dashboard_url = 'hrac_dashboard'
                 else:
                     profile = None
                     dashboard_url = 'index'
@@ -57,17 +59,18 @@ def first_login_view(request):
         ProfileForm = HracProfileForm
         instance = user.hracprofile
     else:
-        return redirect('dashboard')  # nebo 404
+        return redirect('index')  # nebo 404
 
     if request.method == 'POST':
         form = ProfileForm(request.POST, request.FILES, instance=instance)
         if form.is_valid():
             form.save()
-            return redirect('dashboard')
+            return redirect('hrac_dashboard' if hasattr(user, 'hracprofile') else 'trener_dashboard')
     else:
         form = ProfileForm(instance=instance)
 
     return render(request, 'login/first_login.html', {'form': form})
+
 
 
 # dashboard hrace

@@ -63,8 +63,13 @@ class TrenerProfileForm(forms.ModelForm):
 class HracProfileForm(forms.ModelForm):
     class Meta:
         model = HracProfile
+        trener = forms.ModelChoiceField(
+            queryset=TrenerProfile.objects.all(),
+            required=False,
+            label="Vyberte trenéra"
+        )
         fields = ['first_name', 'last_name', 'phone', 'birth_date', 'height', 'weight',
-                  'cislo_dresu', 'pozice', 'preferred_foot', 'photo']
+                  'cislo_dresu', 'pozice', 'preferred_foot', 'photo', 'trener']
         labels = {
             'first_name': 'Jméno',
             'last_name': 'Příjmení',
@@ -76,6 +81,7 @@ class HracProfileForm(forms.ModelForm):
             'pozice': 'Pozice',
             'preferred_foot': 'Preferovaná noha',
             'photo': 'Fotografie',
+            'trener': 'Trenér',
         }
         widgets = {
             'first_name': forms.TextInput(attrs={
@@ -113,6 +119,9 @@ class HracProfileForm(forms.ModelForm):
                 'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'photo': forms.ClearableFileInput(attrs={
+                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'trener': forms.Select(attrs={
                 'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
         }

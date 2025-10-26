@@ -3,13 +3,26 @@ from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, AbstractUser
 
+
+# custom user model
+class User(AbstractUser):
+    ROLE_CHOICES = [
+        ('hrac', 'Hráč'),
+        ('trener', 'Trenér'),
+        ('admin', 'Admin'),
+    ]
+    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='hrac')
+
+    def __str__(self):
+        # zobraz username + roli
+        return f"{self.username} ({self.get_role_display()})"
 
 # profil trenera
 class TrenerProfile(models.Model):
     user = models.OneToOneField(
-        User,
+        'aplikace.User',
         related_name='trenerprofile',
         on_delete=models.CASCADE)
     first_name = models.CharField(
@@ -28,7 +41,9 @@ class TrenerProfile(models.Model):
         blank=True,
         null=True)
     birth_date = models.DateField(
-        verbose_name='Datum narození')
+        verbose_name='Datum narození',
+        blank=True,
+        null=True)
     club = models.CharField(
         max_length=100,
         verbose_name='Klub')
@@ -87,11 +102,11 @@ class HracProfile(models.Model):
         ('LW', 'Levé křídlo'),
         ('RW', 'Pravé křídlo'),]
     user = models.OneToOneField(
-        User,
+        'aplikace.User',
         related_name='hracprofile',
         on_delete=models.CASCADE)
     trener = models.ForeignKey(
-        TrenerProfile,
+        'TrenerProfile',
         related_name='hrac',
         on_delete=models.SET_NULL,
         blank=True,
@@ -112,13 +127,19 @@ class HracProfile(models.Model):
         blank=True,
         null=True)
     birth_date = models.DateField(
-        verbose_name='Datum narození')
+        verbose_name='Datum narození',
+        blank=True,
+        null=True)
     height = models.PositiveIntegerField(
         validators=[MinValueValidator(100), MaxValueValidator(250)],
-        verbose_name='Výška (cm)')
+        verbose_name='Výška (cm)',
+        blank=True,
+        null=True)
     weight = models.PositiveIntegerField(
         validators=[MinValueValidator(30), MaxValueValidator(150)],
-        verbose_name='Váha (kg)')
+        verbose_name='Váha (kg)',
+    blank=True,
+    null=True)
     cislo_dresu = models.PositiveIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(99)],
         verbose_name='Číslo dresu',
