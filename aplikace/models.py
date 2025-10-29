@@ -1,5 +1,4 @@
 from datetime import date
-from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -16,7 +15,6 @@ class User(AbstractUser):
     role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='hrac')
 
     def __str__(self):
-        # zobraz username + roli
         return f"{self.username} ({self.get_role_display()})"
 
 # profil trenera
@@ -66,7 +64,7 @@ class TrenerProfile(models.Model):
                 (today.month, today.day) < (self.birth_date.month, self.birth_date.day)
         )
 
-    # overeni at je zadano aspon jmeno nebo prijmeni
+# overeni at je zadano aspon jmeno nebo prijmeni
     def clean(self):
         super().clean()
         if not (self.first_name or self.last_name):
@@ -174,7 +172,7 @@ class HracProfile(models.Model):
                 (today.month, today.day) < (self.birth_date.month, self.birth_date.day)
         )
 
-    # overeni at je zadano aspon jmeno nebo prijmeni
+# overeni at je zadano aspon jmeno nebo prijmeni
     def clean(self):
         super().clean()
         if not (self.first_name or self.last_name):

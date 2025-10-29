@@ -2,24 +2,24 @@ from django import forms
 from .models import TrenerProfile, HracProfile
 
 
-# zakladni formular
+# prihlaseni
 class LoginForm(forms.Form):
     username = forms.CharField(
         max_length=150,
         widget=forms.TextInput(attrs={
             'placeholder': 'Uživatelské jméno',
-            'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
         })
     )
     password = forms.CharField(
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Heslo',
-            'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
         })
     )
 
 
-# formular pro trenera
+# prvni prihlaseni trenera
 class TrenerProfileForm(forms.ModelForm):
     class Meta:
         model = TrenerProfile
@@ -35,44 +35,48 @@ class TrenerProfileForm(forms.ModelForm):
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'placeholder': 'Jméno',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'last_name': forms.TextInput(attrs={
                 'placeholder': 'Příjmení',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'phone': forms.TextInput(attrs={
                 'placeholder': 'Telefonní číslo',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'birth_date': forms.DateInput(attrs={
                 'type': 'date',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }, format='%Y-%m-%d'),
             'club': forms.TextInput(attrs={
                 'placeholder': 'Klub',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'photo': forms.ClearableFileInput(attrs={
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
         }
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            if self.instance and self.instance.birth_date:
-                self.fields['birth_date'].initial = self.instance.birth_date
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.birth_date:
+            self.fields['birth_date'].initial = self.instance.birth_date
 
 
-# formular pro hrace
+# prvni prihlaseni hrace
 class HracProfileForm(forms.ModelForm):
+    trener = forms.ModelChoiceField(
+        queryset=TrenerProfile.objects.all(),
+        required=False,
+        label="Vyberte trenéra",
+        widget=forms.Select(attrs={
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+        })
+    )
+
     class Meta:
         model = HracProfile
-        trener = forms.ModelChoiceField(
-            queryset=TrenerProfile.objects.all(),
-            required=False,
-            label="Vyberte trenéra"
-        )
         fields = ['first_name', 'last_name', 'phone', 'birth_date', 'height', 'weight',
                   'cislo_dresu', 'pozice', 'preferred_foot', 'trener', 'photo']
         labels = {
@@ -86,52 +90,48 @@ class HracProfileForm(forms.ModelForm):
             'pozice': 'Pozice',
             'preferred_foot': 'Preferovaná noha',
             'photo': 'Fotografie',
-            'trener': 'Trenér',
         }
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'placeholder': 'Jméno',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'last_name': forms.TextInput(attrs={
                 'placeholder': 'Příjmení',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'phone': forms.TextInput(attrs={
                 'placeholder': 'Telefonní číslo',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'birth_date': forms.DateInput(attrs={
                 'type': 'date',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }, format='%Y-%m-%d'),
             'height': forms.NumberInput(attrs={
                 'placeholder': 'Výška',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'weight': forms.NumberInput(attrs={
                 'placeholder': 'Váha',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'cislo_dresu': forms.NumberInput(attrs={
                 'placeholder': 'Číslo dresu',
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'pozice': forms.Select(attrs={
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'preferred_foot': forms.Select(attrs={
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
-            }),
-            'trener': forms.Select(attrs={
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'photo': forms.ClearableFileInput(attrs={
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
         }
 
-        def __init__(self, *args, **kwargs):
-            super().__init__(*args, **kwargs)
-            if self.instance and self.instance.birth_date:
-                self.fields['birth_date'].initial = self.instance.birth_date
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.birth_date:
+            self.fields['birth_date'].initial = self.instance.birth_date

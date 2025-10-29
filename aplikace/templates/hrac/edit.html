@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto bg-white p-8 rounded-2xl shadow-lg mt-20">
+<div class="max-w-3xl mx-auto bg-white p-8 rounded-3xl shadow-xl mt-20">
     <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">
         Upravit profil -
         <span class="bg-gradient-to-r from-blue-500 to-indigo-800 bg-clip-text text-transparent">
@@ -23,31 +23,30 @@
         {% csrf_token %}
         {{ form.non_field_errors }}
 
-            {% for field in form %}
-                <div class="mb-4">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.help_text %}
-                        <p class="text-sm text-gray-500">{{ field.help_text }}</p>
-                    {% endif %}
-                    {{ field.errors }}
-                </div>
-            {% endfor %}
+        {% for field in form %}
+        <div class="mb-4">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+            <p class="text-sm text-gray-500">{{ field.help_text }}</p>
+            {% endif %}
+            {{ field.errors }}
+        </div>
+        {% endfor %}
 
-        <div class="flex justify-between mt-6">
-            <a href="{% url 'hrac_dashboard' %}"
-               class="px-6 py-3 inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
-                  bg-gradient-to-r from-gray-400 to-gray-600 transform transition duration-300
-                  hover:from-gray-500 hover:to-gray-800 hover:scale-105">
-                Zpět
-            </a>
+        <div class="flex flex-col mt-6 space-y-4">
             <button type="submit"
-                    class="px-6 py-3 inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
-                           bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
-                           hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
+                    class="w-full text-white font-bold px-10 py-4 rounded-2xl shadow-lg
+                   bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
+                   hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
                 Uložit změny
             </button>
+            <a href="{% url 'hrac_dashboard' %}"
+               class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
+                Zpět
+            </a>
         </div>
+
     </form>
 </div>
 {% endblock %}

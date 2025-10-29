@@ -136,16 +136,25 @@ def edit_hrac_profile(request):
 
 # nastaveni
 @login_required
-def settings_view(request):
+def trener_settings_view(request):
     user = request.user
-    if hasattr(user, 'trenerprofile'):
-        template = 'trener/settings.html'
-    elif hasattr(user, 'hracprofile'):
-        template = 'hrac/settings.html'
-    else:
+    if not hasattr(user, 'trenerprofile'):
+        return redirect('index')
+    return render(request, 'trener/settings.html', {'user': user})
+
+
+@login_required
+def hrac_settings_view(request):
+    user = request.user
+    print(">>> Uživatel:", user)
+    print(">>> Má hracprofile:", hasattr(user, 'hracprofile'))
+
+    if not hasattr(user, 'hracprofile'):
+        print(">>> Přesměrování na index")
         return redirect('index')
 
-    return render(request, template)
+    print(">>> Renderuji šablonu hrac/settings.html")
+    return render(request, 'hrac/settings.html', {'user': user})
 
 
 # logout
