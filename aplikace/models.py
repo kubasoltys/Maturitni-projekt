@@ -59,12 +59,14 @@ class TrenerProfile(models.Model):
 # vypocet veku
     @property
     def vek(self):
+        if not self.birth_date:
+            return "Neuvedeno"
         today = date.today()
         return today.year - self.birth_date.year - (
                 (today.month, today.day) < (self.birth_date.month, self.birth_date.day)
         )
 
-# overeni at je zadano aspon jmeno nebo prijmeni
+    # overeni at je zadano aspon jmeno nebo prijmeni
     def clean(self):
         super().clean()
         if not (self.first_name or self.last_name):
@@ -138,8 +140,8 @@ class HracProfile(models.Model):
     weight = models.PositiveIntegerField(
         validators=[MinValueValidator(30), MaxValueValidator(150)],
         verbose_name='Váha (kg)',
-    blank=True,
-    null=True)
+        blank=True,
+        null=True)
     cislo_dresu = models.PositiveIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(99)],
         verbose_name='Číslo dresu',
@@ -165,12 +167,14 @@ class HracProfile(models.Model):
 #vypocet veku
     @property
     def vek(self):
+        if not self.birth_date:
+            return "Neuvedeno"
         today = date.today()
         return today.year - self.birth_date.year - (
                 (today.month, today.day) < (self.birth_date.month, self.birth_date.day)
         )
 
-# overeni at je zadano aspon jmeno nebo prijmeni
+    # overeni at je zadano aspon jmeno nebo prijmeni
     def clean(self):
         super().clean()
         if not (self.first_name or self.last_name):

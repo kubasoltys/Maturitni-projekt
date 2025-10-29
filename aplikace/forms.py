@@ -48,7 +48,7 @@ class TrenerProfileForm(forms.ModelForm):
             'birth_date': forms.DateInput(attrs={
                 'type': 'date',
                 'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
-            }),
+            }, format='%Y-%m-%d'),
             'club': forms.TextInput(attrs={
                 'placeholder': 'Klub',
                 'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
@@ -57,6 +57,11 @@ class TrenerProfileForm(forms.ModelForm):
                 'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
         }
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            if self.instance and self.instance.birth_date:
+                self.fields['birth_date'].initial = self.instance.birth_date
 
 
 # formular pro hrace
@@ -69,7 +74,7 @@ class HracProfileForm(forms.ModelForm):
             label="Vyberte trenéra"
         )
         fields = ['first_name', 'last_name', 'phone', 'birth_date', 'height', 'weight',
-                  'cislo_dresu', 'pozice', 'preferred_foot', 'photo', 'trener']
+                  'cislo_dresu', 'pozice', 'preferred_foot', 'trener', 'photo']
         labels = {
             'first_name': 'Jméno',
             'last_name': 'Příjmení',
@@ -99,7 +104,7 @@ class HracProfileForm(forms.ModelForm):
             'birth_date': forms.DateInput(attrs={
                 'type': 'date',
                 'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
-            }),
+            }, format='%Y-%m-%d'),
             'height': forms.NumberInput(attrs={
                 'placeholder': 'Výška',
                 'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
@@ -118,10 +123,15 @@ class HracProfileForm(forms.ModelForm):
             'preferred_foot': forms.Select(attrs={
                 'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
-            'photo': forms.ClearableFileInput(attrs={
-                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
-            }),
             'trener': forms.Select(attrs={
                 'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
+            'photo': forms.ClearableFileInput(attrs={
+                'class': 'w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
         }
+
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+            if self.instance and self.instance.birth_date:
+                self.fields['birth_date'].initial = self.instance.birth_date

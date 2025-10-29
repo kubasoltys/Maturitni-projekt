@@ -247,6 +247,123 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2025-10-26T10:22:32.542Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "3",
+    "object_repr": "Hansi Flick (Trenér - FC Barcelona)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Fotografie\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2025-10-26T12:34:08.998Z",
+    "user": 2,
+    "content_type": 6,
+    "object_id": "9",
+    "object_repr": "trener1 (Trenér)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2025-10-26T12:34:36.507Z",
+    "user": 2,
+    "content_type": 6,
+    "object_id": "11",
+    "object_repr": "hrac1 (Hráč)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2025-10-26T12:36:06.191Z",
+    "user": 2,
+    "content_type": 6,
+    "object_id": "12",
+    "object_repr": "trener1 (Trenér)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2025-10-26T12:36:27.681Z",
+    "user": 2,
+    "content_type": 6,
+    "object_id": "13",
+    "object_repr": "hrac1 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2025-10-26T12:41:18.664Z",
+    "user": 2,
+    "content_type": 6,
+    "object_id": "14",
+    "object_repr": "hrac2 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2025-10-26T19:41:09.500Z",
+    "user": 2,
+    "content_type": 6,
+    "object_id": "15",
+    "object_repr": "trener2 (Trenér)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2025-10-26T19:41:42.422Z",
+    "user": 2,
+    "content_type": 6,
+    "object_id": "16",
+    "object_repr": "hrac3 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2025-10-29T10:34:53.520Z",
+    "user": 2,
+    "content_type": 6,
+    "object_id": "17",
+    "object_repr": "hrac4 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -599,11 +716,19 @@
   }
 },
 {
+  "model": "sessions.session",
+  "pk": "awqchnie796icc8201jfyzev53g8t21s",
+  "fields": {
+    "session_data": ".eJxVjDsOwjAQBe_iGllx_KekzxmstXeNA8iW4qRC3J1ESgHtm5n3ZgG2tYSt0xJmZFfm2eV3i5CeVA-AD6j3xlOr6zJHfij8pJ1PDel1O92_gwK97LUZ4yA1QHIW0BrjhQVABXZQegcYIUo3ks6JvNBKyZyMiERGCqXBZfb5AuaIN_0:1vCy8Z:aGL7FsGbK8KWwVq1Z-Aqnx7ulHHRFSlFBvVKJT4VdgQ",
+    "expire_date": "2025-11-09T10:38:11.883Z"
+  }
+},
+{
   "model": "aplikace.user",
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$h6XEy5CF3JJjkeAbi90MMp$/6aha5iLuKXdes9DkjSWv401yKEJHghW4oej5r1zT7I=",
-    "last_login": "2025-10-26T09:57:51.815Z",
+    "last_login": "2025-10-29T10:34:09.476Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -619,10 +744,10 @@
 },
 {
   "model": "aplikace.user",
-  "pk": 9,
+  "pk": 12,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$UdGDlUM9aW7L5EmYsE88aq$OPDpINlmaPzq1zY3qBzVbAgZoyn083XBw3wga9pxklI=",
-    "last_login": "2025-10-26T10:00:24.571Z",
+    "password": "pbkdf2_sha256$1000000$QEODqVwZthnAtDvlteeiZf$nIhSQJomnLdzFjfjbAMCGteYYzaCDeaaq05mGYNOKHY=",
+    "last_login": "2025-10-29T13:08:38.973Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -630,7 +755,7 @@
     "email": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2025-10-26T09:40:27.688Z",
+    "date_joined": "2025-10-26T12:36:05.787Z",
     "role": "trener",
     "groups": [],
     "user_permissions": []
@@ -638,10 +763,10 @@
 },
 {
   "model": "aplikace.user",
-  "pk": 11,
+  "pk": 13,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$KfmquEWElGgjsbmbIoDqp0$3JXnsBAlT+uBEjRWRXmAGsW27WaHuI8u2eLoHqEix6A=",
-    "last_login": "2025-10-26T10:00:46.902Z",
+    "password": "pbkdf2_sha256$1000000$XDt7L0tn3X5MYwwPMfG6n1$uGuk+q3LuCA5icX9lvdOz/GDN2tIb2Ppy9WNzRZeIWo=",
+    "last_login": "2025-10-29T12:54:41.040Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "",
@@ -649,7 +774,83 @@
     "email": "",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2025-10-26T09:58:23.114Z",
+    "date_joined": "2025-10-26T12:36:27.281Z",
+    "role": "hrac",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$8UqsfoO5sMfS6BpWYZ8aSZ$0R6/4bhZO87t0UR2P9M+e8n+W9xZG/n/NRAKf7XN/zU=",
+    "last_login": "2025-10-29T13:05:41.520Z",
+    "is_superuser": false,
+    "username": "hrac2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-26T12:41:18.269Z",
+    "role": "hrac",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 15,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$t5hi5MptuAti5kjadgxdOh$nweXOJj09R6Twgm0KycOdwPOzf4sTgni5NFiFLtG4Jk=",
+    "last_login": "2025-10-29T10:07:24.447Z",
+    "is_superuser": false,
+    "username": "trener2",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-26T19:41:09.029Z",
+    "role": "trener",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 16,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$SWE12wSWErSXexag5JcB9R$KivvFW67IGevsv9V47GNapxvV/kSnS2YhEYEo1QDJvI=",
+    "last_login": "2025-10-26T19:43:02.098Z",
+    "is_superuser": false,
+    "username": "hrac3",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-26T19:41:42.020Z",
+    "role": "hrac",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 17,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$rWkd6vCt3ZaDBiVqLeD6LC$W8lDhmM++ikXXhE3bXODtbVMKxSDn4ZxM1LFv3SjXMY=",
+    "last_login": "2025-10-29T10:35:20.844Z",
+    "is_superuser": false,
+    "username": "hrac4",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-10-29T10:34:53.040Z",
     "role": "hrac",
     "groups": [],
     "user_permissions": []
@@ -657,25 +858,40 @@
 },
 {
   "model": "aplikace.trenerprofile",
-  "pk": 3,
+  "pk": 4,
   "fields": {
-    "user": 9,
+    "user": 12,
     "first_name": "Hansi",
     "last_name": "Flick",
-    "phone": "147938567",
+    "phone": null,
     "birth_date": "1965-02-24",
     "club": "FC Barcelona",
-    "photo": "",
-    "created_at": "2025-10-26T09:40:28.172Z",
-    "updated_at": "2025-10-26T09:41:41.855Z"
+    "photo": "trener_photo/hansi_flick.jpg",
+    "created_at": "2025-10-26T12:36:06.190Z",
+    "updated_at": "2025-10-29T11:10:24.675Z"
+  }
+},
+{
+  "model": "aplikace.trenerprofile",
+  "pk": 5,
+  "fields": {
+    "user": 15,
+    "first_name": "zkouska",
+    "last_name": "zkouska",
+    "phone": null,
+    "birth_date": "2025-10-16",
+    "club": "ASDFASD",
+    "photo": "trener_photo/pedri.webp",
+    "created_at": "2025-10-26T19:41:09.499Z",
+    "updated_at": "2025-10-26T19:42:40.344Z"
   }
 },
 {
   "model": "aplikace.hracprofile",
-  "pk": 6,
+  "pk": 7,
   "fields": {
-    "user": 11,
-    "trener": 3,
+    "user": 13,
+    "trener": 4,
     "first_name": "Lamine",
     "last_name": "Yamal",
     "phone": null,
@@ -686,8 +902,68 @@
     "pozice": "RW",
     "preferred_foot": "left",
     "photo": "hrac_photo/lamine_yamal.jpg",
-    "created_at": "2025-10-26T09:58:23.574Z",
-    "updated_at": "2025-10-26T09:59:59.982Z"
+    "created_at": "2025-10-26T12:36:27.679Z",
+    "updated_at": "2025-10-29T11:07:01.401Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 8,
+  "fields": {
+    "user": 14,
+    "trener": 4,
+    "first_name": "Pedri",
+    "last_name": null,
+    "phone": null,
+    "birth_date": "2002-11-25",
+    "height": 174,
+    "weight": 68,
+    "cislo_dresu": 8,
+    "pozice": "CM",
+    "preferred_foot": "left",
+    "photo": "hrac_photo/pedri.webp",
+    "created_at": "2025-10-26T12:41:18.662Z",
+    "updated_at": "2025-10-29T11:57:59.251Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 9,
+  "fields": {
+    "user": 16,
+    "trener": 5,
+    "first_name": "zkouska",
+    "last_name": "zkouska",
+    "phone": null,
+    "birth_date": "2025-10-09",
+    "height": 143,
+    "weight": 56,
+    "cislo_dresu": 1,
+    "pozice": "ST",
+    "preferred_foot": "left",
+    "photo": "hrac_photo/lamine_yamal_Cs5SFIO.jpg",
+    "created_at": "2025-10-26T19:41:42.421Z",
+    "updated_at": "2025-10-26T19:43:42.188Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 10,
+  "fields": {
+    "user": 17,
+    "trener": null,
+    "first_name": "HAHAHAHa",
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": 10,
+    "pozice": "ST",
+    "preferred_foot": "right",
+    "photo": "",
+    "created_at": "2025-10-29T10:34:53.519Z",
+    "updated_at": "2025-10-29T10:37:31.986Z"
   }
 }
 ]

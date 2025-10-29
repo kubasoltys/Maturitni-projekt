@@ -24,8 +24,7 @@ def login_view(request):
                 login(request, user)
 
                 if user.is_superuser:
-                    return redirect('/admin/')  # nebo reverse('admin:index')
-                # kontrola prvního přihlášení
+                    return redirect('/admin/')
                 if hasattr(user, 'trenerprofile'):
                     profile = user.trenerprofile
                     dashboard_url = 'trener_dashboard'
@@ -37,7 +36,7 @@ def login_view(request):
                     dashboard_url = 'index'
 
                 if profile and not profile.first_name:
-                    return redirect('first_login_view')  # první doplnění profilu
+                    return redirect('first_login_view')
 
                 return redirect(dashboard_url)
 
@@ -79,16 +78,12 @@ def hrac_dashboard(request):
     try:
         hrac = request.user.hracprofile
     except HracProfile.DoesNotExist:
-        # pokud uživatel nemá profil hráče, přesměruj někam
-        return render(request, 'error.html', {'message': 'Profil hráče nebyl nalezen.'})
+        return render(request, 'index', {'message': 'Profil hráče nebyl nalezen.'})
 
-    trener = hrac.trener  # trenér hráče, pokud existuje
-
-    # Příprava dat pro dashboard
+    trener = hrac.trener
     context = {
         'hrac': hrac,
         'trener': trener,
-        # sem lze později přidat zápasy, tréninky, hlasování apod.
     }
     return render(request, 'hrac/dashboard.html', context)
 
@@ -101,14 +96,56 @@ def trener_dashboard(request):
     except TrenerProfile.DoesNotExist:
         return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
 
-    hraci = trener.hrac.all()  # všichni hráči tohoto trenéra
-
+    hraci = trener.hrac.all()
     context = {
         'trener': trener,
         'hraci': hraci,
-        # sem lze později přidat zápasy, tréninky, hlasování apod.
     }
     return render(request, 'trener/dashboard.html', context)
+
+
+# editace profilu trenera
+@login_required
+def edit_trener_profile(request):
+    trener = request.user.trenerprofile
+    if request.method == 'POST':
+        form = TrenerProfileForm(request.POST, request.FILES, instance=trener)
+        if form.is_valid():
+            form.save()
+            return redirect('trener_dashboard')
+    else:
+        form = TrenerProfileForm(instance=trener)
+
+    return render(request, 'trener/edit.html', {'form': form, 'trener': trener})
+
+
+# editace profilu hrace
+@login_required
+def edit_hrac_profile(request):
+    hrac = request.user.hracprofile
+    if request.method == 'POST':
+        form = HracProfileForm(request.POST, request.FILES, instance=hrac)
+        if form.is_valid():
+            form.save()
+            return redirect('hrac_dashboard')
+    else:
+        form = HracProfileForm(instance=hrac)
+
+    return render(request, 'hrac/edit.html', {'form': form, 'hrac': hrac})
+
+
+# nastaveni
+@login_required
+def settings_view(request):
+    user = request.user
+    if hasattr(user, 'trenerprofile'):
+        template = 'trener/settings.html'
+    elif hasattr(user, 'hracprofile'):
+        template = 'hrac/settings.html'
+    else:
+        return redirect('index')
+
+    return render(request, template)
 
 
 # logout
