@@ -21,9 +21,18 @@ class LoginForm(forms.Form):
 
 # prvni prihlaseni trenera
 class TrenerProfileForm(forms.ModelForm):
+    email = forms.EmailField(
+        required=False,
+        label='E-mail',
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'E-mail',
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+        })
+    )
+
     class Meta:
         model = TrenerProfile
-        fields = ['first_name', 'last_name', 'phone', 'birth_date', 'club', 'photo']
+        fields = ['first_name', 'last_name', 'email', 'phone', 'birth_date', 'club', 'photo']
         labels = {
             'first_name': 'Jméno',
             'last_name': 'Příjmení',
@@ -59,13 +68,34 @@ class TrenerProfileForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.get('instance').user if kwargs.get('instance') else None
         super().__init__(*args, **kwargs)
+        if user:
+            self.fields['email'].initial = user.email
         if self.instance and self.instance.birth_date:
             self.fields['birth_date'].initial = self.instance.birth_date
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            instance.save()
+            if hasattr(instance, 'user'):
+                instance.user.email = self.cleaned_data.get('email', '')
+                instance.user.save()
+        return instance
 
 
 # prvni prihlaseni hrace
 class HracProfileForm(forms.ModelForm):
+    email = forms.EmailField(
+        required=False,
+        label='E-mail',
+        widget=forms.EmailInput(attrs={
+            'placeholder': 'E-mail',
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+        })
+    )
+
     trener = forms.ModelChoiceField(
         queryset=TrenerProfile.objects.all(),
         required=False,
@@ -77,8 +107,10 @@ class HracProfileForm(forms.ModelForm):
 
     class Meta:
         model = HracProfile
-        fields = ['first_name', 'last_name', 'phone', 'birth_date', 'height', 'weight',
-                  'cislo_dresu', 'pozice', 'preferred_foot', 'trener', 'photo']
+        fields = [
+            'first_name', 'last_name', 'email' , 'phone', 'birth_date', 'height', 'weight',
+            'cislo_dresu', 'pozice', 'preferred_foot', 'trener', 'photo'
+        ]
         labels = {
             'first_name': 'Jméno',
             'last_name': 'Příjmení',
@@ -132,6 +164,19 @@ class HracProfileForm(forms.ModelForm):
         }
 
     def __init__(self, *args, **kwargs):
+        user = kwargs.get('instance').user if kwargs.get('instance') else None
         super().__init__(*args, **kwargs)
+        if user:
+            self.fields['email'].initial = user.email
         if self.instance and self.instance.birth_date:
             self.fields['birth_date'].initial = self.instance.birth_date
+
+    def save(self, commit=True):
+        instance = super().save(commit=False)
+        if commit:
+            instance.save()
+            if hasattr(instance, 'user'):
+                instance.user.email = self.cleaned_data.get('email', '')
+                instance.user.save()
+        return instance
+
