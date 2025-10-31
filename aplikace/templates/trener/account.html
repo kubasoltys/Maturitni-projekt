@@ -51,7 +51,7 @@
 
 <div class="max-w-3xl mx-auto bg-white p-10 rounded-3xl shadow-lg">
     <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
-        Nastavení
+        Detaily účtu
     </h2>
 
     <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8 mb-10">
@@ -67,23 +67,19 @@
             {% endif %}
         </div>
 
-        <div class="text-center md:text-left space-y-2">
-            <p class="text-2xl font-bold">
-                <span class="bg-gradient-to-r from-blue-500 to-indigo-800 bg-clip-text text-transparent">
-                    {% if user.trenerprofile.first_name and user.trenerprofile.last_name %}
-                        {{ user.trenerprofile.first_name }} {{ user.trenerprofile.last_name }}
-                    {% elif user.trenerprofile.first_name %}
-                        {{ user.trenerprofile.first_name }}
-                    {% elif user.trenerprofile.last_name %}
-                        {{ user.trenerprofile.last_name }}
-                    {% else %}
-                        (bez jména)
-                    {% endif %}
-                </span>
-                (Trenér)
+        <div class="text-center md:text-left space-y-1">
+            <p class="text-2xl bg-gradient-to-r from-blue-500 to-indigo-800 bg-clip-text text-transparent font-bold">
+                {% if user.trenerprofile.first_name and user.trenerprofile.last_name %}
+                    {{ user.trenerprofile.first_name }} {{ user.trenerprofile.last_name }}
+                {% elif user.trenerprofile.first_name %}
+                    {{ user.trenerprofile.first_name }}
+                {% elif user.trenerprofile.last_name %}
+                    {{ user.trenerprofile.last_name }}
+                {% else %}
+                    (bez jména)
+                {% endif %}
             </p>
             <p class="text-gray-600 text-lg">@{{ user.username }}</p>
-
             <p class="text-gray-500 text-md">
                 {% if user.email %}
                     {{ user.email }}
@@ -99,36 +95,67 @@
         </div>
     </div>
 
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div class="bg-gray-100 rounded-xl p-4 shadow-sm">
+            <p class="text-gray-500 text-sm">Tým</p>
+            <p class="text-gray-800 font-semibold">
+                {% if user.trenerprofile.club %}
+                    {{ user.trenerprofile.club }}
+                {% else %}
+                    -
+                {% endif %}
+            </p>
+        </div>
+        <div class="bg-gray-100 rounded-xl p-4 shadow-sm">
+            <p class="text-gray-500 text-sm">Telefonní číslo</p>
+            <p class="text-gray-800 font-semibold">
+                {% if user.trenerprofile.phone %}
+                    {{ user.trenerprofile.phone }}
+                {% else %}
+                    -
+                {% endif %}
+            </p>
+        </div>
+        <div class="bg-gray-100 rounded-xl p-4 shadow-sm">
+            <p class="text-gray-500 text-sm">Datum narození</p>
+            <p class="text-gray-800 font-semibold">
+                {% if user.trenerprofile.birth_date %}
+                    {{ user.trenerprofile.birth_date|date:"d.m.Y" }}
+                {% else %}
+                    -
+                {% endif %}
+            </p>
+        </div>
+        <div class="bg-gray-100 rounded-xl p-4 shadow-sm">
+            <p class="text-gray-500 text-sm">Věk</p>
+            <p class="text-gray-800 font-semibold">
+                {% if user.trenerprofile.vek %}
+                    {{ user.trenerprofile.vek }}
+                {% else %}
+                    -
+                {% endif %}
+            </p>
+        </div>
+    </div>
+
+    <div class="text-center mb-8">
+        <p class="text-gray-600 text-sm">
+            Účet vytvořen:
+            <span class="font-semibold text-gray-800">{{ user.trenerprofile.created_at|date:"d.m.Y H:i" }}</span>
+        </p>
+        <p class="text-gray-600 text-sm mt-1">
+            Naposledy upraven:
+            <span class="font-semibold text-gray-800">{{ user.trenerprofile.updated_at|date:"d.m.Y H:i" }}</span>
+        </p>
+    </div>
+
     <div class="space-y-4">
-        <a href="{% url 'trener_account' %}"
-           class="block w-full text-center px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl shadow-md
-                  transform transition duration-300 hover:scale-105 hover:bg-gray-200">
-            Zobrazit detaily účtu
-        </a>
-
-        <a href="{% url 'edit_trener_profile' %}"
-           class="block w-full text-center px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl shadow-md
-                  transform transition duration-300 hover:scale-105 hover:bg-gray-200">
-            Upravit profil
-        </a>
-
-        <a href="{% url 'trener_password_change' %}"
-           class="block w-full text-center px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl shadow-md
-                  transform transition duration-300 hover:scale-105 hover:bg-gray-200">
-            Změnit heslo
-        </a>
-
-        <a href="{% url 'logout' %}"
-           class="block w-full text-center px-6 py-3 bg-red-100 text-gray-800 font-medium rounded-2xl shadow-md
-                  transform transition duration-300 hover:scale-105 hover:bg-red-300">
-            Odhlásit se
-        </a>
-
-        <a href="{% url 'trener_dashboard' %}"
+        <a href="{% url 'trener_settings' %}"
            class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
             Zpět
         </a>
     </div>
 </div>
+
 
 {% endblock %}

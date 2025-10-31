@@ -73,7 +73,7 @@ class TrenerProfile(models.Model):
 # nastaveni zobrazeni trenera
     def __str__(self):
         full_name = f"{self.first_name or ''} {self.last_name or ''}".strip()
-        return f"{full_name} (Trenér - {self.club})"
+        return f"{full_name} ({self.club})"
 
     class Meta:
         verbose_name = "Trenér"
@@ -143,16 +143,19 @@ class HracProfile(models.Model):
     cislo_dresu = models.PositiveIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(99)],
         verbose_name='Číslo dresu',
-        default=0)
+        blank=True,
+        null=True)
     pozice = models.CharField(
         choices=POZICE_CHOICES,
         verbose_name='Pozice',
-        default='ST')
+        blank=True,
+        null=True)
     preferred_foot = models.CharField(
         max_length=15,
-        choices=[('left', 'Levá noha'), ('right', 'Pravá noha'), ('both', 'Obě nohy')],
+        choices=[('Levá', 'Levá noha'), ('Pravá', 'Pravá noha')],
         verbose_name='Preferovaná noha',
-        default='right')
+        blank=True,
+        null=True)
     photo = models.ImageField(
         upload_to='hrac_photo/',
         verbose_name='Fotografie',
@@ -166,7 +169,7 @@ class HracProfile(models.Model):
     @property
     def vek(self):
         if not self.birth_date:
-            return "Neuvedeno"
+            return "-"
         today = date.today()
         return today.year - self.birth_date.year - (
                 (today.month, today.day) < (self.birth_date.month, self.birth_date.day)

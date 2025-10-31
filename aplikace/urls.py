@@ -20,6 +20,10 @@ urlpatterns = [
     path('trener/nastaveni/', views.trener_settings_view, name='trener_settings'),
     path('hrac/nastaveni/', views.hrac_settings_view, name='hrac_settings'),
 
+# account
+    path('trener/nastaveni/ucet/', views.trener_account_view, name='trener_account'),
+    path('hrac/nastaveni/ucet/', views.hrac_account_view, name='hrac_account'),
+
 # edit
     path('trener/nastaveni/upravit-profil/', views.edit_trener_profile, name='edit_trener_profile'),
     path('hrac/nastaveni/upravit-profil/', views.edit_hrac_profile, name='edit_hrac_profile'),

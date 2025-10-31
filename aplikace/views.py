@@ -1,5 +1,5 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from pyexpat.errors import messages
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm
@@ -134,7 +134,7 @@ def edit_hrac_profile(request):
     return render(request, 'hrac/edit.html', {'form': form, 'hrac': hrac})
 
 
-# nastaveni
+# nastaveni hrace
 @login_required
 def trener_settings_view(request):
     user = request.user
@@ -146,15 +146,23 @@ def trener_settings_view(request):
 @login_required
 def hrac_settings_view(request):
     user = request.user
-    print(">>> Uživatel:", user)
-    print(">>> Má hracprofile:", hasattr(user, 'hracprofile'))
-
     if not hasattr(user, 'hracprofile'):
-        print(">>> Přesměrování na index")
         return redirect('index')
-
-    print(">>> Renderuji šablonu hrac/settings.html")
     return render(request, 'hrac/settings.html', {'user': user})
+
+
+# detail uctu trenera
+@login_required
+def trener_account_view(request):
+    profile = get_object_or_404(TrenerProfile, user=request.user)
+    return render(request, 'trener/account.html', {'profile': profile})
+
+
+# detail uctu hrace
+@login_required
+def hrac_account_view(request):
+    profile = get_object_or_404(HracProfile, user=request.user)
+    return render(request, 'hrac/account.html', {'profile': profile})
 
 
 # logout

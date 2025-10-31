@@ -9,28 +9,49 @@
             <img src="../../../media/stranka/logo.png" alt="Logo" class="h-16 w-16 object-contain">
         </div>
 
-        <div class="flex justify-center md:justify-end space-x-4 items-center">
+        <div class="flex items-center space-x-6 justify-center md:justify-end">
+
             <a href="{% url 'hrac_settings' %}"
                class="text-gray-700 font-semibold px-6 py-3 transition transform hover:scale-110 hover:text-black">
                 Nastavení účtu
             </a>
 
+            <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
+                {% if hrac.photo %}
+                    <img src="{{ hrac.photo.url }}"
+                         alt="Profilová fotka"
+                         class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                {% else %}
+                    <img src="/media/stranka/default_profile_picture.webp"
+                         alt="Výchozí profilová fotka"
+                         class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                {% endif %}
+
+                <p class="text-gray-400 font-semibold">
+                    {% if hrac.first_name and hrac.last_name %}
+                        {{ hrac.first_name }} {{ hrac.last_name }}
+                    {% elif hrac.first_name %}
+                        {{ hrac.first_name }}
+                    {% elif hrac.last_name %}
+                        {{ hrac.last_name }}
+                    {% else %}
+                        (bez jména)
+                    {% endif %}
+                </p>
+            </div>
+
             <a href="{% url 'logout' %}"
-               class="text-white font-semibold px-8 py-3 rounded-2xl shadow-md
+               class="text-white font-semibold px-6 py-2 rounded-2xl shadow-md
                 bg-gradient-to-r from-gray-400 to-gray-600 transform transition duration-300
                 hover:from-red-400 hover:to-red-600 hover:scale-105">
                 Odhlásit se
             </a>
+
         </div>
     </div>
 </nav>
 
 <div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-6">
-    {% if hrac.photo %}
-    <img src="{{ hrac.photo.url }}"
-         alt="Fotka hrace"
-         class="w-32 h-32 rounded-2xl shadow-lg object-cover mb-4">
-    {% endif %}
 
     <h1 class="text-3xl font-bold text-gray-800 text-center">
         Vítej
