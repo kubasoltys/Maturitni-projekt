@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
-from pyexpat.errors import messages
+from django.contrib import messages
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm
 from .models import TrenerProfile, HracProfile
 
@@ -41,11 +41,13 @@ def login_view(request):
                 return redirect(dashboard_url)
 
             else:
+                # 🔥 TADY MUSÍ BÝT messages.error — ne message.error nebo něco jiného
                 messages.error(request, 'Neplatné uživatelské jméno nebo heslo.')
     else:
         form = LoginForm()
 
     return render(request, 'login/login.html', {'form': form})
+
 
 
 # prvni prihlaseni a doplneni profilu

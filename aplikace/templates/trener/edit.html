@@ -25,7 +25,7 @@
 
         {% for field in form %}
         <div class="mb-4">
-            {{ field.label_tag }}
+            <label class="block text-gray-700 font-medium mb-2">{{ field.label }}</label>
             {{ field }}
             {% if field.help_text %}
             <p class="text-sm text-gray-500">{{ field.help_text }}</p>

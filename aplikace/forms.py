@@ -5,15 +5,17 @@ from .models import TrenerProfile, HracProfile
 # prihlaseni
 class LoginForm(forms.Form):
     username = forms.CharField(
+        label = 'Uživatelské jméno',
         max_length=150,
         widget=forms.TextInput(attrs={
-            'placeholder': 'Uživatelské jméno',
+            'placeholder': 'Zadejte uživatelské jméno',
             'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
         })
     )
     password = forms.CharField(
+        label = 'Heslo',
         widget=forms.PasswordInput(attrs={
-            'placeholder': 'Heslo',
+            'placeholder': 'Zadejte heslo',
             'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
         })
     )
