@@ -2,8 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import LoginForm, TrenerProfileForm, HracProfileForm
-from .models import TrenerProfile, HracProfile
+from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm
+from .models import TrenerProfile, HracProfile, Trenink
 
 
 # hlavni stranka
@@ -99,11 +99,15 @@ def trener_dashboard(request):
         return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
 
     hraci = trener.hrac.all()
+    treninky = trener.treninky.all()
+
     context = {
         'trener': trener,
         'hraci': hraci,
+        'treninky': treninky,
     }
     return render(request, 'trener/dashboard.html', context)
+
 
 
 # editace profilu trenera
@@ -171,3 +175,55 @@ def hrac_account_view(request):
 def logout_view(request):
     logout(request)
     return redirect('index')
+
+
+# pridani treninku
+@login_required
+def add_trenink_view(request):
+    if not hasattr(request.user, 'trenerprofile'):
+        return redirect('index')
+
+    trener = request.user.trenerprofile
+
+    if request.method == 'POST':
+        form = TreninkForm(request.POST)
+        if form.is_valid():
+            trenink = form.save(commit=False)
+            trenink.trener = trener
+            trenink.save()
+            messages.success(request, 'Trénink byl úspěšně přidán.')
+            return redirect('trener_dashboard')
+    else:
+        form = TreninkForm()
+
+    return render(request, 'trener/trenink/add.html', {'form': form})
+
+
+# uprava treninku
+@login_required
+def edit_trenink_view(request, trenink_id):
+    trenink = get_object_or_404(Trenink, id=trenink_id, trener=request.user.trenerprofile)
+
+    if request.method == 'POST':
+        form = TreninkForm(request.POST, instance=trenink)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Trénink byl aktualizován.")
+            return redirect('trener_dashboard')
+    else:
+        form = TreninkForm(instance=trenink)
+
+    return render(request, 'trener/trenink/edit.html', {'form': form, 'edit': True})
+
+
+# smazani treninku
+@login_required
+def delete_trenink_view(request, trenink_id):
+    trenink = get_object_or_404(Trenink, id=trenink_id, trener=request.user.trenerprofile)
+
+    if request.method == 'POST':
+        trenink.delete()
+        messages.success(request, "Trénink byl úspěšně smazán.")
+        return redirect('trener_dashboard')
+
+    return redirect('trener_dashboard')

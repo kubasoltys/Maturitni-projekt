@@ -3,6 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser
+from django.utils import timezone
 
 
 # custom user model
@@ -16,6 +17,8 @@ class User(AbstractUser):
 
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})"
+
+
 
 # profil trenera
 class TrenerProfile(models.Model):
@@ -79,6 +82,7 @@ class TrenerProfile(models.Model):
         verbose_name = "Trenér"
         verbose_name_plural = "Trenéři"
         ordering = ['last_name', 'first_name']
+
 
 
 # profil hrace
@@ -190,3 +194,76 @@ class HracProfile(models.Model):
         verbose_name = "Hráč"
         verbose_name_plural = "Hráči"
         ordering = ['last_name', 'first_name']
+
+
+
+#treninky
+class Trenink(models.Model):
+    TYPY = [
+        ('Fyzická příprava', 'Fyzická příprava'),
+        ('Taktická připrava', 'Taktická příprava'),
+        ('Jiný', 'Jiné'),
+    ]
+
+    trener = models.ForeignKey(
+        'TrenerProfile',
+        on_delete=models.CASCADE,
+        related_name='treninky'
+    )
+    datum = models.DateField(verbose_name='Datum')
+    cas = models.TimeField(verbose_name='Cas')
+    typ = models.CharField(
+        max_length=20,
+        choices=TYPY,
+        verbose_name='Typ tréninku'
+    )
+    poznamka = models.TextField(
+        verbose_name='Poznámka',
+        blank=True,
+        null=True)
+
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        ordering = ['-datum', '-cas']
+        verbose_name = "Trénink"
+        verbose_name_plural = "Tréninky"
+
+    def __str__(self):
+        return f"{self.get_typ_display()} — {self.datum} {self.cas.strftime('%H:%M')} ({self.trener})"
+
+    def dochazka_summary(self):
+        total = self.dochazka.count()
+        ano = self.dochazka.filter(pritomen=True).count()
+        ne = self.dochazka.filter(pritomen=False).count()
+        nehlasoval = self.dochazka.filter(pritomen__isnull=True).count()
+        return {'total': total, 'ano': ano, 'ne': ne, 'nehlasoval': nehlasoval}
+
+
+
+# dochazka na treninky
+class DochazkaTreninky(models.Model):
+    trenink = models.ForeignKey(
+        Trenink,
+        on_delete=models.CASCADE,
+        related_name='dochazka'
+    )
+    hrac = models.ForeignKey(
+        'HracProfile',
+        on_delete=models.CASCADE,
+        related_name='dochazka'
+    )
+    pritomen = models.BooleanField(null=True, blank=True, default=None)
+    duvod = models.CharField(max_length=250, blank=True, null=True)
+    hlasoval_v = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['trenink', 'hrac'], name='unique_trenink_hrac')
+        ]
+        verbose_name = "Docházka"
+        verbose_name_plural = "Docházky"
+
+    def __str__(self):
+        status = 'ANO' if self.pritomen is True else ('NE' if self.pritomen is False else 'NEHLASOVAL')
+        return f"{self.hrac} — {self.trenink} ({status})"

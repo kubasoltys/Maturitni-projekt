@@ -49,4 +49,13 @@ urlpatterns = [
     path('hrac/nastaveni/zmena-hesla/zmeneno/',
          auth_views.PasswordChangeDoneView.as_view(template_name='hrac/password_change_done.html'),
          name='hrac_password_change_done'),
+
+# pridani treninku
+    path('trener/pridat-trenink/', views.add_trenink_view, name='add_trenink'),
+
+# uprava treninku
+    path('trener/upravit-trenink/<int:trenink_id>/', views.edit_trenink_view, name='edit_trenink'),
+
+# smazani treninku
+    path('trener/smazat-trenink/<int:trenink_id>/', views.delete_trenink_view, name='delete_trenink'),
 ]

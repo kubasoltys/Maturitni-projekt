@@ -1,5 +1,5 @@
 from django import forms
-from .models import TrenerProfile, HracProfile
+from .models import TrenerProfile, HracProfile, Trenink
 
 
 # prihlaseni
@@ -182,3 +182,35 @@ class HracProfileForm(forms.ModelForm):
                 instance.user.save()
         return instance
 
+
+
+# trenink
+class TreninkForm(forms.ModelForm):
+    class Meta:
+        model = Trenink
+        fields = ['datum', 'cas', 'typ', 'poznamka']
+        labels = {
+            'datum': 'Datum',
+            'cas': 'Čas',
+            'typ': 'Typ tréninku',
+            'poznamka': 'Poznámka',
+        }
+        widgets = {
+            'datum': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'cas': forms.TimeInput(attrs={
+                'type': 'time',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'typ': forms.Select(attrs={
+                'placeholder': 'Vyber typ tréninku',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'poznamka': forms.Textarea(attrs={
+                'placeholder': 'Poznámka (nepovinné)',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400',
+                'rows': 3
+            }),
+        }
