@@ -53,6 +53,9 @@ urlpatterns = [
 # pridani treninku
     path('trener/pridat-trenink/', views.add_trenink_view, name='add_trenink'),
 
+# hlasovani na trenink
+    path('hrac/hlasovani/<int:trenink_id>/', views.hlasovani_dochazka_view, name='hlasovani_dochazka'),
+
 # uprava treninku
     path('trener/upravit-trenink/<int:trenink_id>/', views.edit_trenink_view, name='edit_trenink'),
 

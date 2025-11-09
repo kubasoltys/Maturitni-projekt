@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm
-from .models import TrenerProfile, HracProfile, Trenink
+from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky
 
 
 # hlavni stranka
@@ -83,14 +83,17 @@ def hrac_dashboard(request):
         return render(request, 'index', {'message': 'Profil hráče nebyl nalezen.'})
 
     trener = hrac.trener
+    treninky = Trenink.objects.filter(trener=trener).order_by('datum', 'cas').prefetch_related('dochazka__hrac')
+
     context = {
         'hrac': hrac,
         'trener': trener,
+        'treninky': treninky,
     }
     return render(request, 'hrac/dashboard.html', context)
 
 
-# dahboard trenera
+# dashboard trenéra
 @login_required
 def trener_dashboard(request):
     try:
@@ -98,15 +101,37 @@ def trener_dashboard(request):
     except TrenerProfile.DoesNotExist:
         return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
 
-    hraci = trener.hrac.all()
-    treninky = trener.treninky.all()
+    hraci = list(trener.hrac.all())
+    treninky = (
+        trener.treninky
+        .prefetch_related('dochazka', 'dochazka__hrac')
+        .order_by('datum', 'cas')
+    )
+
+    treninky_data = []
+    for trenink in treninky:
+        dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
+        dochazka_list = []
+        for hrac in hraci:
+            if hrac.id in dochazka_dict:
+                dochazka_list.append(dochazka_dict[hrac.id])
+            else:
+                from types import SimpleNamespace
+                dochazka_list.append(SimpleNamespace(
+                    hrac=hrac,
+                    pritomen=None,
+                    duvod=None
+                ))
+        treninky_data.append({'trenink': trenink, 'dochazka_list': dochazka_list})
 
     context = {
         'trener': trener,
         'hraci': hraci,
-        'treninky': treninky,
+        'treninky_data': treninky_data,
     }
     return render(request, 'trener/dashboard.html', context)
+
+
 
 
 
@@ -197,6 +222,40 @@ def add_trenink_view(request):
         form = TreninkForm()
 
     return render(request, 'trener/trenink/add.html', {'form': form})
+
+
+
+# hlasovani pro hrace o treninku
+@login_required
+def hlasovani_dochazka_view(request, trenink_id):
+    try:
+        hrac = request.user.hracprofile
+    except HracProfile.DoesNotExist:
+        messages.error(request, "Nemáte hráčský profil.")
+        return redirect('index')
+
+    trenink = get_object_or_404(Trenink, id=trenink_id, trener=hrac.trener)
+
+    if request.method == 'POST':
+        pritomen_raw = request.POST.get('pritomen')
+        if pritomen_raw not in ('true', 'false'):
+            messages.error(request, "Neplatná volba.")
+            return redirect('hrac_dashboard')
+
+        pritomen = (pritomen_raw == 'true')
+        duvod = request.POST.get('duvod', '').strip() or None
+
+        dochazka_obj, created = DochazkaTreninky.objects.update_or_create(
+            trenink=trenink,
+            hrac=hrac,
+            defaults={'pritomen': pritomen, 'duvod': duvod}
+        )
+
+        messages.success(request, "Tvá docházka byla uložena.")
+        return redirect('hrac_dashboard')
+
+    return redirect('hrac_dashboard')
+
 
 
 # uprava treninku

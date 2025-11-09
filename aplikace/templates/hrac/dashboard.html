@@ -2,6 +2,7 @@
 
 {% block content %}
 
+<!-- navbar -->
 <nav class="fixed top-0 left-0 w-full bg-white shadow-lg z-50 border-b border-gray-200">
     <div class="max-w-6xl mx-auto px-8 py-5 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
 
@@ -51,7 +52,8 @@
     </div>
 </nav>
 
-<div class="flex flex-col items-center justify-center min-h-screen bg-gray-100 space-y-6">
+<!-- uvitaci napis -->
+<div class="flex flex-col items-center justify-start min-h-screen bg-gray-100 pt-40 pb-10 space-y-10">
 
     <h1 class="text-3xl font-bold text-gray-800 text-center">
         Vítej
@@ -68,7 +70,60 @@
         </span>
         na hráčském dashboardu!
     </h1>
+
+    <!-- treninky -->
+    <div class="w-full max-w-4xl bg-white rounded-3xl shadow-lg p-6 space-y-6">
+        <h2 class="text-2xl font-semibold text-gray-800 text-center border-b pb-3">Nadcházející tréninky</h2>
+
+        {% for trenink in treninky %}
+            <div class="p-5 border-2 border-gray-100 rounded-3xl bg-gray-50 shadow-lg">
+                <div class="flex justify-between items-center">
+                    <div>
+                        <h3 class="text-xl font-bold">Trénink</h3>
+                    </div>
+                    <div class="text-right mt-2">
+                        <p class="text-gray-700 text-xl"><strong>{{ trenink.datum|date:"d.m.Y" }}</strong> v {{ trenink.cas|time:"H:i" }}</p>
+                        <p class="text-sm text-gray-500">Vytvořeno: {{ trenink.created_at|date:"d.m.Y H:i" }}</p>
+                    </div>
+                </div>
+
+                <p class="text-gray-600 font-semibold">{{ trenink.typ }}</p>
+                {% if trenink.poznamka %}
+                    <p class="mt-3 text-gray-700 italic">{{ trenink.poznamka }}</p>
+                {% endif %}
+
+                <!-- hlasovani -->
+                <div class="flex flex-col items-center mt-4 space-y-2">
+                    <form method="post" action="{% url 'hlasovani_dochazka' trenink.id %}" class="flex space-x-4">
+                        {% csrf_token %}
+                        <button name="pritomen" value="true"
+                                class="px-4 py-2 text-white font-semibold rounded-2xl shadow-md
+                                       bg-gradient-to-r from-green-500 to-green-700 transform transition duration-300
+                                       hover:from-green-600 hover:to-green-800 hover:scale-105">
+                            Zúčastním se
+                        </button>
+                        <button name="pritomen" value="false"
+                                class="px-4 py-2 text-white font-semibold rounded-2xl shadow-md
+                                       bg-gradient-to-r from-red-500 to-red-700 transform transition duration-300
+                                       hover:from-red-600 hover:to-red-800 hover:scale-105">
+                            Nezúčastním se
+                        </button>
+                    </form>
+
+                    {% for d in trenink.dochazka.all %}
+                        {% if d.hrac.user.id == user.id %}
+                            {% if d.pritomen %}
+                                <p class="text-green-600 font-semibold mt-1">Uloženo: zúčastním se</p>
+                            {% else %}
+                                <p class="text-red-600 font-semibold mt-1">Uloženo: nezúčastním se</p>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        {% empty %}
+            <p class="text-center text-gray-500">Zatím nejsou naplánované žádné tréninky.</p>
+        {% endfor %}
+    </div>
 </div>
-
-
 {% endblock %}
