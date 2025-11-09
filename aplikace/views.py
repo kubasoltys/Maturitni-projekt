@@ -235,6 +235,7 @@ def hlasovani_dochazka_view(request, trenink_id):
         return redirect('index')
 
     trenink = get_object_or_404(Trenink, id=trenink_id, trener=hrac.trener)
+    zpet = request.META.get('HTTP_REFERER', '/')
 
     if request.method == 'POST':
         pritomen_raw = request.POST.get('pritomen')
@@ -252,9 +253,9 @@ def hlasovani_dochazka_view(request, trenink_id):
         )
 
         messages.success(request, "Tvá docházka byla uložena.")
-        return redirect('hrac_dashboard')
+        return redirect(zpet)
 
-    return redirect('hrac_dashboard')
+    return redirect(zpet)
 
 
 
@@ -275,6 +276,7 @@ def edit_trenink_view(request, trenink_id):
     return render(request, 'trener/trenink/edit.html', {'form': form, 'edit': True})
 
 
+
 # smazani treninku
 @login_required
 def delete_trenink_view(request, trenink_id):
@@ -286,3 +288,63 @@ def delete_trenink_view(request, trenink_id):
         return redirect('trener_dashboard')
 
     return redirect('trener_dashboard')
+
+
+
+# hrac - stranka pro treninky
+@login_required
+def hrac_trenink(request):
+    try:
+        hrac = request.user.hracprofile
+    except HracProfile.DoesNotExist:
+        return render(request, 'index', {'message': 'Profil hráče nebyl nalezen.'})
+
+    trener = hrac.trener
+    treninky = Trenink.objects.filter(trener=trener).order_by('datum', 'cas').prefetch_related('dochazka__hrac')
+
+    context = {
+        'hrac': hrac,
+        'trener': trener,
+        'treninky': treninky,
+    }
+    return render(request, 'hrac/trenink/trenink.html', context)
+
+
+
+# trener - stranka pro treninky
+@login_required
+def trener_trenink(request):
+    try:
+        trener = request.user.trenerprofile
+    except TrenerProfile.DoesNotExist:
+        return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
+
+    hraci = list(trener.hrac.all())
+    treninky = (
+        trener.treninky
+        .prefetch_related('dochazka', 'dochazka__hrac')
+        .order_by('datum', 'cas')
+    )
+
+    treninky_data = []
+    for trenink in treninky:
+        dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
+        dochazka_list = []
+        for hrac in hraci:
+            if hrac.id in dochazka_dict:
+                dochazka_list.append(dochazka_dict[hrac.id])
+            else:
+                from types import SimpleNamespace
+                dochazka_list.append(SimpleNamespace(
+                    hrac=hrac,
+                    pritomen=None,
+                    duvod=None
+                ))
+        treninky_data.append({'trenink': trenink, 'dochazka_list': dochazka_list})
+
+    context = {
+        'trener': trener,
+        'hraci': hraci,
+        'treninky_data': treninky_data,
+    }
+    return render(request, 'trener/trenink/trenink.html', context)

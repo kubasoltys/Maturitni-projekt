@@ -7,16 +7,14 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-200 flex flex-col min-h-screen">
 
     <main>
         {% block content %}
         {% endblock %}
     </main>
 
-    <footer class="bg-gray-200 py-6 text-center text-sm text-gray-500">
-        © 2025 Squadra. Vytvořeno jako maturitní projekt.
-    </footer>
+    {% include 'page/footer.html' %}
 
 <script src="https://cdn.tailwindcss.com"></script>
 </body>

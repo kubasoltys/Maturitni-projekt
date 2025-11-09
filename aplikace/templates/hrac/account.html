@@ -12,6 +12,16 @@
 
         <div class="flex items-center space-x-6 justify-center md:justify-end">
 
+            <a href="{% url 'hrac_trenink' %}"
+               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+                Tréninky
+            </a>
+
+            <a href="{% url 'hrac_dashboard' %}"
+               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+                Dashboard
+            </a>
+
             <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
                 {% if user.hracprofile.photo %}
                     <img src="{{ user.hracprofile.photo.url }}"
@@ -47,7 +57,7 @@
     </div>
 </nav>
 
-<div class="h-28"></div>
+<div class="pt-40"></div>
 
 <div class="max-w-3xl mx-auto bg-white p-10 rounded-3xl shadow-lg">
     <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">

@@ -12,26 +12,36 @@
 
         <div class="flex items-center space-x-6 justify-center md:justify-end">
 
+            <a href="{% url 'trener_trenink' %}"
+               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+                Tréninky
+            </a>
+
+            <a href="{% url 'trener_dashboard' %}"
+               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+                Dashboard
+            </a>
+
             <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
                 {% if user.trenerprofile.photo %}
-                    <img src="{{ user.trenerprofile.photo.url }}"
-                         alt="Profilová fotka"
-                         class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                <img src="{{ user.trenerprofile.photo.url }}"
+                     alt="Profilová fotka"
+                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
                 {% else %}
-                    <img src="/media/stranka/default_profile_picture.webp"
-                         alt="Výchozí profilová fotka"
-                         class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                <img src="/media/stranka/default_profile_picture.webp"
+                     alt="Výchozí profilová fotka"
+                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
                 {% endif %}
 
                 <p class="text-gray-400 font-semibold">
                     {% if user.trenerprofile.first_name and user.trenerprofile.last_name %}
-                        {{ user.trenerprofile.first_name }} {{ user.trenerprofile.last_name }}
+                    {{ user.trenerprofile.first_name }} {{ user.trenerprofile.last_name }}
                     {% elif user.trenerprofile.first_name %}
-                        {{ user.trenerprofile.first_name }}
+                    {{ user.trenerprofile.first_name }}
                     {% elif user.trenerprofile.last_name %}
-                        {{ user.trenerprofile.last_name }}
+                    {{ user.trenerprofile.last_name }}
                     {% else %}
-                        (bez jména)
+                    (bez jména)
                     {% endif %}
                 </p>
             </div>
@@ -47,7 +57,7 @@
     </div>
 </nav>
 
-<div class="h-28"></div>
+<div class="pt-40"></div>
 
 <div class="max-w-3xl mx-auto bg-white p-10 rounded-3xl shadow-lg">
     <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
@@ -86,13 +96,13 @@
 
             <p class="text-gray-500 text-md">
                 {% if user.email %}
-                    {{ user.email }}
+                {{ user.email }}
                 {% else %}
                 {% endif %}
             </p>
             <p class="text-gray-700 font-medium">
                 {% if user.trenerprofile.club %}
-                    {{ user.trenerprofile.club }}
+                {{ user.trenerprofile.club }}
                 {% else %}
                 {% endif %}
             </p>
@@ -124,10 +134,12 @@
             Odhlásit se
         </a>
 
-        <a href="{% url 'trener_dashboard' %}"
-           class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
-            Zpět
-        </a>
+        <div class="space-y-4">
+            <a href="{% url 'trener_dashboard' %}"
+               class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
+                Zpět na dashboard
+            </a>
+        </div>
     </div>
 </div>
 

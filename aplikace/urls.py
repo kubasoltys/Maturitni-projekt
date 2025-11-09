@@ -1,3 +1,5 @@
+from tkinter.font import names
+
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.urls.base import reverse_lazy
@@ -49,6 +51,12 @@ urlpatterns = [
     path('hrac/nastaveni/zmena-hesla/zmeneno/',
          auth_views.PasswordChangeDoneView.as_view(template_name='hrac/password_change_done.html'),
          name='hrac_password_change_done'),
+
+# hrac - stranka treninku
+    path('hrac/treninky/', views.hrac_trenink, name='hrac_trenink'),
+
+# trener - stranka treninku
+    path('trener/treninky/', views.trener_trenink, name='trener_trenink'),
 
 # pridani treninku
     path('trener/pridat-trenink/', views.add_trenink_view, name='add_trenink'),
