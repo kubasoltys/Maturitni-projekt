@@ -546,6 +546,45 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2025-11-10T22:04:40.280Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "Hansi Flick (FC Barcelona)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Logo klubu\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2025-11-10T22:05:32.166Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "Hansi Flick (FC Barcelona)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Logo klubu\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2025-11-10T22:08:32.184Z",
+    "user": 2,
+    "content_type": 7,
+    "object_id": "4",
+    "object_repr": "Hansi Flick (FC Barcelona)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Logo klubu\"]}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -1090,19 +1129,11 @@
   }
 },
 {
-  "model": "sessions.session",
-  "pk": "ufympsrs38ohdh68zlr7sxjdh4r274u5",
-  "fields": {
-    "session_data": ".eJxVjDsOwyAQRO9CHSHAmE_K9D4DWtglOIlAMnYV5e6xJRdJM8W8N_NmAba1hK3TEmZkVyYHdvktI6Qn1YPgA-q98dTqusyRHwo_aedTQ3rdTvfvoEAv-1pZI1UEwmikVhqVH6wes7Iq2ezJOHLDHsmaEcBZoISCkHyOQmD2kX2-_0c4qg:1vIQJ4:IvZ7HK-dwDjCKxRWeqWESBcy_2a7iE9WZPpZ91w64Bg",
-    "expire_date": "2025-11-24T11:43:34.445Z"
-  }
-},
-{
   "model": "aplikace.user",
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$h6XEy5CF3JJjkeAbi90MMp$/6aha5iLuKXdes9DkjSWv401yKEJHghW4oej5r1zT7I=",
-    "last_login": "2025-11-10T10:44:51.141Z",
+    "last_login": "2025-11-10T23:02:10.426Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -1121,7 +1152,7 @@
   "pk": 12,
   "fields": {
     "password": "pbkdf2_sha256$1000000$Kl5B4sUZk3Z4dGRhK25r9H$Q8Nm2KXlZBkb7cn9NdHSAcwYRPdq8iKXQQIC9aDFGyc=",
-    "last_login": "2025-11-10T11:42:41.315Z",
+    "last_login": "2025-11-10T23:17:01.023Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "Hansi",
@@ -1140,7 +1171,7 @@
   "pk": 13,
   "fields": {
     "password": "pbkdf2_sha256$1000000$NJw9gDm5RG5JvC5aYH0E4K$/1hMjEeaYWU+Ff7KsrAJjSG4MPAdcI3OHnwwqGZWqhU=",
-    "last_login": "2025-11-10T11:43:34.440Z",
+    "last_login": "2025-11-10T23:14:28.001Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "Lamine",
@@ -1159,7 +1190,7 @@
   "pk": 14,
   "fields": {
     "password": "pbkdf2_sha256$1000000$kOSnIKPhMTMYlsFHSP0aG8$iS/BnQKUl0SOjDp7CUJbhf52UoQbjZ3eqkGcHGKXZOY=",
-    "last_login": "2025-11-09T21:47:22.145Z",
+    "last_login": "2025-11-10T23:20:34.695Z",
     "is_superuser": false,
     "username": "hrac2",
     "first_name": "Pedri",
@@ -1197,7 +1228,7 @@
   "pk": 20,
   "fields": {
     "password": "pbkdf2_sha256$1000000$2bnP9Z8ml2kc0oiGlSIns2$kY92uHP8wRTxR/NKRHdWTsvAmrzkdk6pYT0sht1Q/JI=",
-    "last_login": "2025-11-09T15:03:14.687Z",
+    "last_login": "2025-11-10T22:57:17.186Z",
     "is_superuser": false,
     "username": "trener2",
     "first_name": "",
@@ -1240,9 +1271,10 @@
     "phone": null,
     "birth_date": "1965-02-24",
     "club": "FC Barcelona",
+    "club_photo": "klub_photo/fc_barcelona.png",
     "photo": "trener_photo/hansi_flick.jpg",
     "created_at": "2025-10-26T12:36:06.190Z",
-    "updated_at": "2025-10-31T08:52:03.645Z"
+    "updated_at": "2025-11-10T22:08:32.182Z"
   }
 },
 {
@@ -1255,9 +1287,10 @@
     "phone": null,
     "birth_date": "1981-11-25",
     "club": "Real Madrid CF",
+    "club_photo": "klub_photo/real_madrid.png",
     "photo": "trener_photo/xabi_alonso.jpg",
     "created_at": "2025-11-07T09:52:05.154Z",
-    "updated_at": "2025-11-07T09:56:08.962Z"
+    "updated_at": "2025-11-10T23:01:28.390Z"
   }
 },
 {
@@ -1349,6 +1382,7 @@
     "cas": "11:00:00",
     "typ": "Taktická připrava",
     "poznamka": "zkouška",
+    "stav": "Naplánováno",
     "created_at": "2025-11-08T15:46:43.432Z"
   }
 },
@@ -1361,6 +1395,7 @@
     "cas": "16:10:00",
     "typ": "Jiný",
     "poznamka": "zkouška 2",
+    "stav": "Naplánováno",
     "created_at": "2025-11-09T12:07:09.868Z"
   }
 },
@@ -1373,6 +1408,7 @@
     "cas": "10:00:00",
     "typ": "Fyzická příprava",
     "poznamka": "zkouška",
+    "stav": "Naplánováno",
     "created_at": "2025-11-09T15:04:03.036Z"
   }
 },
@@ -1385,6 +1421,7 @@
     "cas": "15:30:00",
     "typ": "Taktická připrava",
     "poznamka": "zkouška 3",
+    "stav": "Naplánováno",
     "created_at": "2025-11-09T19:59:10.774Z"
   }
 },
@@ -1394,9 +1431,9 @@
   "fields": {
     "trenink": 12,
     "hrac": 7,
-    "pritomen": true,
-    "duvod": null,
-    "hlasoval_v": "2025-11-10T11:39:10.964Z"
+    "pritomen": null,
+    "duvod": "",
+    "hlasoval_v": "2025-11-10T22:16:11.333Z"
   }
 },
 {
@@ -1427,9 +1464,9 @@
   "fields": {
     "trenink": 14,
     "hrac": 7,
-    "pritomen": true,
+    "pritomen": false,
     "duvod": null,
-    "hlasoval_v": "2025-11-09T12:07:47.753Z"
+    "hlasoval_v": "2025-11-10T21:08:50.474Z"
   }
 },
 {
@@ -1449,33 +1486,124 @@
   "fields": {
     "trenink": 18,
     "hrac": 7,
-    "pritomen": false,
+    "pritomen": true,
     "duvod": null,
-    "hlasoval_v": "2025-11-09T21:33:30.771Z"
+    "hlasoval_v": "2025-11-10T21:08:52.271Z"
   }
 },
 {
   "model": "aplikace.zapas",
-  "pk": 4,
+  "pk": 6,
   "fields": {
     "trener": 4,
+    "club": "",
     "souper": "Real Madrid CF",
-    "datum": "2025-11-15",
+    "datum": "2025-11-18",
     "cas": "21:00:00",
+    "domaci_hoste": "Domácí",
     "misto": "Camp Nou, Barcelona",
     "popis": "zkouška",
     "stav": "Naplánováno",
-    "vysledek_domaci": null,
-    "vysledek_hoste": null,
-    "dokonceno_dne": null
+    "vysledek_tymu": null,
+    "vysledek_soupere": null,
+    "dokonceno_dne": null,
+    "created_at": "2025-11-10T23:11:02.743Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 7,
+  "fields": {
+    "trener": 4,
+    "club": "",
+    "souper": "Real Madrid CF",
+    "datum": "2025-11-30",
+    "cas": "16:15:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Santiago Bernabéu, Madrid",
+    "popis": "zkouška",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": null,
+    "dokonceno_dne": null,
+    "created_at": "2025-11-10T23:11:02.743Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 9,
+  "fields": {
+    "trener": 4,
+    "club": "",
+    "souper": "Arsenal FC",
+    "datum": "2025-11-11",
+    "cas": "21:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Emirates Stadium, Londýn",
+    "popis": "zkouška",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": null,
+    "dokonceno_dne": null,
+    "created_at": "2025-11-10T23:11:02.743Z"
   }
 },
 {
   "model": "aplikace.dochazkazapasy",
-  "pk": 1,
+  "pk": 2,
   "fields": {
-    "zapas": 4,
+    "zapas": 6,
     "hrac": 7,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 3,
+  "fields": {
+    "zapas": 7,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 5,
+  "fields": {
+    "zapas": 9,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 6,
+  "fields": {
+    "zapas": 9,
+    "hrac": 8,
+    "pritomen": null,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 7,
+  "fields": {
+    "zapas": 6,
+    "hrac": 8,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 8,
+  "fields": {
+    "zapas": 7,
+    "hrac": 8,
     "pritomen": true,
     "poznamka": null
   }

@@ -50,6 +50,11 @@ class TrenerProfile(models.Model):
     club = models.CharField(
         max_length=100,
         verbose_name='Klub')
+    club_photo = models.ImageField(
+        upload_to='klub_photo/',
+        verbose_name='Logo klubu',
+        blank=True,
+        null=True)
     photo = models.ImageField(
         upload_to='trener_photo/',
         verbose_name='Fotografie',
@@ -201,6 +206,11 @@ class HracProfile(models.Model):
 
 #treninky
 class Trenink(models.Model):
+    STAVY = [
+        ('Naplánováno', 'Naplánováno'),
+        ('Dokončeno', 'Dokončeno'),
+    ]
+
     TYPY = [
         ('Fyzická příprava', 'Fyzická příprava'),
         ('Taktická připrava', 'Taktická příprava'),
@@ -212,8 +222,12 @@ class Trenink(models.Model):
         on_delete=models.CASCADE,
         related_name='treninky'
     )
-    datum = models.DateField(verbose_name='Datum')
-    cas = models.TimeField(verbose_name='Cas')
+    datum = models.DateField(
+        verbose_name='Datum'
+    )
+    cas = models.TimeField(
+        verbose_name='Cas'
+    )
     typ = models.CharField(
         max_length=20,
         choices=TYPY,
@@ -222,7 +236,14 @@ class Trenink(models.Model):
     poznamka = models.TextField(
         verbose_name='Poznámka',
         blank=True,
-        null=True)
+        null=True
+    )
+    stav = models.CharField(
+        max_length=20,
+        choices=STAVY,
+        default='Naplánováno',
+        verbose_name="Stav tréninku"
+    )
 
     created_at = models.DateTimeField(default=timezone.now)
 
@@ -280,10 +301,20 @@ class Zapas(models.Model):
         ('Dohráno', 'Dohráno'),
     ]
 
+    DOMACI_HOSTE = [
+        ('Domácí', 'Domácí'),
+        ('Hosté', 'Hosté'),
+    ]
+
     trener = models.ForeignKey(
         "TrenerProfile",
         on_delete=models.CASCADE,
         related_name="zapasy"
+    )
+    club = models.CharField(
+        max_length=100,
+        verbose_name="Tým",
+        blank=True
     )
     souper = models.CharField(
         max_length=100,
@@ -298,6 +329,12 @@ class Zapas(models.Model):
         null=True,
         blank=True
     )
+    domaci_hoste = models.CharField(
+        max_length=10,
+        choices=DOMACI_HOSTE,
+        default='Domácí',
+        verbose_name='Domácí/Hosté'
+    )
     misto = models.CharField(
         verbose_name='Místo',
         max_length=150,
@@ -307,30 +344,29 @@ class Zapas(models.Model):
         verbose_name='Popis',
         blank=True
     )
-
     stav = models.CharField(
         max_length=20,
         choices=STAVY,
         default='Naplánováno',
         verbose_name="Stav zápasu"
     )
-
-    vysledek_domaci = models.PositiveSmallIntegerField(
-        verbose_name='Výsledek domácích',
+    vysledek_tymu = models.PositiveSmallIntegerField(
+        verbose_name='Výsledek týmu',
         null=True,
         blank=True
     )
-    vysledek_hoste = models.PositiveSmallIntegerField(
-        verbose_name='Výsledek hostů',
+    vysledek_soupere = models.PositiveSmallIntegerField(
+        verbose_name='Výsledek soupeře',
         null=True,
         blank=True
     )
-
     dokonceno_dne = models.DateTimeField(
         verbose_name="Dokončeno dne",
         null=True,
         blank=True
     )
+
+    created_at = models.DateTimeField(default=timezone.now)
 
     class Meta:
         ordering = ['datum', 'cas']

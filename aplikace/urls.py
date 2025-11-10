@@ -65,14 +65,17 @@ urlpatterns = [
     # pridani treninku
     path('trener/treninky/pridat/', views.add_trenink_view, name='add_trenink'),
 
-    # hlasovani na trenink
-    path('hrac/hlasovani/<int:trenink_id>/', views.hlasovani_dochazka_view, name='hlasovani_dochazka'),
-
     # uprava treninku
     path('trener/treninky/upravit-trenink/<int:trenink_id>/', views.edit_trenink_view, name='edit_trenink'),
 
     # smazani treninku
     path('trener/treninky/smazat-trenink/<int:trenink_id>/', views.delete_trenink_view, name='delete_trenink'),
+
+    # hlasovani na trenink
+    path('hrac/treninky/hlasovani/<int:trenink_id>/', views.hlasovani_dochazka_view, name='hlasovani_dochazka'),
+
+    # hlasovani na trenink - smazat
+    path('hrac/treninky/hlasovani/smazat/<int:trenink_id>/', views.hlasovani_dochazka_smazat, name='hlasovani_dochazka_smazat'),
 
 
 
@@ -86,6 +89,9 @@ urlpatterns = [
 
     # hlasovani na zapas
     path('hrac/zapasy/hlasovani/<int:zapas_id>/', views.hrac_hlasovani_zapas, name='hrac_hlasovani_zapas'),
+
+    # hlasovani na zapas - smazat
+    path('hrac/zapasy/hlasovani/smazat/<int:zapas_id>/', views.hrac_hlasovani_zapas_smazat, name='hrac_hlasovani_zapas_smazat'),
 
     # pridani zapasu
     path('trener/zapasy/pridat/', views.add_zapas_view, name='add_zapas'),

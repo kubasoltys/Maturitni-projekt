@@ -34,13 +34,14 @@ class TrenerProfileForm(forms.ModelForm):
 
     class Meta:
         model = TrenerProfile
-        fields = ['first_name', 'last_name', 'email', 'phone', 'birth_date', 'club', 'photo']
+        fields = ['first_name', 'last_name', 'email', 'phone', 'birth_date', 'club', 'club_photo','photo']
         labels = {
             'first_name': 'Jméno',
             'last_name': 'Příjmení',
             'phone': 'Telefonní číslo',
             'birth_date': 'Datum narození',
             'club': 'Klub',
+            'club_photo': 'Logo klubu',
             'photo': 'Fotografie',
         }
         widgets = {
@@ -62,6 +63,9 @@ class TrenerProfileForm(forms.ModelForm):
             }, format='%Y-%m-%d'),
             'club': forms.TextInput(attrs={
                 'placeholder': 'Klub',
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'club_photo': forms.ClearableFileInput(attrs={
                 'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'photo': forms.ClearableFileInput(attrs={
@@ -221,11 +225,12 @@ class TreninkForm(forms.ModelForm):
 class ZapasForm(forms.ModelForm):
     class Meta:
         model = Zapas
-        fields = ['souper', 'datum', 'cas', 'misto', 'popis']
+        fields = ['souper', 'datum', 'cas', 'domaci_hoste', 'misto', 'popis']
         labels = {
             'souper': 'Soupěř',
             'datum': 'Datum',
             'cas': 'Čas',
+            'domaci_hoste': 'Domácí/Hosté',
             'misto': 'Místo konání',
             'popis': 'Poznámka',
         }
@@ -240,6 +245,10 @@ class ZapasForm(forms.ModelForm):
             }),
             'cas': forms.TimeInput(attrs={
                 'type': 'time',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'domaci_hoste': forms.Select(attrs={
+                'placeholder': 'Kdo je domácí a kdo host?',
                 'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'misto': forms.TextInput(attrs={
