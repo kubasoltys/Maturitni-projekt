@@ -1,4 +1,6 @@
 from datetime import date
+from tabnanny import verbose
+
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -261,9 +263,117 @@ class DochazkaTreninky(models.Model):
         constraints = [
             models.UniqueConstraint(fields=['trenink', 'hrac'], name='unique_trenink_hrac')
         ]
-        verbose_name = "Docházka"
-        verbose_name_plural = "Docházky"
+        verbose_name = "Docházka na trénink"
+        verbose_name_plural = "Docházky na tréninky"
+
 
     def __str__(self):
         status = 'ANO' if self.pritomen is True else ('NE' if self.pritomen is False else 'NEHLASOVAL')
         return f"{self.hrac} — {self.trenink} ({status})"
+
+
+
+# zapasy
+class Zapas(models.Model):
+    STAVY = [
+        ('Naplánováno', 'Naplánováno'),
+        ('Dohráno', 'Dohráno'),
+    ]
+
+    trener = models.ForeignKey(
+        "TrenerProfile",
+        on_delete=models.CASCADE,
+        related_name="zapasy"
+    )
+    souper = models.CharField(
+        max_length=100,
+        verbose_name="Soupěř",
+    )
+    datum = models.DateField(
+        default=timezone.now,
+        verbose_name='Datum'
+    )
+    cas = models.TimeField(
+        verbose_name='Čas',
+        null=True,
+        blank=True
+    )
+    misto = models.CharField(
+        verbose_name='Místo',
+        max_length=150,
+        blank=True
+    )
+    popis = models.TextField(
+        verbose_name='Popis',
+        blank=True
+    )
+
+    stav = models.CharField(
+        max_length=20,
+        choices=STAVY,
+        default='Naplánováno',
+        verbose_name="Stav zápasu"
+    )
+
+    vysledek_domaci = models.PositiveSmallIntegerField(
+        verbose_name='Výsledek domácích',
+        null=True,
+        blank=True
+    )
+    vysledek_hoste = models.PositiveSmallIntegerField(
+        verbose_name='Výsledek hostů',
+        null=True,
+        blank=True
+    )
+
+    dokonceno_dne = models.DateTimeField(
+        verbose_name="Dokončeno dne",
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        ordering = ['datum', 'cas']
+        verbose_name = "Zápas"
+        verbose_name_plural = "Zápasy"
+
+    def __str__(self):
+        return f"{self.souper} ({self.datum})"
+
+    @property
+    def je_dokonceny(self):
+        return self.stav == 'dokonceny'
+
+
+
+# dochazka na zapasy
+class DochazkaZapasy(models.Model):
+    zapas = models.ForeignKey(
+        Zapas,
+        on_delete=models.CASCADE,
+        related_name="dochazka"
+    )
+    hrac = models.ForeignKey(
+        "HracProfile",
+        on_delete=models.CASCADE
+    )
+    pritomen = models.BooleanField(
+        verbose_name="Přítomen",
+        null=True,
+        blank=True
+    )
+    poznamka = models.CharField(
+        max_length=255,
+        verbose_name="Poznámka",
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        unique_together = ("zapas", "hrac")
+        verbose_name = "Docházka na zápas"
+        verbose_name_plural = "Docházky na zápasy"
+
+    def __str__(self):
+        stav = "✅" if self.pritomen else ("❌" if self.pritomen is False else "⏳")
+        return f"{self.hrac} - {self.zapas} ({stav})"

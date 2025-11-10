@@ -12,13 +12,18 @@
 
         <div class="flex items-center space-x-6 justify-center md:justify-end">
 
+            <a href="{% url 'trener_zapas' %}"
+               class="text-gray-700 font-semibold px-2 py-3 transition transform hover:scale-110 hover:text-black">
+                Zápasy
+            </a>
+
             <a href="{% url 'trener_trenink' %}"
-               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+               class="text-gray-700 font-semibold px-2 py-3 transition transform hover:scale-110 hover:text-black">
                 Tréninky
             </a>
 
             <a href="{% url 'trener_settings' %}"
-               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+               class="text-gray-700 font-semibold px-2 py-3 transition transform hover:scale-110 hover:text-black">
                 Nastavení účtu
             </a>
 
@@ -152,22 +157,22 @@
                     <tr class=" hover:bg-gray-200 transition-colors">
                         <td class="py-1 px-3">
                             {% if dochazka.hrac.first_name and dochazka.hrac.last_name %}
-                                {{ dochazka.hrac.first_name }} {{ dochazka.hrac.last_name }}
+                            {{ dochazka.hrac.first_name }} {{ dochazka.hrac.last_name }}
                             {% elif dochazka.hrac.first_name %}
-                                {{ dochazka.hrac.first_name }}
+                            {{ dochazka.hrac.first_name }}
                             {% elif dochazka.hrac.last_name %}
-                                {{ dochazka.hrac.last_name }}
+                            {{ dochazka.hrac.last_name }}
                             {% else %}
-                                (bez jména)
+                            (bez jména)
                             {% endif %}
                         </td>
                         <td class="py-1 px-3">
                             {% if dochazka.pritomen == True %}
-                                ✅ Ano
+                            ✅ Ano
                             {% elif dochazka.pritomen == False %}
-                                ❌ Ne
+                            ❌ Ne
                             {% else %}
-                                ⏳ Nehlasoval
+                            ⏳ Nehlasoval
                             {% endif %}
                         </td>
                     </tr>
@@ -196,7 +201,6 @@
                 Upravit všechny tréninky
             </a>
         </div>
-
     </div>
 
 </div>

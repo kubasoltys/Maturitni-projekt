@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import User, TrenerProfile, HracProfile, Trenink, DochazkaTreninky
+from .models import User, TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy
 
 
 #custom user model
@@ -37,8 +37,25 @@ class TreninkAdmin(admin.ModelAdmin):
     list_filter = ('typ', 'datum')
 
 
-# dochazka
+# trenink - dochazka
 @admin.register(DochazkaTreninky)
 class DochazkaTreninkyAdmin(admin.ModelAdmin):
     list_display = ('trenink', 'hrac', 'pritomen', 'hlasoval_v')
+    list_filter = ('pritomen',)
+
+
+
+# zapas
+@admin.register(Zapas)
+class ZapasAdmin(admin.ModelAdmin):
+    list_display = ('souper', 'datum', 'cas', 'misto', 'trener')
+    list_filter = ('datum', 'trener')
+    search_fields = ('souper', 'misto')
+
+
+
+# zapas - dochazka
+@admin.register(DochazkaZapasy)
+class DochazkaZapasyAdmin(admin.ModelAdmin):
+    list_display = ('zapas', 'hrac', 'pritomen')
     list_filter = ('pritomen',)

@@ -1,5 +1,5 @@
 from django import forms
-from .models import TrenerProfile, HracProfile, Trenink
+from .models import TrenerProfile, HracProfile, Trenink, Zapas
 
 
 # prihlaseni
@@ -210,6 +210,44 @@ class TreninkForm(forms.ModelForm):
             }),
             'poznamka': forms.Textarea(attrs={
                 'placeholder': 'Poznámka (nepovinné)',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400',
+                'rows': 3
+            }),
+        }
+
+
+
+# zapas
+class ZapasForm(forms.ModelForm):
+    class Meta:
+        model = Zapas
+        fields = ['souper', 'datum', 'cas', 'misto', 'popis']
+        labels = {
+            'souper': 'Soupěř',
+            'datum': 'Datum',
+            'cas': 'Čas',
+            'misto': 'Místo konání',
+            'popis': 'Poznámka',
+        }
+        widgets = {
+            'souper': forms.TextInput(attrs={
+                'placeholder': 'Zadej soupeře',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'datum': forms.DateInput(attrs={
+                'type': 'date',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'cas': forms.TimeInput(attrs={
+                'type': 'time',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'misto': forms.TextInput(attrs={
+                'placeholder': 'Místo zápasu (např. domácí hřiště)',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'popis': forms.Textarea(attrs={
+                'placeholder': 'Popis nebo poznámky (např. důležitost zápasu, sestava...)',
                 'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400',
                 'rows': 3
             }),

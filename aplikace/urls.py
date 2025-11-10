@@ -52,21 +52,47 @@ urlpatterns = [
          auth_views.PasswordChangeDoneView.as_view(template_name='hrac/password_change_done.html'),
          name='hrac_password_change_done'),
 
-# hrac - stranka treninku
+
+
+# TRENINKY
+
+    # hrac - stranka treninku
     path('hrac/treninky/', views.hrac_trenink, name='hrac_trenink'),
 
-# trener - stranka treninku
+    # trener - stranka treninku
     path('trener/treninky/', views.trener_trenink, name='trener_trenink'),
 
-# pridani treninku
-    path('trener/pridat-trenink/', views.add_trenink_view, name='add_trenink'),
+    # pridani treninku
+    path('trener/treninky/pridat/', views.add_trenink_view, name='add_trenink'),
 
-# hlasovani na trenink
+    # hlasovani na trenink
     path('hrac/hlasovani/<int:trenink_id>/', views.hlasovani_dochazka_view, name='hlasovani_dochazka'),
 
-# uprava treninku
-    path('trener/upravit-trenink/<int:trenink_id>/', views.edit_trenink_view, name='edit_trenink'),
+    # uprava treninku
+    path('trener/treninky/upravit-trenink/<int:trenink_id>/', views.edit_trenink_view, name='edit_trenink'),
 
-# smazani treninku
-    path('trener/smazat-trenink/<int:trenink_id>/', views.delete_trenink_view, name='delete_trenink'),
+    # smazani treninku
+    path('trener/treninky/smazat-trenink/<int:trenink_id>/', views.delete_trenink_view, name='delete_trenink'),
+
+
+
+# ZAPASY
+
+    # hrac - stranka zapasu
+    path('hrac/zapasy/', views.hrac_zapas, name='hrac_zapas'),
+
+    # trener - stranka zapasu
+    path('trener/zapasy/', views.trener_zapas, name='trener_zapas'),
+
+    # hlasovani na zapas
+    path('hrac/zapasy/hlasovani/<int:zapas_id>/', views.hrac_hlasovani_zapas, name='hrac_hlasovani_zapas'),
+
+    # pridani zapasu
+    path('trener/zapasy/pridat/', views.add_zapas_view, name='add_zapas'),
+
+    # uprava zapasu
+    path('trener/zapasy/upravit/<int:zapas_id>/', views.edit_zapas_view, name='edit_zapas'),
+
+    # smazani zapasu
+    path('trener/zapasy/smazat/<int:zapas_id>/', views.delete_zapas_view, name='delete_zapas'),
 ]

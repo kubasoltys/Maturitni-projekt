@@ -906,6 +906,78 @@
   }
 },
 {
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add Zápas",
+    "content_type": 11,
+    "codename": "add_zapas"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change Zápas",
+    "content_type": 11,
+    "codename": "change_zapas"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete Zápas",
+    "content_type": 11,
+    "codename": "delete_zapas"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view Zápas",
+    "content_type": 11,
+    "codename": "view_zapas"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add Docházka na zápas",
+    "content_type": 12,
+    "codename": "add_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change Docházka na zápas",
+    "content_type": 12,
+    "codename": "change_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete Docházka na zápas",
+    "content_type": 12,
+    "codename": "delete_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view Docházka na zápas",
+    "content_type": 12,
+    "codename": "view_dochazkazapasy"
+  }
+},
+{
   "model": "contenttypes.contenttype",
   "pk": 1,
   "fields": {
@@ -986,6 +1058,22 @@
   }
 },
 {
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "zapas"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "dochazkazapasy"
+  }
+},
+{
   "model": "sessions.session",
   "pk": "awqchnie796icc8201jfyzev53g8t21s",
   "fields": {
@@ -1002,11 +1090,19 @@
   }
 },
 {
+  "model": "sessions.session",
+  "pk": "ufympsrs38ohdh68zlr7sxjdh4r274u5",
+  "fields": {
+    "session_data": ".eJxVjDsOwyAQRO9CHSHAmE_K9D4DWtglOIlAMnYV5e6xJRdJM8W8N_NmAba1hK3TEmZkVyYHdvktI6Qn1YPgA-q98dTqusyRHwo_aedTQ3rdTvfvoEAv-1pZI1UEwmikVhqVH6wes7Iq2ezJOHLDHsmaEcBZoISCkHyOQmD2kX2-_0c4qg:1vIQJ4:IvZ7HK-dwDjCKxRWeqWESBcy_2a7iE9WZPpZ91w64Bg",
+    "expire_date": "2025-11-24T11:43:34.445Z"
+  }
+},
+{
   "model": "aplikace.user",
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$h6XEy5CF3JJjkeAbi90MMp$/6aha5iLuKXdes9DkjSWv401yKEJHghW4oej5r1zT7I=",
-    "last_login": "2025-11-09T20:38:13.670Z",
+    "last_login": "2025-11-10T10:44:51.141Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -1025,7 +1121,7 @@
   "pk": 12,
   "fields": {
     "password": "pbkdf2_sha256$1000000$Kl5B4sUZk3Z4dGRhK25r9H$Q8Nm2KXlZBkb7cn9NdHSAcwYRPdq8iKXQQIC9aDFGyc=",
-    "last_login": "2025-11-09T21:43:42.609Z",
+    "last_login": "2025-11-10T11:42:41.315Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "Hansi",
@@ -1043,8 +1139,8 @@
   "model": "aplikace.user",
   "pk": 13,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$18ZH7LCAE0hDRtj7HdzOCI$TaTGsawsHp2CxVYnSWPW3tmuN9AfmlwAiX+BHa0LiNc=",
-    "last_login": "2025-11-09T21:26:31.267Z",
+    "password": "pbkdf2_sha256$1000000$NJw9gDm5RG5JvC5aYH0E4K$/1hMjEeaYWU+Ff7KsrAJjSG4MPAdcI3OHnwwqGZWqhU=",
+    "last_login": "2025-11-10T11:43:34.440Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "Lamine",
@@ -1300,7 +1396,7 @@
     "hrac": 7,
     "pritomen": true,
     "duvod": null,
-    "hlasoval_v": "2025-11-09T21:41:28.034Z"
+    "hlasoval_v": "2025-11-10T11:39:10.964Z"
   }
 },
 {
@@ -1356,6 +1452,32 @@
     "pritomen": false,
     "duvod": null,
     "hlasoval_v": "2025-11-09T21:33:30.771Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 4,
+  "fields": {
+    "trener": 4,
+    "souper": "Real Madrid CF",
+    "datum": "2025-11-15",
+    "cas": "21:00:00",
+    "misto": "Camp Nou, Barcelona",
+    "popis": "zkouška",
+    "stav": "Naplánováno",
+    "vysledek_domaci": null,
+    "vysledek_hoste": null,
+    "dokonceno_dne": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 1,
+  "fields": {
+    "zapas": 4,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
   }
 }
 ]
