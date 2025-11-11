@@ -59,8 +59,14 @@ urlpatterns = [
     # hrac - stranka treninku
     path('hrac/treninky/', views.hrac_trenink, name='hrac_trenink'),
 
+    # hrac - historie treninku
+    path('hrac/treninky/historie/', views.hrac_trenink_historie, name='hrac_trenink_historie'),
+
     # trener - stranka treninku
     path('trener/treninky/', views.trener_trenink, name='trener_trenink'),
+
+    # trener - historie treninku
+    path('trener/treninky/historie/', views.trener_trenink_historie, name='trener_trenink_historie'),
 
     # pridani treninku
     path('trener/treninky/pridat/', views.add_trenink_view, name='add_trenink'),
@@ -106,5 +112,8 @@ urlpatterns = [
     path('trener/zapasy/oznacit_dohrano/<int:zapas_id>/', views.oznacit_dohrano_view, name='oznacit_dohrano'),
 
     # trener - odehrane zapasy
-    path('trener/zapasy/dohrane/', views.trener_dohrane_zapasy, name='trener_dohrane_zapasy'),
+    path('trener/zapasy/odehrane-zapasy/', views.trener_dohrane_zapasy, name='trener_dohrane_zapasy'),
+
+    # hrac - odehrane zapasy
+    path('hrac/zapasy/odehrane-zapasy/', views.hrac_dohrane_zapasy, name='hrac_dohrane_zapasy'),
 ]

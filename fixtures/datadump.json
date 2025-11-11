@@ -1130,10 +1130,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "k3ds88pykfn1w0b28be3gj0i56b0d6si",
+  "pk": "z91afixsqzuhmq6izrkfw7ub60c94uhu",
   "fields": {
-    "session_data": ".eJxVjDsOwjAQBe_iGln-Zm1Kes5g-bOLA8iW4qRC3B0ipYD2zcx7sRC3tYZt4BLmws5MKnb6HVPMD2w7KffYbp3n3tZlTnxX-EEHv_aCz8vh_h3UOOq3tspbJYgs6aKkEdklIhkRotYowGVSMIlsHCB5QgAyE-WCoED45Cx7fwAKSThS:1vIluE:qXqShfDiCxH2A-8gCT9WWIq8amtjnI3XDVNB90afbQg",
-    "expire_date": "2025-11-25T10:47:22.416Z"
+    "session_data": ".eJxVjEEOwiAQRe_C2hBoOx3GpXvPQAaYStVAUtqV8e7apAvd_vfefynP25r91mTxc1JnZQd1-h0Dx4eUnaQ7l1vVsZZ1mYPeFX3Qpq81yfNyuH8HmVv-1gR9h50FsJRA-nHkRM5imGLAAQw5ZwcWQcMuCFoB6onFAVLsECej3h_eMjc9:1vIwdi:G7PbQDZgezgwVXiqzdwCgcZd-D-fkkV7Aj2gr_r1CE4",
+    "expire_date": "2025-11-25T22:15:02.958Z"
   }
 },
 {
@@ -1141,7 +1141,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$h6XEy5CF3JJjkeAbi90MMp$/6aha5iLuKXdes9DkjSWv401yKEJHghW4oej5r1zT7I=",
-    "last_login": "2025-11-11T08:59:46.066Z",
+    "last_login": "2025-11-11T19:15:05.128Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -1160,7 +1160,7 @@
   "pk": 12,
   "fields": {
     "password": "pbkdf2_sha256$1000000$Kl5B4sUZk3Z4dGRhK25r9H$Q8Nm2KXlZBkb7cn9NdHSAcwYRPdq8iKXQQIC9aDFGyc=",
-    "last_login": "2025-11-11T10:47:22.414Z",
+    "last_login": "2025-11-11T22:11:37.910Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "Hansi",
@@ -1179,7 +1179,7 @@
   "pk": 13,
   "fields": {
     "password": "pbkdf2_sha256$1000000$NJw9gDm5RG5JvC5aYH0E4K$/1hMjEeaYWU+Ff7KsrAJjSG4MPAdcI3OHnwwqGZWqhU=",
-    "last_login": "2025-11-11T10:46:52.468Z",
+    "last_login": "2025-11-11T22:08:26.629Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "Lamine",
@@ -1198,7 +1198,7 @@
   "pk": 14,
   "fields": {
     "password": "pbkdf2_sha256$1000000$kOSnIKPhMTMYlsFHSP0aG8$iS/BnQKUl0SOjDp7CUJbhf52UoQbjZ3eqkGcHGKXZOY=",
-    "last_login": "2025-11-11T08:31:24.418Z",
+    "last_login": "2025-11-11T22:15:02.953Z",
     "is_superuser": false,
     "username": "hrac2",
     "first_name": "Pedri",
@@ -1236,7 +1236,7 @@
   "pk": 20,
   "fields": {
     "password": "pbkdf2_sha256$1000000$2bnP9Z8ml2kc0oiGlSIns2$kY92uHP8wRTxR/NKRHdWTsvAmrzkdk6pYT0sht1Q/JI=",
-    "last_login": "2025-11-11T08:05:19.838Z",
+    "last_login": "2025-11-11T22:10:07.521Z",
     "is_superuser": false,
     "username": "trener2",
     "first_name": "",
@@ -1434,14 +1434,27 @@
   }
 },
 {
+  "model": "aplikace.trenink",
+  "pk": 19,
+  "fields": {
+    "trener": 4,
+    "datum": "2025-11-01",
+    "cas": "15:00:00",
+    "typ": "Fyzická příprava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-11-11T20:29:36.225Z"
+  }
+},
+{
   "model": "aplikace.dochazkatreninky",
   "pk": 1,
   "fields": {
     "trenink": 12,
     "hrac": 7,
-    "pritomen": null,
-    "duvod": "",
-    "hlasoval_v": "2025-11-11T08:04:57.038Z"
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-11-11T19:38:58.206Z"
   }
 },
 {
@@ -1450,9 +1463,9 @@
   "fields": {
     "trenink": 12,
     "hrac": 8,
-    "pritomen": false,
+    "pritomen": true,
     "duvod": null,
-    "hlasoval_v": "2025-11-09T21:47:30.421Z"
+    "hlasoval_v": "2025-11-11T22:23:31.052Z"
   }
 },
 {
@@ -1501,25 +1514,6 @@
 },
 {
   "model": "aplikace.zapas",
-  "pk": 10,
-  "fields": {
-    "trener": 4,
-    "club": "",
-    "souper": "AC Milan",
-    "datum": "2025-11-09",
-    "cas": "16:15:00",
-    "domaci_hoste": "Domácí",
-    "misto": "Camp Nou, Barcelona",
-    "popis": "",
-    "stav": "Naplánováno",
-    "vysledek_tymu": null,
-    "vysledek_soupere": null,
-    "dokonceno_dne": null,
-    "created_at": "2025-11-11T10:35:53.786Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
   "pk": 12,
   "fields": {
     "trener": 4,
@@ -1529,11 +1523,9 @@
     "cas": "21:00:00",
     "domaci_hoste": "Hosté",
     "misto": "Parc des Princes, Paříž",
-    "popis": "",
     "stav": "Naplánováno",
     "vysledek_tymu": null,
     "vysledek_soupere": null,
-    "dokonceno_dne": null,
     "created_at": "2025-11-11T11:07:33.808Z"
   }
 },
@@ -1548,20 +1540,79 @@
     "cas": "21:00:00",
     "domaci_hoste": "Domácí",
     "misto": "Camp Nou, Barcelona",
-    "popis": "",
     "stav": "Dohráno",
     "vysledek_tymu": 2,
     "vysledek_soupere": 1,
-    "dokonceno_dne": null,
     "created_at": "2025-11-11T11:21:53.852Z"
   }
 },
 {
-  "model": "aplikace.dochazkazapasy",
-  "pk": 9,
+  "model": "aplikace.zapas",
+  "pk": 14,
   "fields": {
-    "zapas": 10,
+    "trener": 4,
+    "club": "",
+    "souper": "Arsenal FC",
+    "datum": "2025-10-31",
+    "cas": "21:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Emirates Stadium, Londýn",
+    "stav": "Dohráno",
+    "vysledek_tymu": 1,
+    "vysledek_soupere": 3,
+    "created_at": "2025-11-11T11:48:43.034Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 16,
+  "fields": {
+    "trener": 4,
+    "club": "",
+    "souper": "AC Milan",
+    "datum": "2025-09-08",
+    "cas": "16:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "San Siro, Milán",
+    "stav": "Dohráno",
+    "vysledek_tymu": 4,
+    "vysledek_soupere": 0,
+    "created_at": "2025-11-11T15:07:02.862Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 17,
+  "fields": {
+    "trener": 4,
+    "club": "",
+    "souper": "Real Madrid CF",
+    "datum": "2025-11-01",
+    "cas": "16:15:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Santiago Bernabéu, Madrid",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": null,
+    "created_at": "2025-11-11T19:37:04.497Z"
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 10,
+  "fields": {
+    "zapas": 12,
     "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 11,
+  "fields": {
+    "zapas": 12,
+    "hrac": 8,
     "pritomen": true,
     "poznamka": null
   }

@@ -16,6 +16,11 @@
 
         <div class="flex items-center space-x-6 justify-center md:justify-end">
 
+            <a href="{% url 'trener_trenink_historie' %}"
+               class="text-gray-700 font-semibold px-2 py-3 transition transform hover:scale-110 hover:text-black">
+                Historie tréninků
+            </a>
+
             <a href="{% url 'trener_zapas' %}"
                class="text-gray-700 font-semibold px-2 py-3 transition transform hover:scale-110 hover:text-black">
                 Zápasy
@@ -73,12 +78,20 @@
 
     <!-- treninky -->
     <div class="w-full max-w-4xl bg-white rounded-3xl shadow-lg p-6 space-y-4">
-        <div class="flex justify-center mb-4">
+
+        <div class="flex justify-center mb-4 space-x-8">
             <a href="{% url 'add_trenink' %}"
                class="inline-block w-1/2 py-3 text-white font-bold text-center rounded-2xl shadow-lg
               bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
               hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
                 + Přidat nový trénink
+            </a>
+
+            <a href="{% url 'trener_trenink_historie' %}"
+               class="inline-block w-1/2 py-3 text-white font-semibold text-center rounded-2xl shadow-lg
+              bg-gradient-to-r from-gray-500 to-gray-800 transform transition duration-300
+              hover:from-gray-600 hover:to-gray-900 hover:scale-105">
+                Historie tréninků
             </a>
         </div>
 
@@ -148,7 +161,7 @@
                         </button>
                     </form>
 
-                    <form method="post" action="{% url 'delete_trenink' data.trenink.id %}">
+                    <form method="post" action=""{% url 'delete_trenink' data.trenink.id %}>
                         {% csrf_token %}
                         <button type="submit"
                                 class="px-4 py-2 text-white font-bold rounded-2xl shadow-lg

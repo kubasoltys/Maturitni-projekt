@@ -308,64 +308,45 @@ class Zapas(models.Model):
     trener = models.ForeignKey(
         "TrenerProfile",
         on_delete=models.CASCADE,
-        related_name="zapasy"
-    )
+        related_name="zapasy")
     club = models.CharField(
         max_length=100,
         verbose_name="Tým",
-        blank=True
-    )
+        blank=True)
     souper = models.CharField(
         max_length=100,
-        verbose_name="Soupěř",
-    )
+        verbose_name="Soupěř",)
     datum = models.DateField(
         default=timezone.now,
-        verbose_name='Datum'
-    )
+        verbose_name='Datum')
     cas = models.TimeField(
         verbose_name='Čas',
         null=True,
-        blank=True
-    )
+        blank=True)
     domaci_hoste = models.CharField(
         max_length=10,
         choices=DOMACI_HOSTE,
         default='Domácí',
-        verbose_name='Domácí/Hosté'
-    )
+        verbose_name='Domácí/Hosté')
     misto = models.CharField(
         verbose_name='Místo',
         max_length=150,
-        blank=True
-    )
-    popis = models.TextField(
-        verbose_name='Popis',
-        blank=True
-    )
+        blank=True)
     stav = models.CharField(
         max_length=20,
         choices=STAVY,
         default='Naplánováno',
-        verbose_name="Stav zápasu"
-    )
+        verbose_name="Stav zápasu")
     vysledek_tymu = models.PositiveSmallIntegerField(
         verbose_name='Výsledek týmu',
         null=True,
-        blank=True
-    )
+        blank=True)
     vysledek_soupere = models.PositiveSmallIntegerField(
         verbose_name='Výsledek soupeře',
         null=True,
-        blank=True
-    )
-    dokonceno_dne = models.DateTimeField(
-        verbose_name="Dokončeno dne",
-        null=True,
-        blank=True
-    )
-
-    created_at = models.DateTimeField(default=timezone.now)
+        blank=True)
+    created_at = models.DateTimeField(
+        default=timezone.now)
 
     class Meta:
         ordering = ['datum', 'cas']
@@ -386,23 +367,19 @@ class DochazkaZapasy(models.Model):
     zapas = models.ForeignKey(
         Zapas,
         on_delete=models.CASCADE,
-        related_name="dochazka"
-    )
+        related_name="dochazka")
     hrac = models.ForeignKey(
         "HracProfile",
-        on_delete=models.CASCADE
-    )
+        on_delete=models.CASCADE)
     pritomen = models.BooleanField(
         verbose_name="Přítomen",
         null=True,
-        blank=True
-    )
+        blank=True)
     poznamka = models.CharField(
         max_length=255,
         verbose_name="Poznámka",
         blank=True,
-        null=True
-    )
+        null=True)
 
     class Meta:
         unique_together = ("zapas", "hrac")

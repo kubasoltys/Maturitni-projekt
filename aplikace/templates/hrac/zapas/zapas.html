@@ -16,6 +16,11 @@
 
         <div class="flex items-center space-x-6 justify-center md:justify-end">
 
+            <a href="{% url 'hrac_dohrane_zapasy' %}"
+               class="text-gray-700 font-semibold px-2 py-3 transition transform hover:scale-110 hover:text-black">
+                Odehrané zápasy
+            </a>
+
             <a href="{% url 'hrac_trenink' %}"
                class="text-gray-700 font-semibold px-2 py-3 transition transform hover:scale-110 hover:text-black">
                 Tréninky
@@ -68,15 +73,25 @@
 
 
 <div class="flex flex-col items-center justify-center min-h-screen space-y-8 py-10 pt-60">
-    <h1 class="text-3xl font-bold text-gray-800 text-center">Zápasy</h1>
+    <h1 class="text-3xl font-bold text-gray-800 text-center">Nadcházející zápasy</h1>
 
     <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-6 space-y-8">
+        <div class="flex justify-center mb-4 space-x-8">
+            <a href="{% url 'hrac_dohrane_zapasy' %}"
+               class="inline-block w-1/2 py-3 text-white font-semibold text-center rounded-2xl shadow-lg
+              bg-gradient-to-r from-gray-500 to-gray-800 transform transition duration-300
+              hover:from-gray-600 hover:to-gray-900 hover:scale-105">
+                Odehrané zápasy
+            </a>
+        </div>
+
         {% for data in zapasy_data %}
-        {% if data.zapas.stav == "Naplánováno" %}
         <div class="{% if not data.hlasoval %} border-2 border-red-500 {% endif %} rounded-3xl p-4 shadow-xl bg-gray-100">
+
             {% if not data.hlasoval %}
-            <p class="text-red-500 text-center font-semibold text-lg p-2">Ještě jsi nehlasoval!</p>
+            <p class="text-red-500 text-center font-semibold text-lg p-2">⚠ Ještě jsi nehlasoval!</p>
             {% endif %}
+
             <div class="flex justify-between items-center">
                 <p class="text-3xl font-bold text-gray-800 mx-auto">
                     {% if data.zapas.domaci_hoste == "Domácí" %}
@@ -85,6 +100,7 @@
                     {{ data.zapas.souper }} <span class="text-lg">vs</span> {{ data.klub }}
                     {% endif %}
                 </p>
+
                 {% if data.zapas.vysledek_domaci is not None and data.zapas.vysledek_hoste is not None %}
                 <p class="font-semibold text-green-700">
                     Výsledek: {{ data.zapas.vysledek_domaci }} : {{ data.zapas.vysledek_hoste }}
@@ -101,9 +117,12 @@
             <p class="text-gray-700 mb-2 text-center">
                 {{ data.zapas.misto|default:"-" }}
             </p>
+
+            {% if data.zapas.popis %}
             <p class="text-gray-700 mb-2 text-center">
                 {{ data.zapas.popis }}
             </p>
+            {% endif %}
 
             <!-- hlasovani -->
             {% if not data.hlasoval %}
@@ -125,29 +144,26 @@
                 </div>
             </form>
             {% elif data.dochazka %}
-
-            {% if data.dochazka.pritomen %}
-            <div class="flex justify-center mt-14">
-                <div class="bg-green-100 border-2 border-green-300 p-1 rounded-xl inline-block text-center">
-                    <p class="text-emerald-600 font-semibold">Uloženo: Přijdu</p>
+                {% if data.dochazka.pritomen %}
+                <div class="flex justify-center mt-14">
+                    <div class="bg-green-100 border-2 border-green-300 p-1 rounded-xl inline-block text-center">
+                        <p class="text-emerald-600 font-semibold">Uloženo: Přijdu</p>
+                    </div>
                 </div>
-            </div>
-            {% else %}
-            <div class="flex justify-center mt-14">
-                <div class="bg-red-100 border-2 border-red-300 p-1 rounded-xl inline-block text-center">
-                    <p class="text-red-600 font-semibold">Uloženo: Nepřijdu</p>
+                {% else %}
+                <div class="flex justify-center mt-14">
+                    <div class="bg-red-100 border-2 border-red-300 p-1 rounded-xl inline-block text-center">
+                        <p class="text-red-600 font-semibold">Uloženo: Nepřijdu</p>
+                    </div>
                 </div>
-            </div>
+                {% endif %}
+                <a href="{% url 'hrac_hlasovani_zapas_smazat' data.zapas.id %}"
+                   class="block mt-4 text-center text-gray-600 text-sm
+                  hover:text-gray-900 font-semibold transition transform hover:scale-105">
+                    Zrušit volbu
+                </a>
             {% endif %}
-            <a href="{% url 'hrac_hlasovani_zapas_smazat' data.zapas.id %}"
-               class="block mt-4 text-center text-gray-600 text-sm
-              hover:text-gray-900 font-semibold transition transform hover:scale-105">
-                Zrušit volbu
-            </a>
-            {% endif %}
-
         </div>
-        {% endif %}
 
         {% if not forloop.last %}
         <hr class="border-t-2 border-gray-300 my-6 rounded-full">
@@ -165,5 +181,6 @@
         </div>
     </div>
 </div>
+
 
 {% endblock %}

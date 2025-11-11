@@ -1,9 +1,12 @@
+from types import SimpleNamespace
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime, date
+from . import models
+from django.db.models import Q
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm, DohranyZapasForm
 from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy
 
@@ -85,15 +88,22 @@ def hrac_dashboard(request):
         return render(request, 'index.html', {'message': 'Profil hráče nebyl nalezen.'})
 
     trener = hrac.trener
+    now = timezone.now()
 
     # --- Tréninky ---
-    treninky = Trenink.objects.filter(
-        trener=trener,
-        stav='Naplánováno'
-    ).order_by('datum', 'cas').prefetch_related('dochazka')
+    trenink = (
+        Trenink.objects.filter(
+            trener=trener,
+            stav='Naplánováno',
+            datum__gte=now.date()
+        )
+        .order_by('datum', 'cas')
+        .prefetch_related('dochazka')
+        .first()
+    )
 
     treninky_data = []
-    for trenink in treninky:
+    if trenink:
         dochazka_obj = trenink.dochazka.filter(hrac=hrac).first()
         treninky_data.append({
             'trenink': trenink,
@@ -102,9 +112,18 @@ def hrac_dashboard(request):
         })
 
     # --- Zápasy ---
-    zapasy = Zapas.objects.filter(trener=trener).order_by('datum', 'cas')
+    zapas = (
+        Zapas.objects.filter(
+            trener=trener,
+            datum__gt=now.date()  # jen budoucí zápasy
+        )
+        .order_by('datum', 'cas')
+        .prefetch_related('dochazka')
+        .first()
+    )
+
     zapasy_data = []
-    for zapas in zapasy:
+    if zapas:
         dochazka_obj = zapas.dochazka.filter(hrac=hrac).first()
         zapasy_data.append({
             'zapas': zapas,
@@ -133,14 +152,12 @@ def trener_dashboard(request):
         return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
 
     hraci = list(trener.hrac.all())
+
     treninky = (
         trener.treninky
+        .filter(datum__gte=date.today())
         .prefetch_related('dochazka', 'dochazka__hrac')
-        .order_by('datum', 'cas')
-    )
-    zapasy = (
-        request.user.trenerprofile.zapasy
-        .order_by('datum', 'cas')
+        .order_by('datum', 'cas')[:1]
     )
 
     treninky_data = []
@@ -151,7 +168,6 @@ def trener_dashboard(request):
             if hrac.id in dochazka_dict:
                 dochazka_list.append(dochazka_dict[hrac.id])
             else:
-                from types import SimpleNamespace
                 dochazka_list.append(SimpleNamespace(
                     hrac=hrac,
                     pritomen=None,
@@ -159,11 +175,37 @@ def trener_dashboard(request):
                 ))
         treninky_data.append({'trenink': trenink, 'dochazka_list': dochazka_list})
 
+    zapasy_qs = (
+        trener.zapasy
+        .filter(datum__gte=date.today())
+        .prefetch_related('dochazka', 'dochazka__hrac')
+        .order_by('datum', 'cas')[:1]
+    )
+
+    zapasy_data = []
+    for zapas in zapasy_qs:
+        dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
+        dochazka_list = []
+        for hrac in hraci:
+            if hrac.id in dochazka_dict:
+                dochazka_list.append(dochazka_dict[hrac.id])
+            else:
+                dochazka_list.append(SimpleNamespace(
+                    hrac=hrac,
+                    pritomen=None,
+                    duvod=None
+                ))
+        zapasy_data.append({
+            'zapas': zapas,
+            'dochazka_list': dochazka_list,
+            'po_dohrani': zapas.stav != 'Naplánováno'
+        })
+
     context = {
         'trener': trener,
         'hraci': hraci,
         'treninky_data': treninky_data,
-        'zapasy': zapasy,
+        'zapasy': zapasy_data,
     }
     return render(request, 'trener/dashboard.html', context)
 
@@ -186,6 +228,7 @@ def edit_trener_profile(request):
     return render(request, 'trener/edit.html', {'form': form, 'trener': trener})
 
 
+
 # editace profilu hrace
 @login_required
 def edit_hrac_profile(request):
@@ -199,6 +242,7 @@ def edit_hrac_profile(request):
         form = HracProfileForm(instance=hrac)
 
     return render(request, 'hrac/edit.html', {'form': form, 'hrac': hrac})
+
 
 
 # nastaveni trenera
@@ -239,6 +283,7 @@ def hrac_settings_view(request):
 def trener_account_view(request):
     trener = get_object_or_404(TrenerProfile, user=request.user)
     return render(request, 'trener/account.html', {'trener': trener})
+
 
 
 # detail účtu hráče
@@ -381,7 +426,13 @@ def hrac_trenink(request):
     except HracProfile.DoesNotExist:
         return render(request, 'index.html', {'message': 'Profil hráče nebyl nalezen.'})
 
-    treninky = Trenink.objects.filter(trener=hrac.trener).order_by('datum', 'cas')
+    dnes = date.today()
+
+    treninky = Trenink.objects.filter(
+        trener=hrac.trener,
+        stav='Naplánováno',
+        datum__gte=dnes
+    ).order_by('datum', 'cas')
 
     treninky_data = []
     for trenink in treninky:
@@ -400,6 +451,38 @@ def hrac_trenink(request):
 
 
 
+# hrac - historie treninku
+@login_required
+def hrac_trenink_historie(request):
+    try:
+        hrac = request.user.hracprofile
+    except HracProfile.DoesNotExist:
+        return render(request, 'index.html', {'message': 'Profil hráče nebyl nalezen.'})
+
+    dnes = date.today()
+
+    treninky = Trenink.objects.filter(
+        trener=hrac.trener,
+        datum__lt=dnes
+    ).order_by('datum', 'cas')
+
+    treninky_data = []
+    for trenink in treninky:
+        dochazka_obj = trenink.dochazka.filter(hrac=hrac).first()
+        treninky_data.append({
+            'trenink': trenink,
+            'dochazka': dochazka_obj,
+            'hlasoval': dochazka_obj.pritomen is not None if dochazka_obj else False
+        })
+
+    return render(request, 'hrac/trenink/trenink_historie.html', {
+        'hrac': hrac,
+        'trener': hrac.trener,
+        'treninky_data': treninky_data,
+    })
+
+
+
 # trener - stranka pro treninky
 @login_required
 def trener_trenink(request):
@@ -409,8 +492,11 @@ def trener_trenink(request):
         return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
 
     hraci = list(trener.hrac.all())
+
+    # --- pouze naplánované treninky podle dnešního data ---
     treninky = (
         trener.treninky
+        .filter(datum__gte=date.today())  # filtr podle data
         .prefetch_related('dochazka', 'dochazka__hrac')
         .order_by('datum', 'cas')
     )
@@ -423,7 +509,6 @@ def trener_trenink(request):
             if hrac.id in dochazka_dict:
                 dochazka_list.append(dochazka_dict[hrac.id])
             else:
-                from types import SimpleNamespace
                 dochazka_list.append(SimpleNamespace(
                     hrac=hrac,
                     pritomen=None,
@@ -440,6 +525,47 @@ def trener_trenink(request):
 
 
 
+# trener -historie treninku
+@login_required
+def trener_trenink_historie(request):
+    try:
+        trener = request.user.trenerprofile
+    except TrenerProfile.DoesNotExist:
+        return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
+
+    hraci = list(trener.hrac.all())
+
+    treninky = (
+        trener.treninky
+        .filter(datum__lt=date.today())
+        .prefetch_related('dochazka', 'dochazka__hrac')
+        .order_by('-datum', '-cas')
+    )
+
+    treninky_data = []
+    for trenink in treninky:
+        dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
+        dochazka_list = []
+        for hrac in hraci:
+            if hrac.id in dochazka_dict:
+                dochazka_list.append(dochazka_dict[hrac.id])
+            else:
+                dochazka_list.append(SimpleNamespace(
+                    hrac=hrac,
+                    pritomen=None,
+                    duvod=None
+                ))
+        treninky_data.append({'trenink': trenink, 'dochazka_list': dochazka_list})
+
+    context = {
+        'trener': trener,
+        'hraci': hraci,
+        'treninky_data': treninky_data,
+    }
+    return render(request, 'trener/trenink/trenink_historie.html', context)
+
+
+
 # ZAPASY
 
 
@@ -450,19 +576,35 @@ def hrac_zapas(request):
     try:
         hrac = request.user.hracprofile
     except HracProfile.DoesNotExist:
-        messages.error(request, "Nemáte hráčský profil.")
+        messages.error(request, "Nemáte profil.")
         return redirect('index')
 
-    zapasy = Zapas.objects.filter(trener=hrac.trener).order_by('datum', 'cas')
-    zapasy_data = []
+    now = timezone.localtime(timezone.now())
 
+    zapasy = (
+        Zapas.objects.filter(trener=hrac.trener, stav='Naplánováno')
+        .filter(datum__gte=now.date())
+        .order_by('datum', 'cas')
+    )
+
+    zapasy_data = []
     for zapas in zapasy:
+        datetime_zapasu = timezone.make_aware(
+            timezone.datetime.combine(zapas.datum, zapas.cas)
+        )
+        if datetime_zapasu <= now:
+            continue
+
         dochazka_obj = zapas.dochazka.filter(hrac=hrac).first()
         zapasy_data.append({
             'zapas': zapas,
             'dochazka': dochazka_obj,
             'klub': hrac.trener.club,
-            'hlasoval': dochazka_obj.pritomen is not None if dochazka_obj else False
+            'hlasoval': dochazka_obj.pritomen is not None if dochazka_obj else False,
+            'po_dohrani': (
+                datetime_zapasu < now
+                and (zapas.vysledek_domaci is None or zapas.vysledek_hoste is None)
+            )
         })
 
     return render(request, 'hrac/zapas/zapas.html', {
@@ -470,7 +612,6 @@ def hrac_zapas(request):
         'trener': hrac.trener,
         'zapasy_data': zapasy_data
     })
-
 
 
 
@@ -698,3 +839,43 @@ def trener_dohrane_zapasy(request):
     }
 
     return render(request, 'trener/zapas/zapas_dohrano.html', context)
+
+
+
+# hrac - dohrane zapasy
+@login_required
+def hrac_dohrane_zapasy(request):
+    try:
+        hrac = request.user.hracprofile
+    except HracProfile.DoesNotExist:
+        messages.error(request, "Nemáte hráčský profil.")
+        return redirect('index')
+
+    dnes = timezone.localdate()
+    tren = hrac.trener
+
+    zapasy = Zapas.objects.filter(
+        trener=tren
+    ).filter(
+        Q(stav='Dohráno') |
+        Q(stav='Naplánováno', datum__lt=dnes)
+    ).order_by('datum', 'cas')
+
+    zapasy_data = []
+
+    for zapas in zapasy:
+        dochazka_obj = zapas.dochazka.filter(hrac=hrac).first()
+        zapasy_data.append({
+            'zapas': zapas,
+            'dochazka': dochazka_obj,
+            'vysledek_tymu': getattr(zapas, 'vysledek_tymu', None),
+            'vysledek_soupere': getattr(zapas, 'vysledek_soupere', None)
+        })
+
+    context = {
+        'hrac': hrac,
+        'trener': tren,
+        'zapasy_data': zapasy_data
+    }
+
+    return render(request, 'hrac/zapas/zapas_dohrano.html', context)
