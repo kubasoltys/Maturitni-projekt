@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm
+from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm, DohranyZapasForm
 from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy
 
 
@@ -525,7 +525,6 @@ def hrac_hlasovani_zapas_smazat(request, zapas_id):
 
 
 
-
 # trener - stranka pro zapasy
 @login_required
 def trener_zapas(request):
@@ -535,8 +534,10 @@ def trener_zapas(request):
         return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
 
     hraci = list(trener.hrac.all())
+
     zapasy = (
         trener.zapasy
+        .filter(stav='Naplánováno')
         .prefetch_related('dochazka', 'dochazka__hrac')
         .order_by('datum', 'cas')
     )
@@ -619,3 +620,65 @@ def delete_zapas_view(request, zapas_id):
         return redirect('trener_zapas')
 
     return redirect('trener_zapas')
+
+
+
+# oznaceni zapasu jako odehrany
+@login_required
+def oznacit_dohrano_view(request, zapas_id):
+    zapas = get_object_or_404(Zapas, id=zapas_id, trener=request.user.trenerprofile)
+
+    if request.method == 'POST':
+        form = DohranyZapasForm(request.POST, instance=zapas)
+        if form.is_valid():
+            zapas = form.save(commit=False)
+            zapas.stav = 'Dohráno'
+            zapas.save()
+            return redirect('trener_zapas')  # nebo speciální stránka pro dohrané zápasy
+    else:
+        form = DohranyZapasForm(instance=zapas)
+
+    return render(request, 'trener/zapas/oznacit_dohrano.html', {'form': form, 'zapas': zapas})
+
+
+
+# trener - odehrany zapasy
+@login_required
+def trener_dohrane_zapasy(request):
+    try:
+        trener = request.user.trenerprofile
+    except TrenerProfile.DoesNotExist:
+        return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
+
+    hraci = list(trener.hrac.all())
+
+    zapasy = (
+        trener.zapasy
+        .filter(stav='Dohráno')
+        .prefetch_related('dochazka', 'dochazka__hrac')
+        .order_by('datum', 'cas')
+    )
+
+    zapasy_data = []
+    for zapas in zapasy:
+        dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
+        dochazka_list = []
+        for hrac in hraci:
+            if hrac.id in dochazka_dict:
+                dochazka_list.append(dochazka_dict[hrac.id])
+            else:
+                from types import SimpleNamespace
+                dochazka_list.append(SimpleNamespace(
+                    hrac=hrac,
+                    pritomen=None,
+                    poznamka=None
+                ))
+        zapasy_data.append({'zapas': zapas, 'dochazka_list': dochazka_list})
+
+    context = {
+        'trener': trener,
+        'hraci': hraci,
+        'zapasy_data': zapasy_data,
+    }
+
+    return render(request, 'trener/zapas/zapas_dohrano.html', context)

@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="flex items-center justify-center min-h-screen bg-gray-100">
+    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-lg">
+        <h2 class="text-2xl font-semibold mb-6 text-center">Zadat výsledky</h2>
+
+        <form method="post" class="space-y-5">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+
+            {% for field in form %}
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <button type="submit"
+                    class="w-full text-white font-bold px-8 py-3 rounded-2xl shadow-lg
+                           bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
+                           hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
+                Uložit výsledek
+            </button>
+        </form>
+
+        <a href="{% url 'trener_zapas' %}"
+           class="block mt-6 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
+            Zpět
+        </a>
+
+    </div>
+</div>
+{% endblock %}

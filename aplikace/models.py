@@ -1,6 +1,5 @@
 from datetime import date
-from tabnanny import verbose
-
+#from tabnanny import verbose
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models

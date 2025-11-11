@@ -261,3 +261,24 @@ class ZapasForm(forms.ModelForm):
                 'rows': 3
             }),
         }
+
+
+
+class DohranyZapasForm(forms.ModelForm):
+    class Meta:
+        model = Zapas
+        fields = ['vysledek_tymu', 'vysledek_soupere']
+        labels = {
+            'vysledek_tymu': 'Výsledek týmu',
+            'vysledek_soupere': 'Výsledek soupeře',
+        }
+        widgets = {
+            'vysledek_tymu': forms.NumberInput(attrs={
+                'placeholder': 'Góly tvého týmu',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+            'vysledek_soupere': forms.NumberInput(attrs={
+                'placeholder': 'Góly soupeře',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            }),
+        }
