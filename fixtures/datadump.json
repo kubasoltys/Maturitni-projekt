@@ -1130,10 +1130,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "xtvdomrdngbxri74yvang01tacqe1ahv",
+  "pk": "k3ds88pykfn1w0b28be3gj0i56b0d6si",
   "fields": {
-    "session_data": ".eJxVjDsOwjAQBe_iGln-Zm1Kes5g-bOLA8iW4qRC3B0ipYD2zcx7sRC3tYZt4BLmws5MKnb6HVPMD2w7KffYbp3n3tZlTnxX-EEHv_aCz8vh_h3UOOq3tspbJYgs6aKkEdklIhkRotYowGVSMIlsHCB5QgAyE-WCoED45Cx7fwAKSThS:1vIkEa:VZ6JG5NkWra2hR4-qyAgdLinMovqQKXdvq8Z69IOtf8",
-    "expire_date": "2025-11-25T09:00:16.991Z"
+    "session_data": ".eJxVjDsOwjAQBe_iGln-Zm1Kes5g-bOLA8iW4qRC3B0ipYD2zcx7sRC3tYZt4BLmws5MKnb6HVPMD2w7KffYbp3n3tZlTnxX-EEHv_aCz8vh_h3UOOq3tspbJYgs6aKkEdklIhkRotYowGVSMIlsHCB5QgAyE-WCoED45Cx7fwAKSThS:1vIluE:qXqShfDiCxH2A-8gCT9WWIq8amtjnI3XDVNB90afbQg",
+    "expire_date": "2025-11-25T10:47:22.416Z"
   }
 },
 {
@@ -1160,7 +1160,7 @@
   "pk": 12,
   "fields": {
     "password": "pbkdf2_sha256$1000000$Kl5B4sUZk3Z4dGRhK25r9H$Q8Nm2KXlZBkb7cn9NdHSAcwYRPdq8iKXQQIC9aDFGyc=",
-    "last_login": "2025-11-11T09:00:16.986Z",
+    "last_login": "2025-11-11T10:47:22.414Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "Hansi",
@@ -1179,7 +1179,7 @@
   "pk": 13,
   "fields": {
     "password": "pbkdf2_sha256$1000000$NJw9gDm5RG5JvC5aYH0E4K$/1hMjEeaYWU+Ff7KsrAJjSG4MPAdcI3OHnwwqGZWqhU=",
-    "last_login": "2025-11-11T08:14:14.759Z",
+    "last_login": "2025-11-11T10:46:52.468Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "Lamine",
@@ -1501,117 +1501,67 @@
 },
 {
   "model": "aplikace.zapas",
-  "pk": 6,
+  "pk": 10,
+  "fields": {
+    "trener": 4,
+    "club": "",
+    "souper": "AC Milan",
+    "datum": "2025-11-09",
+    "cas": "16:15:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
+    "popis": "",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": null,
+    "dokonceno_dne": null,
+    "created_at": "2025-11-11T10:35:53.786Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 12,
+  "fields": {
+    "trener": 4,
+    "club": "",
+    "souper": "PSG",
+    "datum": "2026-01-10",
+    "cas": "21:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Parc des Princes, Paříž",
+    "popis": "",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": null,
+    "dokonceno_dne": null,
+    "created_at": "2025-11-11T11:07:33.808Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 13,
   "fields": {
     "trener": 4,
     "club": "",
     "souper": "Real Madrid CF",
-    "datum": "2025-11-18",
+    "datum": "2025-10-25",
     "cas": "21:00:00",
     "domaci_hoste": "Domácí",
     "misto": "Camp Nou, Barcelona",
-    "popis": "zkouška",
-    "stav": "Naplánováno",
-    "vysledek_tymu": null,
-    "vysledek_soupere": null,
-    "dokonceno_dne": null,
-    "created_at": "2025-11-10T23:11:02.743Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
-  "pk": 7,
-  "fields": {
-    "trener": 4,
-    "club": "",
-    "souper": "Real Madrid CF",
-    "datum": "2025-11-30",
-    "cas": "16:15:00",
-    "domaci_hoste": "Hosté",
-    "misto": "Santiago Bernabéu, Madrid",
-    "popis": "zkouška",
-    "stav": "Naplánováno",
-    "vysledek_tymu": null,
-    "vysledek_soupere": null,
-    "dokonceno_dne": null,
-    "created_at": "2025-11-10T23:11:02.743Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
-  "pk": 9,
-  "fields": {
-    "trener": 4,
-    "club": "",
-    "souper": "Arsenal FC",
-    "datum": "2025-11-11",
-    "cas": "21:00:00",
-    "domaci_hoste": "Hosté",
-    "misto": "Emirates Stadium, Londýn",
-    "popis": "zkouška",
+    "popis": "",
     "stav": "Dohráno",
-    "vysledek_tymu": 3,
+    "vysledek_tymu": 2,
     "vysledek_soupere": 1,
     "dokonceno_dne": null,
-    "created_at": "2025-11-10T23:11:02.743Z"
+    "created_at": "2025-11-11T11:21:53.852Z"
   }
 },
 {
   "model": "aplikace.dochazkazapasy",
-  "pk": 2,
+  "pk": 9,
   "fields": {
-    "zapas": 6,
+    "zapas": 10,
     "hrac": 7,
-    "pritomen": false,
-    "poznamka": null
-  }
-},
-{
-  "model": "aplikace.dochazkazapasy",
-  "pk": 3,
-  "fields": {
-    "zapas": 7,
-    "hrac": 7,
-    "pritomen": true,
-    "poznamka": null
-  }
-},
-{
-  "model": "aplikace.dochazkazapasy",
-  "pk": 5,
-  "fields": {
-    "zapas": 9,
-    "hrac": 7,
-    "pritomen": true,
-    "poznamka": null
-  }
-},
-{
-  "model": "aplikace.dochazkazapasy",
-  "pk": 6,
-  "fields": {
-    "zapas": 9,
-    "hrac": 8,
-    "pritomen": null,
-    "poznamka": null
-  }
-},
-{
-  "model": "aplikace.dochazkazapasy",
-  "pk": 7,
-  "fields": {
-    "zapas": 6,
-    "hrac": 8,
-    "pritomen": false,
-    "poznamka": null
-  }
-},
-{
-  "model": "aplikace.dochazkazapasy",
-  "pk": 8,
-  "fields": {
-    "zapas": 7,
-    "hrac": 8,
     "pritomen": true,
     "poznamka": null
   }

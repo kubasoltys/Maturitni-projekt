@@ -2,6 +2,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
+from django.utils import timezone
+from datetime import datetime
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm, DohranyZapasForm
 from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy
 
@@ -543,6 +545,8 @@ def trener_zapas(request):
     )
 
     zapasy_data = []
+    now = timezone.now()
+
     for zapas in zapasy:
         dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
         dochazka_list = []
@@ -556,7 +560,18 @@ def trener_zapas(request):
                     pritomen=None,
                     poznamka=None
                 ))
-        zapasy_data.append({'zapas': zapas, 'dochazka_list': dochazka_list})
+
+        zapas_datetime_naive = datetime.combine(zapas.datum, zapas.cas)
+        zapas_datetime = timezone.make_aware(zapas_datetime_naive, timezone.get_current_timezone())
+
+        po_dohrani = (zapas_datetime < now and
+                        (zapas.vysledek_tymu is None or zapas.vysledek_soupere is None))
+
+        zapasy_data.append({
+            'zapas': zapas,
+            'dochazka_list': dochazka_list,
+            'po_dohrani': po_dohrani
+        })
 
     context = {
         'trener': trener,
@@ -613,13 +628,14 @@ def edit_zapas_view(request, zapas_id):
 @login_required
 def delete_zapas_view(request, zapas_id):
     zapas = get_object_or_404(Zapas, id=zapas_id, trener=request.user.trenerprofile)
+    zpet = request.META.get('HTTP_REFERER', '/')
 
     if request.method == 'POST':
         zapas.delete()
         messages.success(request, "Zápas byl úspěšně smazán.")
-        return redirect('trener_zapas')
+        return redirect(zpet)
 
-    return redirect('trener_zapas')
+    return redirect(zpet)
 
 
 

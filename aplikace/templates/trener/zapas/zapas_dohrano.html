@@ -16,6 +16,11 @@
 
         <div class="flex items-center space-x-6 justify-center md:justify-end">
 
+            <a href="{% url 'trener_zapas' %}"
+               class="text-gray-700 font-semibold px-2 py-3 transition transform hover:scale-110 hover:text-black">
+                Zápasy
+            </a>
+
             <a href="{% url 'trener_trenink' %}"
                class="text-gray-700 font-semibold px-2 py-3 transition transform hover:scale-110 hover:text-black">
                 Tréninky
@@ -69,20 +74,32 @@
 
 <!-- zapasy -->
 <div class="flex flex-col items-center justify-center min-h-screen bg-gray-200 space-y-8 py-10 pt-60">
-    <h1 class="text-3xl font-bold text-gray-800 text-center">Zápasy</h1>
-
+    <h1 class="text-3xl font-bold text-gray-800 text-center">Odehrané zápasy</h1>
     <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-6 space-y-8">
-        <div class="flex justify-center mb-4">
-            <a href="{% url 'add_zapas' %}"
-               class="inline-block w-1/2 py-3 text-white font-bold text-center rounded-2xl shadow-lg
-              bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
-              hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
-                + Přidat nový zápas
-            </a>
-        </div>
 
         {% for data in zapasy_data %}
-        <div class="rounded-3xl p-4 shadow-xl bg-gray-100">
+        <div class="
+            {% if data.zapas.vysledek_tymu is not None and data.zapas.vysledek_soupere is not None %}
+                {% if data.zapas.vysledek_tymu > data.zapas.vysledek_soupere %}
+                    bg-gradient-to-r from-green-200 to-emerald-300
+                {% elif data.zapas.vysledek_tymu < data.zapas.vysledek_soupere %}
+                    bg-gradient-to-r from-red-200 to-red-400
+                {% else %}
+                    bg-gradient-to-r from-amber-200 to-amber-300
+                {% endif %}
+            {% else %}
+                bg-gray-200
+            {% endif %}
+                rounded-3xl p-4 shadow-xl">
+            {% if data.zapas.vysledek_tymu is not None and data.zapas.vysledek_soupere is not None %}
+            {% if data.zapas.vysledek_tymu > data.zapas.vysledek_soupere %}
+            <p class="text-emerald-800 text-center font-semibold text-lg p-2">Výhra!</p>
+            {% elif data.zapas.vysledek_tymu < data.zapas.vysledek_soupere %}
+            <p class="text-red-800 text-center font-semibold text-lg p-2">Prohra!</p>
+            {% else %}
+            <p class="text-amber-800 text-center font-semibold text-lg p-2">Remíza!</p>
+            {% endif %}
+            {% endif %}
             <!-- Týmy -->
             <div class="grid grid-cols-3 text-center items-center gap-x-2 mt-4">
                 {% if data.zapas.domaci_hoste == "Domácí" %}
@@ -116,42 +133,18 @@
             </p>
 
 
-
             <div class="flex items-center justify-between mt-3 space-x-3">
                 <p class="text-gray-600 text-sm">
-                    Vytvořeno:
-                    <span class="font-semibold text-gray-800">{{ data.zapas.created_at }}</span>
+                    Odehráno:
+                    <span class="font-semibold text-gray-800">{{ data.zapas.datum }}</span>
                 </p>
-
-                <!-- tlacitka dohrano, upravit a smazat -->
-                <div class="flex space-x-3">
-                    <form method="get" action="{% url 'oznacit_dohrano' data.zapas.id %}">
-                        <button type="submit"
-                                class="px-4 py-2 text-white font-bold rounded-2xl shadow-lg
-                                    bg-gradient-to-r from-green-500 to-emerald-700 transform transition duration-300
-                                    hover:from-green-600 hover:to-emerald-800 hover:scale-105">
-                            Dohráno
-                        </button>
-                    </form>
-                    <form method="get" action="{% url 'edit_zapas' data.zapas.id %}">
-                        <button type="submit"
-                                class="px-4 py-2 text-white font-bold rounded-2xl shadow-lg
-                                   bg-gradient-to-r from-gray-500 to-gray-700 transform transition duration-300
-                                   hover:from-gray-600 hover:to-gray-800 hover:scale-105">
-                            Upravit
-                        </button>
-                    </form>
-
-                    <form method="post" action="{% url 'delete_zapas' data.zapas.id %}">
-                        {% csrf_token %}
-                        <button type="submit"
-                                class="px-4 py-2 text-white font-bold rounded-2xl shadow-lg
-                                   bg-gradient-to-r from-red-500 to-red-700 transform transition duration-300
-                                   hover:from-red-600 hover:to-red-800 hover:scale-105">
-                            Smazat
-                        </button>
-                    </form>
-                </div>
+                <form method="post" action="{% url 'delete_zapas' data.zapas.id %}" class="mt-4 text-center">
+                    {% csrf_token %}
+                    <button type="submit"
+                            class="text-gray-600 text-sm hover:text-gray-900 font-semibold transition transform hover:scale-105">
+                        Smazat zápas
+                    </button>
+                </form>
             </div>
         </div>
 
@@ -160,13 +153,13 @@
         {% endif %}
 
         {% empty %}
-        <p class="text-center text-gray-500">Zatím nemáte naplánované žádné zápasy.</p>
+        <p class="text-center text-gray-500">Zatím nebyly odehrané žádné zápasy.</p>
         {% endfor %}
 
         <div class="space-y-4">
-            <a href="{% url 'trener_dashboard' %}"
+            <a href="{% url 'trener_zapas' %}"
                class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
-                Zpět na dashboard
+                Zpět na nadcházející zápasy
             </a>
         </div>
 
