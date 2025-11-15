@@ -34,14 +34,12 @@ class TrenerProfileForm(forms.ModelForm):
 
     class Meta:
         model = TrenerProfile
-        fields = ['first_name', 'last_name', 'email', 'phone', 'birth_date', 'club', 'club_photo','photo']
+        fields = ['first_name', 'last_name', 'email', 'phone', 'birth_date','photo']
         labels = {
             'first_name': 'Jméno',
             'last_name': 'Příjmení',
             'phone': 'Telefonní číslo',
             'birth_date': 'Datum narození',
-            'club': 'Klub',
-            'club_photo': 'Logo klubu',
             'photo': 'Fotografie',
         }
         widgets = {
@@ -61,13 +59,6 @@ class TrenerProfileForm(forms.ModelForm):
                 'type': 'date',
                 'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }, format='%Y-%m-%d'),
-            'club': forms.TextInput(attrs={
-                'placeholder': 'Klub',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
-            }),
-            'club_photo': forms.ClearableFileInput(attrs={
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
-            }),
             'photo': forms.ClearableFileInput(attrs={
                 'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),

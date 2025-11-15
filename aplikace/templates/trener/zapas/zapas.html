@@ -97,7 +97,7 @@
         <div class="rounded-3xl p-4 shadow-xl bg-gray-100 {% if data.po_dohrani %} border border-red-600 {% endif %}">
             {% if data.po_dohrani %}
             <p class="text-red-600 text-lg font-semibold text-center p-2">
-                ⚠ Zápas již proběhl, zapište výsledky!
+                Zápas již proběhl, zapište výsledky!
             </p>
             {% endif %}
             <div class="flex justify-between items-center">
@@ -143,11 +143,11 @@
                         </td>
                         <td class="py-1 px-3">
                             {% if dochazka.pritomen == True %}
-                            ✅ Ano
+                            <span class="text-green-500 font-semibold">Ano</span>
                             {% elif dochazka.pritomen == False %}
-                            ❌ Ne
+                            <span class="text-red-500 font-semibold">Ne</span>
                             {% else %}
-                            ⏳ Nehlasoval
+                            <span class="text-yellow-500 font-semibold">Nehlasoval</span>
                             {% endif %}
                         </td>
                     </tr>

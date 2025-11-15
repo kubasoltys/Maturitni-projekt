@@ -131,11 +131,11 @@
                         </td>
                         <td class="py-1 px-3">
                             {% if dochazka.pritomen == True %}
-                                ✅ Ano
+                                <span class="text-green-500 font-semibold">Ano</span>
                             {% elif dochazka.pritomen == False %}
-                                ❌ Ne
+                                <span class="text-red-500 font-semibold">Ne</span>
                             {% else %}
-                                ⏳ Nehlasoval
+                                <span class="text-yellow-500 font-semibold">Nehlasoval</span>
                             {% endif %}
                         </td>
                     </tr>
@@ -161,7 +161,7 @@
                         </button>
                     </form>
 
-                    <form method="post" action=""{% url 'delete_trenink' data.trenink.id %}>
+                    <form method="post" action="{% url 'delete_trenink' data.trenink.id %}">
                         {% csrf_token %}
                         <button type="submit"
                                 class="px-4 py-2 text-white font-bold rounded-2xl shadow-lg

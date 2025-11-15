@@ -130,7 +130,6 @@
         </div>
 
         <!-- zapasy a treninky -->
-        <!-- zapasy a treninky -->
         <div class="flex flex-col lg:flex-row gap-10 justify-center items-start w-full mt-4">
 
             <!-- zapasy -->
@@ -142,7 +141,7 @@
                 <div class="rounded-3xl p-4 shadow-xl bg-gray-100 {% if data.po_dohrani %} border-2 border-red-600 {% endif %}">
                     {% if data.po_dohrani %}
                     <p class="text-red-600 text-lg font-semibold text-center p-2">
-                        ⚠ Zápas již proběhl, zapište výsledky!
+                        Zápas již proběhl, zapište výsledky!
                     </p>
                     {% endif %}
 
@@ -189,11 +188,11 @@
                                 </td>
                                 <td class="py-1 px-3">
                                     {% if dochazka.pritomen == True %}
-                                    ✅ Ano
+                                    <span class="text-green-500 font-semibold">Ano</span>
                                     {% elif dochazka.pritomen == False %}
-                                    ❌ Ne
+                                    <span class="text-red-500 font-semibold">Ne</span>
                                     {% else %}
-                                    ⏳ Nehlasoval
+                                    <span class="text-yellow-500 font-semibold">Nehlasoval</span>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -229,7 +228,7 @@
                 </div>
             </div>
 
-            <!-- treninky (upravený) -->
+            <!-- treninky -->
             <div class="w-full max-w-[650px] bg-white rounded-3xl shadow-2xl p-6 space-y-4
         min-h-[550px] flex flex-col justify-between">
                 <h2 class="text-2xl font-semibold text-gray-800 text-center pb-3">Další tréninky</h2>
@@ -238,7 +237,7 @@
                 <div class="rounded-3xl p-4 shadow-xl bg-gray-100 {% if data.po_dohrani %} border-2 border-red-600 {% endif %}">
                     {% if data.po_dohrani %}
                     <p class="text-red-600 text-lg font-semibold text-center p-2">
-                        ⚠ Tento trénink již proběhl!
+                        Tento trénink již proběhl!
                     </p>
                     {% endif %}
 
@@ -272,11 +271,11 @@
                                 </td>
                                 <td class="py-1 px-3">
                                     {% if dochazka.pritomen == True %}
-                                    ✅ Ano
+                                    <span class="text-green-500 font-semibold">Ano</span>
                                     {% elif dochazka.pritomen == False %}
-                                    ❌ Ne
+                                    <span class="text-red-500 font-semibold">Ne</span>
                                     {% else %}
-                                    ⏳ Nehlasoval
+                                    <span class="text-yellow-500 font-semibold">Nehlasoval</span>
                                     {% endif %}
                                 </td>
                             </tr>

@@ -100,7 +100,7 @@
             <div class="{% if not data.hlasoval %} border-2 border-red-500 {% endif %}
                     rounded-3xl p-4 shadow-xl bg-gray-100">
                 {% if not data.hlasoval %}
-                <p class="text-red-500 text-center font-semibold p-1">⚠ Ještě jsi nehlasoval!</p>
+                <p class="text-red-500 text-center font-semibold p-1">Ještě jsi nehlasoval!</p>
                 {% endif %}
                 <div class="flex justify-between items-center">
                     <p class="text-2xl font-bold text-gray-800 mx-auto text-center">
@@ -192,7 +192,7 @@
             <div class="{% if not data.hlasoval %} border-2 border-red-500 {% endif %}
                     rounded-3xl p-4 shadow-xl bg-gray-100">
                 {% if not data.hlasoval %}
-                <p class="text-red-500 text-center font-semibold p-1">⚠ Ještě jsi nehlasoval!</p>
+                <p class="text-red-500 text-center font-semibold p-1">Ještě jsi nehlasoval!</p>
                 {% endif %}
                 <h3 class="text-2xl font-bold text-center">{{ data.trenink.typ }}</h3>
                 <p class="text-gray-700 text-lg font-semibold text-center">{{ data.trenink.datum|date:"l, d.m.Y" }}</p>
