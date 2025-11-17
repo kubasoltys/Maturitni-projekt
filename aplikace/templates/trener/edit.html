@@ -2,20 +2,23 @@
 {% load static %}
 
 {% block content %}
-<div class="max-w-3xl mx-auto bg-white p-8 rounded-3xl shadow-xl mt-20">
-    <h2 class="text-3xl font-bold text-center mb-6 text-gray-800">
-        Upravit profil -
-        <span class="bg-gradient-to-r from-blue-500 to-indigo-800 bg-clip-text text-transparent">
-            {% if trener.first_name and trener.last_name %}
-                {{ trener.first_name }} {{ trener.last_name }}
-            {% elif trener.first_name %}
-                {{ trener.first_name }}
-            {% elif trener.last_name %}
-                {{ trener.last_name }}
-            {% else %}
-                (bez jména)
-            {% endif %}
-        </span>
+<div class="max-w-xl mx-auto bg-white p-8 rounded-3xl shadow-xl mt-20">
+    <h2 class="text-4xl font-extrabold text-center mb-6 text-gray-800 drop-shadow-lg">
+        Upravit profil:
+        <div class="p-3">
+            <span class="bg-gradient-to-r from-blue-500 to-purple-800 bg-clip-text text-transparent">
+                {% if trener.first_name and trener.last_name %}
+                    {{ trener.first_name }} {{ trener.last_name }}
+                {% elif trener.first_name %}
+                    {{ trener.first_name }}
+                {% elif trener.last_name %}
+                    {{ trener.last_name }}
+                {% else %}
+                    (bez jména)
+                {% endif %}
+            </span>
+        </div>
+
     </h2>
 
     <form method="post" enctype="multipart/form-data" class="space-y-5">
@@ -36,9 +39,9 @@
 
         <div class="flex flex-col mt-6 space-y-4">
             <button type="submit"
-                    class="w-full text-white font-bold px-10 py-4 rounded-2xl shadow-lg
-                   bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
-                   hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
+                    class="w-full text-white font-semibold px-10 py-4 text-lg rounded-2xl shadow-lg
+                   bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
+                   hover:from-blue-600 hover:to-purple-900 hover:scale-105">
                 Uložit změny
             </button>
             <a href="{% url 'trener_settings' %}"

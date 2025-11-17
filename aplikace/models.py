@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, datetime
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
@@ -239,12 +239,48 @@ class HracProfile(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
+    # pocitani dochazky na treninky v %
+    @property
+    def dochazka_treninky(self):
+        now = timezone.now()
+
+        tymy_hrace = [self.tym] if self.tym else []
+
+        treninky = Trenink.objects.filter(tym__in=tymy_hrace)
+        proběhlé_treninky = []
+
+        for trenink in treninky:
+            trenink_datetime = timezone.make_aware(
+                datetime.combine(trenink.datum, trenink.cas),
+                timezone.get_current_timezone()
+            )
+
+            if trenink_datetime < now:
+                trenink.doplnit_nehlasujici_hrace()
+                proběhlé_treninky.append(trenink)
+
+        if not proběhlé_treninky:
+            return 0
+
+        celkem = len(proběhlé_treninky)
+
+        pritomni = 0
+        for trenink in proběhlé_treninky:
+            dochazka_hrace = trenink.dochazka.filter(hrac=self).first()
+            if dochazka_hrace and dochazka_hrace.pritomen:
+                pritomni += 1
+
+        return round(pritomni / celkem * 100, 1)
+
+
     def save(self, *args, **kwargs):
         if self.trener and not self.tym:
             tymy_trenera = Tym.objects.filter(trener=self.trener)
             if tymy_trenera.exists():
                 self.tym = tymy_trenera.first()
         super().save(*args, **kwargs)
+
 
     @property
     def vek(self):
@@ -253,14 +289,17 @@ class HracProfile(models.Model):
         today = date.today()
         return today.year - self.birth_date.year - ((today.month, today.day) < (self.birth_date.month, self.birth_date.day))
 
+
     def clean(self):
         super().clean()
         if not (self.first_name or self.last_name):
             raise ValidationError("Musíte zadat alespoň jméno nebo příjmení.")
 
+
     def __str__(self):
         full_name = f"{self.first_name or ''} {self.last_name or ''}".strip()
         return f"{full_name} (Hráč)"
+
 
     class Meta:
         verbose_name = "Hráč"
@@ -328,6 +367,20 @@ class Trenink(models.Model):
         ne = self.dochazka.filter(pritomen=False).count()
         nehlasoval = self.dochazka.filter(pritomen__isnull=True).count()
         return {'total': total, 'ano': ano, 'ne': ne, 'nehlasoval': nehlasoval}
+
+    def doplnit_nehlasujici_hrace(self):
+        if not self.tym:
+            return
+
+        hraci = self.tym.hraci.all()
+        for hrac in hraci:
+            if not self.dochazka.filter(hrac=hrac).exists():
+                DochazkaTreninky.objects.create(
+                    trenink=self,
+                    hrac=hrac,
+                    pritomen=False,
+                    duvod=None
+                )
 
 
 # dochazka na treninky

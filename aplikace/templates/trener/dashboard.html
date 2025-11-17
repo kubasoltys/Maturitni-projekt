@@ -68,7 +68,7 @@
     </div>
 </nav>
 
-<!-- obsah stranky -->
+<!-- obsah -->
 <div class="flex flex-col items-center justify-start min-h-screen pt-40 pb-12 space-y-12 px-4 lg:px-0">
 
     <!-- uvitaci nadpis -->
@@ -122,6 +122,7 @@
                             <th class="py-3 px-4 text-left">Jméno</th>
                             <th class="py-3 px-4 text-left">Pozice</th>
                             <th class="py-3 px-4 text-left">Číslo dresu</th>
+                            <th class="py-3 px-4 text-left">Účast - tréninky</th>
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-100">
@@ -141,6 +142,15 @@
                             </td>
                             <td class="py-3 px-4">{{ hrac.pozice|default:"-" }}</td>
                             <td class="py-3 px-4">{{ hrac.cislo_dresu|default:"-" }}</td>
+                            <td class="py-3 px-4 font-semibold">
+                                {% if hrac.dochazka_treninky > 50 %}
+                                    <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
+                                {% elif hrac.dochazka_treninky == 50 %}
+                                    <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
+                                {% else %}
+                                    <span class="text-red-500">{{ hrac.dochazka_treninky }}%</span>
+                                {% endif %}
+                            </td>
                         </tr>
                         {% empty %}
                         <tr>
@@ -159,10 +169,10 @@
 
             <!-- zapasy -->
             <div class="w-full max-w-[650px] bg-white rounded-3xl shadow-2xl p-6 space-y-6 min-h-[550px] border border-gray-200">
-                <h2 class="text-2xl font-bold text-gray-800 text-center pb-3 drop-shadow-lg">Další zápasy</h2>
+                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">Další zápasy</h2>
 
                 {% for data in zapasy %}
-                <div class="rounded-3xl p-4 shadow-md bg-gray-50 {% if data.po_dohrani %} border-2 border-red-600 {% endif %} transition-all hover:scale-[1.01]">
+                <div class="rounded-3xl p-4 shadow-md bg-gray-50 border border-gray-200 {% if data.po_dohrani %} border-2 border-red-600 {% endif %} transition-all hover:scale-[1.01]">
                     {% if data.po_dohrani %}
                     <p class="text-red-600 text-lg font-semibold text-center p-2">
                         Zápas již proběhl, zapište výsledky!
@@ -225,8 +235,9 @@
                 {% endfor %}
 
                 <div class="flex justify-center p-4">
-                    <a href="{% url 'trener_zapas' %}" class="inline-block w-2/3 py-3 text-white text-lg font-semibold text-center rounded-2xl shadow-lg
-                       bg-gradient-to-r from-blue-500 to-purple-800 hover:from-blue-600 hover:to-purple-900 transform transition duration-300">
+                    <a href="{% url 'trener_zapas' %}" class="inline-block w-2/3 py-3 text-white text-lg font-semibold
+                        text-center rounded-2xl shadow-lg bg-gradient-to-r from-blue-500 to-purple-800 hover:from-blue-600
+                        hover:to-purple-900 transform transition duration-300 hover:scale-105">
                         Všechny zápasy
                     </a>
                 </div>
@@ -234,10 +245,10 @@
 
             <!-- treninky -->
             <div class="w-full max-w-[650px] bg-white rounded-3xl shadow-2xl p-6 space-y-6 min-h-[550px] border border-gray-200">
-                <h2 class="text-2xl font-bold text-gray-800 text-center pb-3 drop-shadow-lg">Další tréninky</h2>
+                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">Další tréninky</h2>
 
                 {% for data in treninky_data %}
-                <div class="rounded-3xl p-4 shadow-md bg-gray-50 {% if data.po_dohrani %} border-2 border-red-600 {% endif %} transition-all hover:scale-[1.01]">
+                <div class="rounded-3xl p-4 shadow-md bg-gray-50 border border-gray-200 {% if data.po_dohrani %} border-2 border-red-600 {% endif %} transition-all hover:scale-[1.01]">
                     {% if data.po_dohrani %}
                     <p class="text-red-600 text-lg font-semibold text-center p-2">
                         Tento trénink již proběhl!
@@ -284,8 +295,9 @@
                 {% endfor %}
 
                 <div class="flex justify-center p-4">
-                    <a href="{% url 'trener_trenink' %}" class="inline-block w-2/3 py-3 text-white text-lg font-semibold text-center rounded-2xl shadow-lg
-                       bg-gradient-to-r from-blue-500 to-purple-800 hover:from-blue-600 hover:to-purple-900 transform transition duration-300">
+                    <a href="{% url 'trener_trenink' %}" class="inline-block w-2/3 py-3 text-white text-lg font-semibold
+                        text-center rounded-2xl shadow-lg bg-gradient-to-r from-blue-500 to-purple-800 hover:from-blue-600
+                        hover:to-purple-900 transform transition duration-300 hover:scale-105">
                         Všechny tréninky
                     </a>
                 </div>

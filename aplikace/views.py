@@ -10,11 +10,16 @@ from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, Z
 from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy, Tym
 
 
+
 #----------------------------------------------------------------------------------------------
 # hlavni stranka
 #----------------------------------------------------------------------------------------------
 def index(request):
     return render(request, 'index.html')
+
+
+
+# LOGIN
 
 
 #----------------------------------------------------------------------------------------------
@@ -84,8 +89,21 @@ def first_login_view(request):
     return render(request, 'login/first_login.html', {'form': form})
 
 
+#----------------------------------------------------------------------------------------------
+# logout
+#----------------------------------------------------------------------------------------------
+def logout_view(request):
+    logout(request)
+    return redirect('index')
 
+
+
+# DASHBOARDY
+
+
+#-----------------------------------------------------------------------------------------------
 # dashboard hrace
+#-----------------------------------------------------------------------------------------------
 @login_required
 def hrac_dashboard(request):
     try:
@@ -93,22 +111,24 @@ def hrac_dashboard(request):
     except HracProfile.DoesNotExist:
         return render(request, 'index.html', {'message': 'Profil hráče nebyl nalezen.'})
 
-    trener = hrac.trener
+    tym = hrac.tym
+    trener = tym.trener
     now = timezone.now()
 
-    trenink = (
-        Trenink.objects.filter(
-            trener=trener,
-            stav='Naplánováno',
-            datum__gte=now.date()
-        )
-        .order_by('datum', 'cas')
-        .prefetch_related('dochazka')
-        .first()
-    )
+    treninky_qs = Trenink.objects.filter(
+        tym=tym,
+        stav='Naplánováno'
+    ).order_by('datum', 'cas').prefetch_related('dochazka')
 
     treninky_data = []
-    if trenink:
+    for trenink in treninky_qs:
+        trenink_datetime = timezone.make_aware(
+            datetime.combine(trenink.datum, trenink.cas),
+            timezone.get_current_timezone()
+        )
+        if trenink_datetime < now:
+            continue
+
         dochazka_obj = trenink.dochazka.filter(hrac=hrac).first()
         treninky_data.append({
             'trenink': trenink,
@@ -116,29 +136,32 @@ def hrac_dashboard(request):
             'hlasoval': dochazka_obj.pritomen is not None if dochazka_obj else False
         })
 
-    zapas = (
-        Zapas.objects.filter(
-            trener=trener,
-            datum__gt=now.date()
-        )
-        .order_by('datum', 'cas')
-        .prefetch_related('dochazka')
-        .first()
-    )
+    zapasy_qs = Zapas.objects.filter(
+        tym=tym,
+        stav='Naplánováno'
+    ).order_by('datum', 'cas').prefetch_related('dochazka')
 
     zapasy_data = []
-    if zapas:
+    for zapas in zapasy_qs:
+        zapas_datetime = timezone.make_aware(
+            datetime.combine(zapas.datum, zapas.cas),
+            timezone.get_current_timezone()
+        )
+        if zapas_datetime < now:
+            continue
+
         dochazka_obj = zapas.dochazka.filter(hrac=hrac).first()
         zapasy_data.append({
             'zapas': zapas,
             'dochazka': dochazka_obj,
-            'klub': hrac.trener.club,
+            'klub': tym.club,
             'hlasoval': dochazka_obj.pritomen is not None if dochazka_obj else False
         })
 
     context = {
         'hrac': hrac,
         'trener': trener,
+        'tym': tym,
         'treninky_data': treninky_data,
         'zapasy_data': zapasy_data,
     }
@@ -146,9 +169,10 @@ def hrac_dashboard(request):
     return render(request, 'hrac/dashboard.html', context)
 
 
-#---------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------------
 # dashboard trenera
-#---------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------------
 @login_required
 def trener_dashboard(request):
     try:
@@ -158,22 +182,33 @@ def trener_dashboard(request):
 
     tymy = Tym.objects.filter(trener=trener)
     hraci = HracProfile.objects.filter(tym__in=tymy).distinct()
-    treninky = Trenink.objects.filter(tym__in=tymy, datum__gte=date.today()) \
-                               .prefetch_related('dochazka', 'dochazka__hrac') \
-                               .order_by('datum', 'cas')[:1]
+    now = timezone.now()
+
+    treninky_qs = Trenink.objects.filter(
+        tym__in=tymy,
+        stav='Naplánováno'
+    ).order_by('datum', 'cas').prefetch_related('dochazka', 'dochazka__hrac')
 
     treninky_data = []
-    for trenink in treninky:
+    for trenink in treninky_qs:
+        trenink_datetime = timezone.make_aware(
+            datetime.combine(trenink.datum, trenink.cas),
+            timezone.get_current_timezone()
+        )
+        if trenink_datetime < now:
+            continue
+
         dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
         dochazka_list = []
         for hrac in hraci:
             dochazka_list.append(
                 dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
             )
+
         treninky_data.append({
             'trenink': trenink,
             'dochazka_list': dochazka_list,
-            'po_dohrani': trenink.stav != 'Naplánováno'
+            'po_dohrani': trenink_datetime < now or trenink.stav != 'Naplánováno'
         })
 
     zapasy_qs = Zapas.objects.filter(tym__in=tymy, datum__gte=date.today()) \
@@ -201,29 +236,59 @@ def trener_dashboard(request):
         'zapasy': zapasy_data,
         'tymy': tymy,
     }
+
     return render(request, 'trener/dashboard.html', context)
 
 
 
 
+# NASTAVENI
 
-# editace profilu trenera
+
+#----------------------------------------------------------------------------------------------
+# nastaveni hrace
+#----------------------------------------------------------------------------------------------
 @login_required
-def edit_trener_profile(request):
-    trener = request.user.trenerprofile
-    if request.method == 'POST':
-        form = TrenerProfileForm(request.POST, request.FILES, instance=trener)
-        if form.is_valid():
-            form.save()
-            return redirect('trener_dashboard')
-    else:
-        form = TrenerProfileForm(instance=trener)
+def hrac_settings_view(request):
+    user = request.user
+    if not hasattr(user, 'hracprofile'):
+        return redirect('index')
 
-    return render(request, 'trener/edit.html', {'form': form, 'trener': trener})
+    hrac = user.hracprofile
+    trener = hrac.trener
+    tym = hrac.tym
+
+    context = {
+        'user': user,
+        'hrac': hrac,
+        'trener': trener,
+        'tym': tym,
+    }
+
+    return render(request, 'hrac/settings.html', context)
 
 
+#----------------------------------------------------------------------------------------------
+# detail účtu hráče
+#----------------------------------------------------------------------------------------------
+@login_required
+def hrac_account_view(request):
+    hrac = get_object_or_404(HracProfile, user=request.user)
+    trener = hrac.trener
+    tym = hrac.tym
 
+    context = {
+        'hrac': hrac,
+        'trener': trener,
+        'tym': tym,
+    }
+
+    return render(request, 'hrac/account.html', context)
+
+
+#----------------------------------------------------------------------------------------------
 # editace profilu hrace
+#----------------------------------------------------------------------------------------------
 @login_required
 def edit_hrac_profile(request):
     hrac = request.user.hracprofile
@@ -231,7 +296,7 @@ def edit_hrac_profile(request):
         form = HracProfileForm(request.POST, request.FILES, instance=hrac)
         if form.is_valid():
             form.save()
-            return redirect('hrac_dashboard')
+            return redirect('hrac_settings')
     else:
         form = HracProfileForm(instance=hrac)
 
@@ -256,26 +321,6 @@ def trener_settings_view(request):
     })
 
 
-
-# nastaveni hrace
-@login_required
-def hrac_settings_view(request):
-    user = request.user
-    if not hasattr(user, 'hracprofile'):
-        return redirect('index')
-
-    hrac = user.hracprofile
-    trener = hrac.trener
-
-    context = {
-        'user': user,
-        'hrac': hrac,
-        'trener': trener,
-    }
-
-    return render(request, 'hrac/settings.html', context)
-
-
 #----------------------------------------------------------------------------------------------
 # detail uctu trenera
 #----------------------------------------------------------------------------------------------
@@ -290,35 +335,30 @@ def trener_account_view(request):
     })
 
 
-
-# detail účtu hráče
+#----------------------------------------------------------------------------------------------
+# editace profilu trenera
+#----------------------------------------------------------------------------------------------
 @login_required
-def hrac_account_view(request):
-    hrac = get_object_or_404(HracProfile, user=request.user)
-    trener = hrac.trener  # informace o trenérovi, pokud existuje
+def edit_trener_profile(request):
+    trener = request.user.trenerprofile
+    if request.method == 'POST':
+        form = TrenerProfileForm(request.POST, request.FILES, instance=trener)
+        if form.is_valid():
+            form.save()
+            return redirect('trener_dashboard')
+    else:
+        form = TrenerProfileForm(instance=trener)
 
-    context = {
-        'hrac': hrac,
-        'trener': trener,
-    }
-
-    return render(request, 'hrac/account.html', context)
-
-
-
-# logout
-def logout_view(request):
-    logout(request)
-    return redirect('index')
+    return render(request, 'trener/edit.html', {'form': form, 'trener': trener})
 
 
 
 # TRENINKY
 
 
-#--------------------------------------------------------------------------------
-# trener - stranka pro treninky
-#--------------------------------------------------------------------------------
+# --------------------------------------------------------------------------------
+# trener - stranka pro treninky (nadcházející)
+# --------------------------------------------------------------------------------
 @login_required
 def trener_trenink(request):
     try:
@@ -328,22 +368,32 @@ def trener_trenink(request):
 
     tymy = Tym.objects.filter(trener=trener)
     hraci = HracProfile.objects.filter(tym__in=tymy).distinct()
-    treninky = Trenink.objects.filter(tym__in=tymy, datum__gte=date.today()) \
-                               .prefetch_related('dochazka', 'dochazka__hrac') \
-                               .order_by('datum', 'cas')
+    now = timezone.now()
+
+    treninky_qs = Trenink.objects.filter(tym__in=tymy, stav='Naplánováno') \
+                                 .order_by('datum', 'cas') \
+                                 .prefetch_related('dochazka', 'dochazka__hrac')
 
     treninky_data = []
-    for trenink in treninky:
+    for trenink in treninky_qs:
+        trenink_datetime = timezone.make_aware(
+            datetime.combine(trenink.datum, trenink.cas),
+            timezone.get_current_timezone()
+        )
+        if trenink_datetime < now:
+            continue
+
         dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
         dochazka_list = []
         for hrac in hraci:
             dochazka_list.append(
                 dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
             )
+
         treninky_data.append({
             'trenink': trenink,
             'dochazka_list': dochazka_list,
-            'po_dohrani': trenink.stav != 'Naplánováno'
+            'po_dohrani': trenink_datetime < now or trenink.stav != 'Naplánováno'
         })
 
     context = {
@@ -355,9 +405,9 @@ def trener_trenink(request):
     return render(request, 'trener/trenink/trenink.html', context)
 
 
-#------------------------------------------------------------------------------------------------------------
-# trener -historie treninku
-#------------------------------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------------------------------------
+# trener - historie treninku
+# ------------------------------------------------------------------------------------------------------------
 @login_required
 def trener_trenink_historie(request):
     try:
@@ -367,21 +417,28 @@ def trener_trenink_historie(request):
 
     tymy = Tym.objects.filter(trener=trener)
     hraci = HracProfile.objects.filter(tym__in=tymy).distinct()
+    now = timezone.now()
 
-    treninky = (
-        Trenink.objects.filter(tym__in=tymy, datum__lt=date.today())
-        .prefetch_related('dochazka', 'dochazka__hrac')
-        .order_by('-datum', '-cas')
-    )
+    treninky_qs = Trenink.objects.filter(tym__in=tymy) \
+                                 .prefetch_related('dochazka', 'dochazka__hrac') \
+                                 .order_by('-datum', '-cas')
 
     treninky_data = []
-    for trenink in treninky:
+    for trenink in treninky_qs:
+        trenink_datetime = timezone.make_aware(
+            datetime.combine(trenink.datum, trenink.cas),
+            timezone.get_current_timezone()
+        )
+        if trenink_datetime >= now and trenink.stav == 'Naplánováno':
+            continue
+
         dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
         dochazka_list = []
         for hrac in hraci:
             dochazka_list.append(
                 dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
             )
+
         treninky_data.append({'trenink': trenink, 'dochazka_list': dochazka_list})
 
     context = {
@@ -403,14 +460,13 @@ def add_trenink_view(request):
 
     trener = request.user.trenerprofile
     tymy = Tym.objects.filter(trener=trener)
-    zpet = request.META.get('HTTP_REFERER', '/')
 
     if request.method == 'POST':
         form = TreninkForm(request.POST, trener=trener)
         if form.is_valid():
             trenink = form.save()
             messages.success(request, 'Trénink byl úspěšně přidán.')
-            return redirect(zpet)
+            return redirect('trener_trenink')
     else:
         form = TreninkForm(trener=trener)
 
@@ -455,59 +511,9 @@ def delete_trenink_view(request, trenink_id):
     return redirect(zpet)
 
 
-
-# hlasovani pro hrace o treninku
-@login_required
-def hlasovani_dochazka_view(request, trenink_id):
-    try:
-        hrac = request.user.hracprofile
-    except HracProfile.DoesNotExist:
-        messages.error(request, "Nemáte hráčský profil.")
-        return redirect('index')
-
-    trenink = get_object_or_404(Trenink, id=trenink_id, trener=hrac.trener)
-    zpet = request.META.get('HTTP_REFERER', '/')
-
-    if request.method == 'POST':
-        pritomen_raw = request.POST.get('pritomen')
-        if pritomen_raw not in ('true', 'false'):
-            messages.error(request, "Neplatná volba.")
-            return redirect('hrac_dashboard')
-
-        pritomen = (pritomen_raw == 'true')
-        duvod = request.POST.get('duvod', '').strip() or None
-
-        dochazka_obj, created = DochazkaTreninky.objects.update_or_create(
-            trenink=trenink,
-            hrac=hrac,
-            defaults={'pritomen': pritomen, 'duvod': duvod}
-        )
-
-        messages.success(request, "Tvá docházka byla uložena.")
-        return redirect(zpet)
-
-    return redirect(zpet)
-
-
-
-# zrusit hlasovani na trenink
-@login_required
-def hlasovani_dochazka_smazat(request, trenink_id):
-    hrac = request.user.hracprofile
-    trenink = get_object_or_404(Trenink, id=trenink_id)
-    zpet = request.META.get('HTTP_REFERER', '/')
-
-    dochazka_obj = DochazkaTreninky.objects.filter(trenink=trenink, hrac=hrac).first()
-    if dochazka_obj:
-        dochazka_obj.pritomen = None
-        dochazka_obj.duvod = ''
-        dochazka_obj.save()
-        messages.success(request, "Volba byla odstraněna.")
-    return redirect(zpet)
-
-
-
+#----------------------------------------------------------------------------------------------
 # hrac - stranka pro treninky
+#----------------------------------------------------------------------------------------------
 @login_required
 def hrac_trenink(request):
     try:
@@ -515,16 +521,19 @@ def hrac_trenink(request):
     except HracProfile.DoesNotExist:
         return render(request, 'index.html', {'message': 'Profil hráče nebyl nalezen.'})
 
-    dnes = date.today()
+    now = timezone.localtime(timezone.now())
 
     treninky = Trenink.objects.filter(
-        trener=hrac.trener,
-        stav='Naplánováno',
-        datum__gte=dnes
+        tym=hrac.tym,
+        stav='Naplánováno'
     ).order_by('datum', 'cas')
 
     treninky_data = []
     for trenink in treninky:
+        trenink_datetime = timezone.make_aware(datetime.combine(trenink.datum, trenink.cas))
+        if trenink_datetime < now:
+            continue
+
         dochazka_obj = trenink.dochazka.filter(hrac=hrac).first()
         treninky_data.append({
             'trenink': trenink,
@@ -536,11 +545,13 @@ def hrac_trenink(request):
         'hrac': hrac,
         'trener': hrac.trener,
         'treninky_data': treninky_data,
+        'tym': hrac.tym,
     })
 
 
-
+#----------------------------------------------------------------------------------------------
 # hrac - historie treninku
+#----------------------------------------------------------------------------------------------
 @login_required
 def hrac_trenink_historie(request):
     try:
@@ -548,15 +559,16 @@ def hrac_trenink_historie(request):
     except HracProfile.DoesNotExist:
         return render(request, 'index.html', {'message': 'Profil hráče nebyl nalezen.'})
 
-    dnes = date.today()
+    now = timezone.localtime(timezone.now())
 
-    treninky = Trenink.objects.filter(
-        trener=hrac.trener,
-        datum__lt=dnes
-    ).order_by('datum', 'cas')
+    treninky = Trenink.objects.filter(tym=hrac.tym).order_by('-datum', '-cas')
 
     treninky_data = []
     for trenink in treninky:
+        trenink_datetime = timezone.make_aware(datetime.combine(trenink.datum, trenink.cas))
+        if trenink_datetime >= now:
+            continue
+
         dochazka_obj = trenink.dochazka.filter(hrac=hrac).first()
         treninky_data.append({
             'trenink': trenink,
@@ -568,12 +580,76 @@ def hrac_trenink_historie(request):
         'hrac': hrac,
         'trener': hrac.trener,
         'treninky_data': treninky_data,
+        'tym': hrac.tym,
     })
+
+
+#----------------------------------------------------------------------------------------------
+# hlasovani pro hrace o treninku
+#----------------------------------------------------------------------------------------------
+@login_required
+def hlasovani_dochazka_view(request, trenink_id):
+    try:
+        hrac = request.user.hracprofile
+    except HracProfile.DoesNotExist:
+        messages.error(request, "Nemáte hráčský profil.")
+        return redirect('index')
+
+    trenink = get_object_or_404(
+        Trenink,
+        id=trenink_id,
+        tym=hrac.tym
+    )
+
+    zpet = request.META.get('HTTP_REFERER', '/')
+
+    if request.method == 'POST':
+        pritomen_raw = request.POST.get('pritomen')
+        if pritomen_raw not in ('true', 'false'):
+            messages.error(request, "Neplatná volba.")
+            return redirect(zpet)
+
+        pritomen = (pritomen_raw == 'true')
+        duvod = request.POST.get('duvod', '').strip() or None
+
+        DochazkaTreninky.objects.update_or_create(
+            trenink=trenink,
+            hrac=hrac,
+            defaults={'pritomen': pritomen, 'duvod': duvod}
+        )
+
+        messages.success(request, "Tvá docházka byla uložena.")
+        return redirect(zpet)
+
+    return redirect(zpet)
+
+
+#----------------------------------------------------------------------------------------------
+# zrusit hlasovani na trenink
+#----------------------------------------------------------------------------------------------
+@login_required
+def hlasovani_dochazka_smazat(request, trenink_id):
+    hrac = request.user.hracprofile
+    trenink = get_object_or_404(
+        Trenink,
+        id=trenink_id,
+        tym=hrac.tym
+    )
+
+    zpet = request.META.get('HTTP_REFERER', '/')
+
+    dochazka_obj = DochazkaTreninky.objects.filter(trenink=trenink, hrac=hrac).first()
+    if dochazka_obj:
+        dochazka_obj.pritomen = None
+        dochazka_obj.duvod = ''
+        dochazka_obj.save()
+        messages.success(request, "Volba byla odstraněna.")
+
+    return redirect(zpet)
 
 
 
 # ZAPASY
-
 
 
 # hrac - stranka pro zapasy
@@ -797,7 +873,7 @@ def oznacit_dohrano_view(request, zapas_id):
             zapas = form.save(commit=False)
             zapas.stav = 'Dohráno'
             zapas.save()
-            return redirect('trener_zapas')  # nebo speciální stránka pro dohrané zápasy
+            return redirect('trener_zapas')
     else:
         form = DohranyZapasForm(instance=zapas)
 

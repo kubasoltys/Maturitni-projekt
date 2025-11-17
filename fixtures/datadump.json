@@ -104,6 +104,58 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2025-11-17T11:56:21.319Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "3",
+    "object_repr": "Robert Lewandowski (Hráč)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Fotografie\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2025-11-17T11:57:04.404Z",
+    "user": 1,
+    "content_type": 10,
+    "object_id": "2",
+    "object_repr": "Raphinha (Hráč)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Fotografie\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2025-11-17T12:25:00.745Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "5",
+    "object_repr": "Fyzická příprava — 2025-11-17 13:17 (FC Barcelona (Muži))",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Stav tr\\u00e9ninku\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2025-11-17T12:26:36.584Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "5",
+    "object_repr": "Fyzická příprava — 2025-11-17 13:17 (FC Barcelona (Muži))",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Stav tr\\u00e9ninku\"]}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -768,7 +820,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1000000$lVBDpd6Ja8QRTsMTdKJBR1$fRAfF49lBGd4tGP425N5023GStuBgiqMlmQK2YVN9zE=",
-    "last_login": "2025-11-16T22:57:06.212Z",
+    "last_login": "2025-11-17T12:26:24.434Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -787,8 +839,8 @@
   "model": "aplikace.user",
   "pk": 2,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$fe1t14qxwwZYEmVdcMidFo$8QHBibsNthBUGmzZ/d+YGGGYHYLWDiY+I2yChIvDA9o=",
-    "last_login": "2025-11-17T00:11:56.256Z",
+    "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
+    "last_login": "2025-11-17T13:55:26.065Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -807,8 +859,8 @@
   "model": "aplikace.user",
   "pk": 4,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$vKYdHtvz8V91LDsBUGWHr4$YO5YVkzKqjoNpE0LWNQa+vv8nx40US02y1ZAdYfHH/A=",
-    "last_login": "2025-11-16T14:45:06.304Z",
+    "password": "pbkdf2_sha256$1000000$xqpg5oqf8ID83Nzv2qrIUE$UoViHaQwwwCayltK+XOJETF6n3CpDysSWHk7an4HHvo=",
+    "last_login": "2025-11-17T13:46:37.787Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "",
@@ -828,7 +880,7 @@
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$1000000$Y81Jci5vgHRzftic69jOcs$GQiurTqQun52N2+Vp7krGg27ITPqI6JCQmUCUFpEVGQ=",
-    "last_login": "2025-11-16T21:51:17.927Z",
+    "last_login": "2025-11-17T13:54:59.352Z",
     "is_superuser": false,
     "username": "hrac2",
     "first_name": "",
@@ -885,9 +937,9 @@
     "cislo_dresu": 11,
     "pozice": "LW",
     "preferred_foot": "Levá",
-    "photo": "",
+    "photo": "hrac_photo/raphinha.jpg",
     "created_at": "2025-11-16T14:44:52.991Z",
-    "updated_at": "2025-11-16T14:46:07.717Z"
+    "updated_at": "2025-11-17T11:57:04.403Z"
   }
 },
 {
@@ -906,9 +958,9 @@
     "cislo_dresu": 9,
     "pozice": "ST",
     "preferred_foot": "Pravá",
-    "photo": "",
+    "photo": "hrac_photo/robert_lewandowski.webp",
     "created_at": "2025-11-16T21:39:57.055Z",
-    "updated_at": "2025-11-16T21:58:00.655Z"
+    "updated_at": "2025-11-17T11:56:21.318Z"
   }
 },
 {
@@ -926,15 +978,129 @@
 },
 {
   "model": "aplikace.trenink",
-  "pk": 4,
+  "pk": 7,
   "fields": {
     "tym": 1,
-    "datum": "2025-11-07",
-    "cas": "16:30:00",
+    "datum": "2025-11-08",
+    "cas": "15:30:00",
+    "typ": "Fyzická příprava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-11-17T13:32:28.274Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 8,
+  "fields": {
+    "tym": 1,
+    "datum": "2025-11-17",
+    "cas": "14:34:00",
     "typ": "Taktická připrava",
     "poznamka": "",
     "stav": "Naplánováno",
-    "created_at": "2025-11-16T23:52:18.297Z"
+    "created_at": "2025-11-17T13:32:58.451Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 9,
+  "fields": {
+    "tym": 1,
+    "datum": "2025-11-17",
+    "cas": "14:43:00",
+    "typ": "Fyzická příprava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-11-17T13:42:07.658Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 1,
+  "fields": {
+    "trenink": 3,
+    "hrac": 2,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-11-17T13:46:52.891Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 2,
+  "fields": {
+    "trenink": 3,
+    "hrac": 3,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-11-17T11:50:49.970Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 5,
+  "fields": {
+    "trenink": 8,
+    "hrac": 2,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-11-17T13:33:57.642Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 6,
+  "fields": {
+    "trenink": 8,
+    "hrac": 3,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-11-17T13:39:55.893Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 7,
+  "fields": {
+    "trenink": 7,
+    "hrac": 3,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-11-17T13:39:55.900Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 8,
+  "fields": {
+    "trenink": 7,
+    "hrac": 2,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-11-17T13:39:55.901Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 9,
+  "fields": {
+    "trenink": 9,
+    "hrac": 2,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-11-17T13:42:19.689Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 10,
+  "fields": {
+    "trenink": 9,
+    "hrac": 3,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-11-17T13:44:13.067Z"
   }
 }
 ]

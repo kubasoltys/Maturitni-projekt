@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+
 {% load static %}
 
 {% block content %}
@@ -7,10 +8,10 @@
     <div class="max-w-6xl mx-auto px-8 py-5 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
 
         <div class="flex items-center space-x-3 justify-center md:justify-start">
-            {% if trener.club_photo %}
-            <img src="{{ trener.club_photo.url }}" alt="Logo" class="h-16 w-16 object-contain">
+            {% if tym.logo %}
+            <img src="{{ tym.logo.url }}" alt="Logo" class="h-16 w-16 object-contain">
             {% else %}
-            <img src="../../../media/stranka/logo.png" alt="Logo" class="h-16 w-16 object-contain">
+            <img src="{% static 'stranka/logo.png' %}" alt="Logo" class="h-16 w-16 object-contain">
             {% endif %}
         </div>
 
@@ -33,24 +34,24 @@
 
             <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
                 {% if user.hracprofile.photo %}
-                    <img src="{{ user.hracprofile.photo.url }}"
-                         alt="Profilová fotka"
-                         class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                <img src="{{ user.hracprofile.photo.url }}"
+                     alt="Profilová fotka"
+                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
                 {% else %}
-                    <img src="/media/stranka/default_profile_picture.webp"
-                         alt="Výchozí profilová fotka"
-                         class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                <img src="/media/stranka/default_profile_picture.webp"
+                     alt="Výchozí profilová fotka"
+                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
                 {% endif %}
 
                 <p class="text-gray-400 font-semibold">
                     {% if user.hracprofile.first_name and user.hracprofile.last_name %}
-                        {{ user.hracprofile.first_name }} {{ user.hracprofile.last_name }}
+                    {{ user.hracprofile.first_name }} {{ user.hracprofile.last_name }}
                     {% elif user.hracprofile.first_name %}
-                        {{ user.hracprofile.first_name }}
+                    {{ user.hracprofile.first_name }}
                     {% elif user.hracprofile.last_name %}
-                        {{ user.hracprofile.last_name }}
+                    {{ user.hracprofile.last_name }}
                     {% else %}
-                        (bez jména)
+                    (bez jména)
                     {% endif %}
                 </p>
             </div>
@@ -66,86 +67,83 @@
     </div>
 </nav>
 
-<div class="pt-40"></div>
+<div class="items-center justify-center min-h-screen space-y-8 py-10 pt-40">
+    <h1 class="text-4xl font-extrabold text-gray-800 text-center drop-shadow-lg">Nastavení</h1>
 
-<div class="max-w-3xl mx-auto bg-white p-10 rounded-3xl shadow-lg">
-    <h2 class="text-3xl font-bold text-center mb-10 text-gray-800">
-        Nastavení
-    </h2>
-
-    <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8 mb-10">
-        <div class="flex-shrink-0 mb-6 md:mb-0">
-            {% if user.hracprofile.photo %}
-            <img src="{{ user.hracprofile.photo.url }}"
-                 alt="Profilová fotka"
-                 class="w-32 h-32 rounded-full object-cover shadow-xl border border-gray-200">
-            {% else %}
-            <img src="/media/stranka/default_profile_picture.webp"
-                 alt="Výchozí profilová fotka"
-                 class="w-32 h-32 rounded-full object-cover shadow-xl border border-gray-200">
-            {% endif %}
-        </div>
+    <div class="max-w-3xl mx-auto bg-white p-10 rounded-3xl shadow-lg">
+        <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-8 mb-10">
+            <div class="flex-shrink-0 mb-6 md:mb-0">
+                {% if user.hracprofile.photo %}
+                <img src="{{ user.hracprofile.photo.url }}"
+                     alt="Profilová fotka"
+                     class="w-32 h-32 rounded-full object-cover shadow-xl border border-gray-200">
+                {% else %}
+                <img src="/media/stranka/default_profile_picture.webp"
+                     alt="Výchozí profilová fotka"
+                     class="w-32 h-32 rounded-full object-cover shadow-xl border border-gray-200">
+                {% endif %}
+            </div>
 
 
-        <div class="text-center md:text-left space-y-1">
-            <p class="text-2xl bg-gradient-to-r from-blue-500 to-indigo-800 bg-clip-text text-transparent font-bold">
-                {% if user.hracprofile.first_name and user.hracprofile.last_name %}
+            <div class="text-center md:text-left space-y-1">
+                <p class="text-2xl bg-gradient-to-r from-blue-500 to-purple-800 bg-clip-text text-transparent font-bold">
+                    {% if user.hracprofile.first_name and user.hracprofile.last_name %}
                     {{ user.hracprofile.first_name }} {{ user.hracprofile.last_name }}
-                {% elif user.hracprofile.first_name %}
+                    {% elif user.hracprofile.first_name %}
                     {{ user.hracprofile.first_name }}
-                {% elif user.hracprofile.last_name %}
+                    {% elif user.hracprofile.last_name %}
                     {{ user.hracprofile.last_name }}
-                {% else %}
+                    {% else %}
                     (bez jména)
-                {% endif %}
-            </p>
-            <p class="text-gray-600 text-lg">@{{ user.username }}</p>
-            <p class="text-gray-500 text-md">
-                {% if user.email %}
+                    {% endif %}
+                </p>
+                <p class="text-gray-600 text-lg">@{{ user.username }}</p>
+                <p class="text-gray-500 text-md">
+                    {% if user.email %}
                     {{ user.email }}
-                {% else %}
-                {% endif %}
-            </p>
-            <p class="text-gray-700 font-medium">
-                {% if user.hracprofile.pozice %}
+                    {% else %}
+                    {% endif %}
+                </p>
+                <p class="text-gray-700 font-medium">
+                    {% if user.hracprofile.pozice %}
                     {{ user.hracprofile.pozice }}
-                {% else %}
-                {% endif %}
-            </p>
+                    {% else %}
+                    {% endif %}
+                </p>
+            </div>
         </div>
-    </div>
 
-    <div class="space-y-4">
-        <a href="{% url 'hrac_account' %}"
-           class="block w-full text-center px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl shadow-md
+        <div class="space-y-4">
+            <a href="{% url 'hrac_account' %}"
+               class="block w-full text-center px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl shadow-md
                   transform transition duration-300 hover:scale-105 hover:bg-gray-200">
-            Zobrazit detaily účtu
-        </a>
+                Zobrazit detaily účtu
+            </a>
 
-        <a href="{% url 'edit_hrac_profile' %}"
-           class="block w-full text-center px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl shadow-md
+            <a href="{% url 'edit_hrac_profile' %}"
+               class="block w-full text-center px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl shadow-md
                   transform transition duration-300 hover:scale-105 hover:bg-gray-200">
-            Upravit profil
-        </a>
+                Upravit profil
+            </a>
 
-        <a href="{% url 'hrac_password_change' %}"
-           class="block w-full text-center px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl shadow-md
+            <a href="{% url 'hrac_password_change' %}"
+               class="block w-full text-center px-6 py-3 bg-gray-100 text-gray-800 font-medium rounded-2xl shadow-md
                   transform transition duration-300 hover:scale-105 hover:bg-gray-200">
-            Změnit heslo
-        </a>
+                Změnit heslo
+            </a>
 
-        <a href="{% url 'logout' %}"
-           class="block w-full text-center px-6 py-3 bg-red-100 text-gray-800 font-medium rounded-2xl shadow-md
+            <a href="{% url 'logout' %}"
+               class="block w-full text-center px-6 py-3 bg-red-100 text-gray-800 font-medium rounded-2xl shadow-md
                   transform transition duration-300 hover:scale-105 hover:bg-red-300">
-            Odhlásit se
-        </a>
+                Odhlásit se
+            </a>
 
-        <a href="{% url 'hrac_dashboard' %}"
-           class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
-            Zpět na dashboard
-        </a>
+            <a href="{% url 'hrac_dashboard' %}"
+               class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
+                Zpět na dashboard
+            </a>
+        </div>
     </div>
 </div>
-
 
 {% endblock %}
