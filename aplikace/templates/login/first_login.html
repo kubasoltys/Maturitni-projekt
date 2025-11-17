@@ -1,29 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="flex items-center justify-center min-h-screen pt-32">
-    <div class="bg-white p-8 rounded-3xl shadow-md w-full max-w-md">
-        <h2 class="text-2xl font-semibold mb-6 text-center">Doplnění osobních údajů</h2>
+<div class="flex items-center justify-center min-h-screen pt-32 px-4">
+    <div class="bg-white p-12 rounded-3xl shadow-xl w-full max-w-xl border border-gray-200">
 
-        <form method="post" class="space-y-4" enctype="multipart/form-data">
+        <h2 class="text-4xl font-extrabold pt-6 pb-6 text-center drop-shadow-lg">Doplnění osobních údajů</h2>
+
+        <form method="post" class="space-y-5">
             {% csrf_token %}
             {{ form.non_field_errors }}
 
             {% for field in form %}
-                <div class="mb-4">
-                    {{ field.label_tag }}
-                    {{ field }}
-                    {% if field.help_text %}
-                        <p class="text-sm text-gray-500">{{ field.help_text }}</p>
-                    {% endif %}
-                    {{ field.errors }}
-                </div>
+            <div>
+                <label class="block text-gray-700 font-medium mb-2">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                    <p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>
+                {% endif %}
+            </div>
             {% endfor %}
 
             <button type="submit"
                     class="w-full inline-block text-white font-bold px-10 py-4 rounded-2xl shadow-lg
-                           bg-gradient-to-r from-blue-500 to-indigo-800 transform transition duration-300
-                           hover:from-blue-600 hover:to-indigo-900 hover:scale-105">
+                           bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
+                           hover:from-blue-600 hover:to-purple-900 hover:scale-105">
                 Uložit údaje
             </button>
         </form>

@@ -3,63 +3,63 @@
   "model": "admin.logentry",
   "pk": 1,
   "fields": {
-    "action_time": "2025-10-26T08:40:50.621Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "2",
-    "object_repr": "admin (Admin)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Role\"]}}]"
+    "action_time": "2025-11-16T13:58:10.023Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "FC Barcelona (Muži)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 2,
   "fields": {
-    "action_time": "2025-10-26T08:41:00.092Z",
-    "user": 2,
-    "content_type": 8,
+    "action_time": "2025-11-16T13:58:55.677Z",
+    "user": 1,
+    "content_type": 6,
     "object_id": "2",
-    "object_repr": " (Hráč)",
-    "action_flag": 3,
-    "change_message": ""
+    "object_repr": "trener1 (Trenér)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 3,
   "fields": {
-    "action_time": "2025-10-26T08:41:10.134Z",
-    "user": 2,
-    "content_type": 6,
+    "action_time": "2025-11-16T14:22:46.607Z",
+    "user": 1,
+    "content_type": 8,
     "object_id": "1",
-    "object_repr": "jakub (Hráč)",
-    "action_flag": 3,
-    "change_message": ""
+    "object_repr": "FC Barcelona (Muži)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Trener\"]}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 4,
   "fields": {
-    "action_time": "2025-10-26T08:42:55.022Z",
-    "user": 2,
-    "content_type": 8,
+    "action_time": "2025-11-16T14:29:14.208Z",
+    "user": 1,
+    "content_type": 6,
     "object_id": "3",
-    "object_repr": " (Hráč)",
-    "action_flag": 3,
-    "change_message": ""
+    "object_repr": "hrac1 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 5,
   "fields": {
-    "action_time": "2025-10-26T08:43:10.861Z",
-    "user": 2,
+    "action_time": "2025-11-16T14:44:25.392Z",
+    "user": 1,
     "content_type": 6,
     "object_id": "3",
-    "object_repr": "jakub (Hráč)",
+    "object_repr": "hrac1 (Hráč)",
     "action_flag": 3,
     "change_message": ""
   }
@@ -68,520 +68,39 @@
   "model": "admin.logentry",
   "pk": 6,
   "fields": {
-    "action_time": "2025-10-26T09:06:28.211Z",
-    "user": 2,
+    "action_time": "2025-11-16T14:44:52.993Z",
+    "user": 1,
     "content_type": 6,
     "object_id": "4",
-    "object_repr": "jakub (Hráč)",
-    "action_flag": 3,
-    "change_message": ""
+    "object_repr": "hrac1 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 7,
   "fields": {
-    "action_time": "2025-10-26T09:06:28.211Z",
-    "user": 2,
+    "action_time": "2025-11-16T21:39:57.057Z",
+    "user": 1,
     "content_type": 6,
     "object_id": "5",
-    "object_repr": "zkouska (Admin)",
-    "action_flag": 3,
-    "change_message": ""
+    "object_repr": "hrac2 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
   }
 },
 {
   "model": "admin.logentry",
   "pk": 8,
   "fields": {
-    "action_time": "2025-10-26T09:08:47.193Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "6",
-    "object_repr": "trener1 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 9,
-  "fields": {
-    "action_time": "2025-10-26T09:08:54.203Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "6",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Role\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 10,
-  "fields": {
-    "action_time": "2025-10-26T09:09:07.829Z",
-    "user": 2,
-    "content_type": 8,
-    "object_id": "4",
-    "object_repr": " (Hráč)",
+    "action_time": "2025-11-16T22:57:22.924Z",
+    "user": 1,
+    "content_type": 9,
+    "object_id": "1",
+    "object_repr": "Taktická příprava — 2025-11-22 15:30 (None)",
     "action_flag": 3,
     "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 11,
-  "fields": {
-    "action_time": "2025-10-26T09:09:17.207Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "6",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 12,
-  "fields": {
-    "action_time": "2025-10-26T09:17:37.152Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "7",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 13,
-  "fields": {
-    "action_time": "2025-10-26T09:29:32.996Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "7",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 14,
-  "fields": {
-    "action_time": "2025-10-26T09:29:58.874Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "8",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 15,
-  "fields": {
-    "action_time": "2025-10-26T09:39:26.555Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "8",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 16,
-  "fields": {
-    "action_time": "2025-10-26T09:40:28.173Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "9",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 17,
-  "fields": {
-    "action_time": "2025-10-26T09:46:52.174Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "10",
-    "object_repr": "hrac1 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 18,
-  "fields": {
-    "action_time": "2025-10-26T09:58:00.724Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "10",
-    "object_repr": "hrac1 (Hráč)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 19,
-  "fields": {
-    "action_time": "2025-10-26T09:58:23.575Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "11",
-    "object_repr": "hrac1 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 20,
-  "fields": {
-    "action_time": "2025-10-26T10:22:32.542Z",
-    "user": 2,
-    "content_type": 7,
-    "object_id": "3",
-    "object_repr": "Hansi Flick (Trenér - FC Barcelona)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Fotografie\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 21,
-  "fields": {
-    "action_time": "2025-10-26T12:34:08.998Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "9",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 22,
-  "fields": {
-    "action_time": "2025-10-26T12:34:36.507Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "11",
-    "object_repr": "hrac1 (Hráč)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 23,
-  "fields": {
-    "action_time": "2025-10-26T12:36:06.191Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "12",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 24,
-  "fields": {
-    "action_time": "2025-10-26T12:36:27.681Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "13",
-    "object_repr": "hrac1 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 25,
-  "fields": {
-    "action_time": "2025-10-26T12:41:18.664Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "14",
-    "object_repr": "hrac2 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 26,
-  "fields": {
-    "action_time": "2025-10-26T19:41:09.500Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "15",
-    "object_repr": "trener2 (Trenér)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 27,
-  "fields": {
-    "action_time": "2025-10-26T19:41:42.422Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "16",
-    "object_repr": "hrac3 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 28,
-  "fields": {
-    "action_time": "2025-10-29T10:34:53.520Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "17",
-    "object_repr": "hrac4 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 29,
-  "fields": {
-    "action_time": "2025-10-29T20:33:03.908Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "18",
-    "object_repr": "hrac5 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 30,
-  "fields": {
-    "action_time": "2025-10-29T22:52:27.727Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "15",
-    "object_repr": "trener2 (Trenér)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 31,
-  "fields": {
-    "action_time": "2025-10-29T22:52:37.074Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "17",
-    "object_repr": "hrac4 (Hráč)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 32,
-  "fields": {
-    "action_time": "2025-10-29T22:52:37.074Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "18",
-    "object_repr": "hrac5 (Hráč)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 33,
-  "fields": {
-    "action_time": "2025-10-29T22:52:51.157Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "16",
-    "object_repr": "hrac3 (Hráč)",
-    "action_flag": 3,
-    "change_message": ""
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 34,
-  "fields": {
-    "action_time": "2025-10-31T11:55:19.739Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "19",
-    "object_repr": "hrac3 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 35,
-  "fields": {
-    "action_time": "2025-10-31T13:41:38.541Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "12",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Email address\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 36,
-  "fields": {
-    "action_time": "2025-10-31T13:48:28.740Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "13",
-    "object_repr": "hrac1 (Hráč)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Email address\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 37,
-  "fields": {
-    "action_time": "2025-10-31T13:48:48.774Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "14",
-    "object_repr": "hrac2 (Hráč)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Email address\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 38,
-  "fields": {
-    "action_time": "2025-10-31T13:49:13.173Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "13",
-    "object_repr": "hrac1 (Hráč)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 39,
-  "fields": {
-    "action_time": "2025-10-31T13:49:23.732Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "14",
-    "object_repr": "hrac2 (Hráč)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"First name\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 40,
-  "fields": {
-    "action_time": "2025-10-31T13:49:36.659Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "12",
-    "object_repr": "trener1 (Trenér)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"First name\", \"Last name\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 41,
-  "fields": {
-    "action_time": "2025-11-07T09:52:05.155Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "20",
-    "object_repr": "trener2 (Trenér)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 42,
-  "fields": {
-    "action_time": "2025-11-09T20:38:43.391Z",
-    "user": 2,
-    "content_type": 6,
-    "object_id": "21",
-    "object_repr": "hrac4 (Hráč)",
-    "action_flag": 1,
-    "change_message": "[{\"added\": {}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 43,
-  "fields": {
-    "action_time": "2025-11-10T22:04:40.280Z",
-    "user": 2,
-    "content_type": 7,
-    "object_id": "4",
-    "object_repr": "Hansi Flick (FC Barcelona)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Logo klubu\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 44,
-  "fields": {
-    "action_time": "2025-11-10T22:05:32.166Z",
-    "user": 2,
-    "content_type": 7,
-    "object_id": "4",
-    "object_repr": "Hansi Flick (FC Barcelona)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Logo klubu\"]}}]"
-  }
-},
-{
-  "model": "admin.logentry",
-  "pk": 45,
-  "fields": {
-    "action_time": "2025-11-10T22:08:32.184Z",
-    "user": 2,
-    "content_type": 7,
-    "object_id": "4",
-    "object_repr": "Hansi Flick (FC Barcelona)",
-    "action_flag": 2,
-    "change_message": "[{\"changed\": {\"fields\": [\"Logo klubu\"]}}]"
   }
 },
 {
@@ -840,36 +359,36 @@
   "model": "auth.permission",
   "pk": 29,
   "fields": {
-    "name": "Can add Hráč",
+    "name": "Can add tym",
     "content_type": 8,
-    "codename": "add_hracprofile"
+    "codename": "add_tym"
   }
 },
 {
   "model": "auth.permission",
   "pk": 30,
   "fields": {
-    "name": "Can change Hráč",
+    "name": "Can change tym",
     "content_type": 8,
-    "codename": "change_hracprofile"
+    "codename": "change_tym"
   }
 },
 {
   "model": "auth.permission",
   "pk": 31,
   "fields": {
-    "name": "Can delete Hráč",
+    "name": "Can delete tym",
     "content_type": 8,
-    "codename": "delete_hracprofile"
+    "codename": "delete_tym"
   }
 },
 {
   "model": "auth.permission",
   "pk": 32,
   "fields": {
-    "name": "Can view Hráč",
+    "name": "Can view tym",
     "content_type": 8,
-    "codename": "view_hracprofile"
+    "codename": "view_tym"
   }
 },
 {
@@ -912,36 +431,36 @@
   "model": "auth.permission",
   "pk": 37,
   "fields": {
-    "name": "Can add Docházka",
+    "name": "Can add Hráč",
     "content_type": 10,
-    "codename": "add_dochazkatreninky"
+    "codename": "add_hracprofile"
   }
 },
 {
   "model": "auth.permission",
   "pk": 38,
   "fields": {
-    "name": "Can change Docházka",
+    "name": "Can change Hráč",
     "content_type": 10,
-    "codename": "change_dochazkatreninky"
+    "codename": "change_hracprofile"
   }
 },
 {
   "model": "auth.permission",
   "pk": 39,
   "fields": {
-    "name": "Can delete Docházka",
+    "name": "Can delete Hráč",
     "content_type": 10,
-    "codename": "delete_dochazkatreninky"
+    "codename": "delete_hracprofile"
   }
 },
 {
   "model": "auth.permission",
   "pk": 40,
   "fields": {
-    "name": "Can view Docházka",
+    "name": "Can view Hráč",
     "content_type": 10,
-    "codename": "view_dochazkatreninky"
+    "codename": "view_hracprofile"
   }
 },
 {
@@ -984,36 +503,144 @@
   "model": "auth.permission",
   "pk": 45,
   "fields": {
-    "name": "Can add Docházka na zápas",
+    "name": "Can add Docházka na trénink",
     "content_type": 12,
-    "codename": "add_dochazkazapasy"
+    "codename": "add_dochazkatreninky"
   }
 },
 {
   "model": "auth.permission",
   "pk": 46,
   "fields": {
-    "name": "Can change Docházka na zápas",
+    "name": "Can change Docházka na trénink",
     "content_type": 12,
-    "codename": "change_dochazkazapasy"
+    "codename": "change_dochazkatreninky"
   }
 },
 {
   "model": "auth.permission",
   "pk": 47,
   "fields": {
-    "name": "Can delete Docházka na zápas",
+    "name": "Can delete Docházka na trénink",
     "content_type": 12,
-    "codename": "delete_dochazkazapasy"
+    "codename": "delete_dochazkatreninky"
   }
 },
 {
   "model": "auth.permission",
   "pk": 48,
   "fields": {
-    "name": "Can view Docházka na zápas",
+    "name": "Can view Docházka na trénink",
     "content_type": 12,
+    "codename": "view_dochazkatreninky"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add Docházka na zápas",
+    "content_type": 13,
+    "codename": "add_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change Docházka na zápas",
+    "content_type": 13,
+    "codename": "change_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete Docházka na zápas",
+    "content_type": 13,
+    "codename": "delete_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view Docházka na zápas",
+    "content_type": 13,
     "codename": "view_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add Gól",
+    "content_type": 14,
+    "codename": "add_gol"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change Gól",
+    "content_type": 14,
+    "codename": "change_gol"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete Gól",
+    "content_type": 14,
+    "codename": "delete_gol"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view Gól",
+    "content_type": 14,
+    "codename": "view_gol"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add Karta",
+    "content_type": 15,
+    "codename": "add_karta"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change Karta",
+    "content_type": 15,
+    "codename": "change_karta"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete Karta",
+    "content_type": 15,
+    "codename": "delete_karta"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view Karta",
+    "content_type": 15,
+    "codename": "view_karta"
   }
 },
 {
@@ -1077,7 +704,7 @@
   "pk": 8,
   "fields": {
     "app_label": "aplikace",
-    "model": "hracprofile"
+    "model": "tym"
   }
 },
 {
@@ -1093,7 +720,7 @@
   "pk": 10,
   "fields": {
     "app_label": "aplikace",
-    "model": "dochazkatreninky"
+    "model": "hracprofile"
   }
 },
 {
@@ -1109,39 +736,39 @@
   "pk": 12,
   "fields": {
     "app_label": "aplikace",
+    "model": "dochazkatreninky"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "aplikace",
     "model": "dochazkazapasy"
   }
 },
 {
-  "model": "sessions.session",
-  "pk": "awqchnie796icc8201jfyzev53g8t21s",
+  "model": "contenttypes.contenttype",
+  "pk": 14,
   "fields": {
-    "session_data": ".eJxVjDsOwjAQBe_iGllx_KekzxmstXeNA8iW4qRC3J1ESgHtm5n3ZgG2tYSt0xJmZFfm2eV3i5CeVA-AD6j3xlOr6zJHfij8pJ1PDel1O92_gwK97LUZ4yA1QHIW0BrjhQVABXZQegcYIUo3ks6JvNBKyZyMiERGCqXBZfb5AuaIN_0:1vCy8Z:aGL7FsGbK8KWwVq1Z-Aqnx7ulHHRFSlFBvVKJT4VdgQ",
-    "expire_date": "2025-11-09T10:38:11.883Z"
+    "app_label": "aplikace",
+    "model": "gol"
   }
 },
 {
-  "model": "sessions.session",
-  "pk": "go9iyykiu0qhe7py5lt8blgx27e9p2rd",
+  "model": "contenttypes.contenttype",
+  "pk": 15,
   "fields": {
-    "session_data": ".eJxVzMEOwiAQBNB_4WwIS1laPXr3G8gCi1QNJKU9Gf9dmvSg13kz8xaOtjW7rfHi5iguAiZx-g09hSeXXeKDyr3KUMu6zF7uFXlok7ca-XU9un8HmVrua68gsQ3gjVWMxAYSahU0WjKAqBgIvLJdB-5yHtIYR0CjhjBp61F8vvo-NyU:1vEDbZ:5LLV3vkMyjN5s0BnzWNA0sjUwg05kp9_TqM_jkMiT_Y",
-    "expire_date": "2025-11-12T21:21:17.149Z"
-  }
-},
-{
-  "model": "sessions.session",
-  "pk": "z91afixsqzuhmq6izrkfw7ub60c94uhu",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2hBoOx3GpXvPQAaYStVAUtqV8e7apAvd_vfefynP25r91mTxc1JnZQd1-h0Dx4eUnaQ7l1vVsZZ1mYPeFX3Qpq81yfNyuH8HmVv-1gR9h50FsJRA-nHkRM5imGLAAQw5ZwcWQcMuCFoB6onFAVLsECej3h_eMjc9:1vIwdi:G7PbQDZgezgwVXiqzdwCgcZd-D-fkkV7Aj2gr_r1CE4",
-    "expire_date": "2025-11-25T22:15:02.958Z"
+    "app_label": "aplikace",
+    "model": "karta"
   }
 },
 {
   "model": "aplikace.user",
-  "pk": 2,
+  "pk": 1,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$h6XEy5CF3JJjkeAbi90MMp$/6aha5iLuKXdes9DkjSWv401yKEJHghW4oej5r1zT7I=",
-    "last_login": "2025-11-11T19:15:05.128Z",
+    "password": "pbkdf2_sha256$1000000$lVBDpd6Ja8QRTsMTdKJBR1$fRAfF49lBGd4tGP425N5023GStuBgiqMlmQK2YVN9zE=",
+    "last_login": "2025-11-16T22:57:06.212Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -1149,472 +776,165 @@
     "email": "it2227@sspu-opava.cz",
     "is_staff": true,
     "is_active": true,
-    "date_joined": "2025-10-26T08:38:02Z",
+    "date_joined": "2025-11-15T14:58:23.421Z",
     "role": "admin",
+    "first_login": true,
     "groups": [],
     "user_permissions": []
   }
 },
 {
   "model": "aplikace.user",
-  "pk": 12,
+  "pk": 2,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$Kl5B4sUZk3Z4dGRhK25r9H$Q8Nm2KXlZBkb7cn9NdHSAcwYRPdq8iKXQQIC9aDFGyc=",
-    "last_login": "2025-11-11T22:11:37.910Z",
+    "password": "pbkdf2_sha256$1000000$fe1t14qxwwZYEmVdcMidFo$8QHBibsNthBUGmzZ/d+YGGGYHYLWDiY+I2yChIvDA9o=",
+    "last_login": "2025-11-17T00:11:56.256Z",
     "is_superuser": false,
     "username": "trener1",
-    "first_name": "Hansi",
-    "last_name": "Flick",
+    "first_name": "",
+    "last_name": "",
     "email": "hansi.flick@gmail.com",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2025-10-26T12:36:05Z",
+    "date_joined": "2025-11-16T13:58:55.218Z",
     "role": "trener",
+    "first_login": false,
     "groups": [],
     "user_permissions": []
   }
 },
 {
   "model": "aplikace.user",
-  "pk": 13,
+  "pk": 4,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$NJw9gDm5RG5JvC5aYH0E4K$/1hMjEeaYWU+Ff7KsrAJjSG4MPAdcI3OHnwwqGZWqhU=",
-    "last_login": "2025-11-11T22:08:26.629Z",
+    "password": "pbkdf2_sha256$1000000$vKYdHtvz8V91LDsBUGWHr4$YO5YVkzKqjoNpE0LWNQa+vv8nx40US02y1ZAdYfHH/A=",
+    "last_login": "2025-11-16T14:45:06.304Z",
     "is_superuser": false,
     "username": "hrac1",
-    "first_name": "Lamine",
-    "last_name": "Yamal",
-    "email": "lamine.yamal@gmail.com",
+    "first_name": "",
+    "last_name": "",
+    "email": "raphinha@gmail.com",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2025-10-26T12:36:27Z",
+    "date_joined": "2025-11-16T14:44:52.536Z",
     "role": "hrac",
+    "first_login": false,
     "groups": [],
     "user_permissions": []
   }
 },
 {
   "model": "aplikace.user",
-  "pk": 14,
+  "pk": 5,
   "fields": {
-    "password": "pbkdf2_sha256$1000000$kOSnIKPhMTMYlsFHSP0aG8$iS/BnQKUl0SOjDp7CUJbhf52UoQbjZ3eqkGcHGKXZOY=",
-    "last_login": "2025-11-11T22:15:02.953Z",
+    "password": "pbkdf2_sha256$1000000$Y81Jci5vgHRzftic69jOcs$GQiurTqQun52N2+Vp7krGg27ITPqI6JCQmUCUFpEVGQ=",
+    "last_login": "2025-11-16T21:51:17.927Z",
     "is_superuser": false,
     "username": "hrac2",
-    "first_name": "Pedri",
-    "last_name": "",
-    "email": "pedri@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2025-10-26T12:41:18Z",
-    "role": "hrac",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "aplikace.user",
-  "pk": 19,
-  "fields": {
-    "password": "pbkdf2_sha256$1000000$GVdMHn1gyzwloQfdfFGC3p$cboSAriB/bbce3GOsegC2yXnDRUA5CAK0BMdldb/ki8=",
-    "last_login": "2025-11-09T12:05:53.877Z",
-    "is_superuser": false,
-    "username": "hrac3",
     "first_name": "",
     "last_name": "",
-    "email": "zkouska@gmail.com",
+    "email": "robert.lewandowski@gmail.com",
     "is_staff": false,
     "is_active": true,
-    "date_joined": "2025-10-31T11:55:19.311Z",
+    "date_joined": "2025-11-16T21:39:56.622Z",
     "role": "hrac",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "aplikace.user",
-  "pk": 20,
-  "fields": {
-    "password": "pbkdf2_sha256$1000000$2bnP9Z8ml2kc0oiGlSIns2$kY92uHP8wRTxR/NKRHdWTsvAmrzkdk6pYT0sht1Q/JI=",
-    "last_login": "2025-11-11T22:10:07.521Z",
-    "is_superuser": false,
-    "username": "trener2",
-    "first_name": "",
-    "last_name": "",
-    "email": "xabi.alonso@gmail.com",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2025-11-07T09:52:04.698Z",
-    "role": "trener",
-    "groups": [],
-    "user_permissions": []
-  }
-},
-{
-  "model": "aplikace.user",
-  "pk": 21,
-  "fields": {
-    "password": "pbkdf2_sha256$1000000$sYuMhxC6v2X1HpsF1f0Xlj$X+Frv1m6tY4wx/o0FwhrrV7ub1xhbRuSs03PJjvlVck=",
-    "last_login": "2025-11-09T20:38:57.889Z",
-    "is_superuser": false,
-    "username": "hrac4",
-    "first_name": "",
-    "last_name": "",
-    "email": "",
-    "is_staff": false,
-    "is_active": true,
-    "date_joined": "2025-11-09T20:38:42.962Z",
-    "role": "hrac",
+    "first_login": false,
     "groups": [],
     "user_permissions": []
   }
 },
 {
   "model": "aplikace.trenerprofile",
-  "pk": 4,
+  "pk": 1,
   "fields": {
-    "user": 12,
+    "user": 2,
     "first_name": "Hansi",
     "last_name": "Flick",
     "phone": null,
     "birth_date": "1965-02-24",
-    "club": "FC Barcelona",
-    "club_photo": "klub_photo/fc_barcelona.png",
-    "photo": "trener_photo/hansi_flick.jpg",
-    "created_at": "2025-10-26T12:36:06.190Z",
-    "updated_at": "2025-11-10T22:08:32.182Z"
+    "photo": "trener_photo/hansi_flick_QIMOBKc.jpg",
+    "created_at": "2025-11-16T13:58:55.674Z",
+    "updated_at": "2025-11-16T14:15:14.323Z"
   }
 },
 {
-  "model": "aplikace.trenerprofile",
-  "pk": 6,
+  "model": "aplikace.tym",
+  "pk": 1,
   "fields": {
-    "user": 20,
-    "first_name": "Xabi",
-    "last_name": "Alonso",
-    "phone": null,
-    "birth_date": "1981-11-25",
-    "club": "Real Madrid CF",
-    "club_photo": "klub_photo/real_madrid.png",
-    "photo": "trener_photo/xabi_alonso.jpg",
-    "created_at": "2025-11-07T09:52:05.154Z",
-    "updated_at": "2025-11-10T23:01:28.390Z"
+    "nazev": "FC Barcelona",
+    "kategorie": "Muži",
+    "trener": 1,
+    "stadion": "Camp Nou",
+    "mesto": "Barcelona",
+    "logo": "klub_photo/fc_barcelona.png"
   }
 },
 {
   "model": "aplikace.hracprofile",
-  "pk": 7,
+  "pk": 2,
   "fields": {
-    "user": 13,
-    "trener": 4,
-    "first_name": "Lamine",
-    "last_name": "Yamal",
-    "phone": null,
-    "birth_date": "2007-07-13",
-    "height": 178,
-    "weight": 66,
-    "cislo_dresu": 10,
-    "pozice": "RW",
-    "preferred_foot": "Levá",
-    "photo": "hrac_photo/lamine_yamal.jpg",
-    "created_at": "2025-10-26T12:36:27.679Z",
-    "updated_at": "2025-10-31T09:14:56.394Z"
-  }
-},
-{
-  "model": "aplikace.hracprofile",
-  "pk": 8,
-  "fields": {
-    "user": 14,
-    "trener": 4,
-    "first_name": "Pedri",
+    "user": 4,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Raphinha",
     "last_name": null,
     "phone": null,
-    "birth_date": "2002-11-25",
-    "height": 174,
-    "weight": 68,
-    "cislo_dresu": 8,
-    "pozice": "CM",
+    "birth_date": "1996-12-14",
+    "height": 176,
+    "weight": 72,
+    "cislo_dresu": 11,
+    "pozice": "LW",
     "preferred_foot": "Levá",
-    "photo": "hrac_photo/pedri.webp",
-    "created_at": "2025-10-26T12:41:18.662Z",
-    "updated_at": "2025-10-31T12:08:01.868Z"
+    "photo": "",
+    "created_at": "2025-11-16T14:44:52.991Z",
+    "updated_at": "2025-11-16T14:46:07.717Z"
   }
 },
 {
   "model": "aplikace.hracprofile",
-  "pk": 12,
+  "pk": 3,
   "fields": {
-    "user": 19,
-    "trener": 4,
-    "first_name": "zkouska",
-    "last_name": null,
+    "user": 5,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Robert",
+    "last_name": "Lewandowski",
     "phone": null,
-    "birth_date": null,
-    "height": null,
-    "weight": null,
-    "cislo_dresu": null,
-    "pozice": null,
-    "preferred_foot": null,
+    "birth_date": "1988-08-21",
+    "height": 185,
+    "weight": 81,
+    "cislo_dresu": 9,
+    "pozice": "ST",
+    "preferred_foot": "Pravá",
     "photo": "",
-    "created_at": "2025-10-31T11:55:19.736Z",
-    "updated_at": "2025-11-09T11:45:18.262Z"
-  }
-},
-{
-  "model": "aplikace.hracprofile",
-  "pk": 13,
-  "fields": {
-    "user": 21,
-    "trener": 6,
-    "first_name": "zkouska2",
-    "last_name": "zkouska2",
-    "phone": null,
-    "birth_date": null,
-    "height": null,
-    "weight": null,
-    "cislo_dresu": null,
-    "pozice": null,
-    "preferred_foot": null,
-    "photo": "",
-    "created_at": "2025-11-09T20:38:43.386Z",
-    "updated_at": "2025-11-09T20:41:27.291Z"
+    "created_at": "2025-11-16T21:39:57.055Z",
+    "updated_at": "2025-11-16T21:58:00.655Z"
   }
 },
 {
   "model": "aplikace.trenink",
-  "pk": 12,
+  "pk": 3,
   "fields": {
-    "trener": 4,
-    "datum": "2025-11-17",
-    "cas": "11:00:00",
-    "typ": "Taktická připrava",
-    "poznamka": "zkouška",
-    "stav": "Naplánováno",
-    "created_at": "2025-11-08T15:46:43.432Z"
-  }
-},
-{
-  "model": "aplikace.trenink",
-  "pk": 14,
-  "fields": {
-    "trener": 4,
+    "tym": 1,
     "datum": "2025-11-19",
-    "cas": "16:10:00",
-    "typ": "Jiný",
-    "poznamka": "zkouška 2",
-    "stav": "Naplánováno",
-    "created_at": "2025-11-09T12:07:09.868Z"
-  }
-},
-{
-  "model": "aplikace.trenink",
-  "pk": 17,
-  "fields": {
-    "trener": 6,
-    "datum": "2025-11-20",
-    "cas": "10:00:00",
-    "typ": "Fyzická příprava",
-    "poznamka": "zkouška",
-    "stav": "Naplánováno",
-    "created_at": "2025-11-09T15:04:03.036Z"
-  }
-},
-{
-  "model": "aplikace.trenink",
-  "pk": 18,
-  "fields": {
-    "trener": 4,
-    "datum": "2025-12-17",
     "cas": "15:30:00",
-    "typ": "Taktická připrava",
-    "poznamka": "zkouška 3",
-    "stav": "Naplánováno",
-    "created_at": "2025-11-09T19:59:10.774Z"
-  }
-},
-{
-  "model": "aplikace.trenink",
-  "pk": 19,
-  "fields": {
-    "trener": 4,
-    "datum": "2025-11-01",
-    "cas": "15:00:00",
     "typ": "Fyzická příprava",
     "poznamka": "",
     "stav": "Naplánováno",
-    "created_at": "2025-11-11T20:29:36.225Z"
+    "created_at": "2025-11-16T23:10:51.273Z"
   }
 },
 {
-  "model": "aplikace.dochazkatreninky",
-  "pk": 1,
-  "fields": {
-    "trenink": 12,
-    "hrac": 7,
-    "pritomen": true,
-    "duvod": null,
-    "hlasoval_v": "2025-11-11T19:38:58.206Z"
-  }
-},
-{
-  "model": "aplikace.dochazkatreninky",
-  "pk": 2,
-  "fields": {
-    "trenink": 12,
-    "hrac": 8,
-    "pritomen": true,
-    "duvod": null,
-    "hlasoval_v": "2025-11-11T22:23:31.052Z"
-  }
-},
-{
-  "model": "aplikace.dochazkatreninky",
-  "pk": 3,
-  "fields": {
-    "trenink": 12,
-    "hrac": 12,
-    "pritomen": true,
-    "duvod": null,
-    "hlasoval_v": "2025-11-09T12:06:09.031Z"
-  }
-},
-{
-  "model": "aplikace.dochazkatreninky",
+  "model": "aplikace.trenink",
   "pk": 4,
   "fields": {
-    "trenink": 14,
-    "hrac": 7,
-    "pritomen": false,
-    "duvod": null,
-    "hlasoval_v": "2025-11-10T21:08:50.474Z"
-  }
-},
-{
-  "model": "aplikace.dochazkatreninky",
-  "pk": 5,
-  "fields": {
-    "trenink": 14,
-    "hrac": 8,
-    "pritomen": true,
-    "duvod": null,
-    "hlasoval_v": "2025-11-09T13:13:45.135Z"
-  }
-},
-{
-  "model": "aplikace.dochazkatreninky",
-  "pk": 8,
-  "fields": {
-    "trenink": 18,
-    "hrac": 7,
-    "pritomen": true,
-    "duvod": null,
-    "hlasoval_v": "2025-11-10T21:08:52.271Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
-  "pk": 12,
-  "fields": {
-    "trener": 4,
-    "club": "",
-    "souper": "PSG",
-    "datum": "2026-01-10",
-    "cas": "21:00:00",
-    "domaci_hoste": "Hosté",
-    "misto": "Parc des Princes, Paříž",
+    "tym": 1,
+    "datum": "2025-11-07",
+    "cas": "16:30:00",
+    "typ": "Taktická připrava",
+    "poznamka": "",
     "stav": "Naplánováno",
-    "vysledek_tymu": null,
-    "vysledek_soupere": null,
-    "created_at": "2025-11-11T11:07:33.808Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
-  "pk": 13,
-  "fields": {
-    "trener": 4,
-    "club": "",
-    "souper": "Real Madrid CF",
-    "datum": "2025-10-25",
-    "cas": "21:00:00",
-    "domaci_hoste": "Domácí",
-    "misto": "Camp Nou, Barcelona",
-    "stav": "Dohráno",
-    "vysledek_tymu": 2,
-    "vysledek_soupere": 1,
-    "created_at": "2025-11-11T11:21:53.852Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
-  "pk": 14,
-  "fields": {
-    "trener": 4,
-    "club": "",
-    "souper": "Arsenal FC",
-    "datum": "2025-10-31",
-    "cas": "21:00:00",
-    "domaci_hoste": "Hosté",
-    "misto": "Emirates Stadium, Londýn",
-    "stav": "Dohráno",
-    "vysledek_tymu": 1,
-    "vysledek_soupere": 3,
-    "created_at": "2025-11-11T11:48:43.034Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
-  "pk": 16,
-  "fields": {
-    "trener": 4,
-    "club": "",
-    "souper": "AC Milan",
-    "datum": "2025-09-08",
-    "cas": "16:00:00",
-    "domaci_hoste": "Hosté",
-    "misto": "San Siro, Milán",
-    "stav": "Dohráno",
-    "vysledek_tymu": 4,
-    "vysledek_soupere": 0,
-    "created_at": "2025-11-11T15:07:02.862Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
-  "pk": 17,
-  "fields": {
-    "trener": 4,
-    "club": "",
-    "souper": "Real Madrid CF",
-    "datum": "2025-11-01",
-    "cas": "16:15:00",
-    "domaci_hoste": "Hosté",
-    "misto": "Santiago Bernabéu, Madrid",
-    "stav": "Naplánováno",
-    "vysledek_tymu": null,
-    "vysledek_soupere": null,
-    "created_at": "2025-11-11T19:37:04.497Z"
-  }
-},
-{
-  "model": "aplikace.dochazkazapasy",
-  "pk": 10,
-  "fields": {
-    "zapas": 12,
-    "hrac": 7,
-    "pritomen": true,
-    "poznamka": null
-  }
-},
-{
-  "model": "aplikace.dochazkazapasy",
-  "pk": 11,
-  "fields": {
-    "zapas": 12,
-    "hrac": 8,
-    "pritomen": true,
-    "poznamka": null
+    "created_at": "2025-11-16T23:52:18.297Z"
   }
 }
 ]

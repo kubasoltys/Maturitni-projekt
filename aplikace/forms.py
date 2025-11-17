@@ -1,5 +1,5 @@
 from django import forms
-from .models import TrenerProfile, HracProfile, Trenink, Zapas
+from .models import TrenerProfile, HracProfile, Trenink, Zapas, Tym
 
 
 # prihlaseni
@@ -178,17 +178,28 @@ class HracProfileForm(forms.ModelForm):
         return instance
 
 
-
+#----------------------------------------------------------------------------------------------
 # trenink
+#----------------------------------------------------------------------------------------------
 class TreninkForm(forms.ModelForm):
+    tym = forms.ModelChoiceField(
+        queryset=Tym.objects.none(),
+        label="Tým",
+        required=True,
+        widget=forms.Select(attrs={
+            'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+        })
+    )
+
     class Meta:
         model = Trenink
-        fields = ['datum', 'cas', 'typ', 'poznamka']
+        fields = ['tym', 'datum', 'cas', 'typ', 'poznamka']
         labels = {
+            'tym': 'Tým',
             'datum': 'Datum',
             'cas': 'Čas',
             'typ': 'Typ tréninku',
-            'poznamka': 'Poznámka',
+            'poznamka': 'Poznámka'
         }
         widgets = {
             'datum': forms.DateInput(attrs={
@@ -209,6 +220,12 @@ class TreninkForm(forms.ModelForm):
                 'rows': 3
             }),
         }
+
+    def __init__(self, *args, **kwargs):
+        trener = kwargs.pop('trener', None)
+        super().__init__(*args, **kwargs)
+        if trener:
+            self.fields['tym'].queryset = Tym.objects.filter(trener=trener)
 
 
 

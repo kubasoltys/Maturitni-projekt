@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractUser
 from django.utils import timezone
 
 
-# Custom user model
+# custom user model
 class User(AbstractUser):
     ROLE_CHOICES = [
         ('hrac', 'Hráč'),
@@ -18,11 +18,19 @@ class User(AbstractUser):
         choices=ROLE_CHOICES,
         default='hrac')
 
+    first_login = models.BooleanField(default=True)
+
     def __str__(self):
         return f"{self.username} ({self.get_role_display()})"
 
 
-# Profil trenéra
+
+#-----------------------------------------------------------------------------------
+# PROFILY
+#-----------------------------------------------------------------------------------
+
+
+# trener
 class TrenerProfile(models.Model):
     user = models.OneToOneField(
         'aplikace.User',
@@ -78,7 +86,10 @@ class TrenerProfile(models.Model):
         ordering = ['last_name', 'first_name']
 
 
-# Tým
+
+#-----------------------------------------------------------------------------------
+# TYM
+#-----------------------------------------------------------------------------------
 class Tym(models.Model):
     KATEGORIE = [
         ('U6-U9', 'U6-U9'),
@@ -115,16 +126,22 @@ class Tym(models.Model):
         blank=True,
         null=True)
     logo = models.ImageField(
-        upload_to="team_logos/",
+        upload_to="klub_photo/",
         blank=True,
         null=True)
 
     def __str__(self):
         return f"{self.nazev} ({self.kategorie})" if self.kategorie else self.nazev
 
+    class Meta:
+        verbose_name = "Tým"
+        verbose_name_plural = "Týmy"
+        ordering = ['nazev']
 
 
-# Profil hráče
+
+
+# hrac
 class HracProfile(models.Model):
     POZICE = [
         ('GK', 'Brankář'),
@@ -152,13 +169,18 @@ class HracProfile(models.Model):
         'aplikace.User',
         related_name='hracprofile',
         on_delete=models.CASCADE)
+    trener = models.ForeignKey(
+        'TrenerProfile',
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="hraci")
     tym = models.ForeignKey(
         Tym,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="hraci"
-    )
+        related_name="hraci")
     first_name = models.CharField(
         max_length=30,
         verbose_name='Jméno',
@@ -197,6 +219,7 @@ class HracProfile(models.Model):
         blank=True,
         null=True)
     pozice = models.CharField(
+        max_length=5,
         choices=POZICE,
         verbose_name='Pozice',
         blank=True,
@@ -215,6 +238,13 @@ class HracProfile(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def save(self, *args, **kwargs):
+        if self.trener and not self.tym:
+            tymy_trenera = Tym.objects.filter(trener=self.trener)
+            if tymy_trenera.exists():
+                self.tym = tymy_trenera.first()
+        super().save(*args, **kwargs)
 
     @property
     def vek(self):
@@ -239,6 +269,11 @@ class HracProfile(models.Model):
 
 
 
+#-----------------------------------------------------------------------------------
+# TRENINKY
+#-----------------------------------------------------------------------------------
+
+
 # treninky
 class Trenink(models.Model):
     STAVY = [
@@ -248,7 +283,7 @@ class Trenink(models.Model):
 
     TYPY = [
         ('Fyzická příprava', 'Fyzická příprava'),
-        ('Taktická připrava', 'Taktická připrava'),
+        ('Taktická připrava', 'Taktická příprava'),
         ('Jiný', 'Jiné'),
     ]
 
@@ -326,6 +361,12 @@ class DochazkaTreninky(models.Model):
     def __str__(self):
         status = 'ANO' if self.pritomen is True else ('NE' if self.pritomen is False else 'NEHLASOVAL')
         return f"{self.hrac} — {self.trenink} ({status})"
+
+
+
+#-----------------------------------------------------------------------------------
+# ZAPASY
+#-----------------------------------------------------------------------------------
 
 
 # zapasy
@@ -414,10 +455,97 @@ class DochazkaZapasy(models.Model):
         null=True)
 
     class Meta:
-        unique_together = ("zapas", "hrac")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["zapas", "hrac"],
+                name="unique_zapas_hrac"
+            )
+        ]
         verbose_name = "Docházka na zápas"
         verbose_name_plural = "Docházky na zápasy"
 
     def __str__(self):
         stav = "✅" if self.pritomen else ("❌" if self.pritomen is False else "⏳")
         return f"{self.hrac} - {self.zapas} ({stav})"
+
+
+
+#-----------------------------------------------------------------------------------
+# STATISTIKY
+#-----------------------------------------------------------------------------------
+
+
+# goly
+class Gol(models.Model):
+    TYP_GOLU = [
+        ('normalni', 'Normální'),
+        ('penalta', 'Penalta'),
+        ('primak', 'Přímý kop'),
+        ('vlastni', 'Vlastní gól'),
+    ]
+
+    zapas = models.ForeignKey(
+        Zapas,
+        on_delete=models.CASCADE,
+        related_name="goly")
+    hrac = models.ForeignKey(
+        HracProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="goly")
+    minuta = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1),
+                    MaxValueValidator(140)],
+        verbose_name="Minuta")
+    typ = models.CharField(
+        max_length=20,
+        choices=TYP_GOLU)
+
+
+    def __str__(self):
+        hrac = self.hrac or "Neznámý hráč"
+        return f"Gól: {hrac} — {self.zapas} ({self.get_typ_display()} | {self.minuta}. min)"
+
+    class Meta:
+        verbose_name = "Gól"
+        verbose_name_plural = "Góly"
+        ordering = ['minuta']
+
+
+
+# karty
+class Karta(models.Model):
+    TYP_KARTY = [
+        ('zluta', 'Žlutá'),
+        ('cervena', 'Červená'),
+    ]
+
+    zapas = models.ForeignKey(
+        Zapas,
+        on_delete=models.CASCADE,
+        related_name="karty")
+    hrac = models.ForeignKey(
+        HracProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="karty")
+    typ = models.CharField(
+        max_length=10,
+        choices=TYP_KARTY)
+    minuta = models.PositiveSmallIntegerField(
+        validators=[MinValueValidator(1),
+                    MaxValueValidator(140)],
+        verbose_name="Minuta")
+
+
+    def __str__(self):
+        hrac = self.hrac or "Neznámý hráč"
+        return f"Karta: {hrac} — {self.zapas} ({self.get_typ_display()} | {self.minuta}. min)"
+
+    class Meta:
+        verbose_name = "Karta"
+        verbose_name_plural = "Karty"
+        ordering = ['minuta']
+
