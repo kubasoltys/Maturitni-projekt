@@ -6,7 +6,7 @@
 
         <h2 class="text-4xl font-extrabold pt-6 pb-6 text-center drop-shadow-lg">Doplnění osobních údajů</h2>
 
-        <form method="post" class="space-y-5">
+        <form method="post" enctype="multipart/form-data" class="space-y-5">
             {% csrf_token %}
             {{ form.non_field_errors }}
 
@@ -15,18 +15,19 @@
                 <label class="block text-gray-700 font-medium mb-2">{{ field.label }}</label>
                 {{ field }}
                 {% if field.errors %}
-                    <p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>
+                <p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>
                 {% endif %}
             </div>
             {% endfor %}
 
             <button type="submit"
                     class="w-full inline-block text-white font-semibold text-lg px-10 py-4 rounded-2xl shadow-lg
-                           bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
-                           hover:from-blue-600 hover:to-purple-900 hover:scale-105">
+                   bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
+                   hover:from-blue-600 hover:to-purple-900 hover:scale-105">
                 Uložit údaje
             </button>
         </form>
+
 
         <a href="{% url 'logout' %}"
            class="w-full inline-block text-white font-semibold text-lg px-10 py-4 rounded-2xl shadow-lg

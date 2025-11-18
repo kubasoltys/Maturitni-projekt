@@ -1,0 +1,164 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- navbar -->
+<nav class="fixed top-0 left-0 w-full bg-white shadow-lg z-50 border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-8 py-5 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+
+        {% for tym in tymy %}
+        <div class="flex items-center space-x-3 justify-center md:justify-start">
+            {% if tym.logo %}
+            <img src="{{ tym.logo.url }}" alt="{{ tym.nazev }}" class="h-16 w-16 object-contain">
+            {% else %}
+            <img src="{% static 'stranka/logo.png' %}" alt="Logo" class="h-16 w-16 object-contain">
+            {% endif %}
+        </div>
+        {% endfor %}
+
+        <div class="flex items-center space-x-6 justify-center md:justify-end">
+
+            <a href="{% url 'trener_zapas' %}"
+               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+                Zápasy
+            </a>
+
+            <a href="{% url 'trener_trenink' %}"
+               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+                Tréninky
+            </a>
+
+            <a href="{% url 'trener_settings' %}"
+               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+                Nastavení účtu
+            </a>
+
+            <a href="{% url 'trener_dashboard' %}"
+               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+                Dashboard
+            </a>
+
+            <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
+                {% if trener.photo %}
+                <img src="{{ trener.photo.url }}" alt="Profilová fotka"
+                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                {% else %}
+                <img src="/media/stranka/default_profile_picture.webp" alt="Výchozí profilová fotka"
+                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                {% endif %}
+
+                <p class="text-gray-400 font-semibold">
+                    {% if trener.first_name and trener.last_name %}
+                    {{ trener.first_name }} {{ trener.last_name }}
+                    {% elif trener.first_name %}
+                    {{ trener.first_name }}
+                    {% elif trener.last_name %}
+                    {{ trener.last_name }}
+                    {% else %}
+                    (bez jména)
+                    {% endif %}
+                </p>
+            </div>
+
+            <a href="{% url 'logout' %}"
+               class="text-white font-semibold px-6 py-2 rounded-2xl shadow-md
+                bg-gradient-to-r from-gray-400 to-gray-600 transform transition duration-300
+                hover:from-red-500 hover:to-red-700 hover:scale-105">
+                Odhlásit se
+            </a>
+
+        </div>
+    </div>
+</nav>
+
+<!-- obsah -->
+<div class="flex flex-col items-center justify-start min-h-screen pt-40 pb-12 space-y-12 px-4 lg:px-0">
+    <h1 class="text-4xl font-extrabold text-gray-800 text-center drop-shadow-lg">Moji hráči</h1>
+
+    <!-- blok -->
+    <div class="flex flex-col lg:flex-row flex-wrap gap-12 justify-center w-full">
+
+        <!-- seznam hracu -->
+        <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-8 space-y-6 border border-gray-200">
+            <div class="flex flex-col items-center space-y-4">
+                {% for tym in tymy %}
+                <div class="flex items-center space-x-4 p-4 bg-gray-100 rounded-2xl shadow-inner w-full">
+                    <div class="h-16 w-16 overflow-hidden">
+                        {% if tym.logo %}
+                        <img src="{{ tym.logo.url }}" alt="Logo" class="h-full w-full object-contain">
+                        {% else %}
+                        <img src="{% static 'stranka/logo.png' %}" alt="Logo" class="h-full w-full object-contain">
+                        {% endif %}
+                    </div>
+                    <h2 class="text-3xl font-bold text-gray-700 drop-shadow-sm">
+                        {{ tym.nazev }}
+                        <span class="font-semibold text-gray-500">
+                            ({{ tym.kategorie }})
+                        </span>
+                    </h2>
+                </div>
+                {% endfor %}
+
+                <h3 class="text-xl font-bold text-gray-800 pt-6 drop-shadow-lg">Seznam hráčů</h3>
+            </div>
+
+            <div class="overflow-x-auto rounded-2xl border-2 border-gray-200 shadow-lg">
+                <table class="min-w-full rounded-xl divide-y divide-gray-200">
+                    <thead class="bg-gray-100 text-gray-700">
+                        <tr>
+                            <th class="py-3 px-4 text-left">Jméno</th>
+                            <th class="py-3 px-4 text-left">Pozice</th>
+                            <th class="py-3 px-4 text-left">Číslo dresu</th>
+                            <th class="py-3 px-4 text-left">Účast - tréninky</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-100">
+                        {% for hrac in hraci %}
+                        <tr class="hover:bg-gray-50 transition-colors">
+                            <td class="py-3 px-4 font-semibold">
+                                {% if hrac.first_name and hrac.last_name %}
+                                    {{ hrac.first_name }} {{ hrac.last_name }}
+                                {% elif hrac.first_name %}
+                                    {{ hrac.first_name }}
+                                {% elif hrac.last_name %}
+                                    {{ hrac.last_name }}
+                                {% else %}
+                                    (bez jména)
+                                {% endif %}
+                                ({{ hrac.vek }})
+                            </td>
+                            <td class="py-3 px-4">{{ hrac.pozice|default:"-" }}</td>
+                            <td class="py-3 px-4">{{ hrac.cislo_dresu|default:"-" }}</td>
+                            <td class="py-3 px-4 font-semibold">
+                                {% if hrac.dochazka_treninky > 50 %}
+                                    <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
+                                {% elif hrac.dochazka_treninky == 50 %}
+                                    <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
+                                {% else %}
+                                    <span class="text-red-500">{{ hrac.dochazka_treninky }}%</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="py-4 text-center text-gray-400">
+                                Zatím nemáte přiřazené žádné hráče.
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="space-y-4">
+                <a href="{% url 'trener_dashboard' %}"
+                   class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
+                    Zpět na dashboard
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

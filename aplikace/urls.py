@@ -16,6 +16,9 @@ urlpatterns = [
     path('trener/', views.trener_dashboard, name='trener_dashboard'),
     path('hrac/', views.hrac_dashboard, name='hrac_dashboard'),
 
+# trener - hraci
+    path('trener/hraci', views.trener_hraci_view, name='trener_hraci'),
+
 # settings
     path('trener/nastaveni/', views.trener_settings_view, name='trener_settings'),
     path('hrac/nastaveni/', views.hrac_settings_view, name='hrac_settings'),
@@ -31,23 +34,23 @@ urlpatterns = [
 # zmena hesla trener
     path('trener/nastaveni/zmena-hesla/',
          auth_views.PasswordChangeView.as_view(
-             template_name='trener/password_change.html',
+             template_name='trener/heslo/password_change.html',
              success_url=reverse_lazy('trener_password_change_done')
          ),
          name='trener_password_change'),
     path('trener/nastaveni/zmena-hesla/zmeneno/',
-         auth_views.PasswordChangeDoneView.as_view(template_name='trener/password_change_done.html'),
+         auth_views.PasswordChangeDoneView.as_view(template_name='trener/heslo/password_change_done.html'),
          name='trener_password_change_done'),
 
 # zmena hesla hrac
     path('hrac/nastaveni/zmena-hesla/',
          auth_views.PasswordChangeView.as_view(
-             template_name='hrac/password_change.html',
+             template_name='hrac/heslo/password_change.html',
              success_url=reverse_lazy('hrac_password_change_done')
          ),
          name='hrac_password_change'),
     path('hrac/nastaveni/zmena-hesla/zmeneno/',
-         auth_views.PasswordChangeDoneView.as_view(template_name='hrac/password_change_done.html'),
+         auth_views.PasswordChangeDoneView.as_view(template_name='hrac/heslo/password_change_done.html'),
          name='hrac_password_change_done'),
 
 

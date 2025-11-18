@@ -240,6 +240,32 @@ def trener_dashboard(request):
     return render(request, 'trener/dashboard.html', context)
 
 
+#---------------------------------------------------------------------------------------------
+# trener - stranka pro zobrazeni hracu
+#---------------------------------------------------------------------------------------------
+@login_required
+def trener_hraci_view(request):
+    try:
+        trener = request.user.trenerprofile
+    except TrenerProfile.DoesNotExist:
+        return render(request, "error.html", {"message": "Nemáte trenérský profil."})
+
+    tymy = Tym.objects.filter(trener=trener)
+
+    hraci = list(
+        HracProfile.objects.filter(
+            tym__in=tymy
+        ).select_related("user", "tym")
+    )
+
+    hraci.sort(key=lambda x: x.dochazka_treninky, reverse=True)
+
+    return render(request, "trener/hraci/hraci.html", {
+        'hraci': hraci,
+        'tymy': tymy,
+        'trener': trener,
+    })
+
 
 
 # NASTAVENI
@@ -265,7 +291,7 @@ def hrac_settings_view(request):
         'tym': tym,
     }
 
-    return render(request, 'hrac/settings.html', context)
+    return render(request, 'hrac/nastaveni/settings.html', context)
 
 
 #----------------------------------------------------------------------------------------------
@@ -283,7 +309,7 @@ def hrac_account_view(request):
         'tym': tym,
     }
 
-    return render(request, 'hrac/account.html', context)
+    return render(request, 'hrac/nastaveni/account.html', context)
 
 
 #----------------------------------------------------------------------------------------------
@@ -300,7 +326,7 @@ def edit_hrac_profile(request):
     else:
         form = HracProfileForm(instance=hrac)
 
-    return render(request, 'hrac/edit.html', {'form': form, 'hrac': hrac})
+    return render(request, 'hrac/nastaveni/edit.html', {'form': form, 'hrac': hrac})
 
 
 #----------------------------------------------------------------------------------------------
@@ -315,7 +341,7 @@ def trener_settings_view(request):
     trener = user.trenerprofile
     tymy = Tym.objects.filter(trener=trener)
 
-    return render(request, 'trener/settings.html', {
+    return render(request, 'trener/nastaveni/settings.html', {
         'trener': trener,
         'tymy': tymy,
     })
@@ -329,7 +355,7 @@ def trener_account_view(request):
     trener = get_object_or_404(TrenerProfile, user=request.user)
     tymy = Tym.objects.filter(trener=trener)
 
-    return render(request, 'trener/account.html', {
+    return render(request, 'trener/nastaveni/account.html', {
         'trener': trener,
         'tymy': tymy,
     })
@@ -349,7 +375,7 @@ def edit_trener_profile(request):
     else:
         form = TrenerProfileForm(instance=trener)
 
-    return render(request, 'trener/edit.html', {'form': form, 'trener': trener})
+    return render(request, 'trener/nastaveni/edit.html', {'form': form, 'trener': trener})
 
 
 

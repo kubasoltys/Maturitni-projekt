@@ -30,6 +30,11 @@
                 Tréninky
             </a>
 
+            <a href="{% url 'trener_hraci' %}"
+               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
+                Moji hráči
+            </a>
+
             <a href="{% url 'trener_settings' %}"
                class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
                 Nastavení účtu
@@ -162,6 +167,15 @@
                     </tbody>
                 </table>
             </div>
+
+            <div class="flex justify-center p-4">
+                    <a href="{% url 'trener_hraci' %}" class="inline-block w-2/3 py-2 text-white text-lg font-semibold
+                        text-center rounded-2xl shadow-lg bg-gradient-to-r from-blue-500 to-purple-800 hover:from-blue-600
+                        hover:to-purple-900 transform transition duration-300 hover:scale-105">
+                        Zobrazit všechny hráče
+                    </a>
+            </div>
+
         </div>
 
         <!-- zapasy a treninky -->
@@ -208,7 +222,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for dochazka in data.dochazka_list %}
+                                {% for dochazka in data.dochazka_list|slice:":4" %}
                                 <tr class="hover:bg-gray-50 transition-colors">
                                     <td class="py-1 px-3">{{ dochazka.hrac.first_name|default:"" }} {{ dochazka.hrac.last_name|default:"" }}</td>
                                     <td class="py-1 px-3">
@@ -268,7 +282,7 @@
                                 </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
-                                {% for dochazka in data.dochazka_list %}
+                                {% for dochazka in data.dochazka_list|slice:":4" %}
                                 <tr class="hover:bg-gray-50 transition-colors">
                                     <td class="py-1 px-3">{{ dochazka.hrac.first_name|default:"" }} {{ dochazka.hrac.last_name|default:"" }}</td>
                                     <td class="py-1 px-3">
