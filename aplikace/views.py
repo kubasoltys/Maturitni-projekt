@@ -7,8 +7,7 @@ from django.utils import timezone
 from datetime import datetime, date
 from django.db.models import Q
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm, DohranyZapasForm
-from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy, Tym
-
+from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy, Tym, Gol
 
 
 #----------------------------------------------------------------------------------------------
@@ -154,7 +153,7 @@ def hrac_dashboard(request):
         zapasy_data.append({
             'zapas': zapas,
             'dochazka': dochazka_obj,
-            'klub': tym.club,
+            'klub': tym.nazev,
             'hlasoval': dochazka_obj.pritomen is not None if dochazka_obj else False
         })
 
@@ -186,7 +185,6 @@ def trener_dashboard(request):
         request.session["selected_tym"] = selected_tym_id
 
     selected_tym_id = request.session.get("selected_tym")
-
     if selected_tym_id:
         vybrany_tym = tymy.filter(id=selected_tym_id).first()
     else:
@@ -196,7 +194,6 @@ def trener_dashboard(request):
         vybrany_tym = tymy.first()
 
     hraci = HracProfile.objects.filter(tym=vybrany_tym).distinct()
-
     now = timezone.now()
 
     treninky_qs = Trenink.objects.filter(
@@ -218,7 +215,10 @@ def trener_dashboard(request):
         dochazka_list = []
         for hrac in hraci:
             dochazka_list.append(
-                dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
+                dochazka_dict.get(
+                    hrac.id,
+                    SimpleNamespace(hrac=hrac, pritomen=None, duvod=None)
+                )
             )
 
         treninky_data.append({
@@ -228,28 +228,53 @@ def trener_dashboard(request):
         })
 
     zapasy_qs = (
-        Zapas.objects.filter(
-            tym=vybrany_tym,
-            datum__gte=date.today()
-        )
-        .prefetch_related('dochazka', 'dochazka__hrac')
-        .order_by('datum', 'cas')[:1]
+        Zapas.objects.filter(tym=vybrany_tym, stav='Naplánováno')
+                     .prefetch_related('dochazka', 'dochazka__hrac')
+                     .order_by('datum', 'cas')
     )
 
-    zapasy_data = []
-    for zapas in zapasy_qs:
-        dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
+    nejblizsi = None
 
-        dochazka_list = []
-        for hrac in hraci:
-            dochazka_list.append(
-                dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
+    for zapas in zapasy_qs:
+        zapas_datetime = timezone.make_aware(
+            datetime.combine(zapas.datum, zapas.cas),
+            timezone.get_current_timezone()
+        )
+
+        po_casove = zapas_datetime < now
+
+        if not po_casove:
+            nejblizsi = zapas
+            break
+
+        if po_casove:
+            nejblizsi = zapas
+            break
+
+    zapasy_data = []
+
+    if nejblizsi:
+        dochazka_dict = {d.hrac.id: d for d in nejblizsi.dochazka.all()}
+
+        dochazka_list = [
+            dochazka_dict.get(
+                hrac.id,
+                SimpleNamespace(hrac=hrac, pritomen=None, duvod=None)
             )
+            for hrac in hraci
+        ]
+
+        zapas_datetime = timezone.make_aware(
+            datetime.combine(nejblizsi.datum, nejblizsi.cas),
+            timezone.get_current_timezone()
+        )
+
+        po_dohrani = zapas_datetime < now
 
         zapasy_data.append({
-            'zapas': zapas,
+            'zapas': nejblizsi,
             'dochazka_list': dochazka_list,
-            'po_dohrani': zapas.stav != 'Naplánováno'
+            'po_dohrani': po_dohrani,
         })
 
     context = {
@@ -791,43 +816,52 @@ def hrac_zapas(request):
         messages.error(request, "Nemáte profil.")
         return redirect('index')
 
-    now = timezone.localtime(timezone.now())
+    tym = hrac.tym
+    now = timezone.localtime()
 
+    # Zápasy týmu, které ještě neproběhly
     zapasy = (
-        Zapas.objects.filter(trener=hrac.trener, stav='Naplánováno')
+        Zapas.objects.filter(tym=tym, stav='Naplánováno')
         .filter(datum__gte=now.date())
         .order_by('datum', 'cas')
+        .prefetch_related('dochazka')
     )
 
     zapasy_data = []
     for zapas in zapasy:
         datetime_zapasu = timezone.make_aware(
-            timezone.datetime.combine(zapas.datum, zapas.cas)
+            datetime.combine(zapas.datum, zapas.cas),
+            timezone.get_current_timezone()
         )
+
+        # Přeskočíme zápasy, které už proběhly
         if datetime_zapasu <= now:
             continue
 
         dochazka_obj = zapas.dochazka.filter(hrac=hrac).first()
+
         zapasy_data.append({
             'zapas': zapas,
             'dochazka': dochazka_obj,
-            'klub': hrac.trener.club,
+            'klub': tym.nazev,   # nový model – klub přes tým
             'hlasoval': dochazka_obj.pritomen is not None if dochazka_obj else False,
             'po_dohrani': (
-                datetime_zapasu < now
-                and (zapas.vysledek_domaci is None or zapas.vysledek_hoste is None)
+                datetime_zapasu < now and
+                (zapas.vysledek_tymu is None or zapas.vysledek_soupere is None)
             )
         })
 
     return render(request, 'hrac/zapas/zapas.html', {
         'hrac': hrac,
-        'trener': hrac.trener,
+        'tym': tym,
+        'trener': tym.trener,   # pokud ho chceš v šabloně
         'zapasy_data': zapasy_data
     })
 
 
-
+#----------------------------------------------------------------------------------------------
 # hlasovani pro hrace o zapasu
+#----------------------------------------------------------------------------------------------
 @login_required
 def hrac_hlasovani_zapas(request, zapas_id):
     try:
@@ -836,14 +870,14 @@ def hrac_hlasovani_zapas(request, zapas_id):
         messages.error(request, "Nemáte hráčský profil.")
         return redirect('index')
 
-    zapas = get_object_or_404(Zapas, id=zapas_id, trener=hrac.trener)
+    zapas = get_object_or_404(Zapas, id=zapas_id, tym=hrac.tym)
     zpet = request.META.get('HTTP_REFERER', '/')
 
     if request.method == 'POST':
         pritomen_raw = request.POST.get('pritomen')
         if pritomen_raw not in ('true', 'false'):
             messages.error(request, "Neplatná volba.")
-            return redirect('hrac_zapasy')
+            return redirect(zpet)
 
         pritomen = pritomen_raw == 'true'
 
@@ -859,8 +893,9 @@ def hrac_hlasovani_zapas(request, zapas_id):
     return redirect(zpet)
 
 
-
+#----------------------------------------------------------------------------------------------
 # zrusit hlasovani na zapas
+#----------------------------------------------------------------------------------------------
 @login_required
 def hrac_hlasovani_zapas_smazat(request, zapas_id):
     try:
@@ -869,13 +904,16 @@ def hrac_hlasovani_zapas_smazat(request, zapas_id):
         messages.error(request, "Nemáte hráčský profil.")
         return redirect('index')
 
-    zapas = get_object_or_404(Zapas, id=zapas_id)
+    zapas = get_object_or_404(Zapas, id=zapas_id, tym=hrac.tym)
+
     dochazka = zapas.dochazka.filter(hrac=hrac).first()
     zpet = request.META.get('HTTP_REFERER', '/')
+
     if dochazka:
         dochazka.pritomen = None
         dochazka.save()
         messages.success(request, "Volba byla zrušena.")
+
     return redirect(zpet)
 
 
@@ -1051,31 +1089,51 @@ def oznacit_dohrano_view(request, zapas_id):
 
     tymy = trener.tymy.all()
     selected_tym_id = request.session.get("selected_tym")
-    if selected_tym_id:
-        vybrany_tym = tymy.filter(id=selected_tym_id).first()
-    else:
-        vybrany_tym = tymy.first()
+    vybrany_tym = tymy.filter(id=selected_tym_id).first() if selected_tym_id else tymy.first()
 
     zapas = get_object_or_404(Zapas, id=zapas_id, tym=vybrany_tym)
 
     if request.method == 'POST':
         form = DohranyZapasForm(request.POST, instance=zapas)
+
         if form.is_valid():
-            zapas = form.save(commit=False)
-            zapas.stav = 'Dohráno'
-            zapas.save()
+            zapas.stav = "Dohráno"
+            form.save()
+
+            zapas.goly.all().delete()
+
+            pocet_golu = int(request.POST.get("pocet_golu", 0))
+            for i in range(1, pocet_golu + 1):
+                hrac_id = request.POST.get(f"gol_hrac_{i}")
+                minuta = request.POST.get(f"gol_minuta_{i}")
+                typ = request.POST.get(f"gol_typ_{i}")
+
+                if hrac_id and minuta and typ:
+                    Gol.objects.create(
+                        zapas=zapas,
+                        hrac_id=hrac_id,
+                        minuta=int(minuta),
+                        typ=typ
+                    )
+
+            messages.success(request, "Zápas byl úspěšně označen jako dohrán a góly uloženy.")
             return redirect('trener_zapas')
     else:
         form = DohranyZapasForm(instance=zapas)
 
-    context = {
-        'form': form,
-        'zapas': zapas,
-        'vybrany_tym': vybrany_tym,
-        'tymy': tymy,
-    }
+    hraci = HracProfile.objects.filter(tym=vybrany_tym)
 
-    return render(request, 'trener/zapas/oznacit_dohrano.html', context)
+    context = {
+        "form": form,
+        "zapas": zapas,
+        "vybrany_tym": vybrany_tym,
+        "tymy": tymy,
+        "hraci": hraci,
+    }
+    return render(request, "trener/zapas/oznacit_dohrano.html", context)
+
+
+
 
 
 #----------------------------------------------------------------------------------------------
@@ -1107,12 +1165,14 @@ def trener_dohrane_zapasy(request):
 
     zapasy_qs = (
         Zapas.objects.filter(tym=vybrany_tym, stav='Dohráno')
-                     .prefetch_related('dochazka', 'dochazka__hrac')
-                     .order_by('datum', 'cas')
+                     .prefetch_related('dochazka', 'dochazka__hrac', 'goly', 'goly__hrac')
+                     .order_by('-datum', '-cas')
     )
 
     zapasy_data = []
+
     for zapas in zapasy_qs:
+
         dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
 
         dochazka_list = []
@@ -1125,9 +1185,19 @@ def trener_dohrane_zapasy(request):
                 ))
             )
 
+        goly = zapas.goly.all()
+
+        goly_tym = goly.filter(hrac__tym=vybrany_tym)
+        vt = goly_tym.count()
+
+        vs = zapas.vysledek_soupere
+
         zapasy_data.append({
             'zapas': zapas,
             'dochazka_list': dochazka_list,
+            'goly': goly,
+            'vt': vt,
+            'vs': vs,
         })
 
     context = {
@@ -1142,7 +1212,10 @@ def trener_dohrane_zapasy(request):
 
 
 
+
+#----------------------------------------------------------------------------------------------
 # hrac - dohrane zapasy
+#----------------------------------------------------------------------------------------------
 @login_required
 def hrac_dohrane_zapasy(request):
     try:
@@ -1152,14 +1225,14 @@ def hrac_dohrane_zapasy(request):
         return redirect('index')
 
     dnes = timezone.localdate()
-    tren = hrac.trener
+    tym = hrac.tym
 
     zapasy = Zapas.objects.filter(
-        trener=tren
+        tym=tym
     ).filter(
         Q(stav='Dohráno') |
         Q(stav='Naplánováno', datum__lt=dnes)
-    ).order_by('datum', 'cas')
+    ).order_by('-datum', '-cas')
 
     zapasy_data = []
 
@@ -1169,13 +1242,13 @@ def hrac_dohrane_zapasy(request):
             'zapas': zapas,
             'dochazka': dochazka_obj,
             'vysledek_tymu': getattr(zapas, 'vysledek_tymu', None),
-            'vysledek_soupere': getattr(zapas, 'vysledek_soupere', None)
+            'vysledek_soupere': getattr(zapas, 'vysledek_soupere', None),
         })
 
     context = {
         'hrac': hrac,
-        'trener': tren,
-        'zapasy_data': zapasy_data
+        'tym': tym,
+        'zapasy_data': zapasy_data,
     }
 
     return render(request, 'hrac/zapas/zapas_dohrano.html', context)

@@ -1,27 +1,50 @@
 {% extends 'base.html' %}
+
 {% block content %}
+
 <div class="flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-lg">
+    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-5xl">
         <h2 class="text-4xl font-extrabold mb-6 text-center drop-shadow-lg">Zadat výsledky</h2>
 
         <form method="post" class="space-y-5">
             {% csrf_token %}
-            {{ form.non_field_errors }}
 
-            {% for field in form %}
-            <div>
-                <label class="block text-gray-700 font-medium mb-2">{{ field.label }}</label>
-                {{ field }}
-                {% if field.errors %}
-                    <p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>
-                {% endif %}
+            <div class="grid grid-cols-2 gap-8">
+
+                <!-- tym trenera -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-3">Góly vašeho týmu</h3>
+                    <div id="goly_wrapper" class="space-y-4"></div>
+
+                    <input type="hidden" id="pocet_golu" name="pocet_golu" value="0">
+
+                    <button type="button" onclick="pridatGol()"
+                        class="w-full text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
+                               bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
+                               hover:from-blue-600 hover:to-purple-900 hover:scale-105 mt-6">
+                        + Přidat gól
+                    </button>
+                </div>
+
+                <!-- souper -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-3">Góly soupeře</h3>
+                    {{ form.non_field_errors }}
+                    <div>
+                        <label class="block text-gray-700 font-medium mb-2">{{ form.vysledek_soupere.label }}</label>
+                        {{ form.vysledek_soupere }}
+                        {% if form.vysledek_soupere.errors %}
+                            <p class="text-red-500 text-sm mt-1">{{ form.vysledek_soupere.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
             </div>
-            {% endfor %}
 
             <button type="submit"
                     class="w-full text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
                            bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
-                           hover:from-blue-600 hover:to-purple-900 hover:scale-105">
+                           hover:from-blue-600 hover:to-purple-900 hover:scale-105 mt-6">
                 Uložit výsledek
             </button>
         </form>
@@ -30,7 +53,56 @@
            class="block mt-6 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
             Zpět
         </a>
-
     </div>
 </div>
+
+<script>
+let gol_pocet = 0;
+
+function pridatGol() {
+    gol_pocet++;
+    document.getElementById("pocet_golu").value = gol_pocet;
+
+    const wrapper = document.getElementById("goly_wrapper");
+
+    const block = document.createElement("div");
+    block.className = "p-4 border rounded-2xl bg-gray-50 shadow-inner";
+
+    block.innerHTML = `
+        <p class="font-semibold mb-2">Gól #${gol_pocet}</p>
+
+        <label class="block text-gray-700 font-medium mb-1">Střelec</label>
+        <select name="gol_hrac_${gol_pocet}" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2">
+            <option value="">-- vyber hráče --</option>
+            {% for hrac in hraci %}
+                <option value="{{ hrac.id }}">
+                    {% if hrac.first_name and hrac.last_name %}
+                        {{ hrac.first_name }} {{ hrac.last_name }}
+                    {% elif hrac.first_name %}
+                        {{ hrac.first_name }}
+                    {% elif hrac.last_name %}
+                        {{ hrac.last_name }}
+                    {% else %}
+                        (bez jména)
+                    {% endif %}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label class="block text-gray-700 font-medium mb-1">Minuta</label>
+        <input type="text" name="gol_minuta_${gol_pocet}" placeholder="např. 12" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2">
+
+        <label class="block text-gray-700 font-medium mb-1">Typ gólu</label>
+        <select name="gol_typ_${gol_pocet}" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2">
+            <option value="">-- vyber typ gólu --</option>
+            <option value="normalni">Normální</option>
+            <option value="penalta">Penalta</option>
+            <option value="primak">Přímý kop</option>
+            <option value="vlastni">Vlastní gól</option>
+        </select>
+    `;
+
+    wrapper.appendChild(block);
+}
+</script>
 {% endblock %}

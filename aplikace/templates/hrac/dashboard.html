@@ -6,64 +6,87 @@
 
 <!-- navbar -->
 <nav class="fixed top-0 left-0 w-full bg-white shadow-lg z-50 border-b border-gray-200">
-    <div class="max-w-6xl mx-auto px-8 py-5 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+    <div class="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
 
-        <div class="flex items-center space-x-3 justify-center md:justify-start">
-            {% if tym.logo %}
-            <img src="{{ tym.logo.url }}" alt="Logo" class="h-16 w-16 object-contain">
-            {% else %}
-            <img src="{% static 'stranka/logo.png' %}" alt="Logo" class="h-16 w-16 object-contain">
-            {% endif %}
+        <!-- tym -->
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4">
+                {% if tym.logo %}
+                <img src="{{ tym.logo.url }}" alt="{{ tym.nazev }}"
+                     class="h-14 w-14 object-contain drop-shadow-sm">
+                {% else %}
+                <img src="{% static 'stranka/logo.png' %}" alt="Logo"
+                     class="h-14 w-14 object-contain drop-shadow-sm">
+                {% endif %}
+
+                {% if tym.logo %}
+                <div class="leading-tight">
+                    <p class="text-2xl font-extrabold text-gray-800 tracking-wide">
+                        {{ tym.nazev }}
+                    </p>
+                    <p class="text-sm text-gray-500 font-semibold -mt-1">
+                        {{ tym.kategorie }}
+                    </p>
+                </div>
+                {% endif %}
+
+            </div>
         </div>
 
-        <div class="flex items-center space-x-6 justify-center md:justify-end">
+        <!-- stranky -->
+        <div class="flex items-center space-x-6">
+
             <a href="{% url 'hrac_zapas' %}"
-               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
-                Zápasy
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Zápasy
+                </span>
             </a>
 
             <a href="{% url 'hrac_trenink' %}"
-               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
-                Tréninky
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Tréninky
+                </span>
             </a>
 
             <a href="{% url 'hrac_settings' %}"
-               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
-                Nastavení účtu
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Nastavení účtu
+                </span>
             </a>
 
+            <!-- profil -->
             <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
-
                 {% if hrac.photo %}
-                <img src="{{ hrac.photo.url }}"
-                     alt="Profilová fotka"
+                <img src="{{ hrac.photo.url }}" alt="Profilová fotka"
                      class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
                 {% else %}
-                <img src="/media/stranka/default_profile_picture.webp"
-                     alt="Výchozí profilová fotka"
+                <img src="/media/stranka/default_profile_picture.webp" alt="Výchozí profilová fotka"
                      class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
                 {% endif %}
 
-                <p class="text-gray-400 font-semibold">
+                <p class="text-gray-500 font-semibold">
                     {% if hrac.first_name and hrac.last_name %}
-                    {{ hrac.first_name }} {{ hrac.last_name }}
+                        {{ hrac.first_name }} {{ hrac.last_name }}
                     {% elif hrac.first_name %}
-                    {{ hrac.first_name }}
+                        {{ hrac.first_name }}
                     {% elif hrac.last_name %}
-                    {{ hrac.last_name }}
+                        {{ hrac.last_name }}
                     {% else %}
-                    (bez jména)
+                        (bez jména)
                     {% endif %}
                 </p>
             </div>
 
+            <!-- logout -->
             <a href="{% url 'logout' %}"
-               class="text-white font-semibold px-6 py-2 rounded-2xl shadow-md
-                bg-gradient-to-r from-gray-400 to-gray-600 transform transition duration-300
-                hover:from-red-500 hover:to-red-700 hover:scale-105">
+               class="px-6 py-2 rounded-2xl shadow-md text-white font-semibold
+                      bg-gradient-to-r from-gray-500 to-gray-700
+                      hover:from-red-500 hover:to-red-700 transform transition hover:scale-105">
                 Odhlásit se
             </a>
-
         </div>
     </div>
 </nav>
@@ -103,28 +126,24 @@
             {% if data.zapas.stav == "Naplánováno" %}
             <div class="rounded-3xl p-6 shadow-md bg-gray-50
                     {% if not data.hlasoval %} border-2 border-red-500 {% else %} border border-gray-200 {% endif %}
-                    transition-all hover:scale-[1.01]">
+                    transition-all hover:scale-[1.01] relative">
 
                 {% if not data.hlasoval %}
-                <p class="text-red-500 text-center font-semibold text-sm pb-1">
-                    Ještě jsi nehlasoval!
-                </p>
+                    <p class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1
+                            bg-gradient-to-r from-red-500 to-rose-700 text-white text-sm font-semibold
+                            rounded-xl shadow-lg">
+                        Ještě jsi nehlasoval!
+                    </p>
                 {% endif %}
 
                 <div class="text-center mb-4">
-                    <p class="text-2xl font-extrabold text-gray-800 leading-tight">
+                    <p class="text-2xl font-extrabold text-gray-800 leading-tight drop-shadow-lg">
                         {% if data.zapas.domaci_hoste == "Domácí" %}
                         {{ data.klub }} <span class="text-lg font-semibold">vs</span> {{ data.zapas.souper }}
                         {% else %}
                         {{ data.zapas.souper }} <span class="text-lg font-semibold">vs</span> {{ data.klub }}
                         {% endif %}
                     </p>
-
-                    {% if data.zapas.vysledek_domaci is not None %}
-                    <p class="text-green-700 font-semibold mt-1">
-                        Výsledek: {{ data.zapas.vysledek_domaci }} : {{ data.zapas.vysledek_hoste }}
-                    </p>
-                    {% endif %}
                 </div>
 
                 <div class="text-center space-y-1 text-gray-700 font-medium">

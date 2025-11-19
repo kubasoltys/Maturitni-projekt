@@ -241,14 +241,13 @@ class HracProfile(models.Model):
 
 
     # pocitani dochazky na treninky v %
-    @property
-    def dochazka_treninky(self):
+    def _trenink_stats(self):
         now = timezone.now()
 
         tymy_hrace = [self.tym] if self.tym else []
 
         treninky = Trenink.objects.filter(tym__in=tymy_hrace)
-        proběhlé_treninky = []
+        probehle = []
 
         for trenink in treninky:
             trenink_datetime = timezone.make_aware(
@@ -258,20 +257,35 @@ class HracProfile(models.Model):
 
             if trenink_datetime < now:
                 trenink.doplnit_nehlasujici_hrace()
-                proběhlé_treninky.append(trenink)
+                probehle.append(trenink)
 
-        if not proběhlé_treninky:
-            return 0
-
-        celkem = len(proběhlé_treninky)
+        if not probehle:
+            return 0, 0
 
         pritomni = 0
-        for trenink in proběhlé_treninky:
-            dochazka_hrace = trenink.dochazka.filter(hrac=self).first()
-            if dochazka_hrace and dochazka_hrace.pritomen:
+        for trenink in probehle:
+            doch = trenink.dochazka.filter(hrac=self).first()
+            if doch and doch.pritomen:
                 pritomni += 1
 
+        return pritomni, len(probehle)
+
+    @property
+    def dochazka_treninky(self):
+        pritomni, celkem = self._trenink_stats()
+        if celkem == 0:
+            return 0
         return round(pritomni / celkem * 100, 1)
+
+    @property
+    def treninky_pritomen(self):
+        return self._trenink_stats()[0]
+
+    @property
+    def treninky_nepritomen(self):
+        pritomni, celkem = self._trenink_stats()
+        return celkem - pritomni
+
 
 
     def save(self, *args, **kwargs):

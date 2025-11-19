@@ -36,25 +36,29 @@
         <!-- stranky -->
         <div class="flex items-center space-x-6">
 
-            <a href="{% url 'trener_zapas' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+            <a href="{% url 'trener_zapas' %}"
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
                 <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
                     Zápasy
                 </span>
             </a>
 
-            <a href="{% url 'trener_trenink' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+            <a href="{% url 'trener_trenink' %}"
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
                 <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
                     Tréninky
                 </span>
             </a>
 
-            <a href="{% url 'trener_hraci' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+            <a href="{% url 'trener_hraci' %}"
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
                 <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
                     Moji hráči
                 </span>
             </a>
 
-            <a href="{% url 'trener_settings' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+            <a href="{% url 'trener_settings' %}"
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
                 <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
                     Nastavení účtu
                 </span>
@@ -72,9 +76,9 @@
 
                 <p class="text-gray-500 font-semibold">
                     {% if trener.first_name or trener.last_name %}
-                        {{ trener.first_name }} {{ trener.last_name }}
+                    {{ trener.first_name }} {{ trener.last_name }}
                     {% else %}
-                        (bez jména)
+                    (bez jména)
                     {% endif %}
                 </p>
             </div>
@@ -119,7 +123,7 @@
             <div class="flex flex-col items-center space-y-4">
 
                 <!-- vybrany tym -->
-                <div class="flex items-center space-x-4 p-4 bg-gray-100 rounded-2xl shadow-inner w-full">
+                <div class="flex items-center space-x-4 p-4 bg-gray-100 rounded-2xl shadow-inner w-full justify-center">
                     <div class="h-16 w-16 overflow-hidden">
                         {% if vybrany_tym.logo %}
                         <img src="{{ vybrany_tym.logo.url }}" alt="Logo" class="h-full w-full object-contain">
@@ -138,13 +142,13 @@
                 <!-- vyber tymu -->
                 <form method="get" action="" class="relative">
                     <select name="selected_tym" onchange="this.form.submit()"
-                        class="p-2 pl-3 pr-10 rounded-xl border border-gray-300 bg-white shadow-sm
+                            class="p-2 pl-3 pr-10 rounded-xl border border-gray-300 bg-white shadow-sm
                                focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700">
 
                         {% for tym in tymy %}
-                            <option value="{{ tym.id }}" {% if tym.id == vybrany_tym.id %}selected{% endif %}>
-                                {{ tym.nazev }} {{ tym.kategorie }}
-                            </option>
+                        <option value="{{ tym.id }}" {% if tym.id == vybrany_tym.id %}selected{% endif %}>
+                            {{ tym.nazev }} {{ tym.kategorie }}
+                        </option>
                         {% endfor %}
                     </select>
                 </form>
@@ -216,37 +220,40 @@
 
             <!-- zapasy -->
             <div class="w-full max-w-[650px] bg-white rounded-3xl shadow-2xl p-6 space-y-6 min-h-[550px] border border-gray-200">
-                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">Další
-                    zápasy</h2>
+                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">
+                    Další zápasy
+                </h2>
 
                 {% for data in zapasy %}
-                <div class="rounded-3xl p-4 shadow-md bg-gray-50 border border-gray-200 {% if data.po_dohrani %} border-2 border-red-600 {% endif %} transition-all hover:scale-[1.01]">
+                <div class="rounded-3xl p-4 shadow-md bg-gray-50 border border-gray-200
+                            {% if data.po_dohrani %} border-2 border-red-600 {% endif %}
+                            transition-all hover:scale-[1.01] relative">
+
                     {% if data.po_dohrani %}
-                    <p class="text-red-600 text-lg font-semibold text-center p-2">
-                        Zápas již proběhl, zapište výsledky!
+                    <p class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1
+                            bg-gradient-to-r from-red-500 to-rose-700 text-white text-sm font-semibold
+                            rounded-xl shadow-lg">
+                        Zápas již proběhl, zapiš výsledky!
                     </p>
                     {% endif %}
 
-                    <div class="flex justify-between items-center mb-2">
-                        <p class="text-xl md:text-2xl font-bold text-gray-800 mx-auto text-center">
+                    <div class="text-center mb-4 pt-2">
+                        <p class="text-2xl font-extrabold text-gray-800 leading-tight drop-shadow-lg">
                             {% if data.zapas.domaci_hoste == "Domácí" %}
-                            {{ vybrany_tym.nazev }} <span class="text-lg">vs</span> {{ data.zapas.souper }}
+                                {{ vybrany_tym.nazev }}
+                                <span class="text-lg font-semibold">vs</span> {{ data.zapas.souper }}
                             {% else %}
-                            {{ data.zapas.souper }} <span class="text-lg">vs</span> {{ vybrany_tym.nazev }}
+                                {{ data.zapas.souper }}
+                                <span class="text-lg font-semibold">vs</span> {{ vybrany_tym.nazev }}
                             {% endif %}
                         </p>
-
-                        {% if data.zapas.vysledek_domaci is not None and data.zapas.vysledek_hoste is not None %}
-                        <p class="font-semibold text-green-700">
-                            Výsledek: {{ data.zapas.vysledek_domaci }} : {{ data.zapas.vysledek_hoste }}
-                        </p>
-                        {% endif %}
                     </div>
 
-                    <p class="text-gray-700 text-center font-medium">
-                        {{ data.zapas.datum|date:"l, d.m.Y" }} | {{ data.zapas.cas|time:"H:i" }}
-                    </p>
-                    <p class="text-gray-700 text-center">{{ data.zapas.misto|default:"-" }}</p>
+                    <div class="text-center space-y-1 text-gray-700 font-medium">
+                        <p class="text-lg">{{ data.zapas.datum|date:"l, d.m.Y" }}</p>
+                        <p>{{ data.zapas.cas|time:"H:i" }}</p>
+                        <p class="text-gray-600">{{ data.zapas.misto|default:"-" }}</p>
+                    </div>
 
                     {% if data.dochazka_list %}
                     <div class="overflow-x-auto rounded-2xl border-2 border-gray-200 shadow-inner mt-4">
@@ -278,7 +285,7 @@
                         </table>
                     </div>
                     {% else %}
-                        <p class="text-center text-gray-400 p-8">Zatím nemáte přiřazené žádné hráče.</p>
+                    <p class="text-center text-gray-400 p-8">Zatím nemáte přiřazené žádné hráče.</p>
                     {% endif %}
                 </div>
                 {% if not forloop.last %}
@@ -299,23 +306,32 @@
 
             <!-- treninky -->
             <div class="w-full max-w-[650px] bg-white rounded-3xl shadow-2xl p-6 space-y-6 min-h-[550px] border border-gray-200">
-                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">Další
-                    tréninky</h2>
+                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">
+                    Další tréninky
+                </h2>
 
                 {% for data in treninky_data %}
-                <div class="rounded-3xl p-4 shadow-md bg-gray-50 border border-gray-200 {% if data.po_dohrani %} border-2 border-red-600 {% endif %} transition-all hover:scale-[1.01]">
+                <div class="rounded-3xl p-4 shadow-md bg-gray-50 border border-gray-200
+                            {% if data.po_dohrani %} border-2 border-red-600 {% endif %}
+                            transition-all hover:scale-[1.01]">
                     {% if data.po_dohrani %}
-                    <p class="text-red-600 text-lg font-semibold text-center p-2">
+                    <p class="text-red-600 text-lg font-semibold text-center">
                         Tento trénink již proběhl!
                     </p>
                     {% endif %}
 
-                    <p class="text-xl md:text-2xl font-bold text-gray-800 text-center mb-2">
-                        Trénink - {{ data.trenink.typ }}
-                    </p>
-                    <p class="text-gray-700 text-center font-medium">
-                        {{ data.trenink.datum|date:"l, d.m.Y" }} | {{ data.trenink.cas|time:"H:i" }}
-                    </p>
+                    <h3 class="text-2xl font-extrabold text-center text-gray-800 drop-shadow-lg pt-2">
+                        {{ data.trenink.typ }}
+                    </h3>
+
+                    <div class="text-center text-gray-700 font-medium mt-2 space-y-1">
+                        <p class="text-lg">{{ data.trenink.datum|date:"l, d.m.Y" }}</p>
+                        <p>{{ data.trenink.cas|time:"H:i" }}</p>
+                    </div>
+
+                    {% if data.trenink.poznamka %}
+                    <p class="text-gray-700 italic text-center mt-3">{{ data.trenink.poznamka }}</p>
+                    {% endif %}
 
                     {% if data.dochazka_list %}
                     <div class="overflow-x-auto rounded-2xl border-2 border-gray-200 shadow-inner mt-4">
@@ -347,7 +363,7 @@
                         </table>
                     </div>
                     {% else %}
-                        <p class="text-center text-gray-400 p-8">Zatím nemáte přiřazené žádné hráče.</p>
+                    <p class="text-center text-gray-400 p-8">Zatím nemáte přiřazené žádné hráče.</p>
                     {% endif %}
                 </div>
                 {% if not forloop.last %}
