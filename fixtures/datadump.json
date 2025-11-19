@@ -208,6 +208,32 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2025-11-18T21:59:13.317Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "FC Barcelona (U16-U19)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2025-11-18T22:15:18.242Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "FC Barcelona (U16-U19)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Logo\"]}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -869,10 +895,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "eg5i7zp8054m4vu90lf6rs6p58ji2x6w",
+  "pk": "4v76xx0mm07utn6ts493fz0ip6asjlrj",
   "fields": {
-    "session_data": ".eJxVjM0OwiAQhN-FsyGw_Lh69N5nIMsCUjU0Ke3J-O62SQ96m8z3zbxFoHWpYe15DmMSVwHi9NtF4mduO0gPavdJ8tSWeYxyV-RBuxymlF-3w_07qNTrtkbrffYO3dlHDwYs6ZLSlqgo1qAS64jKkI45aiYNDopXaNAwuAta8fkCxQ02-w:1vLKlZ:7U0qE-OD4yf4SLvAVChHXyOnvNpV9VxwYLvQwoZBUEc",
-    "expire_date": "2025-12-02T12:25:01.881Z"
+    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vLWO9:_M0aMtNAvxHfFNOigDwuu1Ss9WS31naRw86JStLt2vk",
+    "expire_date": "2025-12-03T00:49:37.511Z"
   }
 },
 {
@@ -880,7 +906,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1000000$lVBDpd6Ja8QRTsMTdKJBR1$fRAfF49lBGd4tGP425N5023GStuBgiqMlmQK2YVN9zE=",
-    "last_login": "2025-11-18T12:16:02.584Z",
+    "last_login": "2025-11-18T22:14:34.724Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -900,7 +926,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-11-18T12:25:01.878Z",
+    "last_login": "2025-11-18T22:15:32.102Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -1039,6 +1065,18 @@
     "stadion": "Camp Nou",
     "mesto": "Barcelona",
     "logo": "klub_photo/fc_barcelona.png"
+  }
+},
+{
+  "model": "aplikace.tym",
+  "pk": 2,
+  "fields": {
+    "nazev": "FC Barcelona",
+    "kategorie": "U16-U19",
+    "trener": 1,
+    "stadion": "Camp Nou",
+    "mesto": "Barcelona",
+    "logo": "klub_photo/fc_barcelona_Rf6W5Fy.png"
   }
 },
 {
@@ -1196,6 +1234,32 @@
     "poznamka": "",
     "stav": "Naplánováno",
     "created_at": "2025-11-17T13:42:07.658Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 11,
+  "fields": {
+    "tym": 2,
+    "datum": "2025-12-24",
+    "cas": "16:30:00",
+    "typ": "Fyzická příprava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-11-18T23:38:16.327Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 12,
+  "fields": {
+    "tym": 2,
+    "datum": "2025-11-01",
+    "cas": "11:11:00",
+    "typ": "Taktická připrava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-11-18T23:38:41.764Z"
   }
 },
 {
@@ -1416,6 +1480,54 @@
     "pritomen": false,
     "duvod": null,
     "hlasoval_v": "2025-11-18T12:23:22.291Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 1,
+  "fields": {
+    "tym": 1,
+    "souper": "Arsenal FC",
+    "datum": "2025-11-23",
+    "cas": "21:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": null,
+    "created_at": "2025-11-18T20:41:09.344Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 2,
+  "fields": {
+    "tym": 1,
+    "souper": "Real Madrid CF",
+    "datum": "2025-11-01",
+    "cas": "11:11:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Santiago Bernabéu, Madrid",
+    "stav": "Dohráno",
+    "vysledek_tymu": 3,
+    "vysledek_soupere": 1,
+    "created_at": "2025-11-19T00:07:27.391Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 4,
+  "fields": {
+    "tym": 1,
+    "souper": "PSG",
+    "datum": "2025-11-06",
+    "cas": "13:45:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": null,
+    "created_at": "2025-11-19T00:45:36.786Z"
   }
 }
 ]

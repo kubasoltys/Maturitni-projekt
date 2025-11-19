@@ -182,20 +182,11 @@ class HracProfileForm(forms.ModelForm):
 # trenink
 #----------------------------------------------------------------------------------------------
 class TreninkForm(forms.ModelForm):
-    tym = forms.ModelChoiceField(
-        queryset=Tym.objects.none(),
-        label="Tým",
-        required=True,
-        widget=forms.Select(attrs={
-            'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
-        })
-    )
 
     class Meta:
         model = Trenink
-        fields = ['tym', 'datum', 'cas', 'typ', 'poznamka']
+        fields = ['datum', 'cas', 'typ', 'poznamka']
         labels = {
-            'tym': 'Tým',
             'datum': 'Datum',
             'cas': 'Čas',
             'typ': 'Typ tréninku',
@@ -221,16 +212,12 @@ class TreninkForm(forms.ModelForm):
             }),
         }
 
-    def __init__(self, *args, **kwargs):
-        trener = kwargs.pop('trener', None)
-        super().__init__(*args, **kwargs)
-        if trener:
-            self.fields['tym'].queryset = Tym.objects.filter(trener=trener)
 
-
-
+#----------------------------------------------------------------------------------------------
 # zapas
+#----------------------------------------------------------------------------------------------
 class ZapasForm(forms.ModelForm):
+
     class Meta:
         model = Zapas
         fields = ['souper', 'datum', 'cas', 'domaci_hoste', 'misto']
@@ -255,7 +242,6 @@ class ZapasForm(forms.ModelForm):
                 'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'domaci_hoste': forms.Select(attrs={
-                'placeholder': 'Kdo je domácí a kdo host?',
                 'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
             }),
             'misto': forms.TextInput(attrs={

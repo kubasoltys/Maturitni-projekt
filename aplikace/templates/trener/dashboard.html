@@ -6,40 +6,61 @@
 
 <!-- navbar -->
 <nav class="fixed top-0 left-0 w-full bg-white shadow-lg z-50 border-b border-gray-200">
-    <div class="max-w-6xl mx-auto px-8 py-5 flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+    <div class="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
 
-        {% for tym in tymy %}
-        <div class="flex items-center space-x-3 justify-center md:justify-start">
-            {% if tym.logo %}
-            <img src="{{ tym.logo.url }}" alt="{{ tym.nazev }}" class="h-16 w-16 object-contain">
-            {% else %}
-            <img src="{% static 'stranka/logo.png' %}" alt="Logo" class="h-16 w-16 object-contain">
-            {% endif %}
+        <!-- tym -->
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4">
+                {% if vybrany_tym.logo %}
+                <img src="{{ vybrany_tym.logo.url }}" alt="{{ vybrany_tym.nazev }}"
+                     class="h-14 w-14 object-contain drop-shadow-sm">
+                {% else %}
+                <img src="{% static 'stranka/logo.png' %}" alt="Logo"
+                     class="h-14 w-14 object-contain drop-shadow-sm">
+                {% endif %}
+
+                {% if vybrany_tym.logo %}
+                <div class="leading-tight">
+                    <p class="text-2xl font-extrabold text-gray-800 tracking-wide">
+                        {{ vybrany_tym.nazev }}
+                    </p>
+                    <p class="text-sm text-gray-500 font-semibold -mt-1">
+                        {{ vybrany_tym.kategorie }}
+                    </p>
+                </div>
+                {% endif %}
+
+            </div>
         </div>
-        {% endfor %}
 
-        <div class="flex items-center space-x-6 justify-center md:justify-end">
+        <!-- stranky -->
+        <div class="flex items-center space-x-6">
 
-            <a href="{% url 'trener_zapas' %}"
-               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
-                Zápasy
+            <a href="{% url 'trener_zapas' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Zápasy
+                </span>
             </a>
 
-            <a href="{% url 'trener_trenink' %}"
-               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
-                Tréninky
+            <a href="{% url 'trener_trenink' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Tréninky
+                </span>
             </a>
 
-            <a href="{% url 'trener_hraci' %}"
-               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
-                Moji hráči
+            <a href="{% url 'trener_hraci' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Moji hráči
+                </span>
             </a>
 
-            <a href="{% url 'trener_settings' %}"
-               class="text-gray-700 font-semibold px-3 py-3 transition transform hover:scale-110 hover:text-black">
-                Nastavení účtu
+            <a href="{% url 'trener_settings' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Nastavení účtu
+                </span>
             </a>
 
+            <!-- profil -->
             <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
                 {% if trener.photo %}
                 <img src="{{ trener.photo.url }}" alt="Profilová fotka"
@@ -49,29 +70,26 @@
                      class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
                 {% endif %}
 
-                <p class="text-gray-400 font-semibold">
-                    {% if trener.first_name and trener.last_name %}
-                    {{ trener.first_name }} {{ trener.last_name }}
-                    {% elif trener.first_name %}
-                    {{ trener.first_name }}
-                    {% elif trener.last_name %}
-                    {{ trener.last_name }}
+                <p class="text-gray-500 font-semibold">
+                    {% if trener.first_name or trener.last_name %}
+                        {{ trener.first_name }} {{ trener.last_name }}
                     {% else %}
-                    (bez jména)
+                        (bez jména)
                     {% endif %}
                 </p>
             </div>
 
+            <!-- logout -->
             <a href="{% url 'logout' %}"
-               class="text-white font-semibold px-6 py-2 rounded-2xl shadow-md
-                bg-gradient-to-r from-gray-400 to-gray-600 transform transition duration-300
-                hover:from-red-500 hover:to-red-700 hover:scale-105">
+               class="px-6 py-2 rounded-2xl shadow-md text-white font-semibold
+                      bg-gradient-to-r from-gray-500 to-gray-700
+                      hover:from-red-500 hover:to-red-700 transform transition hover:scale-105">
                 Odhlásit se
             </a>
-
         </div>
     </div>
 </nav>
+
 
 <!-- obsah -->
 <div class="flex flex-col items-center justify-start min-h-screen pt-40 pb-12 space-y-12 px-4 lg:px-0">
@@ -93,87 +111,102 @@
         na trenérském dashboardu!
     </h1>
 
-    <!-- bloky -->
+
     <div class="flex flex-col lg:flex-row flex-wrap gap-12 justify-center w-full">
 
-        <!-- seznam hracu -->
+        <!-- bloky -->
         <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-8 space-y-6 border border-gray-200">
             <div class="flex flex-col items-center space-y-4">
-                {% for tym in tymy %}
+
+                <!-- vybrany tym -->
                 <div class="flex items-center space-x-4 p-4 bg-gray-100 rounded-2xl shadow-inner w-full">
                     <div class="h-16 w-16 overflow-hidden">
-                        {% if tym.logo %}
-                        <img src="{{ tym.logo.url }}" alt="Logo" class="h-full w-full object-contain">
+                        {% if vybrany_tym.logo %}
+                        <img src="{{ vybrany_tym.logo.url }}" alt="Logo" class="h-full w-full object-contain">
                         {% else %}
                         <img src="{% static 'stranka/logo.png' %}" alt="Logo" class="h-full w-full object-contain">
                         {% endif %}
                     </div>
                     <h2 class="text-3xl font-bold text-gray-700 drop-shadow-sm">
-                        {{ tym.nazev }}
+                        {{ vybrany_tym.nazev }}
                         <span class="font-semibold text-gray-500">
-                            ({{ tym.kategorie }})
+                            ({{ vybrany_tym.kategorie }})
                         </span>
                     </h2>
                 </div>
-                {% endfor %}
 
-                <h3 class="text-xl font-bold text-gray-800 pt-6 drop-shadow-lg">Seznam hráčů</h3>
+                <!-- vyber tymu -->
+                <form method="get" action="" class="relative">
+                    <select name="selected_tym" onchange="this.form.submit()"
+                        class="p-2 pl-3 pr-10 rounded-xl border border-gray-300 bg-white shadow-sm
+                               focus:outline-none focus:ring-2 focus:ring-blue-400 text-gray-700">
+
+                        {% for tym in tymy %}
+                            <option value="{{ tym.id }}" {% if tym.id == vybrany_tym.id %}selected{% endif %}>
+                                {{ tym.nazev }} {{ tym.kategorie }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                </form>
+
             </div>
 
+            <!-- tabulka hracu -->
+            <h3 class="text-xl font-bold text-gray-800 pt-6 drop-shadow-lg text-center">Seznam hráčů</h3>
             <div class="overflow-x-auto rounded-2xl border-2 border-gray-200 shadow-lg">
                 <table class="min-w-full rounded-xl divide-y divide-gray-200">
                     <thead class="bg-gray-100 text-gray-700">
-                        <tr>
-                            <th class="py-3 px-4 text-left">Jméno</th>
-                            <th class="py-3 px-4 text-left">Pozice</th>
-                            <th class="py-3 px-4 text-left">Číslo dresu</th>
-                            <th class="py-3 px-4 text-left">Účast - tréninky</th>
-                        </tr>
+                    <tr>
+                        <th class="py-3 px-4 text-left">Jméno</th>
+                        <th class="py-3 px-4 text-left">Pozice</th>
+                        <th class="py-3 px-4 text-left">Číslo dresu</th>
+                        <th class="py-3 px-4 text-left">Účast - tréninky</th>
+                    </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-100">
-                        {% for hrac in hraci|slice:":4"%}
-                        <tr class="hover:bg-gray-50 transition-colors">
-                            <td class="py-3 px-4 font-semibold">
-                                {% if hrac.first_name and hrac.last_name %}
-                                    {{ hrac.first_name }} {{ hrac.last_name }}
-                                {% elif hrac.first_name %}
-                                    {{ hrac.first_name }}
-                                {% elif hrac.last_name %}
-                                    {{ hrac.last_name }}
-                                {% else %}
-                                    (bez jména)
-                                {% endif %}
-                                ({{ hrac.vek }})
-                            </td>
-                            <td class="py-3 px-4">{{ hrac.pozice|default:"-" }}</td>
-                            <td class="py-3 px-4">{{ hrac.cislo_dresu|default:"-" }}</td>
-                            <td class="py-3 px-4 font-semibold">
-                                {% if hrac.dochazka_treninky > 50 %}
-                                    <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
-                                {% elif hrac.dochazka_treninky == 50 %}
-                                    <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
-                                {% else %}
-                                    <span class="text-red-500">{{ hrac.dochazka_treninky }}%</span>
-                                {% endif %}
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="3" class="py-4 text-center text-gray-400">
-                                Zatím nemáte přiřazené žádné hráče.
-                            </td>
-                        </tr>
-                        {% endfor %}
+                    {% for hrac in hraci|slice:":4"%}
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="py-3 px-4 font-semibold">
+                            {% if hrac.first_name and hrac.last_name %}
+                            {{ hrac.first_name }} {{ hrac.last_name }}
+                            {% elif hrac.first_name %}
+                            {{ hrac.first_name }}
+                            {% elif hrac.last_name %}
+                            {{ hrac.last_name }}
+                            {% else %}
+                            (bez jména)
+                            {% endif %}
+                            ({{ hrac.vek }})
+                        </td>
+                        <td class="py-3 px-4">{{ hrac.pozice|default:"-" }}</td>
+                        <td class="py-3 px-4">{{ hrac.cislo_dresu|default:"-" }}</td>
+                        <td class="py-3 px-4 font-semibold">
+                            {% if hrac.dochazka_treninky > 50 %}
+                            <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
+                            {% elif hrac.dochazka_treninky == 50 %}
+                            <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
+                            {% else %}
+                            <span class="text-red-500">{{ hrac.dochazka_treninky }}%</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="py-4 text-center text-gray-400">
+                            Zatím nemáte přiřazené žádné hráče.
+                        </td>
+                    </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
             </div>
 
             <div class="flex justify-center p-4">
-                    <a href="{% url 'trener_hraci' %}" class="inline-block w-2/3 py-2 text-white text-lg font-semibold
+                <a href="{% url 'trener_hraci' %}" class="inline-block w-2/3 py-2 text-white text-lg font-semibold
                         text-center rounded-2xl shadow-lg bg-gradient-to-r from-blue-500 to-purple-800 hover:from-blue-600
                         hover:to-purple-900 transform transition duration-300 hover:scale-105">
-                        Zobrazit všechny hráče
-                    </a>
+                    Zobrazit všechny hráče
+                </a>
             </div>
 
         </div>
@@ -183,7 +216,8 @@
 
             <!-- zapasy -->
             <div class="w-full max-w-[650px] bg-white rounded-3xl shadow-2xl p-6 space-y-6 min-h-[550px] border border-gray-200">
-                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">Další zápasy</h2>
+                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">Další
+                    zápasy</h2>
 
                 {% for data in zapasy %}
                 <div class="rounded-3xl p-4 shadow-md bg-gray-50 border border-gray-200 {% if data.po_dohrani %} border-2 border-red-600 {% endif %} transition-all hover:scale-[1.01]">
@@ -196,9 +230,9 @@
                     <div class="flex justify-between items-center mb-2">
                         <p class="text-xl md:text-2xl font-bold text-gray-800 mx-auto text-center">
                             {% if data.zapas.domaci_hoste == "Domácí" %}
-                            {{ trener.club }} <span class="text-lg">vs</span> {{ data.zapas.souper }}
+                            {{ vybrany_tym.nazev }} <span class="text-lg">vs</span> {{ data.zapas.souper }}
                             {% else %}
-                            {{ data.zapas.souper }} <span class="text-lg">vs</span> {{ trener.club }}
+                            {{ data.zapas.souper }} <span class="text-lg">vs</span> {{ vybrany_tym.nazev }}
                             {% endif %}
                         </p>
 
@@ -209,36 +243,42 @@
                         {% endif %}
                     </div>
 
-                    <p class="text-gray-700 text-center font-medium">{{ data.zapas.datum|date:"l, d.m.Y" }} | {{ data.zapas.cas|time:"H:i" }}</p>
+                    <p class="text-gray-700 text-center font-medium">
+                        {{ data.zapas.datum|date:"l, d.m.Y" }} | {{ data.zapas.cas|time:"H:i" }}
+                    </p>
                     <p class="text-gray-700 text-center">{{ data.zapas.misto|default:"-" }}</p>
 
                     {% if data.dochazka_list %}
                     <div class="overflow-x-auto rounded-2xl border-2 border-gray-200 shadow-inner mt-4">
                         <table class="w-full text-left rounded-xl divide-y divide-gray-100">
                             <thead class="bg-gray-100 text-gray-700">
-                                <tr>
-                                    <th class="py-2 px-3">Hráč</th>
-                                    <th class="py-2 px-3">Zúčastní se</th>
-                                </tr>
+                            <tr>
+                                <th class="py-2 px-3">Hráč</th>
+                                <th class="py-2 px-3">Zúčastní se</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                {% for dochazka in data.dochazka_list|slice:":4" %}
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-1 px-3">{{ dochazka.hrac.first_name|default:"" }} {{ dochazka.hrac.last_name|default:"" }}</td>
-                                    <td class="py-1 px-3">
-                                        {% if dochazka.pritomen == True %}
-                                        <span class="text-green-500 font-semibold">Ano</span>
-                                        {% elif dochazka.pritomen == False %}
-                                        <span class="text-red-500 font-semibold">Ne</span>
-                                        {% else %}
-                                        <span class="text-yellow-500 font-semibold">Nehlasoval</span>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
+                            {% for dochazka in data.dochazka_list|slice:":4" %}
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-1 px-3">
+                                    {{ dochazka.hrac.first_name|default:"" }} {{ dochazka.hrac.last_name|default:"" }}
+                                </td>
+                                <td class="py-1 px-3">
+                                    {% if dochazka.pritomen == True %}
+                                    <span class="text-green-500 font-semibold">Ano</span>
+                                    {% elif dochazka.pritomen == False %}
+                                    <span class="text-red-500 font-semibold">Ne</span>
+                                    {% else %}
+                                    <span class="text-yellow-500 font-semibold">Nehlasoval</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
+                    {% else %}
+                        <p class="text-center text-gray-400 p-8">Zatím nemáte přiřazené žádné hráče.</p>
                     {% endif %}
                 </div>
                 {% if not forloop.last %}
@@ -259,7 +299,8 @@
 
             <!-- treninky -->
             <div class="w-full max-w-[650px] bg-white rounded-3xl shadow-2xl p-6 space-y-6 min-h-[550px] border border-gray-200">
-                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">Další tréninky</h2>
+                <h2 class="text-3xl font-bold text-gray-800 text-center pb-2 tracking-wide drop-shadow-lg">Další
+                    tréninky</h2>
 
                 {% for data in treninky_data %}
                 <div class="rounded-3xl p-4 shadow-md bg-gray-50 border border-gray-200 {% if data.po_dohrani %} border-2 border-red-600 {% endif %} transition-all hover:scale-[1.01]">
@@ -269,36 +310,44 @@
                     </p>
                     {% endif %}
 
-                    <p class="text-xl md:text-2xl font-bold text-gray-800 text-center mb-2">Trénink - {{ data.trenink.typ }}</p>
-                    <p class="text-gray-700 text-center font-medium">{{ data.trenink.datum|date:"l, d.m.Y" }} | {{ data.trenink.cas|time:"H:i" }}</p>
+                    <p class="text-xl md:text-2xl font-bold text-gray-800 text-center mb-2">
+                        Trénink - {{ data.trenink.typ }}
+                    </p>
+                    <p class="text-gray-700 text-center font-medium">
+                        {{ data.trenink.datum|date:"l, d.m.Y" }} | {{ data.trenink.cas|time:"H:i" }}
+                    </p>
 
                     {% if data.dochazka_list %}
                     <div class="overflow-x-auto rounded-2xl border-2 border-gray-200 shadow-inner mt-4">
                         <table class="w-full text-left rounded-xl divide-y divide-gray-100">
                             <thead class="bg-gray-100 text-gray-700">
-                                <tr>
-                                    <th class="py-2 px-3">Hráč</th>
-                                    <th class="py-2 px-3">Zúčastní se</th>
-                                </tr>
+                            <tr>
+                                <th class="py-2 px-3">Hráč</th>
+                                <th class="py-2 px-3">Zúčastní se</th>
+                            </tr>
                             </thead>
                             <tbody class="divide-y divide-gray-100">
-                                {% for dochazka in data.dochazka_list|slice:":4" %}
-                                <tr class="hover:bg-gray-50 transition-colors">
-                                    <td class="py-1 px-3">{{ dochazka.hrac.first_name|default:"" }} {{ dochazka.hrac.last_name|default:"" }}</td>
-                                    <td class="py-1 px-3">
-                                        {% if dochazka.pritomen == True %}
-                                        <span class="text-green-500 font-semibold">Ano</span>
-                                        {% elif dochazka.pritomen == False %}
-                                        <span class="text-red-500 font-semibold">Ne</span>
-                                        {% else %}
-                                        <span class="text-yellow-500 font-semibold">Nehlasoval</span>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-                                {% endfor %}
+                            {% for dochazka in data.dochazka_list|slice:":4" %}
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="py-1 px-3">
+                                    {{ dochazka.hrac.first_name|default:"" }} {{ dochazka.hrac.last_name|default:"" }}
+                                </td>
+                                <td class="py-1 px-3">
+                                    {% if dochazka.pritomen == True %}
+                                    <span class="text-green-500 font-semibold">Ano</span>
+                                    {% elif dochazka.pritomen == False %}
+                                    <span class="text-red-500 font-semibold">Ne</span>
+                                    {% else %}
+                                    <span class="text-yellow-500 font-semibold">Nehlasoval</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
                             </tbody>
                         </table>
                     </div>
+                    {% else %}
+                        <p class="text-center text-gray-400 p-8">Zatím nemáte přiřazené žádné hráče.</p>
                     {% endif %}
                 </div>
                 {% if not forloop.last %}
