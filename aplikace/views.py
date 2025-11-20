@@ -7,7 +7,7 @@ from django.utils import timezone
 from datetime import datetime, date
 from django.db.models import Q
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm, DohranyZapasForm
-from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy, Tym, Gol
+from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy, Tym, Gol, Karta
 
 
 #----------------------------------------------------------------------------------------------
@@ -1101,7 +1101,6 @@ def oznacit_dohrano_view(request, zapas_id):
             form.save()
 
             zapas.goly.all().delete()
-
             pocet_golu = int(request.POST.get("pocet_golu", 0))
             for i in range(1, pocet_golu + 1):
                 hrac_id = request.POST.get(f"gol_hrac_{i}")
@@ -1116,7 +1115,22 @@ def oznacit_dohrano_view(request, zapas_id):
                         typ=typ
                     )
 
-            messages.success(request, "Zápas byl úspěšně označen jako dohrán a góly uloženy.")
+            zapas.karty.all().delete()
+            pocet_karet = int(request.POST.get("pocet_karet", 0))
+            for i in range(1, pocet_karet + 1):
+                hrac_id = request.POST.get(f"karta_hrac_{i}")
+                minuta = request.POST.get(f"karta_minuta_{i}")
+                typ = request.POST.get(f"karta_typ_{i}")
+
+                if hrac_id and minuta and typ:
+                    Karta.objects.create(
+                        zapas=zapas,
+                        hrac_id=hrac_id,
+                        minuta=int(minuta),
+                        typ=typ
+                    )
+
+            messages.success(request, "Zápas byl uložen včetně gólů a karet.")
             return redirect('trener_zapas')
     else:
         form = DohranyZapasForm(instance=zapas)
@@ -1131,9 +1145,6 @@ def oznacit_dohrano_view(request, zapas_id):
         "hraci": hraci,
     }
     return render(request, "trener/zapas/oznacit_dohrano.html", context)
-
-
-
 
 
 #----------------------------------------------------------------------------------------------
@@ -1165,7 +1176,11 @@ def trener_dohrane_zapasy(request):
 
     zapasy_qs = (
         Zapas.objects.filter(tym=vybrany_tym, stav='Dohráno')
-                     .prefetch_related('dochazka', 'dochazka__hrac', 'goly', 'goly__hrac')
+                     .prefetch_related(
+                        'dochazka', 'dochazka__hrac',
+                        'goly', 'goly__hrac',
+                        'karty', 'karty__hrac'
+                     )
                      .order_by('-datum', '-cas')
     )
 
@@ -1174,7 +1189,6 @@ def trener_dohrane_zapasy(request):
     for zapas in zapasy_qs:
 
         dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
-
         dochazka_list = []
         for hrac in hraci:
             dochazka_list.append(
@@ -1189,8 +1203,19 @@ def trener_dohrane_zapasy(request):
 
         goly_tym = goly.filter(hrac__tym=vybrany_tym)
         vt = goly_tym.count()
-
         vs = zapas.vysledek_soupere
+
+        karty = zapas.karty.all()
+
+        zlute = karty.filter(
+            hrac__tym=vybrany_tym,
+            typ="zluta"
+        ).count()
+
+        cervene = karty.filter(
+            hrac__tym=vybrany_tym,
+            typ="cervena"
+        ).count()
 
         zapasy_data.append({
             'zapas': zapas,
@@ -1198,6 +1223,9 @@ def trener_dohrane_zapasy(request):
             'goly': goly,
             'vt': vt,
             'vs': vs,
+            'karty': karty,
+            'zlute': zlute,
+            'cervene': cervene,
         })
 
     context = {
@@ -1209,8 +1237,6 @@ def trener_dohrane_zapasy(request):
     }
 
     return render(request, 'trener/zapas/zapas_dohrano.html', context)
-
-
 
 
 #----------------------------------------------------------------------------------------------

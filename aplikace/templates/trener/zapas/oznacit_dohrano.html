@@ -6,14 +6,15 @@
     <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-5xl">
         <h2 class="text-4xl font-extrabold mb-6 text-center drop-shadow-lg">Zadat výsledky</h2>
 
-        <form method="post" class="space-y-5">
+        <form method="post" class="space-y-10">
             {% csrf_token %}
 
+            <!-- sloupce -->
             <div class="grid grid-cols-2 gap-8">
 
-                <!-- tym trenera -->
+                <!-- goly tymu trenera -->
                 <div>
-                    <h3 class="text-2xl font-bold mb-3">Góly vašeho týmu</h3>
+                    <h3 class="text-2xl font-bold mb-3 drop-shadow-lg text-center">Góly vašeho týmu</h3>
                     <div id="goly_wrapper" class="space-y-4"></div>
 
                     <input type="hidden" id="pocet_golu" name="pocet_golu" value="0">
@@ -26,28 +27,44 @@
                     </button>
                 </div>
 
-                <!-- souper -->
+                <!-- goly soupere -->
                 <div>
-                    <h3 class="text-2xl font-bold mb-3">Góly soupeře</h3>
+                    <h3 class="text-2xl font-bold pb-9 drop-shadow-lg text-center">Góly soupeře</h3>
                     {{ form.non_field_errors }}
                     <div>
-                        <label class="block text-gray-700 font-medium mb-2">{{ form.vysledek_soupere.label }}</label>
                         {{ form.vysledek_soupere }}
                         {% if form.vysledek_soupere.errors %}
-                            <p class="text-red-500 text-sm mt-1">{{ form.vysledek_soupere.errors.0 }}</p>
+                            <p class="text-red-500 text-sm">{{ form.vysledek_soupere.errors.0 }}</p>
                         {% endif %}
                     </div>
                 </div>
 
             </div>
 
+            <!-- karty -->
+            <div class="mt-6">
+                <h3 class="text-2xl font-bold mb-3 pt-8 text-center drop-shadow-lg">Žluté/červené karty</h3>
+
+                <div id="karty_wrapper" class="space-y-4"></div>
+
+                <input type="hidden" id="pocet_karet" name="pocet_karet" value="0">
+
+                <button type="button" onclick="pridatKartu()"
+                    class="w-auto mx-auto text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
+                           bg-gradient-to-r from-yellow-500 to-red-600 transform transition duration-300
+                           hover:from-yellow-600 hover:to-red-700 hover:scale-105 mt-6 block">
+                    + Přidat kartu
+                </button>
+            </div>
+
             <button type="submit"
-                    class="w-full text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
+                    class="w-auto mx-auto text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
                            bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
-                           hover:from-blue-600 hover:to-purple-900 hover:scale-105 mt-6">
+                           hover:from-blue-600 hover:to-purple-900 hover:scale-105 mt-6 block">
                 Uložit výsledek
             </button>
         </form>
+
 
         <a href="{% url 'trener_zapas' %}"
            class="block mt-6 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
@@ -57,6 +74,7 @@
 </div>
 
 <script>
+let karta_pocet = 0;
 let gol_pocet = 0;
 
 function pridatGol() {
@@ -104,5 +122,50 @@ function pridatGol() {
 
     wrapper.appendChild(block);
 }
+
+function pridatKartu() {
+    karta_pocet++;
+    document.getElementById("pocet_karet").value = karta_pocet;
+
+    const wrapper = document.getElementById("karty_wrapper");
+
+    const block = document.createElement("div");
+    block.className = "p-4 border rounded-2xl bg-red-50 shadow-inner";
+
+    block.innerHTML = `
+        <p class="font-semibold mb-2">Karta #${karta_pocet}</p>
+
+        <label class="block text-gray-700 font-medium mb-1">Hráč</label>
+        <select name="karta_hrac_${karta_pocet}" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2">
+            <option value="">-- vyber hráče --</option>
+            {% for hrac in hraci %}
+                <option value="{{ hrac.id }}">
+                    {% if hrac.first_name and hrac.last_name %}
+                        {{ hrac.first_name }} {{ hrac.last_name }}
+                    {% elif hrac.first_name %}
+                        {{ hrac.first_name }}
+                    {% elif hrac.last_name %}
+                        {{ hrac.last_name }}
+                    {% else %}
+                        (bez jména)
+                    {% endif %}
+                </option>
+            {% endfor %}
+        </select>
+
+        <label class="block text-gray-700 font-medium mb-1">Typ karty</label>
+        <select name="karta_typ_${karta_pocet}" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2">
+            <option value="">-- vyber typ --</option>
+            <option value="zluta">Žlutá</option>
+            <option value="cervena">Červená</option>
+        </select>
+
+        <label class="block text-gray-700 font-medium mb-1">Minuta</label>
+        <input type="text" name="karta_minuta_${karta_pocet}" placeholder="např. 45" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2">
+    `;
+
+    wrapper.appendChild(block);
+}
 </script>
+
 {% endblock %}

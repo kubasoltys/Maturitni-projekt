@@ -234,6 +234,19 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2025-11-20T09:18:08.417Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "21",
+    "object_repr": "Real Madrid CF (2025-09-20)",
+    "action_flag": 2,
+    "change_message": "[{\"added\": {\"name\": \"Karta\", \"object\": \"Karta: Pedri (Hr\\u00e1\\u010d) \\u2014 Real Madrid CF (2025-09-20) (\\u010cerven\\u00e1 | 87. min)\"}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -895,10 +908,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "w6vhyw9fz0i0x55d4ao2ssdgebclehov",
+  "pk": "ox1yuisyxzxu0ymqzayxe8irtdlgr6w0",
   "fields": {
-    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vLqmB:KtLOOy5TzfjNSTG3aNnS4u0MoK1h0Ij7xud5xgUZd6w",
-    "expire_date": "2025-12-03T22:35:47.178Z"
+    "session_data": ".eJxVjM0OwiAQhN-FsyGw_Lh69N5nIMsCUjU0Ke3J-O62SQ96m8z3zbxFoHWpYe15DmMSVwHi9NtF4mduO0gPavdJ8tSWeYxyV-RBuxymlF-3w_07qNTrtkbrffYO3dlHDwYs6ZLSlqgo1qAS64jKkI45aiYNDopXaNAwuAta8fkCxQ02-w:1vM0o1:u4147t2JRylCKxWOWHpMQ7NBZkOZ4zHhWtmcR6Lm794",
+    "expire_date": "2025-12-04T09:18:21.118Z"
   }
 },
 {
@@ -906,7 +919,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1000000$lVBDpd6Ja8QRTsMTdKJBR1$fRAfF49lBGd4tGP425N5023GStuBgiqMlmQK2YVN9zE=",
-    "last_login": "2025-11-19T21:43:49.390Z",
+    "last_login": "2025-11-20T09:17:42.921Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -926,7 +939,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-11-19T22:35:13.233Z",
+    "last_login": "2025-11-20T09:18:21.112Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -1524,54 +1537,6 @@
 },
 {
   "model": "aplikace.zapas",
-  "pk": 16,
-  "fields": {
-    "tym": 1,
-    "souper": "AC Milan",
-    "datum": "2025-11-18",
-    "cas": "13:45:00",
-    "domaci_hoste": "Hosté",
-    "misto": "San Siro, Milán",
-    "stav": "Dohráno",
-    "vysledek_tymu": null,
-    "vysledek_soupere": 1,
-    "created_at": "2025-11-19T20:35:30.165Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
-  "pk": 17,
-  "fields": {
-    "tym": 1,
-    "souper": "PSG",
-    "datum": "2025-11-18",
-    "cas": "21:00:00",
-    "domaci_hoste": "Hosté",
-    "misto": "Parc des Princes, Paříž",
-    "stav": "Dohráno",
-    "vysledek_tymu": null,
-    "vysledek_soupere": 2,
-    "created_at": "2025-11-19T20:53:48.632Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
-  "pk": 18,
-  "fields": {
-    "tym": 1,
-    "souper": "Arsenal FC",
-    "datum": "2025-10-03",
-    "cas": "14:50:00",
-    "domaci_hoste": "Domácí",
-    "misto": "Camp Nou, Barcelona",
-    "stav": "Dohráno",
-    "vysledek_tymu": null,
-    "vysledek_soupere": 1,
-    "created_at": "2025-11-19T21:41:47.130Z"
-  }
-},
-{
-  "model": "aplikace.zapas",
   "pk": 19,
   "fields": {
     "tym": 1,
@@ -1588,18 +1553,18 @@
 },
 {
   "model": "aplikace.zapas",
-  "pk": 20,
+  "pk": 22,
   "fields": {
     "tym": 1,
-    "souper": "Liverpool FC",
-    "datum": "2025-11-14",
-    "cas": "21:00:00",
-    "domaci_hoste": "Hosté",
-    "misto": "Anfield, Liverpool",
+    "souper": "Arsenal FC",
+    "datum": "2025-11-06",
+    "cas": "13:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
     "stav": "Naplánováno",
     "vysledek_tymu": null,
     "vysledek_soupere": null,
-    "created_at": "2025-11-19T22:30:57.750Z"
+    "created_at": "2025-11-20T09:32:03.820Z"
   }
 },
 {
@@ -1610,46 +1575,6 @@
     "hrac": 2,
     "pritomen": true,
     "poznamka": null
-  }
-},
-{
-  "model": "aplikace.gol",
-  "pk": 16,
-  "fields": {
-    "zapas": 16,
-    "hrac": 3,
-    "minuta": 43,
-    "typ": "penalta"
-  }
-},
-{
-  "model": "aplikace.gol",
-  "pk": 17,
-  "fields": {
-    "zapas": 17,
-    "hrac": 6,
-    "minuta": 68,
-    "typ": "normalni"
-  }
-},
-{
-  "model": "aplikace.gol",
-  "pk": 18,
-  "fields": {
-    "zapas": 18,
-    "hrac": 3,
-    "minuta": 54,
-    "typ": "normalni"
-  }
-},
-{
-  "model": "aplikace.gol",
-  "pk": 19,
-  "fields": {
-    "zapas": 18,
-    "hrac": 5,
-    "minuta": 90,
-    "typ": "normalni"
   }
 }
 ]
