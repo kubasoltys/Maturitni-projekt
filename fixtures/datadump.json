@@ -908,10 +908,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "ox1yuisyxzxu0ymqzayxe8irtdlgr6w0",
+  "pk": "qdh272liac8po15dm5s30eo30irnc4vu",
   "fields": {
-    "session_data": ".eJxVjM0OwiAQhN-FsyGw_Lh69N5nIMsCUjU0Ke3J-O62SQ96m8z3zbxFoHWpYe15DmMSVwHi9NtF4mduO0gPavdJ8tSWeYxyV-RBuxymlF-3w_07qNTrtkbrffYO3dlHDwYs6ZLSlqgo1qAS64jKkI45aiYNDopXaNAwuAta8fkCxQ02-w:1vM0o1:u4147t2JRylCKxWOWHpMQ7NBZkOZ4zHhWtmcR6Lm794",
-    "expire_date": "2025-12-04T09:18:21.118Z"
+    "session_data": ".eJxVjEEOwiAQRe_C2hCgzEBduvcMZBimUjVtUtqV8e7apAvd_vfef6lE21rT1mRJY1Fn5dXpd8vED5l2UO403WbN87QuY9a7og_a9HUu8rwc7t9BpVa_tRhgYA4o1jmJrjcwdMDoLfYI0oWOJJLDzBiNwMAmWi6hOBFgQq_eH9Y6N9s:1vMwoK:9amEyMlcSujyZ8bESWWGnz5JR8TmxWQZeUvPMQl5ywo",
+    "expire_date": "2025-12-06T23:14:32.761Z"
   }
 },
 {
@@ -919,7 +919,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1000000$lVBDpd6Ja8QRTsMTdKJBR1$fRAfF49lBGd4tGP425N5023GStuBgiqMlmQK2YVN9zE=",
-    "last_login": "2025-11-20T09:17:42.921Z",
+    "last_login": "2025-11-22T21:55:40.868Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -939,7 +939,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-11-20T09:18:21.112Z",
+    "last_login": "2025-11-22T22:49:27.445Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -959,7 +959,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$1000000$xqpg5oqf8ID83Nzv2qrIUE$UoViHaQwwwCayltK+XOJETF6n3CpDysSWHk7an4HHvo=",
-    "last_login": "2025-11-19T22:34:22.266Z",
+    "last_login": "2025-11-22T23:14:32.756Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "",
@@ -1520,6 +1520,50 @@
   }
 },
 {
+  "model": "aplikace.dochazkatreninky",
+  "pk": 24,
+  "fields": {
+    "trenink": 13,
+    "hrac": 3,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-11-22T21:37:24.939Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 25,
+  "fields": {
+    "trenink": 13,
+    "hrac": 6,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-11-22T21:37:24.945Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 26,
+  "fields": {
+    "trenink": 13,
+    "hrac": 4,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-11-22T21:37:24.947Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 27,
+  "fields": {
+    "trenink": 13,
+    "hrac": 5,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-11-22T21:37:24.948Z"
+  }
+},
+{
   "model": "aplikace.zapas",
   "pk": 6,
   "fields": {
@@ -1561,10 +1605,42 @@
     "cas": "13:00:00",
     "domaci_hoste": "Domácí",
     "misto": "Camp Nou, Barcelona",
-    "stav": "Naplánováno",
+    "stav": "Dohráno",
     "vysledek_tymu": null,
-    "vysledek_soupere": null,
+    "vysledek_soupere": 1,
     "created_at": "2025-11-20T09:32:03.820Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 23,
+  "fields": {
+    "tym": 1,
+    "souper": "PSG",
+    "datum": "2025-11-08",
+    "cas": "16:15:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Parc des Princes, Paříž",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 3,
+    "created_at": "2025-11-22T12:12:57.862Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 24,
+  "fields": {
+    "tym": 1,
+    "souper": "AC Milan",
+    "datum": "2025-10-26",
+    "cas": "21:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 1,
+    "created_at": "2025-11-22T21:42:10.769Z"
   }
 },
 {
@@ -1575,6 +1651,66 @@
     "hrac": 2,
     "pritomen": true,
     "poznamka": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 24,
+  "fields": {
+    "zapas": 22,
+    "hrac": 6,
+    "minuta": 45,
+    "typ": "normalni"
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 25,
+  "fields": {
+    "zapas": 22,
+    "hrac": 5,
+    "minuta": 74,
+    "typ": "normalni"
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 26,
+  "fields": {
+    "zapas": 23,
+    "hrac": 2,
+    "minuta": 56,
+    "typ": "normalni"
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 27,
+  "fields": {
+    "zapas": 24,
+    "hrac": 6,
+    "minuta": 35,
+    "typ": "normalni"
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 3,
+  "fields": {
+    "zapas": 22,
+    "hrac": 4,
+    "typ": "zluta",
+    "minuta": 56
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 4,
+  "fields": {
+    "zapas": 23,
+    "hrac": 4,
+    "typ": "cervena",
+    "minuta": 67
   }
 }
 ]

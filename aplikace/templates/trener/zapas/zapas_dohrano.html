@@ -99,11 +99,11 @@
         <div class="
             {% if vt != None and vs != None %}
                 {% if vt > vs %}
-                    bg-gradient-to-r from-green-100 to-emerald-400 border border-green-200
+                    bg-gradient-to-r from-green-50 to-emerald-200
                 {% elif vt < vs %}
-                    bg-gradient-to-r from-red-100 to-rose-400 border border-red-200
+                    bg-gradient-to-r from-red-50 to-rose-200
                 {% else %}
-                    bg-gradient-to-r from-amber-100 to-amber-300 border border-amber-200
+                    bg-gradient-to-r from-amber-50 to-amber-200
                 {% endif %}
             {% else %}
                 bg-gray-100 border border-gray-200
@@ -160,7 +160,7 @@
 
             <!-- goly -->
             {% if data.goly %}
-            <div class="flex justify-between pt-8 text font-semibold text-gray-700 space-y-1">
+            <div class="flex justify-between pt-8 text font-semibold text-gray-800 space-y-1 drop-shadow-lg">
 
                 <!-- domaci -->
                 <div class="w-1/2 text-left">
@@ -206,15 +206,17 @@
 
             <!-- karty -->
             {% if data.karty %}
-            <div class="flex justify-between pt-2 text font-semibold text-gray-700 space-y-1">
+            <div class="flex justify-between pt-2 text font-semibold text-gray-800 space-y-1 drop-shadow-lg">
 
                 <!-- domaci -->
                 <div class="w-1/2 text-left">
-                    {% if not karta.hrac.tym == data.zapas.tym %}
-                    <h4 class="text-gray-500">Karty:</h4>
-                    {% endif %}
-                    {% for karta in data.karty %}
-                        {% if karta.hrac.tym == data.zapas.tym %}
+
+                    {% if data.zapas.domaci_hoste == "Domácí" %}
+                        {% if data.karty %}
+                            <h4 class="mb-1 text-sm text-black">Karty:</h4>
+                        {% endif %}
+
+                        {% for karta in data.karty %}
                             <p>
                                 {% if karta.typ == "zluta" %}
                                     🟨
@@ -232,24 +234,20 @@
                                     (bez jména)
                                 {% endif %}
                             </p>
-                        {% endif %}
-                    {% endfor %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
 
                 <!-- away -->
                 <div class="w-1/2 text-right">
-                    {% if not karta.hrac.tym != data.zapas.tym %}
-                    <h4 class="text-gray-500">Karty:</h4>
-                    {% endif %}
-                    {% for karta in data.karty %}
-                        {% if karta.hrac.tym != data.zapas.tym %}
-                            <p>
-                                {% if karta.typ == "zluta" %}
-                                    🟨
-                                {% elif karta.typ == "cervena" %}
-                                    🟥
-                                {% endif %}
 
+                    {% if data.zapas.domaci_hoste != "Domácí" %}
+                        {% if data.karty %}
+                            <h4 class="mb-1 text-sm text-black">Karty:</h4>
+                        {% endif %}
+
+                        {% for karta in data.karty %}
+                            <p>
                                 {% if karta.hrac.last_name %}
                                     {{ karta.hrac.last_name }}
                                 {% elif karta.hrac.first_name %}
@@ -259,13 +257,21 @@
                                 {% endif %}
 
                                 <span class="font-extrabold">{{ karta.minuta }}’</span>
+
+                                {% if karta.typ == "zluta" %}
+                                    🟨
+                                {% elif karta.typ == "cervena" %}
+                                    🟥
+                                {% endif %}
+
                             </p>
-                        {% endif %}
-                    {% endfor %}
+                        {% endfor %}
+                    {% endif %}
                 </div>
 
             </div>
             {% endif %}
+
 
             <p class="text-gray-800 mb-2 font-semibold text-center">
                 {{ data.zapas.misto|default:"-" }}

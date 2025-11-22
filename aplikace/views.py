@@ -1097,8 +1097,13 @@ def oznacit_dohrano_view(request, zapas_id):
         form = DohranyZapasForm(request.POST, instance=zapas)
 
         if form.is_valid():
+            zapas = form.save(commit=False)
+
+            zapas.vysledek_tymu = request.POST.get("vysledek_tymu")
+            zapas.vysledek_soupere = request.POST.get("vysledek_soupere")
+
             zapas.stav = "Dohráno"
-            form.save()
+            zapas.save()
 
             zapas.goly.all().delete()
             pocet_golu = int(request.POST.get("pocet_golu", 0))
@@ -1258,17 +1263,37 @@ def hrac_dohrane_zapasy(request):
     ).filter(
         Q(stav='Dohráno') |
         Q(stav='Naplánováno', datum__lt=dnes)
-    ).order_by('-datum', '-cas')
+    ).prefetch_related('goly', 'goly__hrac', 'karty', 'karty__hrac', 'dochazka').order_by('-datum', '-cas')
 
     zapasy_data = []
 
     for zapas in zapasy:
+
         dochazka_obj = zapas.dochazka.filter(hrac=hrac).first()
+
+        goly = zapas.goly.all()
+        goly_tym = goly.filter(hrac__tym=tym)
+
+        goly_souper = goly.exclude(hrac__tym=tym)
+        vysledek_tymu = goly_tym.count()
+
+        vysledek_soupere = zapas.vysledek_soupere
+
+        karty = zapas.karty.all()
+        karty_tym = karty.filter(hrac__tym=tym)
+        karty_souper = karty.exclude(hrac__tym=tym)
+
         zapasy_data.append({
             'zapas': zapas,
             'dochazka': dochazka_obj,
-            'vysledek_tymu': getattr(zapas, 'vysledek_tymu', None),
-            'vysledek_soupere': getattr(zapas, 'vysledek_soupere', None),
+            'vysledek_tymu': vysledek_tymu,
+            'vysledek_soupere': vysledek_soupere,
+            'goly': goly,
+            'goly_tym': goly_tym,
+            'goly_souper': goly_souper,
+            'karty': karty,
+            'karty_tym': karty_tym,
+            'karty_souper': karty_souper,
         })
 
     context = {
@@ -1278,3 +1303,5 @@ def hrac_dohrane_zapasy(request):
     }
 
     return render(request, 'hrac/zapas/zapas_dohrano.html', context)
+
+

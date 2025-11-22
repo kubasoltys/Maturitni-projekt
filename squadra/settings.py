@@ -116,15 +116,8 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/3.1/howto/static-files/
 STATIC_URL = '/static/'
-
-# kde jsou moje statické soubory během vývoje
-#STATICFILES_DIRS = [BASE_DIR / 'assets']  # např. vlastní složka pro Tailwind CSS
-
-# kde Django shromáždí statické soubory při deploy
-STATIC_ROOT = BASE_DIR / 'staticfiles'  # nikdy to nesmí být stejné jako STATICFILES_DIRS
+STATICFILES_DIRS = [BASE_DIR / 'static']
 
 
 MEDIA_URL = '/media/'

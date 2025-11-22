@@ -1,7 +1,11 @@
+from django.conf import settings
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.urls.base import reverse_lazy
+
+from squadra.settings import BASE_DIR
 from . import views
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -118,3 +122,6 @@ urlpatterns = [
     # hrac - odehrane zapasy
     path('hrac/zapasy/odehrane-zapasy/', views.hrac_dohrane_zapasy, name='hrac_dohrane_zapasy'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=BASE_DIR / 'static')
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
