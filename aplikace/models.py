@@ -275,7 +275,7 @@ class HracProfile(models.Model):
         pritomni, celkem = self._trenink_stats()
         if celkem == 0:
             return 0
-        return round(pritomni / celkem * 100, 1)
+        return round(pritomni / celkem * 100)
 
     @property
     def treninky_pritomen(self):
@@ -286,6 +286,54 @@ class HracProfile(models.Model):
         pritomni, celkem = self._trenink_stats()
         return celkem - pritomni
 
+
+    # pocitani dochazky na zapasy v %
+    def _zapas_stats(self):
+        now = timezone.now()
+
+        tymy_hrace = [self.tym] if self.tym else []
+
+        zapasy = Zapas.objects.filter(tym__in=tymy_hrace)
+        probehle = []
+
+        for zapas in zapasy:
+            zapas_datetime = timezone.make_aware(
+                datetime.combine(zapas.datum, zapas.cas),
+                timezone.get_current_timezone()
+            )
+
+            if zapas_datetime < now:
+                if hasattr(zapas, "doplnit_nehlasujici_hrace"):
+                    zapas.doplnit_nehlasujici_hrace()
+
+                probehle.append(zapas)
+
+        if not probehle:
+            return 0, 0
+
+        pritomni = 0
+        for zapas in probehle:
+            doch = zapas.dochazka.filter(hrac=self).first()
+            if doch and doch.pritomen:
+                pritomni += 1
+
+        return pritomni, len(probehle)
+
+    @property
+    def dochazka_zapasy(self):
+        pritomni, celkem = self._zapas_stats()
+        if celkem == 0:
+            return 0
+        return round((pritomni / celkem) * 100)
+
+    @property
+    def zapasy_pritomen(self):
+        return self._zapas_stats()[0]
+
+    @property
+    def zapasy_nepritomen(self):
+        pritomni, celkem = self._zapas_stats()
+        return celkem - pritomni
 
 
     def save(self, *args, **kwargs):
@@ -484,8 +532,7 @@ class Zapas(models.Model):
         blank=True)
     vysledek_soupere = models.PositiveSmallIntegerField(
         verbose_name='Výsledek soupeře',
-        null=True,
-        blank=True)
+        default=0)
 
     created_at = models.DateTimeField(default=timezone.now)
 
@@ -532,7 +579,7 @@ class DochazkaZapasy(models.Model):
         verbose_name_plural = "Docházky na zápasy"
 
     def __str__(self):
-        stav = "✅" if self.pritomen else ("❌" if self.pritomen is False else "⏳")
+        stav = "ANO" if self.pritomen else ("NE" if self.pritomen is False else "NEHLASOVAL")
         return f"{self.hrac} - {self.zapas} ({stav})"
 
 

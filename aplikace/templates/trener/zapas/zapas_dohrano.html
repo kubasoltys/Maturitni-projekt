@@ -177,6 +177,11 @@
                                 {% else %}
                                     (bez jména)
                                 {% endif %}
+                                {% if gol.typ == "penalta" %}
+                                    <span class="text-gray-400 font-normal">(penalta)</span>
+                                {% else %}
+
+                                {% endif %}
                             </p>
                         {% endif %}
                     {% endfor %}
@@ -187,6 +192,11 @@
                     {% for gol in data.goly %}
                         {% if data.zapas.domaci_hoste != "Domácí" %}
                             <p>
+                                {% if gol.typ == "penalta" %}
+                                    <span class="text-gray-400 font-normal">(penalta) </span>
+                                {% else %}
+
+                                {% endif %}
                                 {% if gol.hrac.last_name %}
                                     {{ gol.hrac.last_name }}
                                 {% elif not gol.hrac.last_name %}

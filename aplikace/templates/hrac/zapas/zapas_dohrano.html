@@ -101,8 +101,55 @@
 <!-- zapasy -->
 <div class="flex flex-col items-center justify-center min-h-screen space-y-8 py-10 pt-40">
     <h1 class="text-4xl font-extrabold text-gray-800 text-center drop-shadow-lg">Odehrané zápasy</h1>
-    <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-6 space-y-8">
 
+    <!-- ucast -->
+    <div class="w-full max-w-4xl bg-white rounded-3xl shadow-lg p-6 flex flex-col items-center space-y-4">
+        <p class="text-xl font-semibold text-gray-700">Má účast:</p>
+
+        <div class="flex space-x-6">
+            <p class="text-4xl font-extrabold drop-shadow-lg">
+                {% if hrac.dochazka_zapasy > 50 %}
+                <span class="text-green-500">{{ hrac.dochazka_zapasy }}%</span>
+                {% elif hrac.dochazka_zapasy == 50 %}
+                <span class="text-green-500">{{ hrac.dochazka_zapasy }}%</span>
+                {% else %}
+                <span class="text-red-500">{{ hrac.dochazka_zapasy }}%</span>
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6 text-lg font-medium text-gray-700">
+            <!-- pritomen -->
+            <div class="flex items-center gap-3 p-4 bg-green-50 rounded-2xl shadow-sm border border-green-200">
+                <div class="p-3 bg-green-100 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-green-600" viewBox="0 0 24 24"
+                         fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 13l4 4L19 7"/>
+                    </svg>
+                </div>
+                <p class="text-gray-800">
+                    Přítomen: <span class="font-semibold text-green-700">{{ hrac.zapasy_pritomen }}</span>
+                </p>
+            </div>
+
+            <!-- nepritomen -->
+            <div class="flex items-center gap-3 p-4 bg-red-50 rounded-2xl shadow-sm border border-red-200">
+                <div class="p-3 bg-red-100 rounded-xl">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-red-600" viewBox="0 0 24 24" fill="none"
+                         stroke="currentColor" stroke-width="2">
+                        <path d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </div>
+                <p class="text-gray-800">
+                    Nepřítomen: <span class="font-semibold text-red-700">{{ hrac.zapasy_nepritomen }}</span>
+                </p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="w-full max-w-4xl bg-white rounded-3xl shadow-2xl p-6 space-y-8">
         {% for data in zapasy_data %}
         <div class="
             {% if data.zapas.stav == 'Dohráno' %}
@@ -193,6 +240,11 @@
                                 {% else %}
                                     (bez jména)
                                 {% endif %}
+                                {% if gol.typ == "penalta" %}
+                                    <span class="text-gray-400 font-normal">(penalta)</span>
+                                {% else %}
+
+                                {% endif %}
                             </p>
                         {% endif %}
                     {% endfor %}
@@ -203,6 +255,11 @@
                     {% for gol in data.goly %}
                         {% if data.zapas.domaci_hoste != "Domácí" %}
                             <p>
+                                {% if gol.typ == "penalta" %}
+                                    <span class="text-gray-400 font-normal">(penalta) </span>
+                                {% else %}
+
+                                {% endif %}
                                 {% if gol.hrac.last_name %}
                                     {{ gol.hrac.last_name }}
                                 {% elif not gol.hrac.last_name %}

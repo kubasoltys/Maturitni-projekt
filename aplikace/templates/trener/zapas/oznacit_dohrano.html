@@ -1,35 +1,55 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="flex items-center justify-center min-h-screen">
-    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-5xl">
+<div class="flex items-center justify-center min-h-screen p-32">
+    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-7xl">
         <h2 class="text-4xl font-extrabold mb-6 text-center drop-shadow-lg">Zadat výsledky</h2>
 
-        <form method="post" class="space-y-10">
+        <form method="post" class="space-y-10" id="main_form">
             {% csrf_token %}
 
             <!-- sloupce -->
-            <div class="grid grid-cols-2 gap-8">
+            <div class="grid grid-cols-[1fr_2px_1fr] gap-8 items-start">
 
-                <!-- goly tymu trenera -->
+                <!-- góly a karty týmu -->
                 <div>
-                    <h3 class="text-2xl font-bold mb-3 drop-shadow-lg text-center">Góly vašeho týmu</h3>
-                    <div id="goly_wrapper" class="space-y-4"></div>
+                    <h3 class="text-2xl font-bold mb-3 text-center drop-shadow-lg">Výsledky vašeho týmu</h3>
+
+                    <h4 class="text-xl font-semibold mb-3 text-center drop-shadow-lg">Góly</h4>
+                    <div id="goly_wrapper" class="space-y-2"></div>
 
                     <input type="hidden" id="pocet_golu" name="pocet_golu" value="0">
 
-                    <button type="button" onclick="pridatGol()"
-                        class="w-full text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
+                    <button id="pridat_gol_btn"
+                        type="button"
+                        class="w-auto mx-auto text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
                                bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
-                               hover:from-blue-600 hover:to-purple-900 hover:scale-105 mt-6">
+                               hover:from-blue-600 hover:to-purple-900 hover:scale-105 mt-6 block">
                         + Přidat gól
                     </button>
+
+                    <!-- karty -->
+                    <div class="mt-6">
+                        <h4 class="text-xl font-semibold mb-3 text-center drop-shadow-lg">Žluté a červené karty</h4>
+                        <div id="karty_wrapper" class="space-y-2"></div>
+
+                        <input type="hidden" id="pocet_karet" name="pocet_karet" value="0">
+
+                        <button id="pridat_kartu_btn" type="button"
+                            class="w-auto mx-auto text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
+                                   bg-gradient-to-r from-yellow-500 to-red-600 transform transition duration-300
+                                   hover:from-yellow-600 hover:to-red-700 hover:scale-105 mt-6 block">
+                            + Přidat kartu
+                        </button>
+                    </div>
+
                 </div>
 
-                <!-- goly soupere -->
+                <div class="w-full h-full bg-gray-300 rounded"></div>
+
+                <!-- góly soupeře -->
                 <div>
-                    <h3 class="text-2xl font-bold pb-9 drop-shadow-lg text-center">Góly soupeře</h3>
+                    <h3 class="text-2xl font-bold pb-9 drop-shadow-lg text-center">Výsledky soupeře</h3>
                     {{ form.non_field_errors }}
                     <div>
                         {{ form.vysledek_soupere }}
@@ -41,30 +61,18 @@
 
             </div>
 
-            <!-- karty -->
-            <div class="mt-6">
-                <h3 class="text-2xl font-bold mb-3 pt-8 text-center drop-shadow-lg">Žluté/červené karty</h3>
+            <p id="neulozene_error" class="text-red-600 font-semibold text-center hidden">
+                Dokončete rozpracované góly nebo karty!
+            </p>
 
-                <div id="karty_wrapper" class="space-y-4"></div>
-
-                <input type="hidden" id="pocet_karet" name="pocet_karet" value="0">
-
-                <button type="button" onclick="pridatKartu()"
+            <button type="submit" id="ulozit_btn"
                     class="w-auto mx-auto text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
-                           bg-gradient-to-r from-yellow-500 to-red-600 transform transition duration-300
-                           hover:from-yellow-600 hover:to-red-700 hover:scale-105 mt-6 block">
-                    + Přidat kartu
-                </button>
-            </div>
-
-            <button type="submit"
-                    class="w-auto mx-auto text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
-                           bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
-                           hover:from-blue-600 hover:to-purple-900 hover:scale-105 mt-6 block">
+                           bg-gradient-to-r from-green-500 to-emerald-700 transform transition duration-300
+                           hover:from-green-600 hover:to-emerald-800 hover:scale-105 block">
                 Uložit výsledek
             </button>
-        </form>
 
+        </form>
 
         <a href="{% url 'trener_zapas' %}"
            class="block mt-6 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
@@ -74,98 +82,311 @@
 </div>
 
 <script>
-    let karta_pocet = 0;
     let gol_pocet = 0;
+    let karta_pocet = 0;
+    let goly = [];
 
-    function pridatGol() {
-        gol_pocet++;
-        document.getElementById("pocet_golu").value = gol_pocet;
+    // -----------------------------------------
+    // pridat gol
+    // -----------------------------------------
+    document.getElementById('pridat_gol_btn').addEventListener('click', () => showGolForm());
 
+    function showGolForm() {
         const wrapper = document.getElementById("goly_wrapper");
+        const pridatBtn = document.getElementById("pridat_gol_btn");
+        pridatBtn.style.display = 'none';
 
-        const block = document.createElement("div");
-        block.className = "p-4 border rounded-2xl bg-gray-50 shadow-inner";
+        gol_pocet++;
+        const formDiv = document.createElement('div');
+        formDiv.className = "p-3 border rounded-3xl bg-gray-50 shadow-inner mb-1 flex items-center gap-2 flex-wrap";
+        formDiv.dataset.golId = gol_pocet;
 
-        block.innerHTML = `
-            <p class="font-semibold mb-2">Gól #${gol_pocet}</p>
-
-            <label class="block text-gray-700 font-medium mb-1">Střelec</label>
-            <select name="gol_hrac_${gol_pocet}" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2">
-                <option value="">-- vyber hráče --</option>
+        formDiv.innerHTML = `
+            <select class="p-2 border border-gray-300 rounded-xl min-w-[150px]" name="gol_hrac">
+                <option value="">-- hráč --</option>
                 {% for hrac in hraci %}
                     <option value="{{ hrac.id }}">
-                        {% if hrac.first_name and hrac.last_name %}
-                            {{ hrac.first_name }} {{ hrac.last_name }}
-                        {% elif hrac.first_name %}
-                            {{ hrac.first_name }}
-                        {% elif hrac.last_name %}
-                            {{ hrac.last_name }}
-                        {% else %}
-                            (bez jména)
-                        {% endif %}
+                    {% if hrac.first_name and hrac.last_name %}{{ hrac.first_name }} {{ hrac.last_name }}
+                    {% elif hrac.first_name %}{{ hrac.first_name }}
+                    {% elif hrac.last_name %}{{ hrac.last_name }}
+                    {% else %}(bez jména){% endif %}
                     </option>
                 {% endfor %}
             </select>
-
-            <label class="block text-gray-700 font-medium mb-1">Minuta</label>
-            <input type="text" name="gol_minuta_${gol_pocet}" placeholder="např. 12" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2">
-
-            <label class="block text-gray-700 font-medium mb-1">Typ gólu</label>
-            <select name="gol_typ_${gol_pocet}" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400 mb-2">
-                <option value="">-- vyber typ gólu --</option>
+            <select name="gol_typ" class="p-2 border border-gray-300 rounded-xl min-w-[100px]">
+                <option value="">-- typ --</option>
                 <option value="normalni">Normální</option>
                 <option value="penalta">Penalta</option>
                 <option value="primak">Přímý kop</option>
-                <option value="vlastni">Vlastní gól</option>
             </select>
+            <input type="text" name="gol_minuta" placeholder="min" class="w-16 p-2 border rounded-xl text-center">
+            <button type="button" class="apply-gol bg-gradient-to-r from-blue-500 to-purple-800 text-white
+                px-3 py-1 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-900 hover:scale-105 transition">
+                Přidat
+            </button>
+            <button type="button" class="cancel-gol text-gray-600 px-3 py-1 rounded-xl hover:text-gray-900 hover:scale-105 transition">
+                Zrušit
+            </button>
+            <p class="text-red-600 font-semibold drop-shadow-lg text-sm mt-1 hidden text-center w-full">
+                Vyplňte všechna data!
+            </p>
         `;
 
-        wrapper.appendChild(block);
+        wrapper.appendChild(formDiv);
+        const errorText = formDiv.querySelector('p');
+
+        formDiv.querySelector('.apply-gol').addEventListener('click', () => {
+            const hracSelect = formDiv.querySelector('select[name="gol_hrac"]');
+            const minutaInput = formDiv.querySelector('input[name="gol_minuta"]');
+            const typSelect = formDiv.querySelector('select[name="gol_typ"]');
+
+            if (!hracSelect.value || !minutaInput.value || isNaN(parseInt(minutaInput.value))) {
+                errorText.classList.remove('hidden');
+                return;
+            }
+            errorText.classList.add('hidden');
+
+            goly.push({
+                golId: formDiv.dataset.golId,
+                hracId: hracSelect.value,
+                hracName: hracSelect.options[hracSelect.selectedIndex].text,
+                minuta: parseInt(minutaInput.value),
+                typ: typSelect.value
+            });
+
+            renderGoly();
+
+            formDiv.remove();
+            pridatBtn.style.display = 'block';
+        });
+
+        formDiv.querySelector('.cancel-gol').addEventListener('click', () => {
+            formDiv.remove();
+            pridatBtn.style.display = 'block';
+            gol_pocet--;
+        });
     }
 
-    function pridatKartu() {
-        karta_pocet++;
-        document.getElementById("pocet_karet").value = karta_pocet;
+    function renderGoly() {
+        const wrapper = document.getElementById("goly_wrapper");
+        wrapper.innerHTML = '';
 
+        goly.sort((a, b) => a.minuta - b.minuta);
+
+        goly.forEach((gol, index) => {
+            const div = document.createElement('div');
+            div.className = "flex items-center justify-between p-3 mb-1 border rounded-2xl bg-white shadow-md";
+            div.dataset.golId = gol.golId;
+
+            div.innerHTML = `
+                <span class="text-gray-500">${index + 1}.
+                    <span class="font-semibold text-black">
+                        <span class="font-normal text-gray-400">${gol.typ === 'penalta' ? '(Penalta)' : ''}</span>
+                         ⚽︎
+                        ${gol.minuta}’
+                    </span>
+                    <span class="text-gray-700">${gol.hracName}</span>
+                </span>
+                <button type="button" class="delete-gol text-red-600 text-sm font-semibold hover:scale-110 transition">
+                    Smazat
+                </button>
+                <input type="hidden" name="gol_hrac_${gol.golId}" value="${gol.hracId}">
+                <input type="hidden" name="gol_minuta_${gol.golId}" value="${gol.minuta}">
+                <input type="hidden" name="gol_typ_${gol.golId}" value="${gol.typ}">
+            `;
+
+            wrapper.appendChild(div);
+        });
+
+        gol_pocet = goly.length;
+        document.getElementById("pocet_golu").value = gol_pocet;
+    }
+
+    // smazat gol
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-gol')) {
+            const golId = e.target.closest('[data-gol-id]').dataset.golId;
+            goly = goly.filter(g => g.golId != golId);
+            renderGoly();
+        }
+    });
+
+
+    function applyGol(formDiv, errorText) {
+        const hracSelect = formDiv.querySelector('select[name="gol_hrac"]');
+        const minutaInput = formDiv.querySelector('input[name="gol_minuta"]');
+        const typSelect = formDiv.querySelector('select[name="gol_typ"]');
+
+        if (!hracSelect.value || !minutaInput.value || isNaN(parseInt(minutaInput.value))) {
+            errorText.classList.remove('hidden');
+            return;
+        }
+
+        errorText.classList.add('hidden');
+
+        goly.push({
+            hracId: hracSelect.value,
+            hracName: hracSelect.options[hracSelect.selectedIndex].text,
+            minuta: parseInt(minutaInput.value),
+            typ: typSelect.value,
+            golId: formDiv.dataset.golId
+        });
+
+        renderGoly();
+
+        document.getElementById("pridat_gol_btn").style.display = 'block';
+    }
+
+
+    // -----------------------------------------
+    // smazat gol
+    // -----------------------------------------
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-gol')) {
+            const id = e.target.closest('[data-gol-id]').dataset.golId;
+            goly = goly.filter(g => g.golId !== id);
+            renderGoly();
+        }
+    });
+
+
+    // -----------------------------------------
+    // pridani karty
+    // -----------------------------------------
+    document.getElementById('pridat_kartu_btn').addEventListener('click', () => showKartaForm());
+
+    function showKartaForm(existingKarta = null) {
         const wrapper = document.getElementById("karty_wrapper");
+        const pridatBtn = document.getElementById("pridat_kartu_btn");
+        pridatBtn.style.display = 'none';
 
-        const block = document.createElement("div");
-        block.className = "p-4 border rounded-2xl bg-red-50 shadow-inner";
+        karta_pocet++;
+        const formDiv = document.createElement('div');
+        formDiv.className = "p-3 border rounded-3xl bg-red-50 shadow-inner mb-1 flex items-center gap-2 flex-wrap";
+        formDiv.dataset.kartaId = karta_pocet;
 
-        block.innerHTML = `
-            <p class="font-semibold mb-2">Karta #${karta_pocet}</p>
+        const hrac = existingKarta ? existingKarta.hracId : '';
+        const typ = existingKarta ? existingKarta.typ : '';
+        const min = existingKarta ? existingKarta.minuta : '';
 
-            <label class="block text-gray-700 font-medium mb-1">Hráč</label>
-            <select name="karta_hrac_${karta_pocet}" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2">
-                <option value="">-- vyber hráče --</option>
+        formDiv.innerHTML = `
+            <select name="karta_hrac" class="p-2 border border-gray-300 rounded-xl min-w-[150px]">
+                <option value="">Hráč</option>
                 {% for hrac in hraci %}
-                    <option value="{{ hrac.id }}">
-                        {% if hrac.first_name and hrac.last_name %}
-                            {{ hrac.first_name }} {{ hrac.last_name }}
-                        {% elif hrac.first_name %}
-                            {{ hrac.first_name }}
-                        {% elif hrac.last_name %}
-                            {{ hrac.last_name }}
-                        {% else %}
-                            (bez jména)
-                        {% endif %}
+                    <option value="{{ hrac.id }}" ${hrac.id == hrac ? 'selected' : ''}>
+                        {% if hrac.first_name and hrac.last_name %}{{ hrac.first_name }} {{ hrac.last_name }}
+                        {% elif hrac.first_name %}{{ hrac.first_name }}
+                        {% elif hrac.last_name %}{{ hrac.last_name }}
+                        {% else %}(bez jména){% endif %}
                     </option>
                 {% endfor %}
             </select>
 
-            <label class="block text-gray-700 font-medium mb-1">Typ karty</label>
-            <select name="karta_typ_${karta_pocet}" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2">
-                <option value="">-- vyber typ --</option>
-                <option value="zluta">Žlutá</option>
-                <option value="cervena">Červená</option>
+            <select name="karta_typ" class="p-2 border border-gray-300 rounded-xl min-w-[80px]">
+                <option value="">Typ</option>
+                <option value="zluta" ${typ=='zluta'?'selected':''}>🟨 Žlutá</option>
+                <option value="cervena" ${typ=='cervena'?'selected':''}>🟥 Červená</option>
             </select>
 
-            <label class="block text-gray-700 font-medium mb-1">Minuta</label>
-            <input type="text" name="karta_minuta_${karta_pocet}" placeholder="např. 45" class="w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-yellow-400 mb-2">
-        `;
+            <input name="karta_minuta" type="text" placeholder="min" value="${min}"
+                class="w-16 p-2 border rounded-xl text-center">
 
-        wrapper.appendChild(block);
+            <button type="button" class="apply-karta bg-gradient-to-r from-yellow-500 to-red-600 text-white
+                px-3 py-1 rounded-xl font-semibold hover:from-yellow-600 hover:to-red-700 hover:scale-105 transition">
+                Přidat
+            </button>
+
+            <button type="button" class="cancel-karta text-gray-600 px-3 py-1 rounded-xl hover:text-gray-900 hover:scale-105 transition">
+                Zrušit
+            </button>
+
+            <p class="text-red-600 font-semibold drop-shadow-lg text-sm mt-1 hidden text-center w-full">
+                Vyplňte všechna data!
+            </p>
+        `;
+        wrapper.appendChild(formDiv);
+
+        const errorText = formDiv.querySelector("p");
+
+        formDiv.querySelector('.apply-karta').addEventListener('click', () => applyKarta(formDiv, errorText));
+        formDiv.querySelector('.cancel-karta').addEventListener('click', () => {
+            formDiv.remove();
+            pridatBtn.style.display = 'block';
+            karta_pocet--;
+        });
     }
-</script>
+
+    function applyKarta(formDiv, errorText) {
+    const hracSelect = formDiv.querySelector('select[name="karta_hrac"]');
+    const typSelect = formDiv.querySelector('select[name="karta_typ"]');
+    const minutaInput = formDiv.querySelector('input[name="karta_minuta"]');
+
+    if (!hracSelect.value || !minutaInput.value || isNaN(parseInt(minutaInput.value))) {
+        errorText.classList.remove('hidden');
+        return;
+    }
+
+    errorText.classList.add('hidden');
+
+    const displayDiv = document.createElement('div');
+    displayDiv.className = "flex items-center justify-between p-3 mb-1 border rounded-2xl bg-white shadow-md";
+    displayDiv.dataset.kartaId = formDiv.dataset.kartaId;
+
+    displayDiv.innerHTML = `
+        <span class="text-gray-500">
+            ${typSelect.value=='zluta'?'🟨':'🟥'}
+            <span class="font-semibold text-black">${minutaInput.value}’</span>
+            <span class="text-gray-700">${hracSelect.options[hracSelect.selectedIndex].text}</span>
+        </span>
+        <button type="button" class="delete-karta text-red-600 text-sm font-semibold hover:scale-110 transition">
+            Smazat
+        </button>
+
+        <input type="hidden" name="karta_hrac_${formDiv.dataset.kartaId}" value="${hracSelect.value}">
+        <input type="hidden" name="karta_minuta_${formDiv.dataset.kartaId}" value="${minutaInput.value}">
+        <input type="hidden" name="karta_typ_${formDiv.dataset.kartaId}" value="${typSelect.value}">
+    `;
+
+    formDiv.replaceWith(displayDiv);
+
+    document.getElementById("pocet_karet").value = karta_pocet;
+
+    document.getElementById("pridat_kartu_btn").style.display = 'block';
+}
+
+
+    //------------------------------------------------------------------------------------------------
+    // smazat kartu
+    //------------------------------------------------------------------------------------------------
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('delete-karta')) {
+            const id = e.target.closest('[data-karta-id]').dataset.kartaId;
+            document.querySelector(`[data-karta-id="${id}"]`).remove();
+            karta_pocet--;
+            document.getElementById("pocet_karet").value = karta_pocet;
+        }
+    });
+
+
+    // -----------------------------------------
+    // error hlaska
+    // -----------------------------------------
+    document.getElementById("main_form").addEventListener("submit", function (e) {
+        const error = document.getElementById("neulozene_error");
+
+        const neulozenyGol = document.querySelector("#goly_wrapper select[name='gol_hrac']");
+        const neulozenaKarta = document.querySelector("#karty_wrapper select[name='karta_hrac']");
+
+        if (neulozenyGol || neulozenaKarta) {
+            e.preventDefault();
+            error.classList.remove("hidden");
+            error.scrollIntoView({ behavior: "smooth", block: "center" });
+            return;
+        }
+
+        error.classList.add("hidden");
+    });
+    </script>
+
 
 {% endblock %}

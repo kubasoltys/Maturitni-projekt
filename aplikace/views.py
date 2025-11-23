@@ -806,8 +806,9 @@ def hlasovani_dochazka_smazat(request, trenink_id):
 
 # ZAPASY
 
-
+#----------------------------------------------------------------------------------------------
 # hrac - stranka pro zapasy
+#----------------------------------------------------------------------------------------------
 @login_required
 def hrac_zapas(request):
     try:
@@ -819,7 +820,6 @@ def hrac_zapas(request):
     tym = hrac.tym
     now = timezone.localtime()
 
-    # Zápasy týmu, které ještě neproběhly
     zapasy = (
         Zapas.objects.filter(tym=tym, stav='Naplánováno')
         .filter(datum__gte=now.date())
@@ -834,7 +834,6 @@ def hrac_zapas(request):
             timezone.get_current_timezone()
         )
 
-        # Přeskočíme zápasy, které už proběhly
         if datetime_zapasu <= now:
             continue
 
@@ -843,7 +842,7 @@ def hrac_zapas(request):
         zapasy_data.append({
             'zapas': zapas,
             'dochazka': dochazka_obj,
-            'klub': tym.nazev,   # nový model – klub přes tým
+            'klub': tym.nazev,
             'hlasoval': dochazka_obj.pritomen is not None if dochazka_obj else False,
             'po_dohrani': (
                 datetime_zapasu < now and
@@ -854,7 +853,7 @@ def hrac_zapas(request):
     return render(request, 'hrac/zapas/zapas.html', {
         'hrac': hrac,
         'tym': tym,
-        'trener': tym.trener,   # pokud ho chceš v šabloně
+        'trener': tym.trener,
         'zapasy_data': zapasy_data
     })
 

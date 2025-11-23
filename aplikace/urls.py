@@ -114,7 +114,7 @@ urlpatterns = [
     path('trener/zapasy/smazat/<int:zapas_id>/', views.delete_zapas_view, name='delete_zapas'),
 
     # oznacit zapas jako dohrany
-    path('trener/zapasy/oznacit_dohrano/<int:zapas_id>/', views.oznacit_dohrano_view, name='oznacit_dohrano'),
+    path('trener/zapasy/zadat_vysledky/<int:zapas_id>/', views.oznacit_dohrano_view, name='oznacit_dohrano'),
 
     # trener - odehrane zapasy
     path('trener/zapasy/odehrane-zapasy/', views.trener_dohrane_zapasy, name='trener_dohrane_zapasy'),

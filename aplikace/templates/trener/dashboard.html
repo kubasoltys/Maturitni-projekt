@@ -165,6 +165,7 @@
                         <th class="py-3 px-4 text-left">Pozice</th>
                         <th class="py-3 px-4 text-left">Číslo dresu</th>
                         <th class="py-3 px-4 text-left">Účast - tréninky</th>
+                        <th class="py-3 px-4 text-left">Účast - zápasy</th>
                     </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-100">
@@ -193,10 +194,19 @@
                             <span class="text-red-500">{{ hrac.dochazka_treninky }}%</span>
                             {% endif %}
                         </td>
+                        <td class="py-3 px-4 font-semibold">
+                            {% if hrac.dochazka_zapasy > 50 %}
+                            <span class="text-green-500">{{ hrac.dochazka_zapasy }}%</span>
+                            {% elif hrac.dochazka_zapasy == 50 %}
+                            <span class="text-green-500">{{ hrac.dochazka_zapasy }}%</span>
+                            {% else %}
+                            <span class="text-red-500">{{ hrac.dochazka_zapasy }}%</span>
+                            {% endif %}
+                        </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="4" class="py-4 text-center text-gray-400">
+                        <td colspan="5" class="py-4 text-center text-gray-400">
                             Zatím nemáte přiřazené žádné hráče.
                         </td>
                     </tr>
