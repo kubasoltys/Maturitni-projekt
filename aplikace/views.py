@@ -1139,7 +1139,10 @@ def oznacit_dohrano_view(request, zapas_id):
     else:
         form = DohranyZapasForm(instance=zapas)
 
-    hraci = HracProfile.objects.filter(tym=vybrany_tym)
+    hraci = HracProfile.objects.filter(
+        dochazkazapasy__zapas=zapas,
+        dochazkazapasy__pritomen=True
+    )
 
     context = {
         "form": form,
