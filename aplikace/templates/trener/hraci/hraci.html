@@ -133,9 +133,11 @@
                             <th class="py-3 px-4 text-left">Účast - zápasy</th>
                         </tr>
                     </thead>
+
                     <tbody class="bg-white divide-y divide-gray-100">
                         {% for hrac in hraci %}
-                        <tr class="hover:bg-gray-50 transition-colors">
+                        <tr class="hover:bg-gray-100 transition-colors cursor-pointer"
+                            onclick="window.location='{% url 'trener_hrac_detail' hrac.id %}'">
                             <td class="py-3 px-4 font-semibold">
                                 {% if hrac.first_name and hrac.last_name %}
                                     {{ hrac.first_name }} {{ hrac.last_name }}
@@ -148,27 +150,27 @@
                                 {% endif %}
                                 ({{ hrac.vek }})
                             </td>
+
                             <td class="py-3 px-4">{{ hrac.pozice|default:"-" }}</td>
                             <td class="py-3 px-4">{{ hrac.cislo_dresu|default:"-" }}</td>
+
                             <td class="py-3 px-4 font-semibold">
-                                {% if hrac.dochazka_treninky > 50 %}
-                                    <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
-                                {% elif hrac.dochazka_treninky == 50 %}
+                                {% if hrac.dochazka_treninky >= 50 %}
                                     <span class="text-green-500">{{ hrac.dochazka_treninky }}%</span>
                                 {% else %}
                                     <span class="text-red-500">{{ hrac.dochazka_treninky }}%</span>
                                 {% endif %}
                             </td>
+
                             <td class="py-3 px-4 font-semibold">
-                                {% if hrac.dochazka_zapasy > 50 %}
-                                    <span class="text-green-500">{{ hrac.dochazka_zapasy }}%</span>
-                                {% elif hrac.dochazka_zapasy == 50 %}
+                                {% if hrac.dochazka_zapasy >= 50 %}
                                     <span class="text-green-500">{{ hrac.dochazka_zapasy }}%</span>
                                 {% else %}
                                     <span class="text-red-500">{{ hrac.dochazka_zapasy }}%</span>
                                 {% endif %}
                             </td>
                         </tr>
+
                         {% empty %}
                         <tr>
                             <td colspan="5" class="py-4 text-center text-gray-400">
@@ -179,6 +181,7 @@
                     </tbody>
                 </table>
             </div>
+
             <div class="space-y-4">
                 <a href="{% url 'trener_dashboard' %}"
                    class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">

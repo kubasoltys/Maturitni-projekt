@@ -8,6 +8,9 @@ from datetime import datetime, date
 from django.db.models import Q
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm, DohranyZapasForm
 from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy, Tym, Gol, Karta
+from collections import defaultdict
+from itertools import accumulate
+import json
 
 
 #----------------------------------------------------------------------------------------------
@@ -325,6 +328,123 @@ def trener_hraci_view(request):
         'vybrany_tym': vybrany_tym,
         'trener': trener,
     })
+
+
+#----------------------------------------------------------------------------------------------
+# trener - detail hrace
+#----------------------------------------------------------------------------------------------
+@login_required
+def trener_hrac_detail(request, hrac_id):
+    from collections import defaultdict
+    import json
+
+    try:
+        trener = request.user.trenerprofile
+    except TrenerProfile.DoesNotExist:
+        return render(request, "error.html", {"message": "Nemáte trenérský profil."})
+
+    tymy = Tym.objects.filter(trener=trener)
+
+    selected_tym_id = request.GET.get("selected_tym")
+    if selected_tym_id:
+        request.session["selected_tym"] = selected_tym_id
+
+    selected_tym_id = request.session.get("selected_tym")
+    if selected_tym_id:
+        vybrany_tym = tymy.filter(id=selected_tym_id).first()
+    else:
+        vybrany_tym = tymy.first()
+
+    if vybrany_tym not in tymy:
+        vybrany_tym = tymy.first()
+
+    hrac = get_object_or_404(HracProfile, id=hrac_id)
+
+    if hrac.tym not in trener.tymy.all():
+        return render(request, "error.html", {"message": "Nemáte oprávnění zobrazit tohoto hráče."})
+
+    goly = Gol.objects.filter(hrac=hrac)
+    karty = Karta.objects.filter(hrac=hrac)
+
+    gol_count = goly.count()
+    zlute = karty.filter(typ="zluta").count()
+    cervene = karty.filter(typ="cervena").count()
+
+    dochazka_treninky = (
+        DochazkaTreninky.objects
+        .filter(hrac=hrac)
+        .select_related("trenink")
+        .order_by("-trenink__datum")[:5]
+    )
+
+    dochazka_hrace_zapasy = (
+        DochazkaZapasy.objects
+        .filter(hrac=hrac, pritomen=True)
+        .select_related("zapas")
+        .order_by("zapas__datum")
+    )
+
+    zapasy = (
+        Zapas.objects.filter(tym=vybrany_tym, stav="Dohráno")
+        .prefetch_related("goly", "karty", "dochazka")
+        .order_by("-datum", "-cas")[:5]
+    )
+
+    zapasy_data = []
+
+    for zapas in zapasy:
+        dochazka_hrace = dochazka_hrace_zapasy.filter(zapas=zapas).first()
+        if dochazka_hrace:
+            goly_hrace = zapas.goly.filter(hrac=hrac)
+            karty_hrace = zapas.karty.filter(hrac=hrac)
+            goly_tym = zapas.goly.filter(hrac__tym=vybrany_tym).count()
+            vysledek_soupere = zapas.vysledek_soupere
+
+            zapasy_data.append({
+                "zapas": zapas,
+                "goly_hrace": goly_hrace,
+                "karty_hrace": karty_hrace,
+                "vysledek_tymu": goly_tym,
+                "vysledek_soupere": vysledek_soupere,
+            })
+
+    labels = []
+    values = []
+
+    for d in dochazka_hrace_zapasy:
+        zapas = d.zapas
+        pocet = zapas.goly.filter(hrac=hrac).count()
+
+        labels.append(zapas.datum.strftime("%d.%m.%Y"))
+        values.append(pocet)
+
+    graf_goly_json = json.dumps({
+        "labels": labels,
+        "values": values,
+    })
+
+    zapasy_pritomen_ids = dochazka_hrace_zapasy.values_list('zapas', flat=True)
+    celkove_goly = Gol.objects.filter(hrac=hrac, zapas__in=zapasy_pritomen_ids).count()
+    pocet_zapasu = len(zapasy_pritomen_ids)
+    prumer_golu = round(celkove_goly / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
+
+    context = {
+        "hrac": hrac,
+        "tym": hrac.tym,
+        "vybrany_tym": vybrany_tym,
+        "trener": trener,
+        "goly": goly,
+        "karty": karty,
+        "gol_count": gol_count,
+        "zlute": zlute,
+        "cervene": cervene,
+        "prumer_golu": prumer_golu,
+        "dochazka_treninky": dochazka_treninky,
+        "zapasy_data": zapasy_data,
+        "graf_goly_json": graf_goly_json,
+    }
+
+    return render(request, "trener/hraci/hraci_detail.html", context)
 
 
 

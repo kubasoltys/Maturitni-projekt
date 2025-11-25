@@ -2,7 +2,6 @@ from django.conf import settings
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.urls.base import reverse_lazy
-
 from squadra.settings import BASE_DIR
 from . import views
 from django.conf.urls.static import static
@@ -21,7 +20,10 @@ urlpatterns = [
     path('hrac/', views.hrac_dashboard, name='hrac_dashboard'),
 
 # trener - hraci
-    path('trener/hraci', views.trener_hraci_view, name='trener_hraci'),
+    path('trener/hraci/', views.trener_hraci_view, name='trener_hraci'),
+
+# trener - detail hrace
+    path('trener/hraci/detail/<int:hrac_id>/', views.trener_hrac_detail, name='trener_hrac_detail'),
 
 # settings
     path('trener/nastaveni/', views.trener_settings_view, name='trener_settings'),
