@@ -910,8 +910,8 @@
   "model": "sessions.session",
   "pk": "5r4xsfydx4ty50eovxs4k3kv2jsor55p",
   "fields": {
-    "session_data": ".eJxVjM0OwiAQhN-FsyGw_Lh69N5nIMsCUjU0Ke3J-O62SQ96m8z3zbxFoHWpYe15DmMSVwHi9NtF4mduO0gPavdJ8tSWeYxyV-RBuxymlF-3w_07qNTrtkbrffYO3dlHDwYs6ZLSlqgo1qAS64jKkI45aiYNDopXaNAwuAta8fkCxQ02-w:1vNzeK:uhT4I9j4P_zprzwmPQYpESwUfLrqoJ57fH4rXGOjUc4",
-    "expire_date": "2025-12-09T20:28:32.281Z"
+    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vOLhx:Qc-Sfwuwim81elcnwM9EA-462jYOH5juJIL6vDqeCFY",
+    "expire_date": "2025-12-10T20:01:45.201Z"
   }
 },
 {
@@ -939,7 +939,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-11-25T20:28:32.279Z",
+    "last_login": "2025-11-26T20:01:45.189Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -1286,6 +1286,19 @@
     "poznamka": "zkouška",
     "stav": "Naplánováno",
     "created_at": "2025-11-19T15:55:52.852Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 14,
+  "fields": {
+    "tym": 1,
+    "datum": "2025-11-29",
+    "cas": "15:00:00",
+    "typ": "Fyzická příprava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-11-26T12:51:13.243Z"
   }
 },
 {
@@ -1641,6 +1654,22 @@
     "vysledek_tymu": null,
     "vysledek_soupere": 2,
     "created_at": "2025-11-25T20:26:46.522Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 40,
+  "fields": {
+    "tym": 1,
+    "souper": "Liverpool FC",
+    "datum": "2025-11-30",
+    "cas": "21:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 0,
+    "created_at": "2025-11-26T12:50:50.110Z"
   }
 },
 {

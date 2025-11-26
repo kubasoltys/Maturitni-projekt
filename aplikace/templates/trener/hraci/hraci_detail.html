@@ -6,7 +6,7 @@
 
 
 <!-- navbar -->
-<nav class="fixed top-0 left-0 w-full bg-white shadow-lg z-50 border-b border-gray-200">
+<nav class="fixed top-0 left-0 w-full bg-white/70 backdrop-blur-sm shadow-lg z-50 border-b border-gray-200">
     <div class="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
 
         <!-- tym -->
@@ -117,12 +117,12 @@
 
     <!-- statistiky -->
     <div class="bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800">Statistiky</h2>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 drop-shadow-lg">Statistiky</h2>
 
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
 
             <!-- goly -->
-            <div class="bg-gradient-to-b from-blue-100 to-white rounded-3xl p-5 shadow-md hover:shadow-xl transition">
+            <div class="bg-gradient-to-b from-blue-300 to-white rounded-3xl p-5 shadow-md hover:shadow-xl transition">
                 <div class="w-12 h-12 mb-2 mx-left">
                     <img src="../../../../media/stranka/goal.png" alt="Góly" class="w-full h-full object-contain">
                 </div>
@@ -133,7 +133,7 @@
             </div>
 
             <!-- dochazka - zapasy -->
-            <div class="bg-gradient-to-b from-purple-100 to-white rounded-3xl p-5 shadow-md hover:shadow-xl transition">
+            <div class="bg-gradient-to-b from-purple-300 to-white rounded-3xl p-5 shadow-md hover:shadow-xl transition">
                 <div class="w-12 h-12 mb-2 mx-left">
                     <img src="../../../../media/stranka/zapas.png" alt="Góly" class="w-full h-full object-contain">
                 </div>
@@ -144,7 +144,7 @@
             </div>
 
             <!-- dochazka - treninky -->
-            <div class="bg-gradient-to-b from-green-100 to-white rounded-3xl p-5 shadow-md hover:shadow-xl transition">
+            <div class="bg-gradient-to-b from-green-300 to-white rounded-3xl p-5 shadow-md hover:shadow-xl transition">
                 <div class="w-12 h-12 mb-2 mx-left">
                     <img src="../../../../media/stranka/trenink.png" alt="Góly" class="w-full h-full object-contain">
                 </div>
@@ -197,83 +197,134 @@
     </div>
 
 
-
-
     <!-- dochazka - treninky -->
     <div class="bg-white p-6 rounded-3xl shadow-2xl border border-gray-200">
-        <h2 class="text-2xl font-bold mb-4 text-gray-800 drop-shadow-sm">Docházka – Tréninky</h2>
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 drop-shadow-sm">Účast na trénincích</h2>
 
-        <ul class="divide-y divide-gray-200">
+        {% if dochazka_treninky %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+
             {% for d in dochazka_treninky %}
-                <li class="py-3 flex justify-between items-center">
-                    <span class="text-gray-700 font-medium">
-                        {{ d.trenink.datum }} – {{ d.trenink.cas }}
-                    </span>
+            <div class="p-4 rounded-3xl border border-gray-200 shadow-md bg-gray-50
+                        hover:shadow-xl transition">
 
-                    {% if d.pritomen %}
-                        <span class="text-green-600 font-semibold">Přítomen</span>
-                    {% else %}
-                        <span class="text-red-600 font-semibold">Nepřítomen</span>
-                    {% endif %}
-                </li>
-            {% empty %}
-                <li class="py-3 text-gray-400 text-center">Žádné záznamy</li>
+                <p class="text-gray-600 font-semibold text-sm mb-1">
+                    {{ d.trenink.datum }} – {{ d.trenink.cas }}
+                </p>
+
+                {% if d.pritomen %}
+                    <p class="text-green-600 font-bold text-lg">
+                        ✓ Přítomen
+                    </p>
+                {% else %}
+                    <p class="text-red-600 font-bold text-lg">
+                        ✗ Nepřítomen
+                    </p>
+                {% endif %}
+            </div>
             {% endfor %}
-        </ul>
+
+        </div>
+        {% else %}
+            <p class="text-gray-400 text-center py-6">Žádné záznamy</p>
+        {% endif %}
     </div>
+
 
     <!-- odehrane zapasy -->
-    <div class="bg-white p-6 rounded-3xl shadow-2xl border border-gray-200">
-        <h2 class="text-2xl font-bold mb-4 text-gray-800 drop-shadow-sm">Odehrané zápasy</h2>
+    <div class="bg-white p-6 rounded-3xl shadow-2xl">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 drop-shadow-sm">Odehrané zápasy</h2>
 
-        <ul class="divide-y divide-gray-200">
-            {% for item in zapasy_data %}
-                <li class="py-3 space-y-1 border-2 border-gray-200 mb-3 rounded-3xl shadow-inner bg-gray-50 hover:bg-blue-50 transition">
-                    <div class="flex justify-between items-center px-2">
-                        <span class="font-bold text-gray-700">
-                            {% if data.zapas.domaci_hoste|lower == "domácí"|lower %}
-                                <span class="font-semibold text-gray-600">{{ item.zapas.datum }} | </span>{{ tym.nazev }}
-                                <span class="text-sm font-semibold text-gray-500">vs </span>
-                                {{ item.zapas.souper }}
-                            {% else %}
-                                <span class="font-semibold text-gray-600">{{ item.zapas.datum }} | </span>{{ item.zapas.souper }}
-                                <span class="text-sm font-semibold text-gray-500">vs </span>
-                                {{ tym.nazev }}
-                            {% endif %}
-                        </span>
-                        <span class="font-bold text-lg text-gray-800 drop-shadow-lg">
-                            {{ item.vysledek_soupere }} : {{ item.vysledek_tymu }}
-                        </span>
+        {% if zapasy_data %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                {% for item in zapasy_data %}
+                <div class="bg-gray-50 border border-gray-200 p-5 rounded-3xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition transform">
+
+                    <!-- skore -->
+                    <div class="p-3 text-center mb-4">
+                        <p class="text-4xl font-bold tracking-wide drop-shadow text-gray-800">
+                            {{ item.vysledek_tymu }} : {{ item.vysledek_soupere }}
+                        </p>
                     </div>
 
-                    {% if item.goly_hrace %}
-                        <p class="text-sm text-gray-600 px-2">
-                            Gól(y):
-                            {% for g in item.goly_hrace %}
-                                {{ g.minuta }}'
-                                {% if g.typ == "penalta" %}
-                                    (<span class="text-gray-400">penalta</span>)
-                                {% endif %}
-                                {% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </p>
-                    {% endif %}
+                    <!-- tym -->
+                    <div class="text-center text-gray-800 text-xl font-semibold mb-1">
+                        {% if item.zapas.domaci_hoste|lower == "domácí"|lower %}
+                            {{ tym.nazev }}
+                            <div class="text-gray-400">vs</div>
+                            {{ item.zapas.souper }}
+                        {% else %}
+                            {{ item.zapas.souper }}
+                            <div class="text-gray-400">vs</div>
+                            {{ tym.nazev }}
+                        {% endif %}
+                    </div>
 
-                    {% if item.karty_hrace %}
-                        <p class="text-sm text-gray-600 px-2">
-                            Karty:
-                            {% for k in item.karty_hrace %}
-                                {{ k.minuta }}' {% if k.typ == "zluta" %}🟨{% elif k.typ == "cervena" %}🟥{% endif %}
-                                {% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </p>
-                    {% endif %}
-                </li>
-            {% empty %}
-                <li class="py-3 text-gray-400 text-center">Žádné zápasy</li>
-            {% endfor %}
-        </ul>
+                    <!-- datum -->
+                    <p class="text-center font-semibold text-gray-400 text-xs mb-4">
+                        {{ item.zapas.datum }}
+                    </p>
+
+                    <!-- goly -->
+                    <div class="mb-4">
+                        <p class="text-gray-600 text-sm font-semibold mb-1">Góly hráče:</p>
+
+                        {% if item.goly_hrace %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for g in item.goly_hrace %}
+                                    <span class="flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-xl
+                                                 text-sm font-medium shadow">
+                                        ⚽︎<span>{{ g.minuta }}’</span>
+                                        {% if g.typ == "penalta" %}
+                                            <span class="text-gray-400 text-xs">(pen.)</span>
+                                        {% endif %}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="bg-gray-100 shadow p-2 rounded-xl text-sm text-gray-500">
+                                Hráč nedal v tomto zápase gól
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <!-- karty -->
+                    <div>
+                        <p class="text-gray-600 text-sm font-semibold mb-1">Karty:</p>
+
+                        {% if item.karty_hrace %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for k in item.karty_hrace %}
+                                    <span class="flex items-center gap-1 px-3 py-1 rounded-xl text-sm font-medium shadow
+                                                 {% if k.typ == 'zluta' %}
+                                                     bg-yellow-100 text-yellow-800
+                                                 {% else %}
+                                                     bg-red-100 text-red-800
+                                                 {% endif %}">
+                                        {% if k.typ == "zluta" %} 🟨 {% else %} 🟥 {% endif %}
+                                        <span>{{ k.minuta }}’</span>
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="bg-gray-100 shadow p-2 rounded-xl text-sm text-gray-500">
+                                Žádná karta v tomto zápase
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <p class="text-gray-400 text-center py-6">Žádné zápasy</p>
+        {% endif %}
     </div>
+
+
+
 
 </div>
 

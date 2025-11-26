@@ -374,7 +374,7 @@ def trener_hrac_detail(request, hrac_id):
         DochazkaTreninky.objects
         .filter(hrac=hrac)
         .select_related("trenink")
-        .order_by("-trenink__datum")[:5]
+        .order_by("-trenink__datum")[:4]
     )
 
     dochazka_hrace_zapasy = (
@@ -387,7 +387,7 @@ def trener_hrac_detail(request, hrac_id):
     zapasy = (
         Zapas.objects.filter(tym=vybrany_tym, stav="Dohráno")
         .prefetch_related("goly", "karty", "dochazka")
-        .order_by("-datum", "-cas")[:5]
+        .order_by("-datum", "-cas")[:3]
     )
 
     zapasy_data = []
