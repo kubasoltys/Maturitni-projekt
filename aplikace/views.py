@@ -334,9 +334,7 @@ def trener_hraci_view(request):
 # trener - detail hrace
 #----------------------------------------------------------------------------------------------
 @login_required
-def trener_hrac_detail(request, hrac_id):
-    from collections import defaultdict
-    import json
+def trener_hrac_statistiky(request, hrac_id):
 
     try:
         trener = request.user.trenerprofile
@@ -387,7 +385,7 @@ def trener_hrac_detail(request, hrac_id):
     zapasy = (
         Zapas.objects.filter(tym=vybrany_tym, stav="Dohráno")
         .prefetch_related("goly", "karty", "dochazka")
-        .order_by("-datum", "-cas")[:3]
+        .order_by("-datum", "-cas")
     )
 
     zapasy_data = []
@@ -444,7 +442,90 @@ def trener_hrac_detail(request, hrac_id):
         "graf_goly_json": graf_goly_json,
     }
 
-    return render(request, "trener/hraci/hraci_detail.html", context)
+    return render(request, "trener/hraci/statistiky.html", context)
+
+
+#---------------------------------------------------------------------------------------------
+# hrac - statistiky hrace
+#---------------------------------------------------------------------------------------------
+@login_required
+def hrac_statistiky(request):
+    try:
+        hrac = request.user.hracprofile
+    except HracProfile.DoesNotExist:
+        return render(request, "error.html", {"message": "Nemáte hráčský profil."})
+
+    tym = hrac.tym
+
+    goly = Gol.objects.filter(hrac=hrac)
+    karty = Karta.objects.filter(hrac=hrac)
+    gol_count = goly.count()
+    zlute = karty.filter(typ="zluta").count()
+    cervene = karty.filter(typ="cervena").count()
+
+    dochazka_treninky = (
+        DochazkaTreninky.objects
+        .filter(hrac=hrac)
+        .select_related("trenink")
+        .order_by("-trenink__datum")[:4]
+    )
+
+    dochazka_hrace_zapasy = (
+        DochazkaZapasy.objects
+        .filter(hrac=hrac, pritomen=True)
+        .select_related("zapas")
+        .order_by("zapas__datum")
+    )
+
+    zapasy_data = []
+    for doch in dochazka_hrace_zapasy:
+        zapas = doch.zapas
+        goly_hrace = zapas.goly.filter(hrac=hrac)
+        karty_hrace = zapas.karty.filter(hrac=hrac)
+        goly_tym = zapas.goly.filter(hrac__tym=tym).count()
+        vysledek_soupere = zapas.vysledek_soupere
+
+        zapasy_data.append({
+            "zapas": zapas,
+            "goly_hrace": goly_hrace,
+            "karty_hrace": karty_hrace,
+            "vysledek_tymu": goly_tym,
+            "vysledek_soupere": vysledek_soupere,
+        })
+
+    labels = []
+    values = []
+    for doch in dochazka_hrace_zapasy:
+        zapas = doch.zapas
+        pocet = zapas.goly.filter(hrac=hrac).count()
+        labels.append(zapas.datum.strftime("%d.%m.%Y"))
+        values.append(pocet)
+
+    graf_goly_json = json.dumps({
+        "labels": labels,
+        "values": values,
+    })
+
+    zapasy_pritomen_ids = dochazka_hrace_zapasy.values_list('zapas', flat=True)
+    celkove_goly = Gol.objects.filter(hrac=hrac, zapas__in=zapasy_pritomen_ids).count()
+    pocet_zapasu = len(zapasy_pritomen_ids)
+    prumer_golu = round(celkove_goly / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
+
+    context = {
+        "hrac": hrac,
+        "tym": tym,
+        "goly": goly,
+        "karty": karty,
+        "gol_count": gol_count,
+        "zlute": zlute,
+        "cervene": cervene,
+        "prumer_golu": prumer_golu,
+        "graf_goly_json": graf_goly_json,
+        "zapasy_data": zapasy_data,
+        "dochazka_treninky": dochazka_treninky,
+    }
+
+    return render(request, "hrac/statistiky/statistiky.html", context)
 
 
 
@@ -1425,5 +1506,38 @@ def hrac_dohrane_zapasy(request):
     }
 
     return render(request, 'hrac/zapas/zapas_dohrano.html', context)
+
+
+
+#----------------------------------------------------------------------------------------------
+# trener - detail zapasu
+#----------------------------------------------------------------------------------------------
+@login_required
+def trener_zapas_detail(request, zapas_id):
+    zapas = get_object_or_404(Zapas, id=zapas_id)
+    try:
+        hrac = request.user.hracprofile
+        tym = hrac.tym
+    except HracProfile.DoesNotExist:
+        hrac = None
+        tym = None
+
+    dochazka_list = DochazkaZapasy.objects.filter(zapas=zapas).select_related('hrac__user')
+
+    goly = zapas.goly.all()
+    karty = zapas.karty.all()
+
+    context = {
+        'zapas': zapas,
+        'tym': tym,
+        'hrac': hrac,
+        'dochazka_list': dochazka_list,
+        'goly': goly,
+        'karty': karty,
+    }
+
+    return render(request, 'trener/zapas/detail.html', context)
+
+
 
 

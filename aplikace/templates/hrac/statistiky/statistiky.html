@@ -1,0 +1,355 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- navbar -->
+<nav class="fixed top-0 left-0 w-full bg-white/70 backdrop-blur-sm shadow-lg z-50 border-b border-gray-200">
+    <div class="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
+
+        <!-- tym -->
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-4">
+                {% if tym.logo %}
+                <img src="{{ tym.logo.url }}" alt="{{ tym.nazev }}"
+                     class="h-14 w-14 object-contain drop-shadow-sm">
+                {% else %}
+                <img src="{% static 'stranka/logo.png' %}" alt="Logo"
+                     class="h-14 w-14 object-contain drop-shadow-sm">
+                {% endif %}
+
+                {% if tym.logo %}
+                <div class="leading-tight">
+                    <p class="text-2xl font-extrabold text-gray-800 tracking-wide">
+                        {{ tym.nazev }}
+                    </p>
+                    <p class="text-sm text-gray-500 font-semibold -mt-1">
+                        {{ tym.kategorie }}
+                    </p>
+                </div>
+                {% endif %}
+
+            </div>
+        </div>
+
+        <!-- stranky -->
+        <div class="flex items-center space-x-6">
+
+            <a href="{% url 'hrac_zapas' %}"
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Zápasy
+                </span>
+            </a>
+
+            <a href="{% url 'hrac_trenink' %}"
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Tréninky
+                </span>
+            </a>
+
+            <a href="{% url 'hrac_settings' %}"
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Nastavení účtu
+                </span>
+            </a>
+
+            <a href="{% url 'hrac_dashboard' %}"
+               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
+                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
+                    Dashboard
+                </span>
+            </a>
+
+            <!-- profil -->
+            <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
+                {% if hrac.photo %}
+                <img src="{{ hrac.photo.url }}" alt="Profilová fotka"
+                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                {% else %}
+                <img src="/media/stranka/default_profile_picture.webp" alt="Výchozí profilová fotka"
+                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
+                {% endif %}
+
+                <p class="text-gray-500 font-semibold">
+                    {% if hrac.first_name and hrac.last_name %}
+                        {{ hrac.first_name }} {{ hrac.last_name }}
+                    {% elif hrac.first_name %}
+                        {{ hrac.first_name }}
+                    {% elif hrac.last_name %}
+                        {{ hrac.last_name }}
+                    {% else %}
+                        (bez jména)
+                    {% endif %}
+                </p>
+            </div>
+
+            <!-- logout -->
+            <a href="{% url 'logout' %}"
+               class="px-6 py-2 rounded-2xl shadow-md text-white font-semibold
+                      bg-gradient-to-r from-gray-500 to-gray-700
+                      hover:from-red-500 hover:to-red-700 transform transition hover:scale-105">
+                Odhlásit se
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div class="max-w-5xl mx-auto mt-10 space-y-8 pt-32">
+
+    <h1 class="text-3xl md:text-4xl font-extrabold text-center text-gray-800 drop-shadow-lg">
+        Moje statistiky
+    </h1>
+
+    <!-- statistiky -->
+    <div class="bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+
+            <div class="bg-gradient-to-b from-blue-300 to-blue-50 rounded-3xl p-5 shadow-md">
+                <div class="w-12 h-12 mb-2 mx-left">
+                    <img src="../../../../media/stranka/goal.png" alt="Góly" class="w-full h-full object-contain">
+                </div>
+                <p class="text-gray-600 font-semibold">Góly</p>
+                <p class="text-4xl font-bold text-gray-700 drop-shadow-lg">{{ gol_count }}</p>
+            </div>
+
+            <div class="bg-gradient-to-b from-purple-300 to-purple-50 rounded-3xl p-5 shadow-md">
+                <div class="w-12 h-12 mb-2 mx-left">
+                    <img src="../../../../media/stranka/zapas.png" alt="Góly" class="w-full h-full object-contain">
+                </div>
+                <p class="text-gray-600 font-semibold">Účast - zápasy</p>
+                <p class="text-4xl font-bold text-gray-700 drop-shadow-lg">{{ hrac.dochazka_zapasy }}%</p>
+            </div>
+
+            <div class="bg-gradient-to-b from-green-300 to-green-50 rounded-3xl p-5 shadow-md">
+                <div class="w-12 h-12 mb-2 mx-left">
+                    <img src="../../../../media/stranka/trenink.png" alt="Góly" class="w-full h-full object-contain">
+                </div>
+                <p class="text-gray-600 font-semibold">Účast - tréninky</p>
+                <p class="text-4xl font-bold text-gray-700 drop-shadow-lg">{{ hrac.dochazka_treninky }}%</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- graf -->
+    <div class="bg-white p-6 rounded-3xl shadow-2xl border border-gray-200 mt-8">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 drop-shadow-lg">Góly na zápas</h2>
+        <canvas id="golyGraf" height="100"></canvas>
+    </div>
+
+    <!-- dalsi statistiky -->
+    <div class="mt-8">
+        <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center drop-shadow-lg">Další statistiky</h3>
+
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+
+            <div class="bg-white rounded-3xl p-6 shadow-xl text-center">
+                <p class="text-gray-600 mb-1">Průměr gólů na zápas</p>
+                <p class="text-4xl font-bold text-transparent bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text drop-shadow-lg">
+                    {{ prumer_golu }}
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-xl text-center">
+                <p class="text-gray-600 mb-1">Žluté karty</p>
+                <p class="text-4xl font-bold text-transparent bg-gradient-to-r from-yellow-500 to-amber-600 bg-clip-text drop-shadow-lg">
+                    {{ zlute }}
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-xl text-center">
+                <p class="text-gray-600 mb-1">Červené karty</p>
+                <p class="text-4xl font-bold text-transparent bg-gradient-to-r from-red-500 to-rose-600 bg-clip-text drop-shadow-lg">
+                    {{ cervene }}
+                </p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- dochazka na treninky -->
+    <div class="bg-white p-6 rounded-3xl shadow-2xl border border-gray-200">
+        <h2 class="text-2xl font-bold mb-4 text-gray-800 drop-shadow-lg">Účast na trénincích</h2>
+
+        {% if dochazka_treninky %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {% for d in dochazka_treninky %}
+                <div class="p-4 rounded-3xl shadow bg-gray-50 border border-gray-200
+                            {% if d.pritomen %} border-green-300 {% else %} border-red-300 {% endif %}">
+                    <p class="text-gray-600 font-semibold text-sm mb-1">
+                        {{ d.trenink.datum }} – {{ d.trenink.cas }}
+                    </p>
+
+                    {% if d.pritomen %}
+                        <p class="text-green-700 font-bold">✓ Přítomen</p>
+                    {% else %}
+                        <p class="text-red-700 font-bold">✗ Nepřítomen</p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+        <p class="text-gray-400 text-center py-6">Žádné záznamy</p>
+        {% endif %}
+    </div>
+
+    <!-- odehrane zapasy -->
+    <div class="bg-white p-6 rounded-3xl shadow-2xl">
+        <h2 class="text-2xl font-bold mb-6 text-gray-800 drop-shadow-lg">Odehrané zápasy</h2>
+
+        {% if zapasy_data %}
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                {% for z in zapasy_data %}
+                <div class="bg-gray-50 border border-gray-200 p-5 rounded-3xl shadow-lg
+                {% if z.vysledek_tymu > z.vysledek_soupere %} bg-gradient-to-b from-green-200 to-green-50
+                {% elif z.vysledek_tymu < z.vysledek_soupere %} bg-gradient-to-b from-red-200 to-red-50
+                {% else %} bg-gradient-to-b from-yellow-200 to-yellow-50 {% endif %}">
+
+                    <div class="p-3 text-center mb-4">
+                        {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
+                            <p class="text-4xl font-bold tracking-wide drop-shadow text-gray-800">
+                                {{ z.vysledek_tymu }} : {{ z.vysledek_soupere }}
+                            </p>
+                        {% else %}
+                            <p class="text-4xl font-bold tracking-wide drop-shadow text-gray-800">
+                                {{ z.vysledek_soupere }} : {{ z.vysledek_tymu }}
+                            </p>
+                        {% endif %}
+                    </div>
+
+                    <div class="text-center text-gray-800 text-xl font-semibold mb-1">
+                        {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
+                            {{ tym.nazev }}
+                            <div class="text-gray-400">vs</div>
+                            {{ z.zapas.souper }}
+                        {% else %}
+                            {{ z.zapas.souper }}
+                            <div class="text-gray-400">vs</div>
+                            {{ tym.nazev }}
+                        {% endif %}
+                    </div>
+
+                    <p class="text-center font-semibold text-gray-400 text-xs mb-4">
+                        {{ z.zapas.datum }}
+                    </p>
+
+                    <div class="mb-4">
+                        <p class="text-gray-600 text-sm font-semibold mb-1">Tvé góly:</p>
+                        {% if z.goly_hrace %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for g in z.goly_hrace %}
+                                    <span class="flex items-center gap-1 bg-gray-300 px-3 py-1 rounded-xl
+                                                 text-sm font-medium shadow">
+                                        ⚽︎ <span>{{ g.minuta }}’</span>
+                                        {% if g.typ == "penalta" %}
+                                            <span class="text-gray-400 text-xs">(pen.)</span>
+                                        {% endif %}
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="bg-gray-100 shadow p-2 rounded-xl text-sm text-gray-500">
+                                V tomto zápase jsi nedal gól
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <p class="text-gray-600 text-sm font-semibold mb-1">Karty:</p>
+                        {% if z.karty_hrace %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for k in z.karty_hrace %}
+                                    <span class="flex items-center gap-1 px-3 py-1 rounded-xl text-sm font-medium shadow
+                                                 {% if k.typ == 'zluta' %} bg-yellow-100 text-yellow-800 {% else %} bg-red-100 text-red-800 {% endif %}">
+                                        {% if k.typ == "zluta" %} 🟨 {% else %} 🟥 {% endif %}
+                                        <span>{{ k.minuta }}’</span>
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="bg-gray-100 shadow p-2 rounded-xl text-sm text-gray-500">
+                                V tomto zápase jsi nedostal kartu
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+                {% endfor %}
+            </div>
+
+        {% else %}
+            <p class="text-gray-400 text-center py-6">Žádné zápasy</p>
+        {% endif %}
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+    const data = JSON.parse('{{ graf_goly_json|escapejs }}');
+
+    new Chart(document.getElementById('golyGraf'), {
+        type: 'line',
+        data: {
+            labels: data.labels,
+            datasets: [{
+                label: 'Góly',
+                data: data.values,
+                fill: false,
+                borderColor: 'rgb(75, 192, 192)',
+                backgroundColor: 'rgb(75, 192, 192)',
+                tension: 0.2,
+                pointRadius: 5,
+                pointHoverRadius: 7,
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            return `${context.dataset.label}: ${Math.round(context.parsed.y)}`;
+                        }
+                    }
+                },
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: {
+                        stepSize: 1,
+                        callback: function(value) {
+                            return value;
+                        }
+                    },
+                    suggestedMax: Math.max(...data.values) + 1
+                },
+                x: {
+                    ticks: {
+                        autoSkip: false,
+                        maxRotation: 45,
+                        minRotation: 45
+                    }
+                }
+            }
+        }
+    });
+
+});
+</script>
+
+
+{% endblock %}

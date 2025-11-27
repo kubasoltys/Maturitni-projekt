@@ -122,7 +122,7 @@
         <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
 
             <!-- goly -->
-            <div class="bg-gradient-to-b from-blue-300 to-white rounded-3xl p-5 shadow-md hover:shadow-xl transition">
+            <div class="bg-gradient-to-b from-blue-300 to-blue-50 rounded-3xl p-5 shadow-md">
                 <div class="w-12 h-12 mb-2 mx-left">
                     <img src="../../../../media/stranka/goal.png" alt="Góly" class="w-full h-full object-contain">
                 </div>
@@ -133,7 +133,7 @@
             </div>
 
             <!-- dochazka - zapasy -->
-            <div class="bg-gradient-to-b from-purple-300 to-white rounded-3xl p-5 shadow-md hover:shadow-xl transition">
+            <div class="bg-gradient-to-b from-purple-300 to-purple-50 rounded-3xl p-5 shadow-md">
                 <div class="w-12 h-12 mb-2 mx-left">
                     <img src="../../../../media/stranka/zapas.png" alt="Góly" class="w-full h-full object-contain">
                 </div>
@@ -144,7 +144,7 @@
             </div>
 
             <!-- dochazka - treninky -->
-            <div class="bg-gradient-to-b from-green-300 to-white rounded-3xl p-5 shadow-md hover:shadow-xl transition">
+            <div class="bg-gradient-to-b from-green-300 to-green-50 rounded-3xl p-5 shadow-md">
                 <div class="w-12 h-12 mb-2 mx-left">
                     <img src="../../../../media/stranka/trenink.png" alt="Góly" class="w-full h-full object-contain">
                 </div>
@@ -169,26 +169,23 @@
 
         <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
 
-            <!-- goly na zapas -->
-            <div class="flex flex-col items-center justify-center bg-white rounded-3xl p-6 shadow-xl border border-gray-200 hover:shadow-2xl transition">
+            <div class="flex flex-col items-center justify-center bg-white rounded-3xl p-6 shadow-xl border border-gray-200">
                 <p class="text-gray-600 font-medium mb-1">Průměr gólů na zápas</p>
-                <p class="text-4xl font-bold text-gradient bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">
+                <p class="text-4xl font-bold text-gradient bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent drop-shadow-lg">
                     {{ prumer_golu }}
                 </p>
             </div>
 
-            <!-- zluta karta -->
-            <div class="flex flex-col items-center justify-center bg-white rounded-3xl p-6 shadow-xl border border-gray-200 hover:shadow-2xl transition">
+            <div class="flex flex-col items-center justify-center bg-white rounded-3xl p-6 shadow-xl border border-gray-200">
                 <p class="text-gray-600 font-medium mb-1">Žluté karty</p>
-                <p class="text-4xl font-bold text-gradient bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">
+                <p class="text-4xl font-bold text-gradient bg-gradient-to-r from-yellow-500 to-amber-600 bg-clip-text text-transparent drop-shadow-lg">
                     {{ zlute }}
                 </p>
             </div>
 
-            <!-- cervena karta -->
-            <div class="flex flex-col items-center justify-center bg-white rounded-3xl p-6 shadow-xl border border-gray-200 hover:shadow-2xl transition">
+            <div class="flex flex-col items-center justify-center bg-white rounded-3xl p-6 shadow-xl border border-gray-200">
                 <p class="text-gray-600 font-medium mb-1">Červené karty</p>
-                <p class="text-4xl font-bold text-gradient bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent drop-shadow-lg">
+                <p class="text-4xl font-bold text-gradient bg-gradient-to-r from-red-500 to-rose-600 bg-clip-text text-transparent drop-shadow-lg">
                     {{ cervene }}
                 </p>
             </div>
@@ -206,7 +203,7 @@
 
             {% for d in dochazka_treninky %}
             <div class="p-4 rounded-3xl border border-gray-200 shadow-md bg-gray-50
-                        hover:shadow-xl transition">
+                        {% if d.pritomen %} border-green-300 {% else %} border-red-300 {% endif %}">
 
                 <p class="text-gray-600 font-semibold text-sm mb-1">
                     {{ d.trenink.datum }} – {{ d.trenink.cas }}
@@ -238,42 +235,47 @@
         {% if zapasy_data %}
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-                {% for item in zapasy_data %}
-                <div class="bg-gray-50 border border-gray-200 p-5 rounded-3xl shadow-lg hover:shadow-2xl hover:scale-[1.02] transition transform">
+                {% for z in zapasy_data %}
+                <div class="bg-gray-50 border border-gray-200 p-5 rounded-3xl shadow-lg
+                            {% if z.vysledek_tymu > z.vysledek_soupere %} bg-gradient-to-b from-green-200 to-green-50
+                            {% elif z.vysledek_tymu < z.vysledek_soupere %} bg-gradient-to-b from-red-200 to-red-50
+                            {% else %} bg-gradient-to-b from-yellow-200 to-yellow-50 {% endif %}">
 
-                    <!-- skore -->
                     <div class="p-3 text-center mb-4">
+                        {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
                         <p class="text-4xl font-bold tracking-wide drop-shadow text-gray-800">
-                            {{ item.vysledek_tymu }} : {{ item.vysledek_soupere }}
+                            {{ z.vysledek_tymu }} : {{ z.vysledek_soupere }}
                         </p>
+                        {% else %}
+                        <p class="text-4xl font-bold tracking-wide drop-shadow text-gray-800">
+                            {{ z.vysledek_soupere }} : {{ z.vysledek_tymu }}
+                        </p>
+                        {% endif %}
                     </div>
 
-                    <!-- tym -->
                     <div class="text-center text-gray-800 text-xl font-semibold mb-1">
-                        {% if item.zapas.domaci_hoste|lower == "domácí"|lower %}
+                        {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
                             {{ tym.nazev }}
                             <div class="text-gray-400">vs</div>
-                            {{ item.zapas.souper }}
+                            {{ z.zapas.souper }}
                         {% else %}
-                            {{ item.zapas.souper }}
+                            {{ z.zapas.souper }}
                             <div class="text-gray-400">vs</div>
                             {{ tym.nazev }}
                         {% endif %}
                     </div>
 
-                    <!-- datum -->
                     <p class="text-center font-semibold text-gray-400 text-xs mb-4">
-                        {{ item.zapas.datum }}
+                        {{ z.zapas.datum }}
                     </p>
 
-                    <!-- goly -->
                     <div class="mb-4">
                         <p class="text-gray-600 text-sm font-semibold mb-1">Góly hráče:</p>
 
-                        {% if item.goly_hrace %}
+                        {% if z.goly_hrace %}
                             <div class="flex flex-wrap gap-2">
-                                {% for g in item.goly_hrace %}
-                                    <span class="flex items-center gap-1 bg-green-100 text-green-800 px-3 py-1 rounded-xl
+                                {% for g in z.goly_hrace %}
+                                    <span class="flex items-center gap-1 bg-gray-300 px-3 py-1 rounded-xl
                                                  text-sm font-medium shadow">
                                         ⚽︎<span>{{ g.minuta }}’</span>
                                         {% if g.typ == "penalta" %}
@@ -289,13 +291,12 @@
                         {% endif %}
                     </div>
 
-                    <!-- karty -->
                     <div>
                         <p class="text-gray-600 text-sm font-semibold mb-1">Karty:</p>
 
-                        {% if item.karty_hrace %}
+                        {% if z.karty_hrace %}
                             <div class="flex flex-wrap gap-2">
-                                {% for k in item.karty_hrace %}
+                                {% for k in z.karty_hrace %}
                                     <span class="flex items-center gap-1 px-3 py-1 rounded-xl text-sm font-medium shadow
                                                  {% if k.typ == 'zluta' %}
                                                      bg-yellow-100 text-yellow-800
@@ -322,9 +323,6 @@
             <p class="text-gray-400 text-center py-6">Žádné zápasy</p>
         {% endif %}
     </div>
-
-
-
 
 </div>
 

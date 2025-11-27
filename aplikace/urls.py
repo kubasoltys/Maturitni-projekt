@@ -22,8 +22,11 @@ urlpatterns = [
 # trener - hraci
     path('trener/hraci/', views.trener_hraci_view, name='trener_hraci'),
 
-# trener - detail hrace
-    path('trener/hraci/detail/<int:hrac_id>/', views.trener_hrac_detail, name='trener_hrac_detail'),
+# trener - statistiky hrace
+    path('trener/hraci/statistiky/<int:hrac_id>/', views.trener_hrac_statistiky, name='trener_hrac_statistiky'),
+
+# hrac - statistiky
+    path('hrac/statistiky/', views.hrac_statistiky, name='hrac_statistiky'),
 
 # settings
     path('trener/nastaveni/', views.trener_settings_view, name='trener_settings'),
@@ -123,6 +126,9 @@ urlpatterns = [
 
     # hrac - odehrane zapasy
     path('hrac/zapasy/odehrane-zapasy/', views.hrac_dohrane_zapasy, name='hrac_dohrane_zapasy'),
+
+    # trener - detail zapasu
+    path('trener/zapasy/detail/<int:zapas_id>/', views.trener_zapas_detail, name='trener_zapas_detail'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=BASE_DIR / 'static')
