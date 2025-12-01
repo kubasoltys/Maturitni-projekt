@@ -1,15 +1,16 @@
 from types import SimpleNamespace
 from django.contrib.auth.decorators import login_required
+from django.http.response import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils import timezone
-from datetime import datetime, date
+from datetime import datetime
 from django.db.models import Q
+from django.utils.timezone import now
+
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm, DohranyZapasForm
 from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy, Tym, Gol, Karta
-from collections import defaultdict
-from itertools import accumulate
 import json
 
 
@@ -331,7 +332,7 @@ def trener_hraci_view(request):
 
 
 #----------------------------------------------------------------------------------------------
-# trener - detail hrace
+# trener - statistiky hrace
 #----------------------------------------------------------------------------------------------
 @login_required
 def trener_hrac_statistiky(request, hrac_id):
@@ -1515,29 +1516,225 @@ def hrac_dohrane_zapasy(request):
 @login_required
 def trener_zapas_detail(request, zapas_id):
     zapas = get_object_or_404(Zapas, id=zapas_id)
-    try:
-        hrac = request.user.hracprofile
-        tym = hrac.tym
-    except HracProfile.DoesNotExist:
-        hrac = None
-        tym = None
 
-    dochazka_list = DochazkaZapasy.objects.filter(zapas=zapas).select_related('hrac__user')
+    hrac = getattr(request.user, "hracprofile", None)
+    trener = getattr(request.user, "trenerprofile", None)
 
-    goly = zapas.goly.all()
-    karty = zapas.karty.all()
+    vybrany_tym_id = request.session.get("selected_tym")
+    vybrany_tym = None
+
+    if hrac:
+        vybrany_tym = hrac.tym
+    elif trener and vybrany_tym_id:
+        vybrany_tym = trener.tymy.filter(id=vybrany_tym_id).first()
+    elif trener:
+        vybrany_tym = trener.tymy.first()
+
+    if vybrany_tym is None:
+        raise Http404("Nemáte přiřazený tým nebo nevybrali jste tým.")
+
+    if zapas.tym != vybrany_tym:
+        raise Http404("Tento zápas nepatří do vybraného týmu.")
+
+    hraci = HracProfile.objects.filter(tym=vybrany_tym).order_by('user__first_name', 'user__last_name')
+
+    dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
+
+    dochazka_list = [
+        dochazka_dict.get(
+            hrac.id,
+            SimpleNamespace(hrac=hrac, pritomen=None, poznamka=None)
+        )
+        for hrac in hraci
+    ]
+
+    pocet_hracu = len(dochazka_list)
+    pocet_pritomnych = sum(1 for d in dochazka_list if d.pritomen)
+    procento_pritomnych = round((pocet_pritomnych / pocet_hracu) * 100, 1) if pocet_hracu > 0 else 0.0
 
     context = {
         'zapas': zapas,
-        'tym': tym,
+        'vybrany_tym': vybrany_tym,
         'hrac': hrac,
         'dochazka_list': dochazka_list,
-        'goly': goly,
-        'karty': karty,
+        'trener': trener,
+        'procento_pritomnych': procento_pritomnych,
     }
 
     return render(request, 'trener/zapas/detail.html', context)
 
 
 
+#----------------------------------------------------------------------------------------------
+# trener - detail treninku
+#----------------------------------------------------------------------------------------------
+@login_required
+def trener_trenink_detail(request, trenink_id):
+    trenink = get_object_or_404(Trenink, id=trenink_id)
 
+    hrac = getattr(request.user, "hracprofile", None)
+    trener = getattr(request.user, "trenerprofile", None)
+
+    vybrany_tym_id = request.session.get("selected_tym")
+    vybrany_tym = None
+
+    if hrac:
+        vybrany_tym = hrac.tym
+    elif trener and vybrany_tym_id:
+        vybrany_tym = trener.tymy.filter(id=vybrany_tym_id).first()
+    elif trener:
+        vybrany_tym = trener.tymy.first()
+
+    if vybrany_tym is None:
+        raise Http404("Nemáte přiřazený tým nebo nevybrali jste tým.")
+
+    if trenink.tym != vybrany_tym:
+        raise Http404("Tento trénink nepatří do vybraného týmu.")
+
+    hraci = HracProfile.objects.filter(tym=vybrany_tym).order_by('user__first_name', 'user__last_name')
+
+    dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
+
+    dochazka_list = [
+        dochazka_dict.get(
+            hrac.id,
+            SimpleNamespace(hrac=hrac, pritomen=None, duvod=None)
+        )
+        for hrac in hraci
+    ]
+
+    pocet_hracu = len(dochazka_list)
+    pocet_pritomnych = sum(1 for d in dochazka_list if d.pritomen)
+    procento_pritomnych = round((pocet_pritomnych / pocet_hracu) * 100, 1) if pocet_hracu > 0 else 0.0
+
+    context = {
+        'trenink': trenink,
+        'vybrany_tym': vybrany_tym,
+        'hrac': hrac,
+        'dochazka_list': dochazka_list,
+        'trener': trener,
+        'procento_pritomnych': procento_pritomnych,
+    }
+
+    return render(request, 'trener/trenink/detail.html', context)
+
+
+
+#----------------------------------------------------------------------------------------------
+# trener - tym
+#----------------------------------------------------------------------------------------------
+@login_required
+def trener_tym(request):
+
+    hrac = getattr(request.user, "hracprofile", None)
+    trener = getattr(request.user, "trenerprofile", None)
+
+    vybrany_tym_id = request.session.get("selected_tym")
+    vybrany_tym = None
+
+    if hrac:
+        vybrany_tym = hrac.tym
+    elif trener and vybrany_tym_id:
+        vybrany_tym = trener.tymy.filter(id=vybrany_tym_id).first()
+    elif trener:
+        vybrany_tym = trener.tymy.first()
+
+    if vybrany_tym is None:
+        raise Http404("Nemáte přiřazený tým nebo jste nevybrali tým.")
+
+    hraci = (
+        HracProfile.objects.filter(tym=vybrany_tym)
+        .order_by("user__first_name", "user__last_name")
+    )
+
+    dnes = now().date()
+
+    treninky = Trenink.objects.filter(
+        tym=vybrany_tym,
+        datum__lt=dnes
+    )
+
+    zapasy = Zapas.objects.filter(
+        tym=vybrany_tym,
+        datum__lt=dnes
+    )
+
+    hraci_data = []
+
+    for h in hraci:
+
+        tren_total = treninky.count()
+
+        tren_yes = (
+            DochazkaTreninky.objects
+            .filter(hrac=h, trenink__in=treninky, pritomen=True)
+            .count()
+        )
+
+        tren_percent = round((tren_yes / tren_total) * 100, 1) if tren_total > 0 else 0
+
+        zap_total = zapasy.count()
+
+        zap_yes = (
+            DochazkaZapasy.objects
+            .filter(hrac=h, zapas__in=zapasy, pritomen=True)
+            .count()
+        )
+
+        zap_percent = round((zap_yes / zap_total) * 100, 1) if zap_total > 0 else 0
+
+        goly = Gol.objects.filter(hrac=h).count()
+        zlute = Karta.objects.filter(hrac=h, typ="zluta").count()
+        cervene = Karta.objects.filter(hrac=h, typ="cervena").count()
+
+        hraci_data.append({
+            "hrac": h,
+            "treninky_percent": tren_percent,
+            "zapasy_percent": zap_percent,
+            "goly": goly,
+            "zlute": zlute,
+            "cervene": cervene,
+        })
+
+        hraci_data = sorted(
+            hraci_data,
+            key=lambda x: (
+                -x["goly"],
+                -x["zapasy_percent"],
+                x["hrac"].user.last_name,
+                x["hrac"].user.first_name,
+            )
+        )
+
+    tym_goly = Gol.objects.filter(
+        hrac__tym=vybrany_tym,
+        zapas__in=zapasy
+    ).count()
+
+    vyhry = 0
+    prohry = 0
+    remizy = 0
+
+    for z in zapasy:
+        goly_tym = z.goly.filter(hrac__tym=vybrany_tym).count()
+        goly_souper = z.vysledek_soupere
+
+        if goly_tym > goly_souper:
+            vyhry += 1
+        elif goly_tym < goly_souper:
+            prohry += 1
+        else:
+            remizy += 1
+
+    context = {
+        "vybrany_tym": vybrany_tym,
+        "hraci_data": hraci_data,
+        "hrac": hrac,
+        "trener": trener,
+        "tym_goly": tym_goly,
+        "vyhry": vyhry,
+        "prohry": prohry,
+        "remizy": remizy,
+    }
+
+    return render(request, "trener/tym/tym.html", context)

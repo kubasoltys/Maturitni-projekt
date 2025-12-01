@@ -134,42 +134,14 @@
 
             <!-- tabulka dochazky -->
             {% if data.dochazka_list %}
-            <div class="overflow-x-auto rounded-2xl border-2 border-gray-200 shadow-inner mt-4">
-                <table class="w-full text-left rounded-xl divide-y divide-gray-100">
-                    <thead class="bg-gray-100 text-gray-700">
-                    <tr>
-                        <th class="py-2 px-3">Hráč</th>
-                        <th class="py-2 px-3">Zúčastní se</th>
-                    </tr>
-                    </thead>
-                    <tbody class="bg-white divide-y divide-gray-100">
-                    {% for dochazka in data.dochazka_list %}
-                    <tr class="hover:bg-gray-50 transition-colors">
-                        <td class="py-1 px-3">
-                            {% if dochazka.hrac.first_name and dochazka.hrac.last_name %}
-                            {{ dochazka.hrac.first_name }} {{ dochazka.hrac.last_name }}
-                            {% elif dochazka.hrac.first_name %}
-                            {{ dochazka.hrac.first_name }}
-                            {% elif dochazka.hrac.last_name %}
-                            {{ dochazka.hrac.last_name }}
-                            {% else %}
-                            (bez jména)
-                            {% endif %}
-                        </td>
-                        <td class="py-1 px-3">
-                            {% if dochazka.pritomen == True %}
-                            <span class="text-green-500 font-semibold">Ano</span>
-                            {% elif dochazka.pritomen == False %}
-                            <span class="text-red-500 font-semibold">Ne</span>
-                            {% else %}
-                            <span class="text-yellow-500 font-semibold">Nehlasoval</span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                    {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+            <div class="flex justify-center p-4">
+                        <a href="{% url 'trener_trenink_detail' data.trenink.id %}"
+                           class="inline-block w-1/3 py-2 text-white font-semibold
+                                  text-center rounded-2xl shadow-lg bg-gradient-to-r from-blue-500 to-purple-800
+                                  hover:from-blue-600 hover:to-purple-900 transform transition duration-300 hover:scale-105">
+                            Účast tréninky
+                        </a>
+                    </div>
             {% else %}
                 <p class="text-center text-gray-400 p-8">Zatím nemáte přiřazené žádné hráče.</p>
             {% endif %}

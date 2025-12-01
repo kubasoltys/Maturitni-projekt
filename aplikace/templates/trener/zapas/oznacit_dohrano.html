@@ -11,7 +11,7 @@
             <!-- sloupce -->
             <div class="grid grid-cols-[1fr_2px_1fr] gap-8 items-start">
 
-                <!-- góly a karty týmu -->
+                <!-- goly a karty tymu -->
                 <div>
                     <h3 class="text-2xl font-bold mb-3 text-center drop-shadow-lg">Výsledky vašeho týmu</h3>
 
@@ -47,7 +47,7 @@
 
                 <div class="w-full h-full bg-gray-300 rounded"></div>
 
-                <!-- góly soupeře -->
+                <!-- goly soupere -->
                 <div>
                     <h3 class="text-2xl font-bold pb-9 drop-shadow-lg text-center">Výsledky soupeře</h3>
                     {{ form.non_field_errors }}
@@ -113,20 +113,37 @@
                     </option>
                 {% endfor %}
             </select>
+
+            <select name="asistent" class="p-2 border border-gray-300 rounded-xl min-w-[150px]">
+                <option value="">-- asistence --</option>
+                {% for hrac in hraci %}
+                    <option value="{{ hrac.id }}">
+                    {% if hrac.first_name and hrac.last_name %}{{ hrac.first_name }} {{ hrac.last_name }}
+                    {% elif hrac.first_name %}{{ hrac.first_name }}
+                    {% elif hrac.last_name %}{{ hrac.last_name }}
+                    {% else %}(bez jména){% endif %}
+                    </option>
+                {% endfor %}
+            </select>
+
             <select name="gol_typ" class="p-2 border border-gray-300 rounded-xl min-w-[100px]">
                 <option value="">-- typ --</option>
                 <option value="normalni">Normální</option>
                 <option value="penalta">Penalta</option>
                 <option value="primak">Přímý kop</option>
             </select>
+
             <input type="text" name="gol_minuta" placeholder="min" class="w-16 p-2 border rounded-xl text-center">
+
             <button type="button" class="apply-gol bg-gradient-to-r from-blue-500 to-purple-800 text-white
                 px-3 py-1 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-900 hover:scale-105 transition">
                 Přidat
             </button>
+
             <button type="button" class="cancel-gol text-gray-600 px-3 py-1 rounded-xl hover:text-gray-900 hover:scale-105 transition">
                 Zrušit
             </button>
+
             <p class="text-red-600 font-semibold drop-shadow-lg text-sm mt-1 hidden text-center w-full">
                 Vyplňte všechna data!
             </p>
@@ -134,11 +151,21 @@
 
         wrapper.appendChild(formDiv);
         const errorText = formDiv.querySelector('p');
+        const asistentSelect = formDiv.querySelector('select[name="asistent"]');
+        const typSelect = formDiv.querySelector('select[name="gol_typ"]');
+
+        asistentSelect.addEventListener('change', () => {
+            if (asistentSelect.value) {
+                typSelect.style.display = 'none';
+                typSelect.value = 'normalni';
+            } else {
+                typSelect.style.display = 'inline-block';
+            }
+        });
 
         formDiv.querySelector('.apply-gol').addEventListener('click', () => {
             const hracSelect = formDiv.querySelector('select[name="gol_hrac"]');
             const minutaInput = formDiv.querySelector('input[name="gol_minuta"]');
-            const typSelect = formDiv.querySelector('select[name="gol_typ"]');
 
             if (!hracSelect.value || !minutaInput.value || isNaN(parseInt(minutaInput.value))) {
                 errorText.classList.remove('hidden');
@@ -150,12 +177,13 @@
                 golId: formDiv.dataset.golId,
                 hracId: hracSelect.value,
                 hracName: hracSelect.options[hracSelect.selectedIndex].text,
+                asistentId: asistentSelect.value || null,
+                asistentName: asistentSelect.value ? asistentSelect.options[asistentSelect.selectedIndex].text : '',
                 minuta: parseInt(minutaInput.value),
                 typ: typSelect.value
             });
 
             renderGoly();
-
             formDiv.remove();
             pridatBtn.style.display = 'block';
         });
@@ -166,6 +194,7 @@
             gol_pocet--;
         });
     }
+
 
     function renderGoly() {
         const wrapper = document.getElementById("goly_wrapper");
@@ -178,6 +207,8 @@
             div.className = "flex items-center justify-between p-3 mb-1 border rounded-2xl bg-white shadow-md";
             div.dataset.golId = gol.golId;
 
+            const asistentText = gol.asistentId ? ` <span class="text-gray-400">(${gol.asistentName})</span>` : '';
+
             div.innerHTML = `
                 <span class="text-gray-500">${index + 1}.
                     <span class="font-semibold text-black">
@@ -186,6 +217,7 @@
                         ${gol.minuta}’
                     </span>
                     <span class="text-gray-700">${gol.hracName}</span>
+                    ${asistentText}
                 </span>
                 <button type="button" class="delete-gol text-red-600 text-sm font-semibold hover:scale-110 transition">
                     Smazat
@@ -193,6 +225,7 @@
                 <input type="hidden" name="gol_hrac_${gol.golId}" value="${gol.hracId}">
                 <input type="hidden" name="gol_minuta_${gol.golId}" value="${gol.minuta}">
                 <input type="hidden" name="gol_typ_${gol.golId}" value="${gol.typ}">
+                <input type="hidden" name="gol_asistent_${gol.golId}" value="${gol.asistentId || ''}">
             `;
 
             wrapper.appendChild(div);

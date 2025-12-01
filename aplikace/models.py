@@ -615,6 +615,14 @@ class Gol(models.Model):
     typ = models.CharField(
         max_length=20,
         choices=TYP_GOLU)
+    asistent = models.ForeignKey(
+        HracProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="asistence",
+        verbose_name="Asistence"
+    )
 
 
     def __str__(self):

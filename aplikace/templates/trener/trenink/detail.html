@@ -97,14 +97,11 @@
     <div class="w-full max-w-4xl p-6 bg-white rounded-3xl shadow-2xl border border-gray-200">
         <div class="text-center mb-6">
             <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 drop-shadow-lg">
-                {% if zapas.domaci_hoste|lower == "domácí"|lower %}
-                    {{ zapas.tym.nazev }} <span class="text-gray-400 font-semibold">vs</span> {{ zapas.souper }}
-                {% else %}
-                    {{ zapas.souper }} <span class="text-gray-400 font-semibold">vs</span> {{ zapas.tym.nazev }}
-                {% endif %}
+                Trénink - {{ vybrany_tym.nazev }}
+                <span class="text-gray-600 font-bold">{{ vybrany_tym.kategorie }}</span>
             </h1>
             <p class="text-gray-600 mt-2 text-base md:text-md">
-                {{ zapas.datum|date:"l, d.m.Y" }} | {{ zapas.cas|time:"H:i" }} | {{ zapas.misto|default:"-" }}
+                {{ trenink.datum|date:"l, d.m.Y" }} | {{ trenink.cas|time:"H:i" }}
             </p>
         </div>
 
@@ -149,22 +146,25 @@
                     </tbody>
                 </table>
             </div>
+
             <div class="flex space-x-6 mt-6 justify-center bg-gray-200 rounded-2xl">
                 <p class="text-2xl text-gray-700 font-extrabold p-4">
-                    Účast hráčů na zápasu:
+                    Účast hráčů na tréninku:
                     {% if procento_pritomnych > 50 %}
-                    <span class="text-green-500">{{ procento_pritomnych }}%</span>
+                        <span class="text-green-500">{{ procento_pritomnych }}%</span>
                     {% elif procento_pritomnych == 50 %}
-                    <span class="text-green-500">{{ procento_pritomnych }}%</span>
+                        <span class="text-yellow-500">{{ procento_pritomnych }}%</span>
                     {% else %}
-                    <span class="text-red-500">{{ procento_pritomnych }}%</span>
+                        <span class="text-red-500">{{ procento_pritomnych }}%</span>
                     {% endif %}
                 </p>
             </div>
+
             {% else %}
             <p class="text-center text-gray-400 p-6 text-base">Zatím nemáte přiřazené žádné hráče.</p>
             {% endif %}
         </div>
+
         <div class="space-y-4">
             <button
                 onclick="window.history.back()"
@@ -175,6 +175,5 @@
         </div>
     </div>
 </div>
-
 
 {% endblock %}

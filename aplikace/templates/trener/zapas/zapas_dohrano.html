@@ -292,8 +292,17 @@
                 <p>{{ data.zapas.cas|time:"H:i" }}</p>
             </div>
 
+            <div class="flex justify-center p-4">
+                        <a href="{% url 'trener_zapas_detail' data.zapas.id %}"
+                           class="inline-block w-1/3 py-2 text-white font-semibold
+                                  text-center rounded-2xl shadow-lg bg-gradient-to-r from-blue-500 to-purple-800
+                                  hover:from-blue-600 hover:to-purple-900 transform transition duration-300 hover:scale-105">
+                            Účast zápasu
+                        </a>
+                    </div>
+
             <div class="flex items-center justify-center">
-                <form method="post" action="{% url 'delete_zapas' data.zapas.id %}" class="mt-4 text-center">
+                <form method="post" action="{% url 'delete_zapas' data.zapas.id %}" class="text-center">
                     {% csrf_token %}
                     <button type="submit"
                             class="text-gray-600 text-sm hover:text-gray-900 font-semibold transition transform hover:scale-105">
