@@ -366,8 +366,9 @@ def trener_hrac_statistiky(request, hrac_id):
     karty = Karta.objects.filter(hrac=hrac)
 
     gol_count = goly.count()
+    asistence_count = Gol.objects.filter(asistence=hrac).count()
     zlute = karty.filter(typ="zluta").count()
-    cervene = karty.filter(typ="cervena").count()
+    cervene = karty.filter(typ__in=["cervena", "zluta_cervena"]).count()
 
     dochazka_treninky = (
         DochazkaTreninky.objects
@@ -398,6 +399,7 @@ def trener_hrac_statistiky(request, hrac_id):
             karty_hrace = zapas.karty.filter(hrac=hrac)
             goly_tym = zapas.goly.filter(hrac__tym=vybrany_tym).count()
             vysledek_soupere = zapas.vysledek_soupere
+            asistence_hrace = zapas.goly.filter(asistence=hrac)
 
             zapasy_data.append({
                 "zapas": zapas,
@@ -405,6 +407,7 @@ def trener_hrac_statistiky(request, hrac_id):
                 "karty_hrace": karty_hrace,
                 "vysledek_tymu": goly_tym,
                 "vysledek_soupere": vysledek_soupere,
+                "asistence_hrace": asistence_hrace,
             })
 
     labels = []
@@ -424,8 +427,11 @@ def trener_hrac_statistiky(request, hrac_id):
 
     zapasy_pritomen_ids = dochazka_hrace_zapasy.values_list('zapas', flat=True)
     celkove_goly = Gol.objects.filter(hrac=hrac, zapas__in=zapasy_pritomen_ids).count()
+    celkove_asistence = Gol.objects.filter(asistence=hrac,
+                                           zapas__in=zapasy_pritomen_ids).count()
     pocet_zapasu = len(zapasy_pritomen_ids)
     prumer_golu = round(celkove_goly / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
+    prumer_asistenci = round(celkove_asistence / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
 
     context = {
         "hrac": hrac,
@@ -435,9 +441,11 @@ def trener_hrac_statistiky(request, hrac_id):
         "goly": goly,
         "karty": karty,
         "gol_count": gol_count,
+        "asistence_count": asistence_count,
         "zlute": zlute,
         "cervene": cervene,
         "prumer_golu": prumer_golu,
+        "prumer_asistenci": prumer_asistenci,
         "dochazka_treninky": dochazka_treninky,
         "zapasy_data": zapasy_data,
         "graf_goly_json": graf_goly_json,
@@ -461,8 +469,9 @@ def hrac_statistiky(request):
     goly = Gol.objects.filter(hrac=hrac)
     karty = Karta.objects.filter(hrac=hrac)
     gol_count = goly.count()
+    asistence_count = Gol.objects.filter(asistence=hrac).count()
     zlute = karty.filter(typ="zluta").count()
-    cervene = karty.filter(typ="cervena").count()
+    cervene = karty.filter(typ__in=["cervena", "zluta_cervena"]).count()
 
     dochazka_treninky = (
         DochazkaTreninky.objects
@@ -475,13 +484,14 @@ def hrac_statistiky(request):
         DochazkaZapasy.objects
         .filter(hrac=hrac, pritomen=True)
         .select_related("zapas")
-        .order_by("zapas__datum")
+        .order_by("-zapas__datum")
     )
 
     zapasy_data = []
     for doch in dochazka_hrace_zapasy:
         zapas = doch.zapas
         goly_hrace = zapas.goly.filter(hrac=hrac)
+        asistence_hrace = zapas.goly.filter(asistence=hrac)
         karty_hrace = zapas.karty.filter(hrac=hrac)
         goly_tym = zapas.goly.filter(hrac__tym=tym).count()
         vysledek_soupere = zapas.vysledek_soupere
@@ -489,6 +499,7 @@ def hrac_statistiky(request):
         zapasy_data.append({
             "zapas": zapas,
             "goly_hrace": goly_hrace,
+            "asistence_hrace": asistence_hrace,
             "karty_hrace": karty_hrace,
             "vysledek_tymu": goly_tym,
             "vysledek_soupere": vysledek_soupere,
@@ -509,25 +520,29 @@ def hrac_statistiky(request):
 
     zapasy_pritomen_ids = dochazka_hrace_zapasy.values_list('zapas', flat=True)
     celkove_goly = Gol.objects.filter(hrac=hrac, zapas__in=zapasy_pritomen_ids).count()
+    celkove_asistence = Gol.objects.filter(asistence=hrac,
+                                           zapas__in=zapasy_pritomen_ids).count()
     pocet_zapasu = len(zapasy_pritomen_ids)
     prumer_golu = round(celkove_goly / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
+    prumer_asistenci = round(celkove_asistence / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
 
     context = {
         "hrac": hrac,
         "tym": tym,
         "goly": goly,
+        "asistence_count": asistence_count,
         "karty": karty,
         "gol_count": gol_count,
         "zlute": zlute,
         "cervene": cervene,
         "prumer_golu": prumer_golu,
+        "prumer_asistenci": prumer_asistenci,
         "graf_goly_json": graf_goly_json,
         "zapasy_data": zapasy_data,
         "dochazka_treninky": dochazka_treninky,
     }
 
     return render(request, "hrac/statistiky/statistiky.html", context)
-
 
 
 # NASTAVENI
@@ -1302,42 +1317,72 @@ def oznacit_dohrano_view(request, zapas_id):
 
             zapas.vysledek_tymu = request.POST.get("vysledek_tymu")
             zapas.vysledek_soupere = request.POST.get("vysledek_soupere")
-
             zapas.stav = "Dohráno"
             zapas.save()
 
+            # Goly
             zapas.goly.all().delete()
             pocet_golu = int(request.POST.get("pocet_golu", 0))
+
             for i in range(1, pocet_golu + 1):
                 hrac_id = request.POST.get(f"gol_hrac_{i}")
                 minuta = request.POST.get(f"gol_minuta_{i}")
-                typ = request.POST.get(f"gol_typ_{i}")
+                typ_form = request.POST.get(f"gol_typ_{i}")
+                asistence_id = request.POST.get(f"gol_asistent_{i}") or None
 
-                if hrac_id and minuta and typ:
-                    Gol.objects.create(
-                        zapas=zapas,
-                        hrac_id=hrac_id,
-                        minuta=int(minuta),
-                        typ=typ
-                    )
+                if not hrac_id or not minuta:
+                    continue
+
+                if asistence_id and asistence_id == str(hrac_id):
+                    asistence_id = None
+
+                typ = "normalni" if asistence_id else (typ_form or "normalni")
+
+                Gol.objects.create(
+                    zapas=zapas,
+                    hrac_id=hrac_id,
+                    minuta=int(minuta),
+                    typ=typ,
+                    asistence_id=asistence_id
+                )
 
             zapas.karty.all().delete()
             pocet_karet = int(request.POST.get("pocet_karet", 0))
+
+            hraci_karty = {}
+
             for i in range(1, pocet_karet + 1):
                 hrac_id = request.POST.get(f"karta_hrac_{i}")
                 minuta = request.POST.get(f"karta_minuta_{i}")
                 typ = request.POST.get(f"karta_typ_{i}")
 
                 if hrac_id and minuta and typ:
+                    hraci_karty.setdefault(hrac_id, []).append({
+                        "typ": typ,
+                        "minuta": int(minuta)
+                    })
+
+            for hrac_id, karty_list in hraci_karty.items():
+                karty_list.sort(key=lambda x: x["minuta"])
+
+                zlute = [k for k in karty_list if k["typ"] == "zluta"]
+
+                if len(zlute) >= 2:
+                    for k in karty_list:
+                        if k["typ"] == "zluta" and k != zlute[0]:
+                            k["typ"] = "cervena_ze_zlutych"
+
+                for karta in karty_list:
                     Karta.objects.create(
                         zapas=zapas,
                         hrac_id=hrac_id,
-                        minuta=int(minuta),
-                        typ=typ
+                        minuta=karta["minuta"],
+                        typ=karta["typ"]
                     )
 
-            messages.success(request, "Zápas byl uložen včetně gólů a karet.")
+            messages.success(request, "Zápas byl uložen včetně gólů, asistencí a karet.")
             return redirect('trener_zapas')
+
     else:
         form = DohranyZapasForm(instance=zapas)
 
@@ -1354,6 +1399,8 @@ def oznacit_dohrano_view(request, zapas_id):
         "hraci": hraci,
     }
     return render(request, "trener/zapas/oznacit_dohrano.html", context)
+
+
 
 
 #----------------------------------------------------------------------------------------------
@@ -1683,9 +1730,10 @@ def trener_tym(request):
 
         zap_percent = round((zap_yes / zap_total) * 100, 1) if zap_total > 0 else 0
 
+        asistence = Gol.objects.filter(asistence=h).count()
         goly = Gol.objects.filter(hrac=h).count()
         zlute = Karta.objects.filter(hrac=h, typ="zluta").count()
-        cervene = Karta.objects.filter(hrac=h, typ="cervena").count()
+        cervene = Karta.objects.filter(hrac=h, typ__in=["cervena", "zluta_cervena"]).count()
 
         hraci_data.append({
             "hrac": h,
@@ -1694,17 +1742,19 @@ def trener_tym(request):
             "goly": goly,
             "zlute": zlute,
             "cervene": cervene,
+            "asistence": asistence,
         })
 
-        hraci_data = sorted(
-            hraci_data,
-            key=lambda x: (
-                -x["goly"],
-                -x["zapasy_percent"],
-                x["hrac"].user.last_name,
-                x["hrac"].user.first_name,
-            )
+    hraci_data = sorted(
+        hraci_data,
+        key=lambda x: (
+            -x["goly"],
+            -x["asistence"],
+            -x["zapasy_percent"],
+            x["hrac"].user.last_name,
+            x["hrac"].user.first_name,
         )
+    )
 
     tym_goly = Gol.objects.filter(
         hrac__tym=vybrany_tym,
@@ -1735,6 +1785,7 @@ def trener_tym(request):
         "vyhry": vyhry,
         "prohry": prohry,
         "remizy": remizy,
+        "asistence": asistence,
     }
 
     return render(request, "trener/tym/tym.html", context)

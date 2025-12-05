@@ -164,23 +164,27 @@
 
                 <!-- domaci -->
                 <div class="w-1/2 text-left">
-
                     {% for gol in data.goly %}
                         {% if data.zapas.domaci_hoste == "Domácí" %}
                             <p class="pl-1">
                                 ⚽︎
-                                <span class="font-extrabold"> {{ gol.minuta }}’</span>
+                                <span class="font-extrabold">{{ gol.minuta }}’</span>
                                 {% if gol.hrac.last_name %}
                                     {{ gol.hrac.last_name }}
-                                {% elif not gol.hrac.last_name %}
+                                {% elif gol.hrac.first_name %}
                                     {{ gol.hrac.first_name }}
                                 {% else %}
                                     (bez jména)
                                 {% endif %}
+
+                                {% if gol.asistence %}
+                                    <span class="text-gray-500 font-normal">
+                                        ({% if gol.asistence.last_name %}{{ gol.asistence.last_name }}{% elif gol.asistence.first_name %}{{ gol.asistence.first_name }}{% else %}(bez jména){% endif %})
+                                    </span>
+                                {% endif %}
+
                                 {% if gol.typ == "penalta" %}
                                     <span class="text-gray-400 font-normal">(penalta)</span>
-                                {% else %}
-
                                 {% endif %}
                             </p>
                         {% endif %}
@@ -194,16 +198,24 @@
                             <p>
                                 {% if gol.typ == "penalta" %}
                                     <span class="text-gray-400 font-normal">(penalta) </span>
-                                {% else %}
-
                                 {% endif %}
+
                                 {% if gol.hrac.last_name %}
                                     {{ gol.hrac.last_name }}
-                                {% elif not gol.hrac.last_name %}
+                                {% elif gol.hrac.first_name %}
                                     {{ gol.hrac.first_name }}
                                 {% else %}
                                     (bez jména)
                                 {% endif %}
+
+                                {% if gol.asistence %}
+                                    <span class="text-gray-500 font-normal">
+                                        ({% if gol.asistence.last_name %}{{ gol.asistence.last_name }}
+                                        {% elif gol.asistence.first_name %}{{ gol.asistence.first_name }}
+                                        {% else %}(bez jména){% endif %})
+                                    </span>
+                                {% endif %}
+
                                 <span class="font-extrabold">{{ gol.minuta }}’ </span>
                                 ⚽︎
                             </p>
@@ -227,22 +239,26 @@
                         {% endif %}
 
                         {% for karta in data.karty %}
-                            <p>
+                            <p class="flex items-center gap-2 mb-1">
                                 {% if karta.typ == "zluta" %}
-                                    🟨
+                                    <img src="/media/stranka/zluta_karta.png" alt="Žlutá" class="w-3 h-5">
                                 {% elif karta.typ == "cervena" %}
-                                    🟥
+                                    <img src="/media/stranka/cervena_karta.png" alt="Červená" class="w-3 h-5">
+                                {% else %}
+                                    <img src="/media/stranka/zluta_a_cervena.png" alt="Červená ze žlutých" class="w-3 h-5">
                                 {% endif %}
 
                                 <span class="font-extrabold">{{ karta.minuta }}’</span>
 
-                                {% if karta.hrac.last_name %}
-                                    {{ karta.hrac.last_name }}
-                                {% elif karta.hrac.first_name %}
-                                    {{ karta.hrac.first_name }}
-                                {% else %}
-                                    (bez jména)
-                                {% endif %}
+                                <span>
+                                    {% if karta.hrac.last_name %}
+                                        {{ karta.hrac.last_name }}
+                                    {% elif karta.hrac.first_name %}
+                                        {{ karta.hrac.first_name }}
+                                    {% else %}
+                                        (bez jména)
+                                    {% endif %}
+                                </span>
                             </p>
                         {% endfor %}
                     {% endif %}
@@ -257,23 +273,26 @@
                         {% endif %}
 
                         {% for karta in data.karty %}
-                            <p>
-                                {% if karta.hrac.last_name %}
-                                    {{ karta.hrac.last_name }}
-                                {% elif karta.hrac.first_name %}
-                                    {{ karta.hrac.first_name }}
-                                {% else %}
-                                    (bez jména)
-                                {% endif %}
+                            <p class="flex items-center gap-2 mb-1 justify-end">
+                                <span>
+                                    {% if karta.hrac.last_name %}
+                                        {{ karta.hrac.last_name }}
+                                    {% elif karta.hrac.first_name %}
+                                        {{ karta.hrac.first_name }}
+                                    {% else %}
+                                        (bez jména)
+                                    {% endif %}
+                                </span>
 
                                 <span class="font-extrabold">{{ karta.minuta }}’</span>
 
                                 {% if karta.typ == "zluta" %}
-                                    🟨
+                                    <img src="/media/stranka/zluta_karta.png" alt="Žlutá" class="w-3 h-5">
                                 {% elif karta.typ == "cervena" %}
-                                    🟥
+                                    <img src="/media/stranka/cervena_karta.png" alt="Červená" class="w-3 h-5">
+                                {% else %}
+                                    <img src="/media/stranka/zluta_a_cervena.png" alt="Červená ze žlutých" class="w-3 h-5">
                                 {% endif %}
-
                             </p>
                         {% endfor %}
                     {% endif %}

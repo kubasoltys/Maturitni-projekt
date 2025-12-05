@@ -114,7 +114,7 @@
                 {% endfor %}
             </select>
 
-            <select name="asistent" class="p-2 border border-gray-300 rounded-xl min-w-[150px]">
+            <select name="gol_asistent" class="p-2 border border-gray-300 rounded-xl min-w-[150px]">
                 <option value="">-- asistence --</option>
                 {% for hrac in hraci %}
                     <option value="{{ hrac.id }}">
@@ -151,8 +151,23 @@
 
         wrapper.appendChild(formDiv);
         const errorText = formDiv.querySelector('p');
-        const asistentSelect = formDiv.querySelector('select[name="asistent"]');
+        const hracSelect = formDiv.querySelector('select[name="gol_hrac"]');
+        const asistentSelect = formDiv.querySelector('select[name="gol_asistent"]');
         const typSelect = formDiv.querySelector('select[name="gol_typ"]');
+
+        function updateAsistenti() {
+            const strelec = hracSelect.value;
+            [...asistentSelect.options].forEach(opt => {
+                if (!opt.value) return;
+                opt.disabled = (opt.value === strelec);
+            });
+            if (asistentSelect.value === strelec) {
+                asistentSelect.value = "";
+            }
+        }
+
+        hracSelect.addEventListener("change", updateAsistenti);
+        updateAsistenti();
 
         asistentSelect.addEventListener('change', () => {
             if (asistentSelect.value) {
@@ -164,7 +179,6 @@
         });
 
         formDiv.querySelector('.apply-gol').addEventListener('click', () => {
-            const hracSelect = formDiv.querySelector('select[name="gol_hrac"]');
             const minutaInput = formDiv.querySelector('input[name="gol_minuta"]');
 
             if (!hracSelect.value || !minutaInput.value || isNaN(parseInt(minutaInput.value))) {
@@ -194,7 +208,6 @@
             gol_pocet--;
         });
     }
-
 
     function renderGoly() {
         const wrapper = document.getElementById("goly_wrapper");
@@ -235,7 +248,7 @@
         document.getElementById("pocet_golu").value = gol_pocet;
     }
 
-    // smazat gol
+    // Smazat gól
     document.addEventListener('click', function(e) {
         if (e.target.classList.contains('delete-gol')) {
             const golId = e.target.closest('[data-gol-id]').dataset.golId;
@@ -317,8 +330,8 @@
 
             <select name="karta_typ" class="p-2 border border-gray-300 rounded-xl min-w-[80px]">
                 <option value="">Typ</option>
-                <option value="zluta" ${typ=='zluta'?'selected':''}>🟨 Žlutá</option>
-                <option value="cervena" ${typ=='cervena'?'selected':''}>🟥 Červená</option>
+                <option value="zluta" ${typ=='zluta'?'selected':''}>Žlutá</option>
+                <option value="cervena" ${typ=='cervena'?'selected':''}>Červená</option>
             </select>
 
             <input name="karta_minuta" type="text" placeholder="min" value="${min}"
@@ -350,42 +363,87 @@
     }
 
     function applyKarta(formDiv, errorText) {
-    const hracSelect = formDiv.querySelector('select[name="karta_hrac"]');
-    const typSelect = formDiv.querySelector('select[name="karta_typ"]');
-    const minutaInput = formDiv.querySelector('input[name="karta_minuta"]');
+        const hracSelect = formDiv.querySelector('select[name="karta_hrac"]');
+        const typSelect = formDiv.querySelector('select[name="karta_typ"]');
+        const minutaInput = formDiv.querySelector('input[name="karta_minuta"]');
 
-    if (!hracSelect.value || !minutaInput.value || isNaN(parseInt(minutaInput.value))) {
-        errorText.classList.remove('hidden');
-        return;
+        if (!hracSelect.value || !minutaInput.value || isNaN(parseInt(minutaInput.value))) {
+            errorText.classList.remove('hidden');
+            return;
+        }
+
+        errorText.classList.add('hidden');
+
+        const hracId = hracSelect.value;
+        const minuta = parseInt(minutaInput.value);
+        const typ = typSelect.value;
+
+        const wrapper = document.getElementById("karty_wrapper");
+
+        const existingZlute = Array.from(wrapper.querySelectorAll('.karta-div')).filter(div =>
+            div.dataset.hracId === hracId && div.dataset.typ === 'zluta'
+        );
+
+        if (typ === 'zluta' && existingZlute.length === 1) {
+            karta_pocet++;
+            const cervenaDiv = document.createElement('div');
+            cervenaDiv.className = "flex items-center justify-between p-3 mb-1 border rounded-2xl bg-white shadow-md karta-div";
+            cervenaDiv.dataset.kartaId = karta_pocet;
+            cervenaDiv.dataset.hracId = hracId;
+            cervenaDiv.dataset.typ = 'cervena_zlute';
+
+            cervenaDiv.innerHTML = `
+                <span class="text-gray-500 flex items-center gap-1">
+                    <img src="/media/stranka/zluta_a_cervena.png" alt="Červená ze žlutých" class="w-4 h-6">
+                    <span class="font-semibold text-black">${minuta}’</span>
+                    <span class="text-gray-700">${hracSelect.options[hracSelect.selectedIndex].text}</span>
+                </span>
+                <button type="button" class="delete-karta text-red-600 text-sm font-semibold hover:scale-110 transition">
+                    Smazat
+                </button>
+                <input type="hidden" name="karta_typ_${karta_pocet}" value="zluta_cervena">
+                <input type="hidden" name="karta_hrac_${karta_pocet}" value="${hracId}">
+                <input type="hidden" name="karta_minuta_${karta_pocet}" value="${minuta}">
+            `;
+
+            wrapper.appendChild(cervenaDiv);
+            document.getElementById("pocet_karet").value = karta_pocet;
+
+            formDiv.remove();
+            document.getElementById("pridat_kartu_btn").style.display = 'block';
+            return;
+        }
+
+        karta_pocet++;
+        const displayDiv = document.createElement('div');
+        displayDiv.className = "flex items-center justify-between p-3 mb-1 border rounded-2xl bg-white shadow-md karta-div";
+        displayDiv.dataset.kartaId = karta_pocet;
+        displayDiv.dataset.hracId = hracId;
+        displayDiv.dataset.typ = typ;
+
+        let imgSrc = '';
+        if (typ === 'zluta') imgSrc = '/media/stranka/zluta_karta.png';
+        else if (typ === 'cervena') imgSrc = '/media/stranka/cervena_karta.png';
+        else if (typ === 'cervena_zlute') imgSrc = '/media/stranka/zluta_a_cervena.png';
+
+        displayDiv.innerHTML = `
+            <span class="text-gray-500 flex items-center gap-1">
+                ${imgSrc ? `<img src="${imgSrc}" class="w-4 h-6" alt="${typ}">` : ''}
+                <span class="font-semibold text-black">${minuta}’</span>
+                <span class="text-gray-700">${hracSelect.options[hracSelect.selectedIndex].text}</span>
+            </span>
+            <button type="button" class="delete-karta text-red-600 text-sm font-semibold hover:scale-110 transition">
+                Smazat
+            </button>
+            <input type="hidden" name="karta_hrac_${karta_pocet}" value="${hracId}">
+            <input type="hidden" name="karta_minuta_${karta_pocet}" value="${minuta}">
+            <input type="hidden" name="karta_typ_${karta_pocet}" value="${typ}">
+        `;
+
+        formDiv.replaceWith(displayDiv);
+        document.getElementById("pocet_karet").value = karta_pocet;
+        document.getElementById("pridat_kartu_btn").style.display = 'block';
     }
-
-    errorText.classList.add('hidden');
-
-    const displayDiv = document.createElement('div');
-    displayDiv.className = "flex items-center justify-between p-3 mb-1 border rounded-2xl bg-white shadow-md";
-    displayDiv.dataset.kartaId = formDiv.dataset.kartaId;
-
-    displayDiv.innerHTML = `
-        <span class="text-gray-500">
-            ${typSelect.value=='zluta'?'🟨':'🟥'}
-            <span class="font-semibold text-black">${minutaInput.value}’</span>
-            <span class="text-gray-700">${hracSelect.options[hracSelect.selectedIndex].text}</span>
-        </span>
-        <button type="button" class="delete-karta text-red-600 text-sm font-semibold hover:scale-110 transition">
-            Smazat
-        </button>
-
-        <input type="hidden" name="karta_hrac_${formDiv.dataset.kartaId}" value="${hracSelect.value}">
-        <input type="hidden" name="karta_minuta_${formDiv.dataset.kartaId}" value="${minutaInput.value}">
-        <input type="hidden" name="karta_typ_${formDiv.dataset.kartaId}" value="${typSelect.value}">
-    `;
-
-    formDiv.replaceWith(displayDiv);
-
-    document.getElementById("pocet_karet").value = karta_pocet;
-
-    document.getElementById("pridat_kartu_btn").style.display = 'block';
-}
 
 
     //------------------------------------------------------------------------------------------------
@@ -419,7 +477,8 @@
 
         error.classList.add("hidden");
     });
-    </script>
+
+</script>
 
 
 {% endblock %}

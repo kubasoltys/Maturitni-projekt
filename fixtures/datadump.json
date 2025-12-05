@@ -247,6 +247,19 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2025-12-02T16:18:54.937Z",
+    "user": 1,
+    "content_type": 11,
+    "object_id": "42",
+    "object_repr": "zkouska (2025-12-02)",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"name\": \"G\\u00f3l\", \"object\": \"G\\u00f3l: Lamine Yamal (Hr\\u00e1\\u010d) \\u2014 zkouska (2025-12-02) (Norm\\u00e1ln\\u00ed | 56. min)\", \"fields\": [\"Asistence\"]}}, {\"changed\": {\"name\": \"G\\u00f3l\", \"object\": \"G\\u00f3l: Lamine Yamal (Hr\\u00e1\\u010d) \\u2014 zkouska (2025-12-02) (Norm\\u00e1ln\\u00ed | 89. min)\", \"fields\": [\"Asistence\"]}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -908,10 +921,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "afz6ddwdv5c8umyfbfbrwoy8jrv8fye9",
+  "pk": "h3wkzy9rw4zd2kcfr5taqr3kfpgv83n2",
   "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2hAYpkBduvcMZJgBWzVtUtqV8e7apAvd_vfef6lE2zqkrZUljaLOyqrT75aJH2Xagdxpus2a52ldxqx3RR-06ess5Xk53L-DgdrwrQuizZk8OCMIEJm5hxyMEwdeQjRoPWIEj7WrPRpyUIm64ECYDVb1_gDGAjcp:1vQCHF:bPGILkEtT3hyttYoEm2DGYaKXBTmvN3T_2rF07p_zPg",
-    "expire_date": "2025-12-15T22:21:49.796Z"
+    "session_data": ".eJxVjM0OwiAQhN-FsyGw_Lh69N5nIMsCUjU0Ke3J-O62SQ96m8z3zbxFoHWpYe15DmMSVwHi9NtF4mduO0gPavdJ8tSWeYxyV-RBuxymlF-3w_07qNTrtkbrffYO3dlHDwYs6ZLSlqgo1qAS64jKkI45aiYNDopXaNAwuAta8fkCxQ02-w:1vRdBF:zc5MA7UIEX5BPMk8VnjXAAYbgLfZIZYw2KQKn4_yp_c",
+    "expire_date": "2025-12-19T21:17:33.361Z"
   }
 },
 {
@@ -919,7 +932,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1000000$lVBDpd6Ja8QRTsMTdKJBR1$fRAfF49lBGd4tGP425N5023GStuBgiqMlmQK2YVN9zE=",
-    "last_login": "2025-12-01T22:21:49.794Z",
+    "last_login": "2025-12-05T09:12:52.536Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -939,7 +952,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-12-01T21:39:04.890Z",
+    "last_login": "2025-12-05T21:17:33.358Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -959,7 +972,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$1000000$xqpg5oqf8ID83Nzv2qrIUE$UoViHaQwwwCayltK+XOJETF6n3CpDysSWHk7an4HHvo=",
-    "last_login": "2025-12-01T21:37:46.527Z",
+    "last_login": "2025-12-05T09:36:30.656Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "",
@@ -979,7 +992,7 @@
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$1000000$Y81Jci5vgHRzftic69jOcs$GQiurTqQun52N2+Vp7krGg27ITPqI6JCQmUCUFpEVGQ=",
-    "last_login": "2025-12-01T21:37:58.440Z",
+    "last_login": "2025-12-05T21:17:20.226Z",
     "is_superuser": false,
     "username": "hrac2",
     "first_name": "",
@@ -999,7 +1012,7 @@
   "pk": 6,
   "fields": {
     "password": "pbkdf2_sha256$1000000$hzst7yyM8eW7Ih1YaLJoau$7vp5UYMsWc4xeRwQmKyofN52jTOTZfiyl3uKonKhDGk=",
-    "last_login": "2025-12-01T21:38:21.377Z",
+    "last_login": "2025-12-05T20:40:48.209Z",
     "is_superuser": false,
     "username": "hrac3",
     "first_name": "",
@@ -1019,7 +1032,7 @@
   "pk": 7,
   "fields": {
     "password": "pbkdf2_sha256$1000000$CmZEPJELcwenEe9am1kp6E$crPuZcpBqg+y8wpFm/vF7BatXOEieX3u8d59SfON/lk=",
-    "last_login": "2025-12-01T21:38:34.098Z",
+    "last_login": "2025-12-02T21:43:43.622Z",
     "is_superuser": false,
     "username": "hrac4",
     "first_name": "",
@@ -1039,7 +1052,7 @@
   "pk": 8,
   "fields": {
     "password": "pbkdf2_sha256$1000000$oFbFtbuT6aEEARMe7AAWQ8$G0nBnyub9VVIMhV3rDlKW9A6ufoX+XAHhgRK65CI1Nk=",
-    "last_login": "2025-12-01T21:38:48.314Z",
+    "last_login": "2025-12-02T21:43:54.678Z",
     "is_superuser": false,
     "username": "hrac5",
     "first_name": "",
@@ -1656,6 +1669,28 @@
   }
 },
 {
+  "model": "aplikace.dochazkatreninky",
+  "pk": 34,
+  "fields": {
+    "trenink": 15,
+    "hrac": 5,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-12-02T13:38:45.488Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 35,
+  "fields": {
+    "trenink": 15,
+    "hrac": 6,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-12-02T13:39:00.523Z"
+  }
+},
+{
   "model": "aplikace.zapas",
   "pk": 6,
   "fields": {
@@ -1765,6 +1800,70 @@
     "vysledek_tymu": null,
     "vysledek_soupere": 2,
     "created_at": "2025-12-01T21:37:29.578Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 42,
+  "fields": {
+    "tym": 1,
+    "souper": "zkouska",
+    "datum": "2025-12-02",
+    "cas": "14:40:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 0,
+    "created_at": "2025-12-02T13:37:32Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 45,
+  "fields": {
+    "tym": 1,
+    "souper": "zkouska 2",
+    "datum": "2025-12-02",
+    "cas": "19:54:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 0,
+    "created_at": "2025-12-02T18:52:54.593Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 52,
+  "fields": {
+    "tym": 1,
+    "souper": "zkouska 8",
+    "datum": "2025-12-05",
+    "cas": "10:12:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 0,
+    "created_at": "2025-12-05T09:11:02.262Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 53,
+  "fields": {
+    "tym": 1,
+    "souper": "zkouska 9",
+    "datum": "2025-12-05",
+    "cas": "22:18:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Camp Nou, Barcelona",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 0,
+    "created_at": "2025-12-05T21:17:11.484Z"
   }
 },
 {
@@ -2018,6 +2117,96 @@
   }
 },
 {
+  "model": "aplikace.dochazkazapasy",
+  "pk": 46,
+  "fields": {
+    "zapas": 42,
+    "hrac": 2,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 47,
+  "fields": {
+    "zapas": 42,
+    "hrac": 3,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 48,
+  "fields": {
+    "zapas": 42,
+    "hrac": 4,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 49,
+  "fields": {
+    "zapas": 42,
+    "hrac": 5,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 50,
+  "fields": {
+    "zapas": 42,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 55,
+  "fields": {
+    "zapas": 45,
+    "hrac": 2,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 56,
+  "fields": {
+    "zapas": 45,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 69,
+  "fields": {
+    "zapas": 52,
+    "hrac": 4,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 70,
+  "fields": {
+    "zapas": 53,
+    "hrac": 3,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
   "model": "aplikace.gol",
   "pk": 44,
   "fields": {
@@ -2025,7 +2214,7 @@
     "hrac": 6,
     "minuta": 25,
     "typ": "normalni",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2036,7 +2225,7 @@
     "hrac": 5,
     "minuta": 76,
     "typ": "normalni",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2047,7 +2236,7 @@
     "hrac": 3,
     "minuta": 59,
     "typ": "penalta",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2058,7 +2247,7 @@
     "hrac": 2,
     "minuta": 70,
     "typ": "primak",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2069,7 +2258,7 @@
     "hrac": 6,
     "minuta": 47,
     "typ": "normalni",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2080,7 +2269,7 @@
     "hrac": 2,
     "minuta": 61,
     "typ": "normalni",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2091,7 +2280,7 @@
     "hrac": 2,
     "minuta": 23,
     "typ": "normalni",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2102,7 +2291,7 @@
     "hrac": 6,
     "minuta": 46,
     "typ": "normalni",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2113,7 +2302,7 @@
     "hrac": 5,
     "minuta": 78,
     "typ": "normalni",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2124,7 +2313,7 @@
     "hrac": 6,
     "minuta": 45,
     "typ": "normalni",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2135,7 +2324,7 @@
     "hrac": 2,
     "minuta": 60,
     "typ": "primak",
-    "asistent": null
+    "asistence": null
   }
 },
 {
@@ -2146,7 +2335,62 @@
     "hrac": 6,
     "minuta": 89,
     "typ": "normalni",
-    "asistent": null
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 56,
+  "fields": {
+    "zapas": 42,
+    "hrac": 6,
+    "minuta": 56,
+    "typ": "normalni",
+    "asistence": 2
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 57,
+  "fields": {
+    "zapas": 42,
+    "hrac": 2,
+    "minuta": 78,
+    "typ": "primak",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 58,
+  "fields": {
+    "zapas": 42,
+    "hrac": 6,
+    "minuta": 89,
+    "typ": "normalni",
+    "asistence": 5
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 59,
+  "fields": {
+    "zapas": 45,
+    "hrac": 6,
+    "minuta": 23,
+    "typ": "normalni",
+    "asistence": 2
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 61,
+  "fields": {
+    "zapas": 53,
+    "hrac": 3,
+    "minuta": 21,
+    "typ": "normalni",
+    "asistence": null
   }
 },
 {
@@ -2187,6 +2431,46 @@
     "hrac": 3,
     "typ": "zluta",
     "minuta": 76
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 13,
+  "fields": {
+    "zapas": 42,
+    "hrac": 3,
+    "typ": "zluta",
+    "minuta": 66
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 20,
+  "fields": {
+    "zapas": 52,
+    "hrac": 4,
+    "typ": "zluta",
+    "minuta": 43
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 21,
+  "fields": {
+    "zapas": 52,
+    "hrac": 4,
+    "typ": "zluta_cervena",
+    "minuta": 65
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 22,
+  "fields": {
+    "zapas": 53,
+    "hrac": 3,
+    "typ": "zluta",
+    "minuta": 45
   }
 }
 ]

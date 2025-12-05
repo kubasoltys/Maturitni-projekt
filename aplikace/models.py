@@ -615,7 +615,7 @@ class Gol(models.Model):
     typ = models.CharField(
         max_length=20,
         choices=TYP_GOLU)
-    asistent = models.ForeignKey(
+    asistence = models.ForeignKey(
         HracProfile,
         on_delete=models.SET_NULL,
         null=True,
@@ -641,6 +641,7 @@ class Karta(models.Model):
     TYP_KARTY = [
         ('zluta', 'Žlutá'),
         ('cervena', 'Červená'),
+        ('zluta_cervena', 'Červená ze žlutých'),
     ]
 
     zapas = models.ForeignKey(
@@ -654,7 +655,7 @@ class Karta(models.Model):
         blank=True,
         related_name="karty")
     typ = models.CharField(
-        max_length=10,
+        max_length=17,
         choices=TYP_KARTY)
     minuta = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(1),

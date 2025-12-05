@@ -107,7 +107,7 @@
     <!-- statistiky -->
     <div class="bg-white p-6 rounded-3xl shadow-lg border border-gray-100">
 
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-4 gap-5">
 
             <div class="bg-gradient-to-b from-blue-300 to-blue-50 rounded-3xl p-5 shadow-md">
                 <div class="w-12 h-12 mb-2 mx-left">
@@ -115,6 +115,14 @@
                 </div>
                 <p class="text-gray-600 font-semibold">Góly</p>
                 <p class="text-4xl font-bold text-gray-700 drop-shadow-lg">{{ gol_count }}</p>
+            </div>
+
+            <div class="bg-gradient-to-b from-teal-300 to-teal-50 rounded-3xl p-5 shadow-md">
+                <div class="w-12 h-12 mb-2 mx-left">
+                    <img src="../../../../media/stranka/asist.png" alt="Góly" class="w-full h-full object-contain">
+                </div>
+                <p class="text-gray-600 font-semibold">Asistence</p>
+                <p class="text-4xl font-bold text-gray-700 drop-shadow-lg">{{ asistence_count }}</p>
             </div>
 
             <div class="bg-gradient-to-b from-purple-300 to-purple-50 rounded-3xl p-5 shadow-md">
@@ -146,12 +154,19 @@
     <div class="mt-8">
         <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center drop-shadow-lg">Další statistiky</h3>
 
-        <div class="grid grid-cols-2 sm:grid-cols-3 gap-6">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-6">
 
             <div class="bg-white rounded-3xl p-6 shadow-xl text-center">
                 <p class="text-gray-600 mb-1">Průměr gólů na zápas</p>
                 <p class="text-4xl font-bold text-transparent bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text drop-shadow-lg">
                     {{ prumer_golu }}
+                </p>
+            </div>
+
+            <div class="bg-white rounded-3xl p-6 shadow-xl text-center">
+                <p class="text-gray-600 mb-1">Průměr asistencí na zápas</p>
+                <p class="text-4xl font-bold text-transparent bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text drop-shadow-lg">
+                    {{ prumer_asistenci }}
                 </p>
             </div>
 
@@ -260,14 +275,47 @@
                         {% endif %}
                     </div>
 
+                    <div class="mb-4">
+                        <p class="text-gray-600 text-sm font-semibold mb-1">Asistence hráče:</p>
+
+                        {% if z.asistence_hrace %}
+                            <div class="flex flex-wrap gap-2">
+                                {% for a in z.asistence_hrace %}
+                                    <span class="flex items-center gap-1 bg-blue-200 px-3 py-1 rounded-xl
+                                                 text-sm font-medium shadow">
+                                        <img src="../../../../media/stranka/asist.png" alt="Asistence" class="w-4 h-4">
+                                        <span>{{ a.minuta }}’</span>
+                                    </span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            <div class="bg-gray-100 shadow p-2 rounded-xl text-sm text-gray-500">
+                                V tomto zápase jsi nedal asistenci
+                            </div>
+                        {% endif %}
+                    </div>
+
                     <div>
                         <p class="text-gray-600 text-sm font-semibold mb-1">Karty:</p>
+
                         {% if z.karty_hrace %}
                             <div class="flex flex-wrap gap-2">
                                 {% for k in z.karty_hrace %}
                                     <span class="flex items-center gap-1 px-3 py-1 rounded-xl text-sm font-medium shadow
-                                                 {% if k.typ == 'zluta' %} bg-yellow-100 text-yellow-800 {% else %} bg-red-100 text-red-800 {% endif %}">
-                                        {% if k.typ == "zluta" %} 🟨 {% else %} 🟥 {% endif %}
+                                                 {% if k.typ == 'zluta' %}
+                                                     bg-yellow-100 text-yellow-800
+                                                 {% elif k.typ == 'cervena' %}
+                                                     bg-red-100 text-red-800
+                                                 {% else %}
+                                                     bg-red-200 text-red-900
+                                                 {% endif %}">
+                                        {% if k.typ == "zluta" %}
+                                            <img src="/media/stranka/zluta_karta.png" class="w-3 h-5" alt="Žlutá">
+                                        {% elif k.typ == "cervena" %}
+                                            <img src="/media/stranka/cervena_karta.png" class="w-3 h-5" alt="Červená">
+                                        {% else %}
+                                            <img src="/media/stranka/zluta_a_cervena.png" class="w-3 h-5" alt="Červená ze žlutých">
+                                        {% endif %}
                                         <span>{{ k.minuta }}’</span>
                                     </span>
                                 {% endfor %}
