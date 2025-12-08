@@ -200,10 +200,139 @@ def trener_dashboard(request):
     hraci = HracProfile.objects.filter(tym=vybrany_tym).distinct()
     now = timezone.now()
 
+    zapasy_qs = (
+        Zapas.objects.filter(tym=vybrany_tym)
+                     .prefetch_related('dochazka', 'dochazka__hrac', 'goly')
+                     .order_by('datum', 'cas')
+    )
+
+
+    # STATISTIKY TYMU
+    zapasy_dohrane = zapasy_qs.filter(stav='Dohráno')
+    celkove_goly = Gol.objects.filter(hrac__tym=vybrany_tym, zapas__in=zapasy_dohrane).count()
+
+    vyhry = 0
+    prohry = 0
+    remizy = 0
+
+    for z in zapasy_dohrane:
+        goly_tym = z.goly.filter(hrac__tym=vybrany_tym).count()
+        goly_souper = z.vysledek_soupere
+
+        if goly_tym > goly_souper:
+            vyhry += 1
+        elif goly_tym < goly_souper:
+            prohry += 1
+        else:
+            remizy += 1
+
+    pocet_zapasu = zapasy_dohrane.count()
+    prumer_golu = round(celkove_goly / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
+
+
+    # STATISTIKY HRACU
+    hraci_data = []
+    for h in hraci:
+        goly = Gol.objects.filter(hrac=h).count()
+        asistence = Gol.objects.filter(asistence=h).count()
+        zlute = Karta.objects.filter(hrac=h, typ="zluta").count()
+        cervene = Karta.objects.filter(hrac=h, typ__in=["cervena", "zluta_cervena"]).count()
+
+        hraci_data.append({
+            "hrac": h,
+            "goly": goly,
+            "asistence": asistence,
+            "G_A": goly + asistence,
+            "zlute": zlute,
+            "cervene": cervene,
+        })
+
+    hraci_data_sorted = sorted(hraci_data, key=lambda x: x["G_A"], reverse=True)
+
+
+    # POSLEDNI ODEHRANY ZAPAS
+    posledni_zapas = zapasy_qs.filter(stav='Dohráno').order_by('-datum', '-cas').first()
+    posledni_zapas_data = None
+
+    hraci_stats = []
+
+    if posledni_zapas:
+
+        vt = Gol.objects.filter(hrac__tym=vybrany_tym, zapas=posledni_zapas).count()
+        vs = posledni_zapas.vysledek_soupere
+
+        goly = Gol.objects.filter(zapas=posledni_zapas)
+        karty = Karta.objects.filter(zapas=posledni_zapas)
+
+        hraci_stats = []
+        for h in hraci:
+            goly_hrac = goly.filter(hrac=h).count()
+            asistence_hrac = goly.filter(asistence=h).count()
+            zlute = karty.filter(hrac=h, typ="zluta").count()
+            cervene = karty.filter(hrac=h, typ__in=["cervena", "zluta_cervena"]).count()
+
+            hraci_stats.append({
+                "hrac": h,
+                "goly": goly_hrac,
+                "asistence": asistence_hrac,
+                "G_A": goly_hrac + asistence_hrac,
+                "zlute": zlute,
+                "cervene": cervene,
+            })
+
+        posledni_zapas_data = {
+            "zapas": posledni_zapas,
+            "vt": vt,
+            "vs": vs,
+            "goly": goly,
+            "karty": karty,
+            "hraci_stats": hraci_stats,
+        }
+
+    else:
+        vt = None
+        vs = None
+
+
+    # NADCHAZEJI ZAPAS
+    zapasy_nadchazejici = (
+        Zapas.objects.filter(
+            tym=vybrany_tym,
+            datum__gte=timezone.localdate()
+        )
+        .exclude(stav="Dohráno")
+        .order_by("datum", "cas")
+    )
+
+    zapasy_data = []
+
+    for zapas in zapasy_nadchazejici:
+        dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
+
+        dochazka_list = [
+            dochazka_dict.get(
+                hrac.id,
+                SimpleNamespace(hrac=hrac, pritomen=None, duvod=None)
+            )
+            for hrac in hraci
+        ]
+
+        pritomni = sum(1 for d in dochazka_list if d.pritomen is True)
+        celkem = len(dochazka_list)
+        procento_pritomnych = round((pritomni / celkem) * 100) if celkem > 0 else 0
+
+        zapasy_data.append({
+            "zapas": zapas,
+            "dochazka_list": dochazka_list,
+            "po_dohrani": zapas.stav == "Dohráno",
+            "procento_pritomnych": procento_pritomnych,
+        })
+
+    # NADCHAZEJICI TRENINK
     treninky_qs = Trenink.objects.filter(
         tym=vybrany_tym,
         stav='Naplánováno'
-    ).order_by('datum', 'cas').prefetch_related('dochazka', 'dochazka__hrac')
+    ).order_by('datum', 'cas').prefetch_related('dochazka', 'dochazka__hrac').distinct()
 
     treninky_data = []
     for trenink in treninky_qs:
@@ -216,70 +345,23 @@ def trener_dashboard(request):
 
         dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
 
-        dochazka_list = []
-        for hrac in hraci:
-            dochazka_list.append(
-                dochazka_dict.get(
-                    hrac.id,
-                    SimpleNamespace(hrac=hrac, pritomen=None, duvod=None)
-                )
-            )
+        dochazka_list = [
+            dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
+            for hrac in hraci
+        ]
+
+        pritomni = sum(1 for d in dochazka_list if d.pritomen is True)
+        celkem = len(dochazka_list)
+        procento_pritomnych = round((pritomni / celkem) * 100) if celkem > 0 else 0
 
         treninky_data.append({
             'trenink': trenink,
             'dochazka_list': dochazka_list,
-            'po_dohrani': trenink_datetime < now or trenink.stav != 'Naplánováno'
+            'po_dohrani': trenink_datetime < now or trenink.stav != 'Naplánováno',
+            'procento_pritomnych': procento_pritomnych,
+            'trenink_dochazka': len(hraci) > 0,
         })
 
-    zapasy_qs = (
-        Zapas.objects.filter(tym=vybrany_tym, stav='Naplánováno')
-                     .prefetch_related('dochazka', 'dochazka__hrac')
-                     .order_by('datum', 'cas')
-    )
-
-    nejblizsi = None
-
-    for zapas in zapasy_qs:
-        zapas_datetime = timezone.make_aware(
-            datetime.combine(zapas.datum, zapas.cas),
-            timezone.get_current_timezone()
-        )
-
-        po_casove = zapas_datetime < now
-
-        if not po_casove:
-            nejblizsi = zapas
-            break
-
-        if po_casove:
-            nejblizsi = zapas
-            break
-
-    zapasy_data = []
-
-    if nejblizsi:
-        dochazka_dict = {d.hrac.id: d for d in nejblizsi.dochazka.all()}
-
-        dochazka_list = [
-            dochazka_dict.get(
-                hrac.id,
-                SimpleNamespace(hrac=hrac, pritomen=None, duvod=None)
-            )
-            for hrac in hraci
-        ]
-
-        zapas_datetime = timezone.make_aware(
-            datetime.combine(nejblizsi.datum, nejblizsi.cas),
-            timezone.get_current_timezone()
-        )
-
-        po_dohrani = zapas_datetime < now
-
-        zapasy_data.append({
-            'zapas': nejblizsi,
-            'dochazka_list': dochazka_list,
-            'po_dohrani': po_dohrani,
-        })
 
     context = {
         'trener': trener,
@@ -288,9 +370,21 @@ def trener_dashboard(request):
         'treninky_data': treninky_data,
         'zapasy': zapasy_data,
         'tymy': tymy,
+        'celkove_goly': celkove_goly,
+        'vyhry': vyhry,
+        'prohry': prohry,
+        'remizy': remizy,
+        'prumer_golu': prumer_golu,
+        'posledni_zapas': posledni_zapas,
+        'hraci_stats': hraci_stats,
+        'hraci_data': hraci_data_sorted,
+        'posledni_zapas_data': posledni_zapas_data,
+        'vt': vt,
+        'vs': vs,
     }
 
     return render(request, 'trener/dashboard.html', context)
+
 
 
 
@@ -689,7 +783,7 @@ def edit_trener_profile(request):
 
 
 # --------------------------------------------------------------------------------
-# trener - stranka pro treninky (nadcházející)
+# trener - stranka pro treninky
 # --------------------------------------------------------------------------------
 @login_required
 def trener_trenink(request):
@@ -699,17 +793,11 @@ def trener_trenink(request):
         return render(request, 'error.html', {'message': 'Profil trenéra nebyl nalezen.'})
 
     tymy = Tym.objects.filter(trener=trener)
-
     selected_tym_id = request.GET.get("selected_tym")
     if selected_tym_id:
         request.session["selected_tym"] = selected_tym_id
-
     selected_tym_id = request.session.get("selected_tym")
-    if selected_tym_id:
-        vybrany_tym = tymy.filter(id=selected_tym_id).first()
-    else:
-        vybrany_tym = tymy.first()
-
+    vybrany_tym = tymy.filter(id=selected_tym_id).first() if selected_tym_id else tymy.first()
     if vybrany_tym not in tymy:
         vybrany_tym = tymy.first()
 
@@ -732,14 +820,21 @@ def trener_trenink(request):
 
         dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
         dochazka_list = []
+        pocet_pritomnych = 0
         for hrac in hraci:
-            dochazka_list.append(
-                dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
-            )
+            doch = dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
+            dochazka_list.append(doch)
+            if doch.pritomen is True:
+                pocet_pritomnych += 1
+
+        celkem_hracu = len(hraci)
+        procento_pritomnych = int((pocet_pritomnych / celkem_hracu) * 100) if celkem_hracu else 0
 
         treninky_data.append({
             'trenink': trenink,
             'dochazka_list': dochazka_list,
+            'trenink_dochazka': bool(dochazka_list),
+            'procento_pritomnych': procento_pritomnych,
             'po_dohrani': trenink_datetime < now or trenink.stav != 'Naplánováno'
         })
 
@@ -788,21 +883,35 @@ def trener_trenink_historie(request):
 
     treninky_data = []
     for trenink in treninky_qs:
+
+        # datum + čas → datetime
         trenink_datetime = timezone.make_aware(
             datetime.combine(trenink.datum, trenink.cas),
             timezone.get_current_timezone()
         )
+
+        # jen minulost
         if trenink_datetime >= now and trenink.stav == 'Naplánováno':
             continue
 
+        # --- docházka ---
         dochazka_dict = {d.hrac.id: d for d in trenink.dochazka.all()}
-        dochazka_list = []
-        for hrac in hraci:
-            dochazka_list.append(
-                dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
-            )
+        dochazka_list = [
+            dochazka_dict.get(hrac.id, SimpleNamespace(hrac=hrac, pritomen=None, duvod=None))
+            for hrac in hraci
+        ]
 
-        treninky_data.append({'trenink': trenink, 'dochazka_list': dochazka_list})
+        # --- procenta ---
+        pritomni = sum(1 for d in dochazka_list if d.pritomen is True)
+        celkem = len(dochazka_list)
+        procento_pritomnych = round((pritomni / celkem) * 100) if celkem else 0
+
+        treninky_data.append({
+            'trenink': trenink,
+            'dochazka_list': dochazka_list,
+            'procento_pritomnych': procento_pritomnych,
+            'po_dohrani': True,
+        })
 
     context = {
         'trener': trener,

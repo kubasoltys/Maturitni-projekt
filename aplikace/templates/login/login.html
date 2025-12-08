@@ -2,22 +2,12 @@
 
 {% block content %}
 <div class="flex items-center justify-center min-h-screen">
-    <div class="bg-white p-10 rounded-3xl shadow-2xl w-full max-w-md">
-        <h2 class="text-4xl font-extrabold mb-8 text-center drop-shadow-lg">
+    <div class="bg-white p-10 rounded-3xl shadow-xl w-full max-w-md">
+        <h2 class="text-3xl font-bold mb-8 text-center text-gray-800">
             Přihlášení
         </h2>
 
-        <!--
-        {% if messages %}
-            {% for message in messages %}
-                <div class="mb-4 text-center text-red-600 font-semibold">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endif %}
-        -->
-
-        <form method="post" class="space-y-5">
+        <form method="post" class="space-y-6">
             {% csrf_token %}
             {{ form.non_field_errors }}
 
@@ -32,15 +22,14 @@
             {% endfor %}
 
             <button type="submit"
-                    class="w-full py-3 text-white font-semibold text-lg rounded-2xl shadow-lg
-                           bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
-                           hover:from-blue-600 hover:to-purple-900 hover:scale-105">
+                class="w-full py-3 text-white font-semibold text-lg rounded-2xl bg-green-600
+                       hover:bg-green-700 transition duration-200">
                 Přihlásit se
             </button>
         </form>
 
         <a href="{% url 'index' %}"
-           class="block mt-6 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
+           class="block mt-6 text-center text-green-700 hover:text-green-900 font-medium hover:scale-105 transition">
             Zpět
         </a>
     </div>

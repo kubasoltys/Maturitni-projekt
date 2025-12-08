@@ -921,10 +921,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "h3wkzy9rw4zd2kcfr5taqr3kfpgv83n2",
+  "pk": "g6svr3iibgw7gp8h2pxrseaea1gbn4ev",
   "fields": {
-    "session_data": ".eJxVjM0OwiAQhN-FsyGw_Lh69N5nIMsCUjU0Ke3J-O62SQ96m8z3zbxFoHWpYe15DmMSVwHi9NtF4mduO0gPavdJ8tSWeYxyV-RBuxymlF-3w_07qNTrtkbrffYO3dlHDwYs6ZLSlqgo1qAS64jKkI45aiYNDopXaNAwuAta8fkCxQ02-w:1vRdBF:zc5MA7UIEX5BPMk8VnjXAAYbgLfZIZYw2KQKn4_yp_c",
-    "expire_date": "2025-12-19T21:17:33.361Z"
+    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vSGE7:mA_pzg7VDx1mqxMkRyAC3AJcufj3qiA6MLPw2GcM5is",
+    "expire_date": "2025-12-21T14:59:07.892Z"
   }
 },
 {
@@ -932,7 +932,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1000000$lVBDpd6Ja8QRTsMTdKJBR1$fRAfF49lBGd4tGP425N5023GStuBgiqMlmQK2YVN9zE=",
-    "last_login": "2025-12-05T09:12:52.536Z",
+    "last_login": "2025-12-06T14:54:25.657Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -952,7 +952,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-12-05T21:17:33.358Z",
+    "last_login": "2025-12-07T14:54:47.179Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -1852,18 +1852,18 @@
 },
 {
   "model": "aplikace.zapas",
-  "pk": 53,
+  "pk": 55,
   "fields": {
     "tym": 1,
-    "souper": "zkouska 9",
-    "datum": "2025-12-05",
-    "cas": "22:18:00",
-    "domaci_hoste": "Domácí",
-    "misto": "Camp Nou, Barcelona",
-    "stav": "Dohráno",
+    "souper": "Arsenal FC",
+    "datum": "2025-12-28",
+    "cas": "21:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Emirates Stadium, Londýn",
+    "stav": "Naplánováno",
     "vysledek_tymu": null,
     "vysledek_soupere": 0,
-    "created_at": "2025-12-05T21:17:11.484Z"
+    "created_at": "2025-12-07T07:19:52.946Z"
   }
 },
 {
@@ -2197,16 +2197,6 @@
   }
 },
 {
-  "model": "aplikace.dochazkazapasy",
-  "pk": 70,
-  "fields": {
-    "zapas": 53,
-    "hrac": 3,
-    "pritomen": true,
-    "poznamka": null
-  }
-},
-{
   "model": "aplikace.gol",
   "pk": 44,
   "fields": {
@@ -2383,17 +2373,6 @@
   }
 },
 {
-  "model": "aplikace.gol",
-  "pk": 61,
-  "fields": {
-    "zapas": 53,
-    "hrac": 3,
-    "minuta": 21,
-    "typ": "normalni",
-    "asistence": null
-  }
-},
-{
   "model": "aplikace.karta",
   "pk": 9,
   "fields": {
@@ -2461,16 +2440,6 @@
     "hrac": 4,
     "typ": "zluta_cervena",
     "minuta": 65
-  }
-},
-{
-  "model": "aplikace.karta",
-  "pk": 22,
-  "fields": {
-    "zapas": 53,
-    "hrac": 3,
-    "typ": "zluta",
-    "minuta": 45
   }
 }
 ]

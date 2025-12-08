@@ -5,20 +5,30 @@ from .models import TrenerProfile, HracProfile, Trenink, Zapas, Tym
 # prihlaseni
 class LoginForm(forms.Form):
     username = forms.CharField(
-        label = 'Uživatelské jméno',
+        label='Uživatelské jméno',
         max_length=150,
         widget=forms.TextInput(attrs={
             'placeholder': 'Zadejte uživatelské jméno',
-            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            'class': (
+                'w-full p-4 border border-gray-300 rounded-2xl '
+                'focus:outline-none focus:ring-2 focus:ring-green-700 '
+                'transition-shadow shadow-sm focus:shadow-md'
+            )
         })
     )
+
     password = forms.CharField(
-        label = 'Heslo',
+        label='Heslo',
         widget=forms.PasswordInput(attrs={
             'placeholder': 'Zadejte heslo',
-            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            'class': (
+                'w-full p-4 border border-gray-300 rounded-2xl '
+                'focus:outline-none focus:ring-2 focus:ring-green-700 '
+                'transition-shadow shadow-sm focus:shadow-md'
+            )
         })
     )
+
 
 
 # prvni prihlaseni trenera
@@ -28,13 +38,13 @@ class TrenerProfileForm(forms.ModelForm):
         label='E-mail',
         widget=forms.EmailInput(attrs={
             'placeholder': 'E-mail',
-            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
         })
     )
 
     class Meta:
         model = TrenerProfile
-        fields = ['first_name', 'last_name', 'email', 'phone', 'birth_date','photo']
+        fields = ['first_name', 'last_name', 'email', 'phone', 'birth_date', 'photo']
         labels = {
             'first_name': 'Jméno',
             'last_name': 'Příjmení',
@@ -45,22 +55,22 @@ class TrenerProfileForm(forms.ModelForm):
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'placeholder': 'Jméno',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'last_name': forms.TextInput(attrs={
                 'placeholder': 'Příjmení',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'phone': forms.TextInput(attrs={
                 'placeholder': 'Telefonní číslo',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'birth_date': forms.DateInput(attrs={
                 'type': 'date',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }, format='%Y-%m-%d'),
             'photo': forms.ClearableFileInput(attrs={
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
         }
 
@@ -89,7 +99,7 @@ class HracProfileForm(forms.ModelForm):
         label='E-mail',
         widget=forms.EmailInput(attrs={
             'placeholder': 'E-mail',
-            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
         })
     )
 
@@ -98,14 +108,14 @@ class HracProfileForm(forms.ModelForm):
         required=False,
         label="Vyberte trenéra",
         widget=forms.Select(attrs={
-            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
         })
     )
 
     class Meta:
         model = HracProfile
         fields = [
-            'first_name', 'last_name', 'email' , 'phone', 'birth_date', 'height', 'weight',
+            'first_name', 'last_name', 'email', 'phone', 'birth_date', 'height', 'weight',
             'cislo_dresu', 'pozice', 'preferred_foot', 'trener', 'photo'
         ]
         labels = {
@@ -123,40 +133,40 @@ class HracProfileForm(forms.ModelForm):
         widgets = {
             'first_name': forms.TextInput(attrs={
                 'placeholder': 'Jméno',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'last_name': forms.TextInput(attrs={
                 'placeholder': 'Příjmení',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'phone': forms.TextInput(attrs={
                 'placeholder': 'Telefonní číslo',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'birth_date': forms.DateInput(attrs={
                 'type': 'date',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }, format='%Y-%m-%d'),
             'height': forms.NumberInput(attrs={
                 'placeholder': 'Výška',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'weight': forms.NumberInput(attrs={
                 'placeholder': 'Váha',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'cislo_dresu': forms.NumberInput(attrs={
                 'placeholder': 'Číslo dresu',
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'pozice': forms.Select(attrs={
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'preferred_foot': forms.Select(attrs={
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'photo': forms.ClearableFileInput(attrs={
-                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
         }
 
@@ -178,9 +188,9 @@ class HracProfileForm(forms.ModelForm):
         return instance
 
 
-#----------------------------------------------------------------------------------------------
+# ----------------------------------------------
 # trenink
-#----------------------------------------------------------------------------------------------
+# ----------------------------------------------
 class TreninkForm(forms.ModelForm):
 
     class Meta:
@@ -195,27 +205,26 @@ class TreninkForm(forms.ModelForm):
         widgets = {
             'datum': forms.DateInput(attrs={
                 'type': 'date',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'cas': forms.TimeInput(attrs={
                 'type': 'time',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'typ': forms.Select(attrs={
-                'placeholder': 'Vyber typ tréninku',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'poznamka': forms.Textarea(attrs={
                 'placeholder': 'Poznámka (nepovinné)',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400',
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600',
                 'rows': 3
             }),
         }
 
 
-#----------------------------------------------------------------------------------------------
+# ----------------------------------------------
 # zapas
-#----------------------------------------------------------------------------------------------
+# ----------------------------------------------
 class ZapasForm(forms.ModelForm):
 
     class Meta:
@@ -231,25 +240,24 @@ class ZapasForm(forms.ModelForm):
         widgets = {
             'souper': forms.TextInput(attrs={
                 'placeholder': 'Zadej soupeře',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'datum': forms.DateInput(attrs={
                 'type': 'date',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'cas': forms.TimeInput(attrs={
                 'type': 'time',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'domaci_hoste': forms.Select(attrs={
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'misto': forms.TextInput(attrs={
                 'placeholder': 'Místo zápasu (např. domácí hřiště)',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
         }
-
 
 
 class DohranyZapasForm(forms.ModelForm):
@@ -263,10 +271,10 @@ class DohranyZapasForm(forms.ModelForm):
         widgets = {
             'vysledek_tymu': forms.NumberInput(attrs={
                 'placeholder': 'Góly tvého týmu',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
             'vysledek_soupere': forms.NumberInput(attrs={
                 'placeholder': 'Góly soupeře',
-                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-400'
+                'class': 'w-full p-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
             }),
         }
