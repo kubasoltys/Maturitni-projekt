@@ -923,8 +923,8 @@
   "model": "sessions.session",
   "pk": "g6svr3iibgw7gp8h2pxrseaea1gbn4ev",
   "fields": {
-    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vSfNS:S94S08sobY7On7Xcb37vWsMJuTvyAd6zyzU7gKMawCI",
-    "expire_date": "2025-12-22T17:50:26.553Z"
+    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vStIV:qU9x5jTJqQEaJRxm9lCJQWmZJX9-YeY-XE5BPrk182k",
+    "expire_date": "2025-12-23T08:42:15.270Z"
   }
 },
 {
@@ -952,7 +952,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-12-07T14:54:47.179Z",
+    "last_login": "2025-12-09T08:42:15.262Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",

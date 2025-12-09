@@ -1597,12 +1597,19 @@ def trener_dohrane_zapasy(request):
             typ="cervena"
         ).count()
 
+        pocet_pritomnych = sum(1 for d in dochazka_list if d.pritomen)
+        procento_pritomnych = int((pocet_pritomnych / len(hraci)) * 100) if hraci else 0
+
         zapasy_data.append({
             'zapas': zapas,
             'dochazka_list': dochazka_list,
+            'zapas_dochazka': bool(dochazka_list),
+            'procento_pritomnych': procento_pritomnych,
+
             'goly': goly,
             'vt': vt,
             'vs': vs,
+
             'karty': karty,
             'zlute': zlute,
             'cervene': cervene,
