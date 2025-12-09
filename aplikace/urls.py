@@ -81,9 +81,6 @@ urlpatterns = [
     # trener - historie treninku
     path('trener/treninky/historie/', views.trener_trenink_historie, name='trener_trenink_historie'),
 
-    # trener - detail treninku
-    path('trener/treninky/detail/<int:trenink_id>/', views.trener_trenink_detail, name='trener_trenink_detail'),
-
     # pridani treninku
     path('trener/treninky/pridat/', views.add_trenink_view, name='add_trenink'),
 

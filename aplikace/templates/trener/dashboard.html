@@ -104,12 +104,12 @@
 
 
 <!-- obsah -->
-<div class="min-h-screen pt-32 px-4 lg:px-16">
+<div class="min-h-screen pt-40 px-4 lg:px-16">
 
     <div class="text-center mb-12">
         <h1 class="text-5xl font-extrabold text-gray-800 mb-2 drop-shadow-sm">
             Vítej
-            <span class="bg-green-600 bg-clip-text text-transparent">
+            <span class="bg-green-700 bg-clip-text text-transparent">
                 {% if trener.first_name or trener.last_name %}
                     {{ trener.first_name }} {{ trener.last_name }}
                 {% else %}
@@ -141,7 +141,7 @@
                 <!-- zmena tymu -->
                 {% if tymy|length > 1 %}
                 <button id="openTeamModal"
-                        class="mt-2 px-4 py-2 bg-green-600 text-white font-semibold rounded-2xl shadow hover:bg-green-700 transition">
+                        class="mt-2 px-4 py-2 bg-green-700 text-white font-semibold rounded-2xl shadow hover:bg-green-600 hover:scale-105 transition duration-300">
                     Změnit tým
                 </button>
                 {% endif %}
@@ -265,7 +265,7 @@
                     </p>
 
                     <button onclick="openMatchModal('matchModal_{{ data.zapas.id }}')"
-                            class="px-4 py-2 bg-gray-600 text-white font-semibold hover:bg-gray-700 rounded-2xl mt-4 transition shadow-md">
+                            class="px-4 py-2 bg-gray-700 text-white font-semibold hover:bg-gray-600 hover:scale-105 rounded-2xl mt-4 transition duration-300 shadow-md">
                         Detail zápasu
                     </button>
 

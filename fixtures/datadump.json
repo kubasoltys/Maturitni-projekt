@@ -923,8 +923,8 @@
   "model": "sessions.session",
   "pk": "g6svr3iibgw7gp8h2pxrseaea1gbn4ev",
   "fields": {
-    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vSGE7:mA_pzg7VDx1mqxMkRyAC3AJcufj3qiA6MLPw2GcM5is",
-    "expire_date": "2025-12-21T14:59:07.892Z"
+    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vSfNS:S94S08sobY7On7Xcb37vWsMJuTvyAd6zyzU7gKMawCI",
+    "expire_date": "2025-12-22T17:50:26.553Z"
   }
 },
 {
@@ -1325,6 +1325,19 @@
     "poznamka": "",
     "stav": "Naplánováno",
     "created_at": "2025-12-01T13:59:36.351Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 16,
+  "fields": {
+    "tym": 1,
+    "datum": "2025-12-31",
+    "cas": "12:00:00",
+    "typ": "Taktická připrava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-12-08T17:33:19.546Z"
   }
 },
 {
