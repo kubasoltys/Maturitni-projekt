@@ -94,120 +94,121 @@
 </nav>
 
 <!-- zapasy -->
-<div class="min-h-screen py-10 px-4 sm:px-6 lg:px-8 pt-40">
-    <!-- Nadpis -->
+<div class="flex flex-col items-center min-h-screen py-10 pt-40">
+
     <div class="max-w-4xl mx-auto mb-8 text-center">
         <h1 class="text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2">Odehrané zápasy</h1>
         <p class="text-gray-600 font-medium">Přehled všech odehraných zápasů.</p>
     </div>
 
-    <!-- Karty zápasů -->
-    <div class="max-w-4xl mx-auto space-y-6">
+    <!-- bloky -->
+    <div class="w-full max-w-6xl px-4 space-y-10">
 
         {% for data in zapasy_data %}
         {% with vt=data.vt vs=data.vs %}
-        <div class="bg-white rounded-3xl shadow-lg overflow-hidden border-l-8
-            {% if vt != None and vs != None %}
-                {% if vt > vs %} border-green-600 {% elif vt < vs %} border-rose-600 {% else %} border-amber-500 {% endif %}
-            {% else %}
-                border-gray-300
-            {% endif %}
-            transition transform hover:shadow-xl">
 
-            <!-- Výsledek -->
-            <div class="flex justify-between items-center px-6 py-4 bg-gray-50">
-                <div class="flex flex-col items-start">
-                    <span class="text-md text-gray-500">{{ data.zapas.datum|date:"d.m.Y" }} | {{ data.zapas.cas|time:"H:i" }}</span>
-                    <span class="text-lg font-semibold text-gray-800">{{ data.zapas.misto|default:"-" }}</span>
+        <div class="flex items-start gap-6 w-full">
+
+            <div class="flex flex-col items-center">
+                <div class="bg-green-600 text-white font-bold rounded-2xl px-5 py-3 shadow-lg text-center">
+                    <span class="text-xl">{{ data.zapas.datum|date:"d.m." }}</span>
+                    <span class="block text-xs opacity-80">{{ data.zapas.datum|date:"Y" }}</span>
                 </div>
-                <div class="flex items-center space-x-2">
-                    {% if vt is not None and vs is not None %}
-                    {% if vt > vs %}
-                    <span class="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-700 text-white
-                                        rounded-full text-sm font-semibold">Výhra!</span>
-                    {% elif vt < vs %}
-                    <span class="px-3 py-1 bg-gradient-to-r from-red-500 to-rose-700 text-white
-                                        rounded-full text-sm font-semibold">Prohra!</span>
+
+                {% if not forloop.last %}
+                <div class="w-1 h-24 bg-green-300 rounded-full mt-2"></div>
+                {% endif %}
+            </div>
+
+            <div class="flex-1 bg-white rounded-3xl shadow-lg overflow-hidden border-r-8 w-full
+                {% if vt != None and vs != None %}
+                    {% if vt > vs %} border-green-600 {% elif vt < vs %} border-rose-600 {% else %} border-amber-500 {% endif %}
+                {% else %}
+                    border-gray-300
+                {% endif %}
+                transition transform hover:shadow-xl">
+
+                <div class="flex justify-between items-center px-6 py-4 bg-gray-50">
+                    <div class="flex flex-col items-start">
+                        <span class="text-md text-gray-500">{{ data.zapas.datum|date:"d.m.Y" }} | {{ data.zapas.cas|time:"H:i" }}</span>
+                        <span class="text-lg font-semibold text-gray-800">{{ data.zapas.misto|default:"-" }}</span>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        {% if vt is not None and vs is not None %}
+                            {% if vt > vs %}
+                            <span class="px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-700 text-white rounded-full text-sm font-semibold">Výhra!</span>
+                            {% elif vt < vs %}
+                            <span class="px-3 py-1 bg-gradient-to-r from-red-500 to-rose-700 text-white rounded-full text-sm font-semibold">Prohra!</span>
+                            {% else %}
+                            <span class="px-3 py-1 bg-gradient-to-r from-amber-400 to-amber-600 text-white rounded-full text-sm font-semibold">Remíza!</span>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="px-6 py-6 grid grid-cols-3 items-center text-center">
+                    {% if data.zapas.domaci_hoste|lower == "domácí" %}
+                    <div class="text-gray-800 text-2xl font-extrabold">{{ vybrany_tym.nazev }}</div>
+                    <div class="text-lg font-semibold text-gray-500">vs</div>
+                    <div class="text-gray-800 text-2xl font-extrabold">{{ data.zapas.souper }}</div>
                     {% else %}
-                    <span class="px-3 py-1 bg-gradient-to-r from-amber-400 to-amber-600 text-white
-                                        rounded-full text-sm font-semibold">Remíza!</span>
-                    {% endif %}
+                    <div class="text-gray-800 text-2xl font-extrabold">{{ data.zapas.souper }}</div>
+                    <div class="text-lg font-semibold text-gray-500">vs</div>
+                    <div class="text-gray-800 text-2xl font-extrabold">{{ vybrany_tym.nazev }}</div>
                     {% endif %}
                 </div>
-            </div>
 
-            <!-- Týmy -->
-            <div class="px-6 py-6 grid grid-cols-3 items-center text-center">
-                {% if data.zapas.domaci_hoste|lower == "domácí" %}
-                <div class="text-gray-800 font-bold text-2xl">{{ vybrany_tym.nazev }}</div>
-                <div class="text-lg font-semibold text-gray-500">vs</div>
-                <div class="text-gray-800 font-bold text-2xl">{{ data.zapas.souper }}</div>
-                {% else %}
-                <div class="text-gray-800 font-bold text-2xl">{{ data.zapas.souper }}</div>
-                <div class="text-lg font-semibold text-gray-500">vs</div>
-                <div class="text-gray-800 font-bold text-2xl">{{ vybrany_tym.nazev }}</div>
-                {% endif %}
-            </div>
-
-            <!-- Skóre -->
-            {% if data.vt is not None and data.vs is not None %}
-            <div class="px-6 pb-4 grid grid-cols-3 text-center items-center text-3xl font-bold text-gray-700">
-                {% if data.zapas.domaci_hoste == "Domácí" %}
-                <p>{{ vt }}</p>
-                <p>:</p>
-                <p>{{ vs }}</p>
-                {% else %}
-                <p>{{ vs }}</p>
-                <p>:</p>
-                <p>{{ vt }}</p>
-                {% endif %}
-            </div>
-            {% endif %}
-
-
-            <!-- Akce -->
-            <div class="px-6 py-4 flex justify-between items-center border-t border-gray-200">
-
-                <!-- Levá tlačítka -->
-                <div class="flex space-x-3 items-center">
-                    <button onclick="openMatchModal('matchModal_{{ data.zapas.id }}')"
-                            class="px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-white font-semibold
-                       rounded-2xl shadow-md hover:shadow-lg hover:scale-105
-                       transition flex items-center gap-2 duration-300">
-                        <i class="fa-solid fa-eye"></i>
-                        Detail zápasu
-                    </button>
+                {% if data.vt is not None and data.vs is not None %}
+                <div class="px-6 pb-4 grid grid-cols-3 text-center items-center text-3xl font-bold text-gray-700">
+                    {% if data.zapas.domaci_hoste == "Domácí" %}
+                    <p>{{ vt }}</p>
+                    <p>:</p>
+                    <p>{{ vs }}</p>
+                    {% else %}
+                    <p>{{ vs }}</p>
+                    <p>:</p>
+                    <p>{{ vt }}</p>
+                    {% endif %}
                 </div>
+                {% endif %}
 
-                <!-- Pravá tlačítka -->
-                <div class="flex space-x-3 items-center justify-between">
+                <!-- tlacitka -->
+                <div class="px-6 py-4 flex justify-between items-center border-t border-gray-200">
 
-                    <!-- Tlačítko účast hráčů -->
-                    <button onclick="openDochazkaZapasModal('{{ data.zapas.id }}')"
-                            class="px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-white font-semibold
-                       rounded-2xl shadow-md hover:shadow-lg hover:scale-105
-                       transition flex items-center gap-2 duration-300">
-                        <i class="fa-solid fa-user-check"></i>
-                        Účast hráčů
-                    </button>
-
-                    <form method="post" action="{% url 'delete_zapas' data.zapas.id %}"
-                          class="m-0 p-0 flex items-center">
-                        {% csrf_token %}
-                        <button type="submit"
-                                class="px-5 py-2.5 bg-red-700 text-white font-semibold rounded-2xl shadow-md
-                           hover:bg-red-600 hover:shadow-lg hover:scale-105
-                           transition flex items-center gap-2 duration-300">
-                            <i class="fa-solid fa-trash"></i>
-                            Smazat
+                    <!-- leva strana -->
+                    <div class="flex space-x-3 items-center">
+                        <button onclick="openMatchModal('matchModal_{{ data.zapas.id }}')"
+                                class="px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition flex items-center gap-2 duration-300">
+                            <i class="fa-solid fa-eye"></i>
+                            Detail zápasu
                         </button>
-                    </form>
+                    </div>
 
+                    <!-- prava strana -->
+                    <div class="flex space-x-3 items-center justify-between">
+
+                        <button onclick="openDochazkaZapasModal('{{ data.zapas.id }}')"
+                                class="px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-white font-semibold rounded-2xl shadow-md hover:shadow-lg hover:scale-105 transition flex items-center gap-2 duration-300">
+                            <i class="fa-solid fa-user-check"></i>
+                            Účast hráčů
+                        </button>
+
+                        <form method="post" action="{% url 'delete_zapas' data.zapas.id %}" class="m-0 p-0 flex items-center">
+                            {% csrf_token %}
+                            <button type="submit"
+                                    class="px-5 py-2.5 bg-red-700 text-white font-semibold rounded-2xl shadow-md hover:bg-red-600 hover:shadow-lg hover:scale-105 transition flex items-center gap-2 duration-300">
+                                <i class="fa-solid fa-trash"></i>
+                                Smazat
+                            </button>
+                        </form>
+
+                    </div>
                 </div>
+
             </div>
-
-
         </div>
+
         {% endwith %}
         {% endfor %}
 
@@ -215,16 +216,17 @@
         <p class="text-center text-gray-500 mt-6">Zatím nebyly odehrané žádné zápasy.</p>
         {% endif %}
 
-        <!-- Zpět na nadcházející zápasy -->
         <div class="text-center mt-6">
             <a href="{% url 'trener_zapas' %}"
                class="text-gray-600 hover:text-gray-900 font-semibold transition">Zpět na nadcházející zápasy</a>
         </div>
+
     </div>
 </div>
 
+
 {% for data in zapasy_data %}
-<!-- Modal – jen jeden modal pro jeden zápas -->
+<!-- okno pro dochazku -->
 <div id="dochazkaZapasModal-{{ data.zapas.id }}"
      class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden z-50">
     <div class="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-3xl relative">

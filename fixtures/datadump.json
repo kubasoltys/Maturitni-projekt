@@ -921,10 +921,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "g6svr3iibgw7gp8h2pxrseaea1gbn4ev",
+  "pk": "cfv00ej3q3wyhxz1a96l5y7avyp3vxf1",
   "fields": {
-    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vStIV:qU9x5jTJqQEaJRxm9lCJQWmZJX9-YeY-XE5BPrk182k",
-    "expire_date": "2025-12-23T08:42:15.270Z"
+    "session_data": ".eJxVjEEOwiAQRe_C2hCgzEBduvcMZBimUjVtUtqV8e7apAvd_vfef6lE21rT1mRJY1Fn5dXpd8vED5l2UO403WbN87QuY9a7og_a9HUu8rwc7t9BpVa_tRhgYA4o1jmJrjcwdMDoLfYI0oWOJJLDzBiNwMAmWi6hOBFgQq_eH9Y6N9s:1vT4tI:f_-I9WnkajW0gdCO19A6qvD1ESwEKBEjKAFvD1QudkQ",
+    "expire_date": "2025-12-23T21:05:00.588Z"
   }
 },
 {
@@ -952,7 +952,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-12-09T08:42:15.262Z",
+    "last_login": "2025-12-09T21:04:43.459Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -972,7 +972,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$1000000$xqpg5oqf8ID83Nzv2qrIUE$UoViHaQwwwCayltK+XOJETF6n3CpDysSWHk7an4HHvo=",
-    "last_login": "2025-12-05T09:36:30.656Z",
+    "last_login": "2025-12-09T21:05:00.583Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "",
@@ -1704,6 +1704,17 @@
   }
 },
 {
+  "model": "aplikace.dochazkatreninky",
+  "pk": 36,
+  "fields": {
+    "trenink": 15,
+    "hrac": 2,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-12-09T21:47:10.062Z"
+  }
+},
+{
   "model": "aplikace.zapas",
   "pk": 6,
   "fields": {
@@ -2206,6 +2217,16 @@
     "zapas": 52,
     "hrac": 4,
     "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 71,
+  "fields": {
+    "zapas": 55,
+    "hrac": 2,
+    "pritomen": null,
     "poznamka": null
   }
 },
