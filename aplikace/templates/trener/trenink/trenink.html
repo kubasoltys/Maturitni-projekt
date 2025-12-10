@@ -280,6 +280,9 @@
             </div>
         </div>
 
+        {% if not forloop.last %}
+        <hr class="border-t-2 border-gray-300 my-6 rounded-full">
+        {% endif %}
         {% empty %}
         <p class="text-center text-gray-400">Zatím nemáte naplánované žádné tréninky.</p>
         {% endfor %}

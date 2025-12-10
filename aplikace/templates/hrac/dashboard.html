@@ -173,7 +173,7 @@
                 </h3>
 
                 {% for h in hraci_data|slice:":3" %}
-                <div class="flex justify-between items-center py-3 px-4 mb-3 bg-gray-100 rounded-2xl border border-gray-200">
+                <div class="flex justify-between items-center py-3 px-4 mb-3 bg-gray-200 rounded-2xl">
                     <div>
                         <p class="font-semibold text-gray-800">
                             {% if h.hrac.first_name and h.hrac.last_name %}
@@ -218,6 +218,7 @@
 
         <div class="lg:w-2/3 flex flex-col gap-8">
 
+            <!-- nadchazejici zapas -->
             <div class="bg-white rounded-3xl shadow-xl p-6">
                 <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2 border-b border-gray-100 pb-3">
                     <i class="fa-solid fa-futbol text-green-700"></i> Nadcházející zápas
@@ -233,7 +234,7 @@
                             <p class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1
                                     bg-red-600 text-white text-sm font-semibold
                                     rounded-xl shadow-lg flex items-center gap-1">
-                                <i class="fa-solid fa-triangle-exclamation"></i> Ještě jsi nehlasoval!
+                                Ještě jsi nehlasoval!
                             </p>
                         {% endif %}
 
@@ -261,12 +262,12 @@
                                 {% csrf_token %}
                                 <button name="pritomen" value="true"
                                         class="w-1/3 px-5 py-2 text-white font-semibold rounded-2xl shadow-md
-                                       bg-green-600 hover:bg-green-700 transition transform hover:scale-105 flex items-center justify-center gap-2">
+                                       bg-green-600 hover:bg-green-500 transition transform hover:scale-105 flex items-center justify-center gap-2 duration-300">
                                     <i class="fa-solid fa-check"></i> Přijdu
                                 </button>
                                 <button name="pritomen" value="false"
                                         class="w-1/3 px-5 py-2 text-white font-semibold rounded-2xl shadow-md
-                                       bg-red-600 hover:bg-red-700 transition transform hover:scale-105 flex items-center justify-center gap-2">
+                                       bg-red-600 hover:bg-red-500 transition transform hover:scale-105 flex items-center justify-center gap-2 duration-300">
                                     <i class="fa-solid fa-xmark"></i> Nepřijdu
                                 </button>
                             </form>
@@ -306,9 +307,10 @@
                 </a>
             </div>
 
+            <!-- nadchazejici trenink -->
             <div class="bg-white rounded-3xl shadow-xl p-6">
                 <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center gap-2 border-b border-gray-100 pb-3">
-                    <i class="fa-solid fa-dumbbell text-green-600"></i> Nadcházející trénink
+                    <i class="fa-solid fa-dumbbell text-green-700"></i> Nadcházející trénink
                 </h3>
 
                 {% for data in treninky_data|slice:":1" %}
@@ -320,7 +322,7 @@
                         <p class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1
                             bg-red-600 text-white text-sm font-semibold
                             rounded-xl shadow-lg flex items-center gap-1">
-                            <i class="fa-solid fa-triangle-exclamation"></i> Ještě jsi nehlasoval!
+                            Ještě jsi nehlasoval!
                         </p>
                         {% endif %}
 
@@ -352,12 +354,12 @@
                                 {% csrf_token %}
                                 <button name="pritomen" value="true"
                                         class="w-1/3 px-5 py-2 text-white font-semibold rounded-2xl shadow-md
-                                       bg-green-600 hover:bg-green-700 transition transform hover:scale-105 flex items-center justify-center gap-2">
+                                       bg-green-600 hover:bg-green-500 transition transform hover:scale-105 flex items-center justify-center gap-2 duration-300">
                                     <i class="fa-solid fa-check"></i> Přijdu
                                 </button>
                                 <button name="pritomen" value="false"
                                         class="w-1/3 px-5 py-2 text-white font-semibold rounded-2xl shadow-md
-                                       bg-red-600 hover:bg-red-700 transition transform hover:scale-105 flex items-center justify-center gap-2">
+                                       bg-red-600 hover:bg-red-500 transition transform hover:scale-105 flex items-center justify-center gap-2 duration-300">
                                     <i class="fa-solid fa-xmark"></i> Nepřijdu
                                 </button>
                             </form>
