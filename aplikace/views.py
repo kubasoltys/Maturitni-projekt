@@ -507,11 +507,33 @@ def trener_hraci_view(request):
         vybrany_tym = tymy.first()
 
     hraci = HracProfile.objects.filter(tym=vybrany_tym).select_related("user", "tym")
-    hraci = list(hraci)
-    hraci.sort(key=lambda x: x.dochazka_treninky, reverse=True)
+
+    hraci_data = []
+
+    # Ujistěte se, že importujete váš model Gol
+    from .models import Gol
+
+    for hrac in hraci:
+        goly_count = Gol.objects.filter(
+            hrac=hrac,
+            zapas__tym=vybrany_tym
+        ).count()
+
+        asistence_count = Gol.objects.filter(
+            asistence=hrac,
+            zapas__tym=vybrany_tym
+        ).count()
+
+        # ZMĚNA: Uložit přímo součet (Góly + Asistence)
+        hrac.goly_a_asistence = goly_count + asistence_count
+
+        hraci_data.append(hrac)
+
+    # ŘAZENÍ: Nyní řadíme přímo podle číselné hodnoty, sestupně
+    hraci_data.sort(key=lambda x: x.goly_a_asistence, reverse=True)
 
     return render(request, "trener/hraci/hraci.html", {
-        'hraci': hraci,
+        'hraci': hraci_data,
         'tymy': tymy,
         'vybrany_tym': vybrany_tym,
         'trener': trener,

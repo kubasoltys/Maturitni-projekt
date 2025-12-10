@@ -99,6 +99,7 @@
 </nav>
 
 
+<!-- obsah -->
 <div class="flex flex-col items-center min-h-screen py-10 pt-40">
 
     <div class="text-center mb-8">
@@ -118,6 +119,7 @@
 
     <div class="w-full max-w-6xl px-4 space-y-10">
 
+        <!-- bloky -->
         {% for data in zapasy_data %}
         <div class="flex items-start gap-6">
 
@@ -175,6 +177,7 @@
                     </div>
                 </div>
 
+                <!-- hlasovani -->
                 <div class="mt-8 pt-4 border-t border-gray-300">
                     {% if not data.hlasoval %}
                     <form method="post" action="{% url 'hrac_hlasovani_zapas' data.zapas.id %}"
@@ -231,6 +234,5 @@
         </a>
     </div>
 </div>
-
 
 {% endblock %}

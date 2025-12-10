@@ -210,6 +210,10 @@
         </div>
 
         {% endwith %}
+
+        {% if not forloop.last %}
+        <hr class="border-t-2 border-gray-300 my-6 rounded-full">
+        {% endif %}
         {% endfor %}
 
         {% if zapasy_data|length == 0 %}
