@@ -95,150 +95,127 @@
 </nav>
 
 
-<div class="flex flex-col items-center justify-center min-h-screen space-y-8 py-10 pt-32">
-     <div class="w-full max-w-5xl p-6 bg-white rounded-3xl shadow-2xl border border-gray-200">
+<div class="flex flex-col items-center justify-center min-h-screen space-y-12 py-10 pt-40">
 
-        <!-- Nadpis -->
-        <div class="text-center mb-8">
-            <h1 class="text-4xl font-extrabold text-gray-800 drop-shadow-lg">
+    <div class="w-full max-w-6xl p-6 bg-white rounded-3xl shadow-2xl">
+
+        <div class="text-center pb-6 border-b border-gray-200 mb-8">
+            <img src="{{ vybrany_tym.logo.url }}" alt="{{ vybrany_tym.nazev }} logo"
+                 class="mx-auto h-32 w-32 object-contain mt-4 drop-shadow-lg transform hover:scale-105 transition duration-300">
+
+            <h1 class="text-5xl font-extrabold text-gray-800 mt-4 tracking-tight">
                 {{ vybrany_tym.nazev }}
             </h1>
-            <p class="text-3xl font-bold text-gray-500">{{ vybrany_tym.kategorie }}</p>
-            <img src="{{ vybrany_tym.logo.url }}" alt="{{ vybrany_tym.nazev }}"
-                 class="mx-auto h-24 w-24 object-contain mt-4">
-            <p class="text-gray-600 mt-2">
+            <p class="text-2xl font-semibold text-green-600 mt-1">
+                {{ vybrany_tym.kategorie }}
+            </p>
+            <p class="text-sm text-gray-500 mt-2">
                 {{ vybrany_tym.stadion }}, {{ vybrany_tym.mesto }}
             </p>
         </div>
 
-         <h2 class="text-2xl font-bold text-gray-800 text-center p-6 drop-shadow-lg">
+        <h2 class="text-3xl font-bold text-gray-800 text-center mb-6 pb-3">
             Statistiky týmu
         </h2>
 
-        <!-- Celkové statistiky týmu -->
-        <div class="grid grid-cols-1 sm:grid-cols-4 gap-6 mb-10">
-            <div class="p-6 bg-gray-100 shadow-inner rounded-2xl text-center">
-                <h4 class="text-xl font-bold text-gray-700">Góly</h4>
-                <p class="text-4xl font-extrabold text-blue-600 mt-2">
-                    {{ tym_goly }}
-                </p>
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+
+            <div class="bg-gradient-to-br from-blue-600 to-purple-700 text-white rounded-3xl p-6 shadow-xl transform hover:scale-[1.03] transition-transform duration-300">
+                <p class="text-sm font-semibold opacity-80 mb-1">Celkové góly</p>
+                <p class="text-5xl font-extrabold mt-2">{{ tym_goly }}</p>
             </div>
 
-            <div class="p-6 bg-gray-100 shadow-inner rounded-2xl text-center">
-                <h4 class="text-xl font-bold text-gray-700">Výhry</h4>
-                <p class="text-4xl font-extrabold text-green-600 mt-2">
-                    {{ vyhry }}
-                </p>
+            <div class="bg-gradient-to-br from-green-500 to-teal-600 text-white rounded-3xl p-6 shadow-xl transform hover:scale-[1.03] transition-transform duration-300">
+                <p class="text-sm font-semibold opacity-80 mb-1">Výhry</p>
+                <p class="text-5xl font-extrabold mt-2">{{ vyhry }}</p>
             </div>
 
-            <div class="p-6 bg-gray-100 shadow-inner rounded-2xl text-center">
-                <h4 class="text-xl font-bold text-gray-700">Remízy</h4>
-                <p class="text-4xl font-extrabold text-yellow-600 mt-2">
-                    {{ remizy }}
-                </p>
+            <div class="bg-gradient-to-br from-yellow-500 to-orange-600 text-white rounded-3xl p-6 shadow-xl transform hover:scale-[1.03] transition-transform duration-300">
+                <p class="text-sm font-semibold opacity-80 mb-1">Remízy</p>
+                <p class="text-5xl font-extrabold mt-2">{{ remizy }}</p>
             </div>
 
-            <div class="p-6 bg-gray-100 shadow-inner rounded-2xl text-center">
-                <h4 class="text-xl font-bold text-gray-700">Prohry</h4>
-                <p class="text-4xl font-extrabold text-red-500 mt-2">
-                    {{ prohry }}
-                </p>
+            <div class="bg-gradient-to-br from-red-500 to-pink-600 text-white rounded-3xl p-6 shadow-xl transform hover:scale-[1.03] transition-transform duration-300">
+                <p class="text-sm font-semibold opacity-80 mb-1">Prohry</p>
+                <p class="text-5xl font-extrabold mt-2">{{ prohry }}</p>
             </div>
         </div>
 
-        <!-- Seznam hráčů -->
-        <h3 class="text-2xl font-bold text-gray-800 text-center mb-6 drop-shadow-lg">
-            Hráči
+        <h3 class="text-3xl font-bold text-gray-800 text-center mb-8 border-b-2 border-green-100 pb-3">
+            Soupiska
         </h3>
 
-        {% if hraci_data %}
-        <div class="overflow-x-auto rounded-3xl bg-gray-100 shadow-lg p-4">
-            <table class="w-full text-left border-separate border-spacing-y-4">
-                <thead>
-                    <tr class="text-gray-700 rounded-xl">
-                        <th class="py-3 px-4 text-lg rounded-l-xl">Hráč</th>
-                        <th class="py-3 px-4 text-lg">Tréninky</th>
-                        <th class="py-3 px-4 text-lg">Zápasy</th>
-                        <th class="py-3 px-4 text-lg">Góly</th>
-                        <th class="py-3 px-4 text-lg">Asistence</th>
-                        <th class="py-3 px-4 text-lg">ŽK</th>
-                        <th class="py-3 px-4 text-lg rounded-r-xl">ČK</th>
-                    </tr>
-                </thead>
+        <div class="space-y-12">
 
-                <tbody>
-                    {% for hr in hraci_data %}
-                    <tr class="bg-gray-50 shadow-md rounded-xl hover:shadow-lg transition border border-gray-200">
-                        <td class="py-4 px-4 text-base font-semibold rounded-l-xl">
-                            {% if hr.hrac.first_name and hr.hrac.last_name %}
-                                {{ hr.hrac.first_name }} {{ hr.hrac.last_name }}
-                            {% elif hr.hrac.first_name %}
-                                {{ hr.hrac.first_name }}
-                            {% elif hr.hrac.last_name %}
-                                {{ hr.hrac.last_name }}
-                            {% else %}
-                                (bez jména)
-                            {% endif %}
-                        </td>
+            {% if brankari %}
+            <div class="bg-gray-100 p-6 rounded-3xl shadow-lg border border-gray-200">
+                <h4 class="text-2xl font-extrabold text-green-700 mb-6 border-b-2 border-green-300 pb-2">
+                    Brankáři ({{ brankari|length }})
+                </h4>
 
-                        <td class="py-4 px-4 text-base">
-                            {% if hr.treninky_percent >= 50 %}
-                            <span class="text-green-600 font-bold">
-                                {{ hr.treninky_percent }}%
-                            </span>
-                            {% else %}
-                            <span class="text-red-600 font-bold">
-                                {{ hr.treninky_percent }}%
-                            </span>
-                            {% endif %}
-                        </td>
-
-                        <td class="py-4 px-4 text-base">
-                            {% if hr.zapasy_percent >= 50 %}
-                            <span class="text-green-600 font-bold">
-                                {{ hr.zapasy_percent }}%
-                            </span>
-                            {% else %}
-                            <span class="text-red-600 font-bold">
-                                {{ hr.zapasy_percent }}%
-                            </span>
-                            {% endif %}
-                        </td>
-
-                        <td class="py-4 px-4 text-base font-bold text-gray-700">
-                            {{ hr.goly }}
-                        </td>
-
-                        <td class="py-4 px-4 text-base font-bold text-gray-600">
-                            {{ hr.asistence }}
-                        </td>
-
-                        <td class="py-4 px-4 text-base font-bold text-yellow-500">
-                            {{ hr.zlute }}
-                        </td>
-
-                        <td class="py-4 px-4 text-base font-bold text-red-500 rounded-r-xl">
-                            {{ hr.cervene }}
-                        </td>
-                    </tr>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    {% for hr in brankari %}
+                        {% include "trener/partials/hrac_karta_soupiska.html" with hr=hr %}
                     {% endfor %}
-                </tbody>
-            </table>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if obranci %}
+            <div class="bg-gray-100 p-6 rounded-3xl shadow-lg border border-gray-200">
+                <h4 class="text-2xl font-extrabold text-green-700 mb-6 border-b-2 border-green-300 pb-2">
+                    Obránci ({{ obranci|length }})
+                </h4>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    {% for hr in obranci %}
+                        {% include "trener/tym/hrac_soupiska.html" with hr=hr %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if zaloznici %}
+            <div class="bg-gray-100 p-6 rounded-3xl shadow-lg border border-gray-200">
+                <h4 class="text-2xl font-extrabold text-green-700 mb-6 border-b-2 border-green-300 pb-2">
+                    Záložníci ({{ zaloznici|length }})
+                </h4>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    {% for hr in zaloznici %}
+                        {% include "trener/tym/hrac_soupiska.html" with hr=hr %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% comment %} ÚTOČNÍCI {% endcomment %}
+            {% if utocnici %}
+            <div class="bg-gray-100 p-6 rounded-3xl shadow-lg border border-gray-200">
+                <h4 class="text-2xl font-extrabold text-green-700 mb-6 border-b-2 border-green-300 pb-2">
+                    Útočníci ({{ utocnici|length }})
+                </h4>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    {% for hr in utocnici %}
+                        {% include "trener/tym/hrac_soupiska.html" with hr=hr %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
         </div>
-
-
-        {% else %}
-        <p class="text-center text-gray-500 p-6">
+        {% if not brankari and not obranci and not zaloznici and not utocnici %}
+        <p class="text-center text-gray-500 p-6 bg-white rounded-xl shadow-inner">
             V tomto týmu zatím nejsou žádní hráči.
         </p>
         {% endif %}
 
-        <!-- Zpět -->
-        <div class="mt-8">
+        <div class="mt-12 text-center">
             <button onclick="window.history.back()"
-                class="block w-full text-center text-gray-600 hover:text-gray-900 font-semibold
-                       transition transform hover:scale-105 py-3 px-4">
-                Zpět
+                class="inline-flex items-center justify-center bg-gray-200 text-gray-700 hover:bg-green-100 hover:text-green-700
+                       font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+                <i class="fas fa-arrow-left mr-2"></i> Zpět na přehled týmů
             </button>
         </div>
 

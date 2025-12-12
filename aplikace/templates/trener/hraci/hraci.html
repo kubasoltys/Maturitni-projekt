@@ -103,10 +103,10 @@
 
     <div class="w-full max-w-6xl mx-auto mt-6">
 
-        <div class="hidden lg:grid grid-cols-6 gap-4 font-bold text-sm text-gray-500 uppercase pb-3 mb-2 px-6">
-            <div class="col-span-2">Jméno a Pozice</div>
+        <div class="hidden lg:grid grid-cols-7 gap-4 font-bold text-sm text-gray-500 uppercase pb-3 mb-2 px-6">
+            <div class="w-4 text-left">#</div> <div class="col-span-2">Jméno a Pozice</div>
             <div>Dres</div>
-            <div>G/A</div>
+            <div class="text-center">Celkové G/A</div>
             <div class="text-center">Tréninky (Docházka)</div>
             <div class="text-center">Zápasy (Docházka)</div>
         </div>
@@ -117,9 +117,12 @@
                  class="cursor-pointer bg-white rounded-3xl shadow-xl p-4 lg:p-6
                         hover:shadow-2xl transform hover:-translate-y-0.5 hover:bg-gray-200 transition-all duration-500 w-full">
 
-                <div class="hidden lg:grid grid-cols-6 items-center gap-4">
+                <div class="hidden lg:grid grid-cols-7 items-center gap-4">
 
-                    <div class="col-span-2 flex items-center space-x-4">
+                    <div class="w-4 text-lg font-bold text-gray-800 text-left"> {{ forloop.counter }}.
+                    </div>
+
+                    <div class="col-span-2 flex items-center space-x-2">
                         <div class="w-12 h-12 rounded-xl overflow-hidden shadow-sm bg-gray-100 flex-shrink-0">
                             {% if hrac.photo %}
                                 <img src="{{ hrac.photo.url }}" class="object-cover w-full h-full">
@@ -145,7 +148,7 @@
                         #{{ hrac.cislo_dresu|default:"?" }}
                     </div>
 
-                    <div class="text-base text-gray-700">
+                    <div class="text-base text-gray-700 text-center font-semibold">
                         {{ hrac.goly_a_asistence }}
                     </div>
 
@@ -168,8 +171,13 @@
 
 
                 <div class="lg:hidden">
-                    <div class="flex items-center space-x-4">
-                        <div class="w-16 h-16 rounded-xl overflow-hidden shadow-sm bg-gray-100 flex-shrink-0">
+                    <div class="flex items-center space-x-2">
+
+                        <div class="text-xl font-bold text-gray-700 flex-shrink-0">
+                            {{ forloop.counter }}.
+                        </div>
+
+                        <div class="w-14 h-14 rounded-xl overflow-hidden shadow-sm bg-gray-100 flex-shrink-0">
                             {% if hrac.photo %}
                                 <img src="{{ hrac.photo.url }}" class="object-cover w-full h-full">
                             {% else %}

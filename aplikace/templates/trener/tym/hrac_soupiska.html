@@ -1,0 +1,51 @@
+<a href="{% url 'trener_hrac_statistiky' hrac_id=hr.hrac.id %}"
+   class="block bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 border-l-4 border-green-500 transform hover:scale-[1.01]">
+
+    <div class="flex justify-between items-center mb-2">
+        <p class="text-lg font-bold text-gray-800 truncate">
+            {% if hr.hrac.first_name and hr.hrac.last_name %}
+                {{ hr.hrac.first_name }} {{ hr.hrac.last_name }}
+            {% elif hr.hrac.first_name %}
+                {{ hr.hrac.first_name }}
+            {% elif hr.hrac.last_name %}
+                {{ hr.hrac.last_name }}
+            {% else %}
+                (bez jména)
+            {% endif %}
+        </p>
+        <span class="text-xs font-semibold uppercase px-2 py-0.5 rounded-full bg-green-100 text-green-700">
+            {{ hr.hrac.pozice }}
+        </span>
+    </div>
+
+    <div class="flex justify-between items-center text-sm mt-3 border-t pt-2 border-gray-100">
+
+        <div class="text-center">
+            <p class="font-bold text-gray-700">{{ hr.goly }}</p>
+            <p class="text-xs text-gray-500">Góly</p>
+        </div>
+
+        <div class="text-center">
+            <p class="font-bold text-gray-700">{{ hr.asistence }}</p>
+            <p class="text-xs text-gray-500">Asistence</p>
+        </div>
+
+        <div class="text-center">
+            <p class="font-bold {% if hr.treninky_percent >= 50 %}text-green-600{% else %}text-red-600{% endif %}">
+                {{ hr.treninky_percent }}%
+            </p>
+            <p class="text-xs text-gray-500">Tréninky</p>
+        </div>
+
+        <div class="text-center">
+            <p class="font-bold text-yellow-600">{{ hr.zlute }}</p>
+            <p class="text-xs text-gray-500">ŽK</p>
+        </div>
+
+        <div class="text-center">
+            <p class="font-bold text-red-600">{{ hr.cervene }}</p>
+            <p class="text-xs text-gray-500">ČK</p>
+        </div>
+
+    </div>
+</a>
