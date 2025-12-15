@@ -1,5 +1,5 @@
 <a href="{% url 'trener_hrac_statistiky' hrac_id=hr.hrac.id %}"
-   class="block bg-white p-4 rounded-xl shadow-md hover:shadow-xl transition-all duration-500 border-l-4 border-green-500 transform hover:scale-[1.01]">
+   class="block bg-white p-4 rounded-3xl shadow-md hover:shadow-xl transition-all duration-500 border-l-4 border-green-500 transform hover:scale-[1.01]">
 
     <div class="flex justify-between items-center mb-2">
         <p class="text-lg font-bold text-gray-800 truncate">
@@ -30,6 +30,12 @@
             <p class="text-xs text-gray-500">Asistence</p>
         </div>
 
+        <div class="text-center">
+            <p class="font-bold {% if hr.zapasy_percent >= 50 %}text-green-600{% else %}text-red-600{% endif %}">
+                {{ hr.zapasy_percent }}%
+            </p>
+            <p class="text-xs text-gray-500">Zápasy</p>
+        </div>
         <div class="text-center">
             <p class="font-bold {% if hr.treninky_percent >= 50 %}text-green-600{% else %}text-red-600{% endif %}">
                 {{ hr.treninky_percent }}%

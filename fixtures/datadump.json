@@ -921,10 +921,10 @@
 },
 {
   "model": "sessions.session",
-  "pk": "63ph1k58mcy3fc9knxuo95xv6relqaon",
+  "pk": "r3ugpebm4fo62cdy8yo2kgeyou7w236u",
   "fields": {
-    "session_data": ".eJxVjM0OwiAQhN-FsyGw_Lh69N5nIMsCUjU0Ke3J-O62SQ96m8z3zbxFoHWpYe15DmMSVwHi9NtF4mduO0gPavdJ8tSWeYxyV-RBuxymlF-3w_07qNTrtkbrffYO3dlHDwYs6ZLSlqgo1qAS64jKkI45aiYNDopXaNAwuAta8fkCxQ02-w:1vTyvY:_T2z_2OwQVFj4cu-isFKu78o1PLCHOinE8Bskoy5ReE",
-    "expire_date": "2025-12-26T08:55:04.351Z"
+    "session_data": ".eJxVjMEOwiAQRP-FsyGwFESP3v0GsixbW60lKfRgjP8uTXrQ22TmzXuLgGsdwlp4CWMSZwHi8NtFpAfP25DuON-ypDzXZYxyQ-S-FnnNiafLzv4JBixDe_vOOXbW26OLDgx0qPuUWsJekQaVSEevDOrIURNqsNA75Y03BPbkuyYtPDFVTqG-ns2oxecLGE49HA:1vUvgx:vcLcKl9BR_F4HHhn9H9i_YYBsjD7-gsS5F0bkyzqQzs",
+    "expire_date": "2025-12-28T23:39:55.575Z"
   }
 },
 {
@@ -952,7 +952,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-12-12T08:55:04.349Z",
+    "last_login": "2025-12-14T23:28:48.818Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -972,7 +972,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$1000000$xqpg5oqf8ID83Nzv2qrIUE$UoViHaQwwwCayltK+XOJETF6n3CpDysSWHk7an4HHvo=",
-    "last_login": "2025-12-10T20:53:24.124Z",
+    "last_login": "2025-12-14T09:17:56.899Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "",

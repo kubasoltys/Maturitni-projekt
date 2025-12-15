@@ -75,13 +75,13 @@
 
                 <p class="text-gray-500 font-semibold">
                     {% if hrac.first_name and hrac.last_name %}
-                        {{ hrac.first_name }} {{ hrac.last_name }}
+                    {{ hrac.first_name }} {{ hrac.last_name }}
                     {% elif hrac.first_name %}
-                        {{ hrac.first_name }}
+                    {{ hrac.first_name }}
                     {% elif hrac.last_name %}
-                        {{ hrac.last_name }}
+                    {{ hrac.last_name }}
                     {% else %}
-                        (bez jména)
+                    (bez jména)
                     {% endif %}
                 </p>
             </div>
@@ -107,7 +107,7 @@
         <p class="text-gray-600 font-medium">Přehled tvé docházky na tréninky</p>
     </div>
 
-    <div class="w-full max-w-6xl mx-auto flex flex-col gap-10">
+    <div class="w-full max-w-6xl mx-auto flex flex-col">
 
         <div class="w-full max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-6 flex flex-col items-center space-y-4">
             <p class="text-xl font-semibold text-gray-700">Má účast:</p>
@@ -139,6 +139,14 @@
                     </p>
                 </div>
             </div>
+        </div>
+
+        <div class="p-8 text-center">
+            <a href="{% url 'hrac_trenink' %}"
+               class="inline-flex items-center justify-center bg-white text-gray-700 hover:bg-green-400 hover:text-green-900
+                           font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+                <i class="fas fa-arrow-left mr-2"></i> Zpět na naplánované tréninky
+            </a>
         </div>
 
 

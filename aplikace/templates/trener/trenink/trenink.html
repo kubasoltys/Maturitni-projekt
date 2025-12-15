@@ -97,11 +97,19 @@
 
 <div class="flex flex-col items-center min-h-screen py-10 pt-40">
 
-    <div class="text-center mb-14">
+    <div class="text-center">
         <h1 class="text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2">
-            Tréninky
+            Nadcházející tréninky
         </h1>
         <p class="text-gray-600 font-medium">Plánuj a spravuj své tréninky.</p>
+    </div>
+
+    <div class="p-12 text-center">
+        <a href="{% url 'trener_dashboard' %}"
+           class="inline-flex items-center justify-center bg-white text-gray-700 hover:bg-green-400 hover:text-green-900
+                           font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+            <i class="fas fa-arrow-left mr-2"></i> Zpět na dashboard
+        </a>
     </div>
 
     <div class="w-full max-w-6xl px-4 space-y-10">

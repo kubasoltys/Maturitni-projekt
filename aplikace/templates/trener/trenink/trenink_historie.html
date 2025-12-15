@@ -98,13 +98,21 @@
 <!-- obsah -->
 <div class="flex flex-col items-center min-h-screen py-10 pt-40">
 
-    <div class="text-center mb-14">
+    <div class="text-center">
         <h1 class="text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-3">
             Historie tréninků
         </h1>
         <p class="text-gray-600 font-medium">
             Rychlý přehled tvých minulých tréninků.
         </p>
+    </div>
+
+    <div class="p-12 text-center">
+        <a href="{% url 'trener_trenink' %}"
+           class="inline-flex items-center justify-center bg-white text-gray-700 hover:bg-green-400 hover:text-green-900
+                           font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+            <i class="fas fa-arrow-left mr-2"></i> Zpět na nadcházející tréninky
+        </a>
     </div>
 
     <!-- bloky -->
@@ -264,15 +272,6 @@
         {% empty %}
         <p class="text-center text-green-500 text-lg">Zatím nebyly žádné tréninky.</p>
         {% endfor %}
-    </div>
-
-
-    <div class="mt-14">
-        <a href="{% url 'trener_trenink' %}"
-           class="px-6 py-3 bg-green-700 text-white font-semibold rounded-2xl shadow-lg
-                  hover:bg-green-800 hover:scale-105 transition">
-            Zpět na nadcházející tréninky
-        </a>
     </div>
 </div>
 

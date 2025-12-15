@@ -127,16 +127,19 @@ def hrac_dashboard(request):
     )
 
     # STATISTIKY TYMU
-    zapasy_dohrane = zapasy_qs.filter(stav='Dohráno')
-    celkove_goly = Gol.objects.filter(hrac__tym=tym, zapas__in=zapasy_dohrane).count()
+    zapasy_dohrane_vysledky = zapasy_qs.filter(stav='Dohráno').exclude(vysledek_soupere__isnull=True)
+    celkove_goly = Gol.objects.filter(hrac__tym=tym, zapas__in=zapasy_dohrane_vysledky).count()
 
     vyhry = 0
     prohry = 0
     remizy = 0
 
-    for z in zapasy_dohrane:
-        goly_tym = z.goly.filter(hrac__tym=tym).count()
-        goly_souper = z.vysledek_soupere if hasattr(z, 'vysledek_soupere') else 0
+    for z in zapasy_dohrane_vysledky:
+        try:
+            goly_tym = z.goly.filter(hrac__tym=tym).count()
+            goly_souper = int(z.vysledek_soupere)
+        except (ValueError, TypeError):
+            continue
 
         if goly_tym > goly_souper:
             vyhry += 1
@@ -147,7 +150,6 @@ def hrac_dashboard(request):
 
     hrac_goly = Gol.objects.filter(hrac=hrac).count()
     hrac_asistence = Gol.objects.filter(asistence=hrac).count()
-
 
     # HRACI
     hraci_data = []
@@ -167,6 +169,49 @@ def hrac_dashboard(request):
         })
 
     hraci_data_sorted = sorted(hraci_data, key=lambda x: x["G_A"], reverse=True)
+
+    # POSLEDNI 3 ODEHRANE ZAPASY
+    posledni_zapasy_qs = (
+        Zapas.objects.filter(tym=tym, stav='Dohráno')
+        .exclude(vysledek_soupere__isnull=True)
+        .prefetch_related('goly', 'karty')
+        .order_by("-datum", "-cas")
+        [:3]
+    )
+
+    posledni_zapasy_data = []
+    dochazka_hrace_zapasy_all = DochazkaZapasy.objects.filter(hrac=hrac, zapas__in=posledni_zapasy_qs)
+    dochazka_map = {d.zapas_id: d for d in dochazka_hrace_zapasy_all}
+
+    for z in posledni_zapasy_qs:
+        dochazka_hrace = dochazka_map.get(z.pk)
+        hrac_pritomen = dochazka_hrace.pritomen if dochazka_hrace else False
+
+        try:
+            vysledek_tymu = z.goly.filter(hrac__tym=tym).count()
+            vysledek_soupere = int(z.vysledek_soupere)
+        except (ValueError, TypeError):
+            continue
+
+        goly_hrace = []
+        karty_hrace = []
+        asistence_hrace = []
+
+        if hrac_pritomen:
+            goly_hrace = z.goly.filter(hrac=hrac)
+            karty_hrace = z.karty.filter(hrac=hrac)
+            asistence_hrace = z.goly.filter(asistence=hrac)
+
+
+        posledni_zapasy_data.append({
+            "zapas": z,
+            "vysledek_tymu": vysledek_tymu,
+            "vysledek_soupere": vysledek_soupere,
+            "pritomen": hrac_pritomen,
+            "goly_hrace": goly_hrace,
+            "karty_hrace": karty_hrace,
+            "asistence_hrace": asistence_hrace,
+        })
 
     # ZAPAS
     zapasy_nadchazejici = (
@@ -242,6 +287,7 @@ def hrac_dashboard(request):
         'hraci_data': hraci_data_sorted,
         'zapasy_data': zapasy_data,
         'treninky_data': treninky_data,
+        'posledni_zapasy_data': posledni_zapasy_data,
     }
 
     return render(request, 'hrac/dashboard.html', context)
@@ -269,30 +315,45 @@ def trener_dashboard(request):
     else:
         vybrany_tym = tymy.first()
 
-    if vybrany_tym not in tymy:
+    if not vybrany_tym or vybrany_tym not in tymy:
         vybrany_tym = tymy.first()
+        if vybrany_tym:
+            request.session["selected_tym"] = str(vybrany_tym.id)
+        else:
+            hraci = []
+            now = timezone.now()
+            context = {...}
+            return render(request, 'trener/dashboard.html', context)
 
     hraci = HracProfile.objects.filter(tym=vybrany_tym).distinct()
     now = timezone.now()
 
     zapasy_qs = (
         Zapas.objects.filter(tym=vybrany_tym)
-                     .prefetch_related('dochazka', 'dochazka__hrac', 'goly')
-                     .order_by('datum', 'cas')
+        .prefetch_related('dochazka', 'dochazka__hrac', 'goly', 'karty')
+        .order_by('datum', 'cas')
     )
 
+    zapasy_dohrane_vysledky = zapasy_qs.filter(
+        stav='Dohráno'
+    ).exclude(vysledek_soupere__isnull=True)
 
     # STATISTIKY TYMU
-    zapasy_dohrane = zapasy_qs.filter(stav='Dohráno')
-    celkove_goly = Gol.objects.filter(hrac__tym=vybrany_tym, zapas__in=zapasy_dohrane).count()
+    celkove_goly = Gol.objects.filter(
+        hrac__tym=vybrany_tym,
+        zapas__in=zapasy_dohrane_vysledky
+    ).count()
 
     vyhry = 0
     prohry = 0
     remizy = 0
 
-    for z in zapasy_dohrane:
-        goly_tym = z.goly.filter(hrac__tym=vybrany_tym).count()
-        goly_souper = z.vysledek_soupere
+    for z in zapasy_dohrane_vysledky:
+        try:
+            goly_tym = z.goly.filter(hrac__tym=vybrany_tym).count()
+            goly_souper = int(z.vysledek_soupere)
+        except (ValueError, TypeError):
+            continue
 
         if goly_tym > goly_souper:
             vyhry += 1
@@ -301,9 +362,8 @@ def trener_dashboard(request):
         else:
             remizy += 1
 
-    pocet_zapasu = zapasy_dohrane.count()
-    prumer_golu = round(celkove_goly / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
-
+    pocet_zapasu_s_vysledkem = zapasy_dohrane_vysledky.count()
+    prumer_golu = round(celkove_goly / pocet_zapasu_s_vysledkem, 2) if pocet_zapasu_s_vysledkem > 0 else 0
 
     # STATISTIKY HRACU
     hraci_data = []
@@ -324,22 +384,39 @@ def trener_dashboard(request):
 
     hraci_data_sorted = sorted(hraci_data, key=lambda x: x["G_A"], reverse=True)
 
+    # POSLEDNI ODEHRANE ZAPASY
+    posledni_zapasy_qs = zapasy_dohrane_vysledky.order_by('-datum', '-cas')[:3]
+    posledni_zapasy_data = []
 
-    # POSLEDNI ODEHRANY ZAPAS
-    posledni_zapas = zapasy_qs.filter(stav='Dohráno').order_by('-datum', '-cas').first()
-    posledni_zapas_data = None
+    for z in posledni_zapasy_qs:
+        try:
+            vt = z.goly.filter(hrac__tym=vybrany_tym).count()
+            vs = int(z.vysledek_soupere)
+        except (ValueError, TypeError):
+            continue
+
+        posledni_zapasy_data.append({
+            "zapas": z,
+            "vysledek_tymu": vt,
+            "vysledek_soupere": vs,
+        })
+
+    if posledni_zapasy_data:
+        posledni_zapas = posledni_zapasy_data[0]["zapas"]
+        vt = posledni_zapasy_data[0]["vysledek_tymu"]
+        vs = posledni_zapasy_data[0]["vysledek_soupere"]
+    else:
+        posledni_zapas = None
+        vt = None
+        vs = None
 
     hraci_stats = []
+    posledni_zapas_detail = None
 
     if posledni_zapas:
-
-        vt = Gol.objects.filter(hrac__tym=vybrany_tym, zapas=posledni_zapas).count()
-        vs = posledni_zapas.vysledek_soupere
-
         goly = Gol.objects.filter(zapas=posledni_zapas)
         karty = Karta.objects.filter(zapas=posledni_zapas)
 
-        hraci_stats = []
         for h in hraci:
             goly_hrac = goly.filter(hrac=h).count()
             asistence_hrac = goly.filter(asistence=h).count()
@@ -355,7 +432,7 @@ def trener_dashboard(request):
                 "cervene": cervene,
             })
 
-        posledni_zapas_data = {
+        posledni_zapas_detail = {
             "zapas": posledni_zapas,
             "vt": vt,
             "vs": vs,
@@ -363,11 +440,6 @@ def trener_dashboard(request):
             "karty": karty,
             "hraci_stats": hraci_stats,
         }
-
-    else:
-        vt = None
-        vs = None
-
 
     # NADCHAZEJI ZAPAS
     zapasy_nadchazejici = (
@@ -385,7 +457,7 @@ def trener_dashboard(request):
             datetime.combine(zapas.datum, zapas.cas if zapas.cas else time(0, 0)),
             timezone.get_current_timezone()
         )
-        zapas_proběhl = zapas_datetime < now  # now je definováno výše
+        zapas_proběhl = zapas_datetime < now
 
         dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
 
@@ -430,7 +502,7 @@ def trener_dashboard(request):
     treninky_data = []
 
     if nejblizsi_trenink:
-        trenink = nejblizsi_trenink
+        trenik = nejblizsi_trenink
         trenik_datetime = timezone.make_aware(
             datetime.combine(trenik.datum, trenik.cas if trenik.cas else time(0, 0)),
             timezone.get_current_timezone()
@@ -455,7 +527,6 @@ def trener_dashboard(request):
             'trenink_dochazka': len(hraci) > 0,
         })
 
-
     context = {
         'trener': trener,
         'vybrany_tym': vybrany_tym,
@@ -468,10 +539,11 @@ def trener_dashboard(request):
         'prohry': prohry,
         'remizy': remizy,
         'prumer_golu': prumer_golu,
+        'posledni_zapasy_data': posledni_zapasy_data,
+        'posledni_zapas_data': posledni_zapas_detail,
         'posledni_zapas': posledni_zapas,
         'hraci_stats': hraci_stats,
         'hraci_data': hraci_data_sorted,
-        'posledni_zapas_data': posledni_zapas_data,
         'vt': vt,
         'vs': vs,
     }
@@ -682,12 +754,13 @@ def hrac_statistiky(request):
 
     tym = hrac.tym
 
-    goly = Gol.objects.filter(hrac=hrac)
-    karty = Karta.objects.filter(hrac=hrac)
-    gol_count = goly.count()
+    goly_celkem = Gol.objects.filter(hrac=hrac)
+    karty_celkem = Karta.objects.filter(hrac=hrac)
+
+    gol_count = goly_celkem.count()
     asistence_count = Gol.objects.filter(asistence=hrac).count()
-    zlute = karty.filter(typ="zluta").count()
-    cervene = karty.filter(typ__in=["cervena", "zluta_cervena"]).count()
+    zlute = karty_celkem.filter(typ="zluta").count()
+    cervene = karty_celkem.filter(typ__in=["cervena", "zluta_cervena"]).count()
 
     dochazka_treninky = (
         DochazkaTreninky.objects
@@ -696,35 +769,55 @@ def hrac_statistiky(request):
         .order_by("-trenink__datum")[:4]
     )
 
-    dochazka_hrace_zapasy = (
-        DochazkaZapasy.objects
-        .filter(hrac=hrac, pritomen=True)
-        .select_related("zapas")
-        .order_by("-zapas__datum")
+    zapasy = (
+        Zapas.objects
+        .filter(tym=tym, stav="Dohráno")
+        .prefetch_related("goly", "karty", "dochazka")
+        .order_by("-datum", "-cas")
     )
 
+    dochazka_hrace_zapasy = DochazkaZapasy.objects.filter(hrac=hrac)
+
     zapasy_data = []
-    for doch in dochazka_hrace_zapasy:
-        zapas = doch.zapas
-        goly_hrace = zapas.goly.filter(hrac=hrac)
-        asistence_hrace = zapas.goly.filter(asistence=hrac)
-        karty_hrace = zapas.karty.filter(hrac=hrac)
-        goly_tym = zapas.goly.filter(hrac__tym=tym).count()
+
+    for zapas in zapasy:
+        dochazka = dochazka_hrace_zapasy.filter(zapas=zapas).first()
+        hrac_pritomen = dochazka and dochazka.pritomen
+
+        vysledek_tymu = zapas.goly.filter(hrac__tym=tym).count()
+
         vysledek_soupere = zapas.vysledek_soupere
+
+        goly_hrace = []
+        karty_hrace = []
+        asistence_hrace = []
+
+        if hrac_pritomen:
+            goly_hrace = zapas.goly.filter(hrac=hrac)
+            karty_hrace = zapas.karty.filter(hrac=hrac)
+            asistence_hrace = zapas.goly.filter(asistence=hrac)
 
         zapasy_data.append({
             "zapas": zapas,
             "goly_hrace": goly_hrace,
-            "asistence_hrace": asistence_hrace,
             "karty_hrace": karty_hrace,
-            "vysledek_tymu": goly_tym,
+            "asistence_hrace": asistence_hrace,
+            "vysledek_tymu": vysledek_tymu,
             "vysledek_soupere": vysledek_soupere,
+            "pritomen": hrac_pritomen,
         })
+
+    zapasy_pritomen = DochazkaZapasy.objects.filter(
+        hrac=hrac,
+        pritomen=True,
+        zapas__stav="Dohráno"
+    ).select_related("zapas").order_by("zapas__datum")
 
     labels = []
     values = []
-    for doch in dochazka_hrace_zapasy:
-        zapas = doch.zapas
+
+    for d in zapasy_pritomen:
+        zapas = d.zapas
         pocet = zapas.goly.filter(hrac=hrac).count()
         labels.append(zapas.datum.strftime("%d.%m.%Y"))
         values.append(pocet)
@@ -734,31 +827,32 @@ def hrac_statistiky(request):
         "values": values,
     })
 
-    zapasy_pritomen_ids = dochazka_hrace_zapasy.values_list('zapas', flat=True)
-    celkove_goly = Gol.objects.filter(hrac=hrac, zapas__in=zapasy_pritomen_ids).count()
-    celkove_asistence = Gol.objects.filter(asistence=hrac,
-                                           zapas__in=zapasy_pritomen_ids).count()
-    pocet_zapasu = len(zapasy_pritomen_ids)
-    prumer_golu = round(celkove_goly / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
-    prumer_asistenci = round(celkove_asistence / pocet_zapasu, 2) if pocet_zapasu > 0 else 0
+    zapasy_ids = zapasy_pritomen.values_list("zapas_id", flat=True)
+
+    celkove_goly = Gol.objects.filter(hrac=hrac, zapas_id__in=zapasy_ids).count()
+    celkove_asistence = Gol.objects.filter(asistence=hrac, zapas_id__in=zapasy_ids).count()
+
+    pocet_zapasu = len(zapasy_ids)
+
+    prumer_golu = round(celkove_goly / pocet_zapasu, 2) if pocet_zapasu else 0
+    prumer_asistenci = round(celkove_asistence / pocet_zapasu, 2) if pocet_zapasu else 0
 
     context = {
         "hrac": hrac,
         "tym": tym,
-        "goly": goly,
-        "asistence_count": asistence_count,
-        "karty": karty,
         "gol_count": gol_count,
+        "asistence_count": asistence_count,
         "zlute": zlute,
         "cervene": cervene,
         "prumer_golu": prumer_golu,
         "prumer_asistenci": prumer_asistenci,
         "graf_goly_json": graf_goly_json,
-        "zapasy_data": zapasy_data,
         "dochazka_treninky": dochazka_treninky,
+        "zapasy_data": zapasy_data,
     }
 
     return render(request, "hrac/statistiky/statistiky.html", context)
+
 
 
 # NASTAVENI
@@ -1674,16 +1768,27 @@ def trener_dohrane_zapasy(request):
     if vybrany_tym not in tymy:
         vybrany_tym = tymy.first()
 
+    # Ošetření, pokud trenér nemá přiřazené žádné týmy
+    if not vybrany_tym:
+        context = {
+            'trener': trener,
+            'tymy': tymy,
+            'zapasy_data': [],
+        }
+        return render(request, 'trener/zapas/zapas_dohrano.html', context)
+
     hraci = HracProfile.objects.filter(tym=vybrany_tym).distinct()
 
+    # KLÍČOVÁ ZMĚNA: Filtrovat pouze zápasy s Dohráno A s NESPOUSTNÝM vysledek_soupere
     zapasy_qs = (
         Zapas.objects.filter(tym=vybrany_tym, stav='Dohráno')
-                     .prefetch_related(
-                        'dochazka', 'dochazka__hrac',
-                        'goly', 'goly__hrac',
-                        'karty', 'karty__hrac'
-                     )
-                     .order_by('-datum', '-cas')
+        .exclude(vysledek_soupere__isnull=True)  # <--- TOTO ZAJISTÍ, ŽE MÁ ZAPSÁN VÝSLEDEK
+        .prefetch_related(
+            'dochazka', 'dochazka__hrac',
+            'goly', 'goly__hrac',
+            'karty', 'karty__hrac'
+        )
+        .order_by('-datum', '-cas')
     )
 
     zapasy_data = []
@@ -1705,7 +1810,13 @@ def trener_dohrane_zapasy(request):
 
         goly_tym = goly.filter(hrac__tym=vybrany_tym)
         vt = goly_tym.count()
-        vs = zapas.vysledek_soupere
+
+        # Ošetření, i když QuerySet by měl zaručit, že vs existuje a je konvertovatelné
+        try:
+            vs = int(zapas.vysledek_soupere)
+        except (ValueError, TypeError):
+            # Pokud se sem kód náhodou dostane (kvůli nevalidnímu zápisu i přes filtrování), přeskočíme zápas
+            continue
 
         karty = zapas.karty.all()
 
@@ -1720,7 +1831,9 @@ def trener_dohrane_zapasy(request):
         ).count()
 
         pocet_pritomnych = sum(1 for d in dochazka_list if d.pritomen)
-        procento_pritomnych = int((pocet_pritomnych / len(hraci)) * 100) if hraci else 0
+        # Ošetření dělení nulou, pokud nejsou hráči (i když nahoře jsou filtrováni)
+        pocet_hracu = len(hraci)
+        procento_pritomnych = int((pocet_pritomnych / pocet_hracu) * 100) if pocet_hracu > 0 else 0
 
         zapasy_data.append({
             'zapas': zapas,
@@ -1759,21 +1872,23 @@ def hrac_dohrane_zapasy(request):
         messages.error(request, "Nemáte hráčský profil.")
         return redirect('index')
 
-    dnes = timezone.localdate()
     tym = hrac.tym
 
     zapasy = Zapas.objects.filter(
-        tym=tym
-    ).filter(
-        Q(stav='Dohráno') |
-        Q(stav='Naplánováno', datum__lt=dnes)
+        tym=tym,
+        stav='Dohráno'
+    ).exclude(
+        vysledek_soupere__isnull=True
     ).prefetch_related('goly', 'goly__hrac', 'karty', 'karty__hrac', 'dochazka').order_by('-datum', '-cas')
 
     zapasy_data = []
 
+    dochazka_hrace_all = DochazkaZapasy.objects.filter(hrac=hrac)
+
     for zapas in zapasy:
 
-        dochazka_obj = zapas.dochazka.filter(hrac=hrac).first()
+        dochazka_obj = dochazka_hrace_all.filter(zapas=zapas).first()
+        hrac_pritomen = dochazka_obj.pritomen if dochazka_obj else False
 
         goly = zapas.goly.all()
         goly_tym = goly.filter(hrac__tym=tym)
@@ -1781,11 +1896,23 @@ def hrac_dohrane_zapasy(request):
         goly_souper = goly.exclude(hrac__tym=tym)
         vysledek_tymu = goly_tym.count()
 
-        vysledek_soupere = zapas.vysledek_soupere
+        try:
+            vysledek_soupere = int(zapas.vysledek_soupere)
+        except (ValueError, TypeError):
+            vysledek_soupere = None
 
         karty = zapas.karty.all()
         karty_tym = karty.filter(hrac__tym=tym)
         karty_souper = karty.exclude(hrac__tym=tym)
+
+        goly_hrace = []
+        asistence_hrace = []
+        karty_hrace = []
+
+        if hrac_pritomen:
+            goly_hrace = goly.filter(hrac=hrac)
+            asistence_hrace = goly.filter(asistence=hrac)
+            karty_hrace = karty.filter(hrac=hrac)
 
         zapasy_data.append({
             'zapas': zapas,
@@ -1798,6 +1925,10 @@ def hrac_dohrane_zapasy(request):
             'karty': karty,
             'karty_tym': karty_tym,
             'karty_souper': karty_souper,
+            'goly_hrace': goly_hrace,
+            'asistence_hrace': asistence_hrace,
+            'karty_hrace': karty_hrace,
+            'pritomen': hrac_pritomen,
         })
 
     context = {
@@ -1870,13 +2001,6 @@ def trener_zapas_detail(request, zapas_id):
 #----------------------------------------------------------------------------------------------
 @login_required
 def trener_tym(request):
-    # Imports potřebné pro tuto funkci (předpokládám, že jsou importovány dříve)
-    # from django.http import Http404
-    # from django.shortcuts import render
-    # from django.utils.timezone import now
-    # from .models import HracProfile, TrenerProfile, Trenink, Zapas, DochazkaTreninky, DochazkaZapasy, Gol, Karta
-
-    # 1. NAČTENÍ TÝMU
     hrac = getattr(request.user, "hracprofile", None)
     trener = getattr(request.user, "trenerprofile", None)
 
@@ -1891,11 +2015,8 @@ def trener_tym(request):
         vybrany_tym = trener.tymy.first()
 
     if vybrany_tym is None:
-        # Import Http404 by byl nutný zde
-        # from django.http import Http404
         raise Http404("Nemáte přiřazený tým nebo jste nevybrali tým.")
 
-    # Načtení všech hráčů týmu
     hraci = (
         HracProfile.objects
         .filter(tym=vybrany_tym)
@@ -1915,7 +2036,6 @@ def trener_tym(request):
         datum__lt=dnes
     )
 
-    # 2. VÝPOČET STATISTIK PRO KAŽDÉHO HRÁČE
     hraci_stat_list = []
 
     for h in hraci:
@@ -1950,9 +2070,7 @@ def trener_tym(request):
             "asistence": asistence,
         })
 
-    # 3. ŘAZENÍ A SESKUPOVÁNÍ HRÁČŮ PODLE POZICE
 
-    # Definice hlavních kategorií pozic
     POZICE_MAP = {
         'GK': 'brankari',
         'DF': 'obranci', 'CB': 'obranci', 'LB': 'obranci', 'RB': 'obranci', 'LWB': 'obranci', 'RWB': 'obranci',
@@ -1960,13 +2078,11 @@ def trener_tym(request):
         'FW': 'utocnici', 'CF': 'utocnici', 'ST': 'utocnici', 'LW': 'utocnici', 'RW': 'utocnici',
     }
 
-    # Inicializace seznamů
     brankari = []
     obranci = []
     zaloznici = []
     utocnici = []
 
-    # Hlavní řadící klíč (stejný jako v původní tabulce)
     def sort_key(x):
         return (
             -x["goly"],
@@ -1976,10 +2092,9 @@ def trener_tym(request):
             x["hrac"].user.first_name,
         )
 
-    # Rozdělení a seřazení
     for hr_data in hraci_stat_list:
-        pozice_kod = hr_data["hrac"].pozice  # Předpokládá se, že pozice je na modelu HracProfile
-        kategorie = POZICE_MAP.get(pozice_kod, 'zaloznici')  # Pokud pozice není definována, přiřadíme je k záložníkům
+        pozice_kod = hr_data["hrac"].pozice
+        kategorie = POZICE_MAP.get(pozice_kod, 'zaloznici')
 
         if kategorie == 'brankari':
             brankari.append(hr_data)
@@ -1990,13 +2105,11 @@ def trener_tym(request):
         elif kategorie == 'utocnici':
             utocnici.append(hr_data)
 
-    # Seřazení kategorií
     brankari.sort(key=sort_key)
     obranci.sort(key=sort_key)
     zaloznici.sort(key=sort_key)
     utocnici.sort(key=sort_key)
 
-    # 4. CELKOVÉ STATISTIKY TÝMU
     tym_goly = Gol.objects.filter(
         hrac__tym=vybrany_tym,
         zapas__in=zapasy
@@ -2007,8 +2120,6 @@ def trener_tym(request):
     remizy = 0
 
     for z in zapasy:
-        # Použití z.goly (prefetchované v QuerySetu zapasy), i když zde nejsou.
-        # Budeme muset použít nový dotaz, protože z.goly je v kódu jen pro lokální iteraci
         goly_tym = Gol.objects.filter(zapas=z, hrac__tym=vybrany_tym).count()
         goly_souper = z.vysledek_soupere
 
@@ -2019,20 +2130,18 @@ def trener_tym(request):
         else:
             remizy += 1
 
-    # 5. PŘEDÁNÍ KONTEXTU
     context = {
         "vybrany_tym": vybrany_tym,
-        "brankari": brankari,  # NOVÉ
-        "obranci": obranci,  # NOVÉ
-        "zaloznici": zaloznici,  # NOVÉ
-        "utocnici": utocnici,  # NOVÉ
+        "brankari": brankari,
+        "obranci": obranci,
+        "zaloznici": zaloznici,
+        "utocnici": utocnici,
         "hrac": hrac,
         "trener": trener,
         "tym_goly": tym_goly,
         "vyhry": vyhry,
         "prohry": prohry,
         "remizy": remizy,
-        # "asistence" byla celková proměnná jen pro posledního hráče, zde ji odebereme, protože je obsažena v listech
     }
 
     return render(request, "trener/tym/tym.html", context)
