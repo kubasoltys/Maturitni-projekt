@@ -1,0 +1,166 @@
+{% load static %}
+
+<nav class="fixed top-0 left-0 w-full bg-white shadow-2xl z-50 border-b-4 border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+
+        <div class="flex items-center gap-4">
+            {% if tym.logo %}
+            <img src="{{ tym.logo.url }}"
+                 alt="{{ tym.nazev }}"
+                 class="h-14 w-14 object-contain p-1 drop-shadow-lg">
+            {% else %}
+            <img src="../../../media/stranka/logo.png"
+                 alt="Logo"
+                 class="h-14 w-14 object-contain p-1 drop-shadow-lg">
+            {% endif %}
+
+            <div class="hidden lg:block leading-tight">
+                <p class="text-gray-900 font-extrabold text-xl drop-shadow-lg">
+                    {{ tym.nazev }}
+                </p>
+                <p class="text-gray-600 font-semibold drop-shadow-lg">
+                    {{ tym.kategorie }}
+                </p>
+            </div>
+
+            {% comment %}
+            {% if tymy|length > 1 %}
+            <button id="openTeamModal"
+                    class="px-3 py-2 rounded-2xl text-sm font-medium bg-gray-400
+                          hover:bg-gray-300 hover:scale-105
+                          transition duration-300 flex items-center gap-2 drop-shadow-lg">
+                <i class="fa-solid fa-chevron-down"></i>
+                <span class="hidden sm:inline">Změnit tým</span>
+            </button>
+            {% endif %}
+            {% endcomment %}
+        </div>
+
+        <div class="hidden lg:flex items-center gap-8">
+
+            <div class="flex items-center gap-6 text-md font-medium text-gray-700">
+
+                <a href="{% url 'hrac_dashboard' %}"
+                   class="hover:text-green-600 transition border-b-2 border-transparent hover:border-green-600 pb-1 drop-shadow-lg">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'hrac_zapas' %}"
+                   class="hover:text-green-600 transition border-b-2 border-transparent hover:border-green-600 pb-1 drop-shadow-lg">
+                    Zápasy
+                </a>
+
+                <a href="{% url 'hrac_trenink' %}"
+                   class="hover:text-green-600 transition border-b-2 border-transparent hover:border-green-600 pb-1 drop-shadow-lg">
+                    Tréninky
+                </a>
+
+                <a href="{% url 'hrac_statistiky' %}"
+                   class="hover:text-green-600 transition border-b-2 border-transparent hover:border-green-600 pb-1 drop-shadow-lg">
+                    Statistiky
+                </a>
+            </div>
+
+            <div class="h-8 w-px bg-gray-300"></div>
+
+            <div class="flex items-center gap-3">
+                <a href="{% url 'hrac_settings' %}"
+                   class="flex items-center gap-2 hover:bg-green-100 px-2 py-1.5 rounded-2xl transition" title="Nastavení účtu">
+
+                    {% if hrac.photo %}
+                    <img src="{{ hrac.photo.url }}"
+                         class="w-10 h-10 rounded-full object-cover border border-gray-400 drop-shadow-lg">
+                    {% else %}
+                    <img src="{% static 'stranka/default_profile_picture.webp' %}"
+                         class="w-10 h-10 rounded-full object-cover border border-gray-400 drop-shadow-lg">
+                    {% endif %}
+
+                    <span class="text-md font-semibold text-gray-800 drop-shadow-lg">
+                        {% if hrac.first_name and hrac.last_name %}
+                            {{ hrac.first_name }} {{ hrac.last_name }}
+                        {% elif hrac.first_name %}
+                            {{ hrac.first_name }}
+                        {% elif hrac.last_name %}
+                            {{ hrac.last_name }}
+                        {% else %}
+                            (bez jména)
+                        {% endif %}
+                    </span>
+                    <i class="fa-solid fa-cog text-gray-700 drop-shadow-lg"></i>
+                </a>
+
+                <a href="{% url 'logout' %}"
+                   class="px-3 py-2 rounded-2xl text-sm font-medium bg-red-700
+                          text-white hover:bg-red-600 hover:scale-105
+                          transition duration-300 flex items-center gap-2 drop-shadow-lg">
+                    <i class="fa-solid fa-right-from-bracket text-base"></i>
+                    <span>Odhlásit se</span>
+                </a>
+            </div>
+        </div>
+
+        <button id="menuButton"
+                class="lg:hidden text-gray-700 text-2xl hover:text-gray-500 hover:scale-110 transition duration-300">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden lg:hidden bg-gray-300 shadow-2xl">
+        <div class="flex flex-col px-4 py-4 space-y-3 text-gray-800 text-sm font-medium">
+
+            <a href="{% url 'hrac_settings' %}" class="flex items-center gap-2 hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">
+                {% if hrac.photo %}
+                    <img src="{{ hrac.photo.url }}" class="w-8 h-8 rounded-full object-cover border border-gray-400">
+                {% else %}
+                    <img src="{% static 'stranka/default_profile_picture.webp' %}" class="w-8 h-8 rounded-full object-cover border border-gray-400">
+                {% endif %}
+                {% if hrac.first_name and hrac.last_name %}
+                    {{ hrac.first_name }} {{ hrac.last_name }}
+                {% elif hrac.first_name %}
+                    {{ hrac.first_name }}
+                {% elif hrac.last_name %}
+                    {{ hrac.last_name }}
+                {% else %}
+                    (bez jména)
+                {% endif %}
+                <i class="fa-solid fa-cog text-gray-700"></i>
+            </a>
+
+            <hr class="border-gray-400">
+
+            <a href="{% url 'hrac_dashboard' %}" class="hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">Dashboard</a>
+            <a href="{% url 'hrac_zapas' %}" class="hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">Zápasy</a>
+            <a href="{% url 'hrac_trenink' %}" class="hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">Tréninky</a>
+            <a href="{% url 'hrac_statistiky' %}" class="hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">Statistiky</a>
+
+            <a href="{% url 'logout' %}"
+               class="mt-3 text-red-500 hover:text-red-700 border-b-2 border-transparent hover:border-red-700 pb-1 duration-300 flex items-center gap-2">
+                <i class="fa-solid fa-right-from-bracket"></i> Odhlásit se
+            </a>
+        </div>
+    </div>
+</nav>
+
+<script>
+    const openBtn = document.getElementById('openTeamModal');
+    const closeBtn = document.getElementById('closeTeamModal');
+    const modal = document.getElementById('teamModal');
+
+    menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    openBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+</script>

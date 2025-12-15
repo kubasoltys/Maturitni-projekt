@@ -1,0 +1,199 @@
+{% load static %}
+
+<nav class="fixed top-0 left-0 w-full bg-white shadow-2xl z-50 border-b-4 border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+
+        <div class="flex items-center gap-4">
+            {% if vybrany_tym.logo %}
+            <img src="{{ vybrany_tym.logo.url }}"
+                 alt="{{ vybrany_tym.nazev }}"
+                 class="h-14 w-14 object-contain p-1 drop-shadow-lg">
+            {% else %}
+            <img src="../../../media/stranka/logo.png"
+                 alt="Logo"
+                 class="h-14 w-14 object-contain p-1 drop-shadow-lg">
+            {% endif %}
+
+            <div class="hidden lg:block leading-tight">
+                <p class="text-gray-900 font-extrabold text-xl drop-shadow-lg">
+                    {{ vybrany_tym.nazev }}
+                </p>
+                <p class="text-gray-600 font-semibold drop-shadow-lg">
+                    {{ vybrany_tym.kategorie }}
+                </p>
+            </div>
+
+            {% if tymy|length > 1 %}
+            <button id="openTeamModal"
+                    class="px-3 py-2 rounded-2xl text-sm font-medium bg-gray-400
+                          hover:bg-gray-300 hover:scale-105
+                          transition duration-300 flex items-center gap-2 drop-shadow-lg">
+                <i class="fa-solid fa-chevron-down"></i>
+                <span class="hidden sm:inline">Změnit tým</span>
+            </button>
+            {% endif %}
+        </div>
+
+        <div class="hidden lg:flex items-center gap-8">
+
+            <div class="flex items-center gap-6 text-md font-medium text-gray-700">
+
+                <a href="{% url 'trener_dashboard' %}"
+                   class="hover:text-green-600 transition border-b-2 border-transparent hover:border-green-600 pb-1 drop-shadow-lg">
+                    Dashboard
+                </a>
+
+                <a href="{% url 'trener_zapas' %}"
+                   class="hover:text-green-600 transition border-b-2 border-transparent hover:border-green-600 pb-1 drop-shadow-lg">
+                    Zápasy
+                </a>
+
+                <a href="{% url 'trener_trenink' %}"
+                   class="hover:text-green-600 transition border-b-2 border-transparent hover:border-green-600 pb-1 drop-shadow-lg">
+                    Tréninky
+                </a>
+
+                <a href="{% url 'trener_tym' %}"
+                   class="hover:text-green-600 transition border-b-2 border-transparent hover:border-green-600 pb-1 drop-shadow-lg">
+                    Můj tým
+                </a>
+
+                <a href="{% url 'trener_hraci' %}"
+                   class="hover:text-green-600 transition border-b-2 border-transparent hover:border-green-600 pb-1 drop-shadow-lg">
+                    Moji hráči
+                </a>
+            </div>
+
+            <div class="h-8 w-px bg-gray-300"></div>
+
+            <div class="flex items-center gap-3">
+                <a href="{% url 'trener_settings' %}"
+                   class="flex items-center gap-2 hover:bg-green-100 px-2 py-1.5 rounded-2xl transition" title="Nastavení">
+                    {% if trener.photo %}
+                    <img src="{{ trener.photo.url }}"
+                         class="w-10 h-10 rounded-full object-cover border border-gray-400 drop-shadow-lg">
+                    {% else %}
+                    <img src="{% static 'stranka/default_profile_picture.webp' %}"
+                         class="w-10 h-10 rounded-full object-cover border border-gray-400 drop-shadow-lg">
+                    {% endif %}
+
+                    <span class="text-md font-semibold text-gray-800 drop-shadow-lg">
+                        {% if trener.first_name and trener.last_name %}
+                            {{ trener.first_name }} {{ trener.last_name }}
+                        {% elif trener.first_name %}
+                            {{ trener.first_name }}
+                        {% elif trener.last_name %}
+                            {{ trener.last_name }}
+                        {% else %}
+                            (bez jména)
+                        {% endif %}
+                    </span>
+                    <i class="fa-solid fa-cog text-gray-700 drop-shadow-lg"></i>
+                </a>
+
+                <a href="{% url 'logout' %}"
+                   class="px-3 py-2 rounded-2xl text-sm font-medium bg-red-700
+                          text-white hover:bg-red-600 hover:scale-105
+                          transition duration-300 flex items-center gap-2 drop-shadow-lg">
+                    <i class="fa-solid fa-right-from-bracket text-base"></i>
+                    <span>Odhlásit se</span>
+                </a>
+            </div>
+        </div>
+
+        <button id="menuButton"
+                class="lg:hidden text-gray-700 text-2xl hover:text-gray-500 hover:scale-110 transition duration-300">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </div>
+
+    <div id="mobileMenu" class="hidden lg:hidden bg-gray-300 shadow-2xl">
+        <div class="flex flex-col px-4 py-4 space-y-3 text-gray-800 text-sm font-medium">
+            <a href="{% url 'trener_settings' %}" class="flex items-center gap-2 hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">
+                {% if trener.photo %}
+                    <img src="{{ trener.photo.url }}" class="w-8 h-8 rounded-full object-cover border border-gray-400">
+                {% else %}
+                    <img src="{% static 'stranka/default_profile_picture.webp' %}" class="w-8 h-8 rounded-full object-cover border border-gray-400">
+                {% endif %}
+                {% if trener.first_name and trener.last_name %}
+                    {{ trener.first_name }} {{ trener.last_name }}
+                {% elif trener.first_name %}
+                    {{ trener.first_name }}
+                {% elif trener.last_name %}
+                    {{ trener.last_name }}
+                {% else %}
+                    (bez jména)
+                {% endif %}
+                <i class="fa-solid fa-cog text-gray-700"></i>
+            </a>
+
+            <hr class="border-gray-400">
+
+            <a href="{% url 'trener_dashboard' %}" class="hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">Dashboard</a>
+            <a href="{% url 'trener_zapas' %}" class="hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">Zápasy</a>
+            <a href="{% url 'trener_trenink' %}" class="hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">Tréninky</a>
+            <a href="{% url 'trener_tym' %}" class="hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">Můj tým</a>
+            <a href="{% url 'trener_hraci' %}" class="hover:text-green-700 border-b-2 border-transparent hover:border-green-600 pb-1 duration-300">Moji hráči</a>
+
+            <a href="{% url 'logout' %}"
+               class="mt-3 text-red-500 hover:text-red-700 border-b-2 border-transparent hover:border-red-700 pb-1 duration-300 flex items-center gap-2">
+                <i class="fa-solid fa-right-from-bracket"></i> Odhlásit se
+            </a>
+        </div>
+    </div>
+</nav>
+
+<div id="teamModal"
+     class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm
+            flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-3xl p-8 w-96 shadow-xl relative">
+        <h3 class="text-2xl font-bold text-gray-700 mb-6 text-center">Vyber tým</h3>
+        <button id="closeTeamModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-600 text-2xl">&times;
+        </button>
+        <div class="flex flex-col gap-4">
+            {% for tym in tymy %}
+            <form method="get" action="">
+                <input type="hidden" name="selected_tym" value="{{ tym.id }}">
+                <button type="submit"
+                        class="w-full py-3 px-4 bg-gray-200 hover:bg-gray-300 rounded-2xl transition text-gray-700 font-medium flex items-center gap-3
+                                               {% if tym.id == vybrany_tym.id %}font-bold bg-blue-100{% endif %}">
+
+                    <div class="h-8 w-8 overflow-hidden">
+                        {% if tym.logo %}
+                        <img src="{{ tym.logo.url }}" alt="{{ tym.nazev }}" class="h-full w-full object-contain">
+                        {% else %}
+                        <img src="{% static 'stranka/logo.png' %}" alt="Logo" class="h-full w-full object-contain">
+                        {% endif %}
+                    </div>
+
+                    <span class="text-lg">{{ tym.nazev }} {{ tym.kategorie }}</span>
+                </button>
+            </form>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<script>
+    const openBtn = document.getElementById('openTeamModal');
+    const closeBtn = document.getElementById('closeTeamModal');
+    const modal = document.getElementById('teamModal');
+
+    menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    openBtn.addEventListener('click', () => {
+        modal.classList.remove('hidden');
+    });
+
+    closeBtn.addEventListener('click', () => {
+        modal.classList.add('hidden');
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            modal.classList.add('hidden');
+        }
+    });
+</script>

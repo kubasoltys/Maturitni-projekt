@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- navbar -->
+{% if user.is_authenticated %}
+
+{% if user.trenerprofile %}
+{% include "page/trener_navbar.html" %}
+
+{% else %}
+{% include "page/hrac_navbar.html" %}
+{% endif %}
+
+{% else %}
+{% include "page/default_navbar.html" %}
+{% endif %}
+
+
+<!-- obsah -->
+<div class="pt-32 pb-12 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+
+        <div class="text-center mb-12">
+            <h1 class="text-5xl font-extrabold text-gray-800 mb-2 drop-shadow-sm">Kontaktujte mě</h1>
+            <p class="text-gray-600 font-medium">Máte dotaz, potřebujete podporu nebo se chcete dozvědět více o
+                SQUADŘE?</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <div class="lg:col-span-2 space-y-8 pt-0 lg:pt-0">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2 border-l-4 border-green-500 pl-3">
+                    Najdete mě zde
+                </h2>
+
+                <div class="bg-white p-6 rounded-3xl shadow-2xl overflow-hidden">
+
+                    <div class="relative w-full" style="padding-bottom: 50%;">
+                        <iframe
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d641.9846379668959!2d17.9074298829642!3d49.93749426275657!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4713d86c8de44189%3A0x759eb7865c455324!2zU3TFmWVkbsOtIMWha29sYSBwcsWvbXlzbG92w6EgYSB1bcSbbGVja8Oh!5e0!3m2!1scs!2scz!4v1765834654310!5m2!1scs!2scz"
+                                width="100%"
+                                height="100%"
+                                style="border:0;"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade"
+                                class="absolute top-0 left-0 w-full h-full rounded-2xl shadow-inner">
+                        </iframe>
+
+                    </div>
+
+                    <p class="mt-4 text-sm text-gray-500 text-center">
+                        Poloha odkazuje na Střední školu průmyslovou a uměleckou v Opavě.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="lg:col-span-1 space-y-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2 border-l-4 border-green-500 pl-3">
+                    Kontaktní údaje
+                </h2>
+
+                <div class="bg-white p-6 rounded-3xl shadow-xl hover:shadow-2xl transition duration-300">
+                    <i class="fa-solid fa-envelope text-3xl text-cyan-600 mb-3 drop-shadow-md"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">E-mail</h3>
+                    <p class="text-sm text-gray-500 mb-3">Školní e-mail.</p>
+                    <a href="mailto:it2227@sspu-opava.cz"
+                       class="text-green-600 font-semibold hover:text-green-700 transition text-base">
+                        it2227@sspu-opava.cz
+                    </a>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow-xl hover:shadow-2xl transition duration-300">
+                    <i class="fa-solid fa-phone text-3xl text-orange-600 mb-3 drop-shadow-md"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Telefon</h3>
+                    <p class="text-sm text-gray-500 mb-3">Osobní telefonní číslo.</p>
+                    <p class="text-green-600 font-semibold hover:text-green-700 transition text-base">+420 000 000
+                        000</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-3xl shadow-xl hover:shadow-2xl transition duration-300">
+                    <i class="fa-brands fa-instagram text-3xl bg-gradient-to-r from-purple-500 via-red-500 to-yellow-500 bg-clip-text text-transparent mb-3 drop-shadow-md"></i>
+                    <h3 class="text-xl font-bold text-gray-800 mb-1">Sledujte mě</h3>
+                    <p class="text-sm text-gray-500 mb-3">Osobní instagramový účet.</p>
+                    <a href="https://www.instagram.com/kubasolt/?igsh=MXZlemU2bThmcmhvbw%3D%3D&utm_source=qr#"
+                       class="text-green-600 font-semibold hover:text-green-700 transition flex items-center gap-2 text-base">
+                        <i class="fa-brands fa-instagram"></i> @kubasolt
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

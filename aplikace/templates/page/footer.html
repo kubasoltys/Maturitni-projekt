@@ -1,28 +1,30 @@
-<footer class="bg-gray-50 border-t border-gray-200 py-6 mt-10">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
+<footer class="bg-white shadow-inner border-t-4 border-gray-200 py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
 
-        <p class="text-gray-500 text-sm text-center md:text-left">
+        <p class="text-gray-600 text-sm text-center md:text-left">
             © 2025
-            <span class="font-semibold bg-gradient-to-r from-green-700 to-gray-800 bg-clip-text text-transparent">
+            <span class="font-extrabold bg-clip-text text-transparent
+                         bg-gradient-to-r from-green-500 to-teal-600 drop-shadow-sm">
                 Squadra
             </span>.
-            Vytvořeno jako maturitní projekt.
+            Vytvořeno jako maturitní projekt. Slouží pouze pro studijní účely.
         </p>
 
-        <div class="flex space-x-6 text-sm">
-            <a href="#" class="flex items-center gap-1 text-gray-500 hover:text-green-700 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M7.75 2C4.67893 2 2.25 4.42893 2.25 7.5V16.5C2.25 19.5711 4.67893 22 7.75 22H16.25C19.3211 22 21.75 19.5711 21.75 16.5V7.5C21.75 4.42893 19.3211 2 16.25 2H7.75ZM12 8.25C10.2051 8.25 8.75 9.70507 8.75 11.5C8.75 13.2949 10.2051 14.75 12 14.75C13.7949 14.75 15.25 13.2949 15.25 11.5C15.25 9.70507 13.7949 8.25 12 8.25ZM7.25 6.75C7.25 7.30228 6.80228 7.75 6.25 7.75C5.69772 7.75 5.25 7.30228 5.25 6.75C5.25 6.19772 5.69772 5.75 6.25 5.75C6.80228 5.75 7.25 6.19772 7.25 6.75Z"/>
-                </svg>
-                Instagram
+        <div class="flex space-x-8 text-sm font-medium">
+
+            <a href="{% url 'kontakt' %}"
+               class="flex items-center gap-2 text-gray-700 border-b-2 border-transparent hover:text-green-600 transition duration-300 drop-shadow-sm hover:border-green-600">
+                <i class="fa-solid fa-envelope text-lg"></i>
+                <span>Kontakt</span>
             </a>
 
-            <a href="#" class="flex items-center gap-1 text-gray-500 hover:text-green-700 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                    <path d="M3 5h18M3 12h18M3 19h18"/>
-                </svg>
-                Kontakt
+            <a href="https://www.instagram.com/kubasolt/?igsh=MXZlemU2bThmcmhvbw%3D%3D&utm_source=qr#"
+               class="flex items-center gap-2 text-gray-700 border-b-2 border-transparent hover:text-green-600 transition duration-300 drop-shadow-sm hover:border-green-600"
+               target="_blank" rel="noopener noreferrer">
+                <i class="fa-brands fa-instagram text-lg"></i>
+                <span>Instagram</span>
             </a>
+
         </div>
 
     </div>

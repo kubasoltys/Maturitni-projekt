@@ -5,94 +5,11 @@
 {% block content %}
 
 <!-- navbar -->
-<nav class="fixed top-0 left-0 w-full bg-white/70 backdrop-blur-sm shadow-lg z-50 border-b border-gray-200">
-    <div class="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
-
-        <!-- tym -->
-        <div class="flex items-center space-x-4">
-            <div class="flex items-center space-x-4">
-                {% if vybrany_tym.logo %}
-                <img src="{{ vybrany_tym.logo.url }}" alt="{{ vybrany_tym.nazev }}"
-                     class="h-14 w-14 object-contain drop-shadow-sm">
-                {% else %}
-                <img src="{% static 'stranka/logo.png' %}" alt="Logo"
-                     class="h-14 w-14 object-contain drop-shadow-sm">
-                {% endif %}
-
-                {% if vybrany_tym.logo %}
-                <div class="leading-tight">
-                    <p class="text-2xl font-extrabold text-gray-800 tracking-wide">
-                        {{ vybrany_tym.nazev }}
-                    </p>
-                    <p class="text-sm text-gray-500 font-semibold -mt-1">
-                        {{ vybrany_tym.kategorie }}
-                    </p>
-                </div>
-                {% endif %}
-
-            </div>
-        </div>
-
-        <!-- stranky -->
-        <div class="flex items-center space-x-6">
-
-            <a href="{% url 'trener_zapas' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
-                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
-                    Zápasy
-                </span>
-            </a>
-
-            <a href="{% url 'trener_trenink' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
-                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
-                    Tréninky
-                </span>
-            </a>
-
-            <a href="{% url 'trener_settings' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
-                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
-                    Nastavení účtu
-                </span>
-            </a>
-
-            <a href="{% url 'trener_dashboard' %}" class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
-                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
-                    Dashboard
-                </span>
-            </a>
-
-            <!-- profil -->
-            <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
-                {% if trener.photo %}
-                <img src="{{ trener.photo.url }}" alt="Profilová fotka"
-                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
-                {% else %}
-                <img src="/media/stranka/default_profile_picture.webp" alt="Výchozí profilová fotka"
-                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
-                {% endif %}
-
-                <p class="text-gray-500 font-semibold">
-                    {% if trener.first_name or trener.last_name %}
-                        {{ trener.first_name }} {{ trener.last_name }}
-                    {% else %}
-                        (bez jména)
-                    {% endif %}
-                </p>
-            </div>
-
-            <!-- logout -->
-            <a href="{% url 'logout' %}"
-               class="px-6 py-2 rounded-2xl shadow-md text-white font-semibold
-                      bg-gradient-to-r from-gray-500 to-gray-700
-                      hover:from-red-500 hover:to-red-700 transform transition hover:scale-105">
-                Odhlásit se
-            </a>
-        </div>
-    </div>
-</nav>
+{% include "page/trener_navbar.html" %}
 
 
 <!-- obsah -->
-<div class="flex flex-col items-center justify-start min-h-screen pt-40 pb-12 space-y-12 px-4 lg:px-0">
+<div class="flex flex-col items-center justify-start min-h-screen pt-32 pb-12 space-y-12 px-4 lg:px-0">
 
     <div class="text-center">
         <h1 class="text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2">

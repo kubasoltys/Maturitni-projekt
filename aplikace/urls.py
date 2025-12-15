@@ -19,6 +19,9 @@ urlpatterns = [
     path('trener/', views.trener_dashboard, name='trener_dashboard'),
     path('hrac/', views.hrac_dashboard, name='hrac_dashboard'),
 
+# kontakt
+    path('kontakt/', views.kontakt_view, name='kontakt'),
+
 # trener - seznam hracu
     path('trener/hraci/', views.trener_hraci_view, name='trener_hraci'),
 

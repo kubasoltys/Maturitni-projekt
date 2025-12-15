@@ -5,94 +5,10 @@
 {% block content %}
 
 <!-- navbar -->
-<nav class="fixed top-0 left-0 w-full bg-white shadow-lg z-50 border-b border-gray-200">
-    <div class="max-w-6xl mx-auto px-8 py-4 flex items-center justify-between">
-
-        <!-- tym -->
-        <div class="flex items-center space-x-4">
-            <div class="flex items-center space-x-4">
-                {% if tym.logo %}
-                <img src="{{ tym.logo.url }}" alt="{{ tym.nazev }}"
-                     class="h-14 w-14 object-contain drop-shadow-sm">
-                {% else %}
-                <img src="{% static 'stranka/logo.png' %}" alt="Logo"
-                     class="h-14 w-14 object-contain drop-shadow-sm">
-                {% endif %}
-
-                {% if tym.logo %}
-                <div class="leading-tight">
-                    <p class="text-2xl font-extrabold text-gray-800 tracking-wide">
-                        {{ tym.nazev }}
-                    </p>
-                    <p class="text-sm text-gray-500 font-semibold -mt-1">
-                        {{ tym.kategorie }}
-                    </p>
-                </div>
-                {% endif %}
-
-            </div>
-        </div>
-
-        <!-- stranky -->
-        <div class="flex items-center space-x-6">
-
-            <a href="{% url 'hrac_zapas' %}"
-               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
-                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
-                    Zápasy
-                </span>
-            </a>
-
-            <a href="{% url 'hrac_trenink' %}"
-               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
-                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
-                    Tréninky
-                </span>
-            </a>
-
-            <a href="{% url 'hrac_dashboard' %}"
-               class="nav-link text-gray-700 font-semibold transition transform hover:scale-110 relative group">
-                <span class="relative z-10 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-700">
-                    Dashboard
-                </span>
-            </a>
-
-            <!-- profil -->
-            <div class="flex items-center space-x-3 border-l pl-5 border-gray-300">
-                {% if hrac.photo %}
-                <img src="{{ hrac.photo.url }}" alt="Profilová fotka"
-                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
-                {% else %}
-                <img src="/media/stranka/default_profile_picture.webp" alt="Výchozí profilová fotka"
-                     class="w-10 h-10 rounded-full object-cover border border-gray-300 shadow-sm">
-                {% endif %}
-
-                <p class="text-gray-500 font-semibold">
-                    {% if hrac.first_name and hrac.last_name %}
-                        {{ hrac.first_name }} {{ hrac.last_name }}
-                    {% elif hrac.first_name %}
-                        {{ hrac.first_name }}
-                    {% elif hrac.last_name %}
-                        {{ hrac.last_name }}
-                    {% else %}
-                        (bez jména)
-                    {% endif %}
-                </p>
-            </div>
-
-            <!-- logout -->
-            <a href="{% url 'logout' %}"
-               class="px-6 py-2 rounded-2xl shadow-md text-white font-semibold
-                      bg-gradient-to-r from-gray-500 to-gray-700
-                      hover:from-red-500 hover:to-red-700 transform transition hover:scale-105">
-                Odhlásit se
-            </a>
-        </div>
-    </div>
-</nav>
+{% include "page/hrac_navbar.html" %}
 
 <!-- obsah -->
-<div class="flex flex-col items-center justify-center min-h-screen space-y-8 py-10 pt-40">
+<div class="flex flex-col items-center justify-center min-h-screen space-y-8 py-10 pt-32">
 
     <div class="text-center mb-6">
         <h1 class="text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2">
@@ -130,7 +46,7 @@
                     {% endif %}
                 </span>
                 </p>
-                <p class="text-green-600 text-lg font-medium">@{{ user.username }}</p>
+                <p class="bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent text-lg font-medium">@{{ user.username }}</p>
 
                 <p class="text-gray-500 text-md">
                     <span class="font-medium text-gray-700">Email:</span>
@@ -155,7 +71,7 @@
 
             <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
                 <p class="text-gray-500 text-sm flex items-center mb-1">
-                    <i class="fas fa-user-tie mr-2 text-green-500"></i> Trenér
+                    <i class="fas fa-user-tie mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Trenér
                 </p>
                 <p class="text-gray-800 font-bold text-lg">
                     {% if user.hracprofile.trener %}
@@ -168,7 +84,7 @@
 
             <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
                 <p class="text-gray-500 text-sm flex items-center mb-1">
-                    <i class="fas fa-phone mr-2 text-green-500"></i> Telefonní číslo
+                    <i class="fas fa-phone mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Telefonní číslo
                 </p>
                 <p class="text-gray-800 font-bold text-lg">
                     {% if user.hracprofile.phone %}
@@ -181,7 +97,7 @@
 
             <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
                 <p class="text-gray-500 text-sm flex items-center mb-1">
-                    <i class="fas fa-birthday-cake mr-2 text-green-500"></i> Datum narození
+                    <i class="fas fa-birthday-cake mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Datum narození
                 </p>
                 <p class="text-gray-800 font-bold text-lg">
                     {% if user.hracprofile.birth_date %}
@@ -194,7 +110,7 @@
 
             <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
                 <p class="text-gray-500 text-sm flex items-center mb-1">
-                    <i class="fas fa-clock mr-2 text-green-500"></i> Věk
+                    <i class="fas fa-clock mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Věk
                 </p>
                 <p class="text-gray-800 font-bold text-lg">
                     {% if user.hracprofile.vek %}
@@ -207,7 +123,7 @@
 
             <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
                 <p class="text-gray-500 text-sm flex items-center mb-1">
-                    <i class="fas fa-ruler-vertical mr-2 text-green-500"></i> Výška
+                    <i class="fas fa-ruler-vertical mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Výška
                 </p>
                 <p class="text-gray-800 font-bold text-lg">
                     {% if user.hracprofile.height %}
@@ -220,7 +136,7 @@
 
             <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
                 <p class="text-gray-500 text-sm flex items-center mb-1">
-                    <i class="fas fa-weight mr-2 text-green-500"></i> Váha
+                    <i class="fas fa-weight mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Váha
                 </p>
                 <p class="text-gray-800 font-bold text-lg">
                     {% if user.hracprofile.weight %}
@@ -233,7 +149,7 @@
 
             <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
                 <p class="text-gray-500 text-sm flex items-center mb-1">
-                    <i class="fas fa-tshirt mr-2 text-green-500"></i> Číslo dresu
+                    <i class="fas fa-tshirt mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Číslo dresu
                 </p>
                 <p class="text-gray-800 font-bold text-lg">
                     {% if user.hracprofile.cislo_dresu %}
@@ -246,7 +162,7 @@
 
             <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
                 <p class="text-gray-500 text-sm flex items-center mb-1">
-                    <i class="fas fa-shoe-prints mr-2 text-green-500"></i> Preferovaná noha
+                    <i class="fas fa-shoe-prints mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Preferovaná noha
                 </p>
                 <p class="text-gray-800 font-bold text-lg">
                     {% if user.hracprofile.preferred_foot %}

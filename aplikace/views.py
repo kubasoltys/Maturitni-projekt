@@ -1768,7 +1768,6 @@ def trener_dohrane_zapasy(request):
     if vybrany_tym not in tymy:
         vybrany_tym = tymy.first()
 
-    # Ošetření, pokud trenér nemá přiřazené žádné týmy
     if not vybrany_tym:
         context = {
             'trener': trener,
@@ -1779,10 +1778,9 @@ def trener_dohrane_zapasy(request):
 
     hraci = HracProfile.objects.filter(tym=vybrany_tym).distinct()
 
-    # KLÍČOVÁ ZMĚNA: Filtrovat pouze zápasy s Dohráno A s NESPOUSTNÝM vysledek_soupere
     zapasy_qs = (
         Zapas.objects.filter(tym=vybrany_tym, stav='Dohráno')
-        .exclude(vysledek_soupere__isnull=True)  # <--- TOTO ZAJISTÍ, ŽE MÁ ZAPSÁN VÝSLEDEK
+        .exclude(vysledek_soupere__isnull=True)
         .prefetch_related(
             'dochazka', 'dochazka__hrac',
             'goly', 'goly__hrac',
@@ -1811,11 +1809,9 @@ def trener_dohrane_zapasy(request):
         goly_tym = goly.filter(hrac__tym=vybrany_tym)
         vt = goly_tym.count()
 
-        # Ošetření, i když QuerySet by měl zaručit, že vs existuje a je konvertovatelné
         try:
             vs = int(zapas.vysledek_soupere)
         except (ValueError, TypeError):
-            # Pokud se sem kód náhodou dostane (kvůli nevalidnímu zápisu i přes filtrování), přeskočíme zápas
             continue
 
         karty = zapas.karty.all()
@@ -1831,7 +1827,6 @@ def trener_dohrane_zapasy(request):
         ).count()
 
         pocet_pritomnych = sum(1 for d in dochazka_list if d.pritomen)
-        # Ošetření dělení nulou, pokud nejsou hráči (i když nahoře jsou filtrováni)
         pocet_hracu = len(hraci)
         procento_pritomnych = int((pocet_pritomnych / pocet_hracu) * 100) if pocet_hracu > 0 else 0
 
@@ -2004,15 +1999,31 @@ def trener_tym(request):
     hrac = getattr(request.user, "hracprofile", None)
     trener = getattr(request.user, "trenerprofile", None)
 
-    vybrany_tym_id = request.session.get("selected_tym")
     vybrany_tym = None
+    tymy_trenéra = []
 
-    if hrac:
+    if trener:
+        tymy_trenéra = trener.tymy.all()
+
+        selected_tym_id_from_get = request.GET.get("selected_tym")
+
+        if selected_tym_id_from_get:
+            request.session["selected_tym"] = selected_tym_id_from_get
+
+        selected_tym_id = request.session.get("selected_tym")
+
+        if selected_tym_id:
+            vybrany_tym = tymy_trenéra.filter(id=selected_tym_id).first()
+
+        if vybrany_tym is None and tymy_trenéra.exists():
+            vybrany_tym = tymy_trenéra.first()
+            if vybrany_tym:
+                request.session["selected_tym"] = str(vybrany_tym.id)
+
+    elif hrac:
         vybrany_tym = hrac.tym
-    elif trener and vybrany_tym_id:
-        vybrany_tym = trener.tymy.filter(id=vybrany_tym_id).first()
-    elif trener:
-        vybrany_tym = trener.tymy.first()
+        if vybrany_tym:
+            tymy_trenéra = [vybrany_tym]
 
     if vybrany_tym is None:
         raise Http404("Nemáte přiřazený tým nebo jste nevybrali tým.")
@@ -2069,7 +2080,6 @@ def trener_tym(request):
             "cervene": cervene,
             "asistence": asistence,
         })
-
 
     POZICE_MAP = {
         'GK': 'brankari',
@@ -2132,6 +2142,7 @@ def trener_tym(request):
 
     context = {
         "vybrany_tym": vybrany_tym,
+        "tymy": tymy_trenéra,
         "brankari": brankari,
         "obranci": obranci,
         "zaloznici": zaloznici,
@@ -2145,3 +2156,35 @@ def trener_tym(request):
     }
 
     return render(request, "trener/tym/tym.html", context)
+
+
+#-------------------------------------------------------------------------------------------------------------
+# kontakt
+#-------------------------------------------------------------------------------------------------------------
+def kontakt_view(request):
+    context = {}
+    vybrany_tym = None
+
+    hrac = getattr(request.user, "hracprofile", None)
+    trener = getattr(request.user, "trenerprofile", None)
+
+    if request.user.is_authenticated:
+
+        if hrac:
+            vybrany_tym = hrac.tym
+            context['hrac'] = hrac
+
+        elif trener:
+            context['trener'] = trener
+            vybrany_tym_id = request.session.get("selected_tym")
+
+            if vybrany_tym_id:
+                vybrany_tym = trener.tymy.filter(id=vybrany_tym_id).first()
+
+            if vybrany_tym is None:
+                vybrany_tym = trener.tymy.first()
+
+    if vybrany_tym:
+        context['tym'] = vybrany_tym
+
+    return render(request, 'page/kontakt.html', context)
