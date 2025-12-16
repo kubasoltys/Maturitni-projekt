@@ -260,6 +260,32 @@
   }
 },
 {
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2025-12-16T08:43:02.500Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "9",
+    "object_repr": "hrac6 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2025-12-16T12:07:44.762Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "10",
+    "object_repr": "hrac7 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
   "model": "auth.permission",
   "pk": 1,
   "fields": {
@@ -920,11 +946,27 @@
   }
 },
 {
+  "model": "sessions.session",
+  "pk": "3l19skjd4y83hglhaclz87c0bfciisww",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hAYpkBduvcMZJgBWzVtUtqV8e7apAvd_vfef6lE2zqkrZUljaLOyqrT75aJH2Xagdxpus2a52ldxqx3RR-06ess5Xk53L-DgdrwrQuizZk8OCMIEJm5hxyMEwdeQjRoPWIEj7WrPRpyUIm64ECYDVb1_gDGAjcp:1vVQZ9:oS6gub1YeQ6EEgo9s1waX_6_NuZ29KkFWSiEWgAQP7k",
+    "expire_date": "2025-12-30T08:37:55.785Z"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "eeszu1kvup99ih78hk3rd64wkhc2gltb",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hAYpkBduvcMZJgBWzVtUtqV8e7apAvd_vfef6lE2zqkrZUljaLOyqrT75aJH2Xagdxpus2a52ldxqx3RR-06ess5Xk53L-DgdrwrQuizZk8OCMIEJm5hxyMEwdeQjRoPWIEj7WrPRpyUIm64ECYDVb1_gDGAjcp:1vVWCD:yuQkfsgHz814yClSqrRQGw71s0UGwnevOxqa_LSXVCc",
+    "expire_date": "2025-12-30T14:38:37.630Z"
+  }
+},
+{
   "model": "aplikace.user",
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$1000000$lVBDpd6Ja8QRTsMTdKJBR1$fRAfF49lBGd4tGP425N5023GStuBgiqMlmQK2YVN9zE=",
-    "last_login": "2025-12-06T14:54:25.657Z",
+    "last_login": "2025-12-16T14:38:37.628Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -944,7 +986,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-12-15T21:59:45.869Z",
+    "last_login": "2025-12-16T14:27:54.931Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -964,7 +1006,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$1000000$xqpg5oqf8ID83Nzv2qrIUE$UoViHaQwwwCayltK+XOJETF6n3CpDysSWHk7an4HHvo=",
-    "last_login": "2025-12-15T20:57:38.528Z",
+    "last_login": "2025-12-16T09:04:22.135Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "",
@@ -1053,6 +1095,46 @@
     "is_staff": false,
     "is_active": true,
     "date_joined": "2025-11-18T12:16:39.125Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$chxl4AOtQr9NfFPz1yNZDe$Bko6CGD9AB3bFjkvnJaXF+emPEM5oLIGwJIDHSgKzE0=",
+    "last_login": "2025-12-16T09:08:21.554Z",
+    "is_superuser": false,
+    "username": "hrac6",
+    "first_name": "",
+    "last_name": "",
+    "email": "it2222@sspu-opava.cz",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-12-16T08:43:01.977Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$cLRJnFYOcogLCLDUtkcmIz$oolHGwKM3+jKsMWTIvjKE66e0aqtEAGpBsOzOSdWukg=",
+    "last_login": "2025-12-16T12:14:36.632Z",
+    "is_superuser": false,
+    "username": "hrac7",
+    "first_name": "",
+    "last_name": "",
+    "email": "fklsdaf@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2025-12-16T12:07:43.576Z",
     "role": "hrac",
     "first_login": false,
     "groups": [],
@@ -1200,6 +1282,48 @@
     "photo": "hrac_photo/lamine_yamal.jpg",
     "created_at": "2025-11-18T12:16:39.557Z",
     "updated_at": "2025-11-18T12:20:38.367Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 7,
+  "fields": {
+    "user": 9,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Vojtěch",
+    "last_name": "Pawlik",
+    "phone": null,
+    "birth_date": "2006-07-03",
+    "height": 194,
+    "weight": 92,
+    "cislo_dresu": 14,
+    "pozice": "LB",
+    "preferred_foot": "Pravá",
+    "photo": "hrac_photo/vojtech_pawlik.jpg",
+    "created_at": "2025-12-16T08:43:02.495Z",
+    "updated_at": "2025-12-16T09:22:12.197Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 8,
+  "fields": {
+    "user": 10,
+    "trener": 1,
+    "tym": 2,
+    "first_name": "zkouska",
+    "last_name": "zkouska",
+    "phone": null,
+    "birth_date": "2025-12-20",
+    "height": 187,
+    "weight": 85,
+    "cislo_dresu": 12,
+    "pozice": "GK",
+    "preferred_foot": "Pravá",
+    "photo": "hrac_photo/vojtech_pawlik_uYSCANm.jpg",
+    "created_at": "2025-12-16T12:07:44.759Z",
+    "updated_at": "2025-12-16T12:09:18.205Z"
   }
 },
 {
@@ -1704,6 +1828,94 @@
     "pritomen": true,
     "duvod": null,
     "hlasoval_v": "2025-12-10T21:07:14.588Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 37,
+  "fields": {
+    "trenink": 14,
+    "hrac": 7,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-12-16T08:52:22.836Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 38,
+  "fields": {
+    "trenink": 13,
+    "hrac": 7,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-12-16T08:52:22.869Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 39,
+  "fields": {
+    "trenink": 3,
+    "hrac": 7,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-12-16T08:52:22.878Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 40,
+  "fields": {
+    "trenink": 9,
+    "hrac": 7,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-12-16T08:52:22.885Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 41,
+  "fields": {
+    "trenink": 8,
+    "hrac": 7,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-12-16T08:52:22.894Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 42,
+  "fields": {
+    "trenink": 7,
+    "hrac": 7,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-12-16T08:52:22.904Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 43,
+  "fields": {
+    "trenink": 15,
+    "hrac": 7,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-12-16T08:54:08.604Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 44,
+  "fields": {
+    "trenink": 12,
+    "hrac": 8,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-12-16T12:09:54.063Z"
   }
 },
 {
@@ -2218,6 +2430,16 @@
   "fields": {
     "zapas": 55,
     "hrac": 2,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 72,
+  "fields": {
+    "zapas": 55,
+    "hrac": 7,
     "pritomen": true,
     "poznamka": null
   }
