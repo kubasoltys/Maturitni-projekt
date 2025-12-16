@@ -335,11 +335,11 @@ class HracProfile(models.Model):
         pritomni, celkem = self._zapas_stats()
         return celkem - pritomni
 
-
+    # data podle tymu
     def save(self, *args, **kwargs):
         if self.trener and not self.tym:
             tymy_trenera = Tym.objects.filter(trener=self.trener)
-            if tymy_trenera.exists():
+            if tymy_trenera.count() == 1:
                 self.tym = tymy_trenera.first()
         super().save(*args, **kwargs)
 

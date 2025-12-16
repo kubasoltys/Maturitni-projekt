@@ -8,33 +8,115 @@
 
         <form method="post" enctype="multipart/form-data" class="space-y-5">
             {% csrf_token %}
-            {{ form.non_field_errors }}
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div class="p-5 bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-400 text-red-800 rounded-2xl shadow-lg mb-4 animate-pulse" role="alert">
+                            <p class="font-bold text-lg flex items-center">
+                                <i class="fas fa-exclamation-circle mr-3 text-red-600"></i>{{ message }}
+                            </p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% if form.non_field_errors %}
+                <div class="p-5 bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-400 text-red-800 rounded-2xl shadow-lg mb-4" role="alert">
+                    <p class="font-bold text-lg mb-3 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-3 text-red-600"></i>CHYBA PŘI ZADÁNÍ ÚDAJŮ!
+                    </p>
+                    <ul class="list-disc list-inside space-y-2 ml-2">
+                        {% for error in form.non_field_errors %}
+                            <li class="font-medium">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            {% if form.errors and not form.non_field_errors %}
+            <div class="p-5 bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-400 text-red-800 rounded-2xl shadow-lg mb-4" role="alert">
+                <p class="font-bold text-lg mb-3 flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-3 text-red-600"></i>CHYBA PŘI ZADÁNÍ ÚDAJŮ!
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                            <li class="font-medium">{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
 
             {% for field in form %}
             <div>
                 <label class="block text-gray-700 font-medium mb-2">{{ field.label }}</label>
                 {{ field }}
+
                 {% if field.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ field.errors.0 }}</p>
+                    <div class="mt-2 p-3 bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 rounded-2xl shadow-sm">
+                        {% for error in field.errors %}
+                            <p class="text-red-700 text-sm font-semibold flex items-center">
+                                <i class="fas fa-times-circle mr-2 text-red-600"></i>{{ error }}
+                            </p>
+                        {% endfor %}
+                    </div>
                 {% endif %}
             </div>
             {% endfor %}
 
             <button type="submit"
-                    class="w-full inline-block text-white font-semibold text-lg px-10 py-4 rounded-2xl shadow-lg
-                   bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
-                   hover:from-blue-600 hover:to-purple-900 hover:scale-105">
+                    class="w-full py-3 text-white font-semibold text-lg rounded-full bg-gradient-to-r from-green-500 to-teal-600
+                    hover:from-green-600 hover:to-teal-700 hover:scale-105 transition duration-300">
                 Uložit údaje
             </button>
         </form>
 
 
-        <a href="{% url 'logout' %}"
-           class="w-full inline-block text-white font-semibold text-lg px-10 py-4 rounded-2xl shadow-lg
-                  bg-gradient-to-r from-gray-400 to-gray-600 transform transition duration-300
-                  hover:from-gray-500 hover:to-gray-800 hover:scale-105 mt-4 text-center">
-            Odhlásit se
-        </a>
+        <div class="pt-4 text-center">
+            <a href="{% url 'logout' %}"
+               class="inline-flex items-center justify-center bg-gray-200 text-gray-700 hover:bg-green-400 hover:text-green-900
+                               font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+                <i class="fas fa-arrow-left mr-2"></i> Odhlásit se
+            </a>
+        </div>
     </div>
 </div>
+
+{% if tymy_data_json %}
+<script>
+    // data tymu podle trenera
+    const tymyData = {{ tymy_data_json|safe }};
+    
+    function updateTymy() {
+        const trenerSelect = document.getElementById('id_trener');
+        const tymSelect = document.getElementById('id_tym');
+        
+        if (!trenerSelect || !tymSelect) return;
+        
+        const selectedTrenerId = trenerSelect.value;
+        
+        tymSelect.innerHTML = '<option value="">---------</option>';
+        
+        if (selectedTrenerId && tymyData[selectedTrenerId]) {
+            const tymy = tymyData[selectedTrenerId];
+            tymy.forEach(function(tym) {
+                const option = document.createElement('option');
+                option.value = tym.id;
+                option.textContent = tym.nazev;
+                tymSelect.appendChild(option);
+            });
+        }
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        const trenerSelect = document.getElementById('id_trener');
+        if (trenerSelect) {
+            trenerSelect.addEventListener('change', updateTymy);
+            updateTymy();
+        }
+    });
+</script>
+{% endif %}
 {% endblock %}

@@ -108,7 +108,18 @@ class HracProfileForm(forms.ModelForm):
         required=False,
         label="Vyberte trenéra",
         widget=forms.Select(attrs={
-            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600'
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600',
+            'id': 'id_trener'
+        })
+    )
+
+    tym = forms.ModelChoiceField(
+        queryset=Tym.objects.all(),
+        required=False,
+        label="Vyberte tým",
+        widget=forms.Select(attrs={
+            'class': 'w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-green-600',
+            'id': 'id_tym'
         })
     )
 
@@ -116,7 +127,7 @@ class HracProfileForm(forms.ModelForm):
         model = HracProfile
         fields = [
             'first_name', 'last_name', 'email', 'phone', 'birth_date', 'height', 'weight',
-            'cislo_dresu', 'pozice', 'preferred_foot', 'trener', 'photo'
+            'cislo_dresu', 'pozice', 'preferred_foot', 'trener', 'tym', 'photo'
         ]
         labels = {
             'first_name': 'Jméno',
@@ -129,6 +140,7 @@ class HracProfileForm(forms.ModelForm):
             'pozice': 'Pozice',
             'preferred_foot': 'Preferovaná noha',
             'photo': 'Fotografie',
+            'tym': 'Tým',
         }
         widgets = {
             'first_name': forms.TextInput(attrs={
@@ -177,6 +189,25 @@ class HracProfileForm(forms.ModelForm):
             self.fields['email'].initial = user.email
         if self.instance and self.instance.birth_date:
             self.fields['birth_date'].initial = self.instance.birth_date
+        
+        # Filtrování týmů podle trenéra
+        if self.instance and self.instance.trener:
+            # Pokud už má trenéra přiřazeného, zobrazit pouze jeho týmy
+            self.fields['tym'].queryset = Tym.objects.filter(trener=self.instance.trener)
+        elif args and args[0]:
+            # Pokud je formulář odeslán s daty, zkusit získat trenéra z POST dat
+            trener_id = args[0].get('trener')
+            if trener_id:
+                try:
+                    trener = TrenerProfile.objects.get(pk=trener_id)
+                    self.fields['tym'].queryset = Tym.objects.filter(trener=trener)
+                except (TrenerProfile.DoesNotExist, ValueError):
+                    self.fields['tym'].queryset = Tym.objects.none()
+            else:
+                self.fields['tym'].queryset = Tym.objects.none()
+        else:
+            # Pokud není trenér vybrán, zobrazit prázdný seznam týmů
+            self.fields['tym'].queryset = Tym.objects.none()
 
     def save(self, commit=True):
         instance = super().save(commit=False)

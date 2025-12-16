@@ -8,7 +8,6 @@ from django.utils import timezone
 from datetime import datetime, time
 from django.db.models import Q
 from django.utils.timezone import now
-
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm, DohranyZapasForm
 from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy, Tym, Gol, Karta
 import json
@@ -89,7 +88,19 @@ def first_login_view(request):
     else:
         form = ProfileForm(instance=instance)
 
-    return render(request, 'login/first_login.html', {'form': form})
+    # data podle tymu
+    tymy_data_json = '{}'
+    if hasattr(user, 'hracprofile'):
+        tymy_data = {}
+        for trener in TrenerProfile.objects.all():
+            tymy = Tym.objects.filter(trener=trener)
+            tymy_data[trener.id] = [{'id': tym.id, 'nazev': str(tym)} for tym in tymy]
+        tymy_data_json = json.dumps(tymy_data)
+
+    return render(request, 'login/first_login.html', {
+        'form': form,
+        'tymy_data_json': tymy_data_json
+    })
 
 
 #----------------------------------------------------------------------------------------------
@@ -766,7 +777,7 @@ def hrac_statistiky(request):
         DochazkaTreninky.objects
         .filter(hrac=hrac)
         .select_related("trenink")
-        .order_by("-trenink__datum")[:4]
+        .order_by("-trenink__datum")[:5]
     )
 
     zapasy = (

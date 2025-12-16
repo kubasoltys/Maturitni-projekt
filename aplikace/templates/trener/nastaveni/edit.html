@@ -6,7 +6,7 @@
     <h2 class="text-4xl font-extrabold text-center mb-6 drop-shadow-lg">
         Upravit profil:
         <div class="p-3">
-            <span class="bg-gradient-to-r from-blue-500 to-purple-800 bg-clip-text text-transparent">
+            <span class="bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent">
                 {% if trener.first_name and trener.last_name %}
                     {{ trener.first_name }} {{ trener.last_name }}
                 {% elif trener.first_name %}
@@ -24,7 +24,46 @@
     <form method="post" enctype="multipart/form-data" class="space-y-5">
 
         {% csrf_token %}
-        {{ form.non_field_errors }}
+
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags == 'error' %}
+                    <div class="p-5 bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-400 text-red-800 rounded-2xl shadow-lg mb-4 animate-pulse" role="alert">
+                        <p class="font-bold text-lg flex items-center">
+                            <i class="fas fa-exclamation-circle mr-3 text-red-600"></i>{{ message }}
+                        </p>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+
+        {% if form.non_field_errors %}
+            <div class="p-5 bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-400 text-red-800 rounded-2xl shadow-lg mb-4" role="alert">
+                <p class="font-bold text-lg mb-3 flex items-center">
+                    <i class="fas fa-exclamation-triangle mr-3 text-red-600"></i>CHYBA PŘI ZADÁNÍ ÚDAJŮ!
+                </p>
+                <ul class="list-disc list-inside space-y-2 ml-2">
+                    {% for error in form.non_field_errors %}
+                        <li class="font-medium">{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        {% if form.errors and not form.non_field_errors %}
+        <div class="p-5 bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-400 text-red-800 rounded-2xl shadow-lg mb-4" role="alert">
+            <p class="font-bold text-lg mb-3 flex items-center">
+                <i class="fas fa-exclamation-triangle mr-3 text-red-600"></i>CHYBA PŘI ZADÁNÍ ÚDAJŮ!
+            </p>
+            <ul class="list-disc list-inside space-y-2 ml-2">
+                {% for field, errors in form.errors.items %}
+                    {% for error in errors %}
+                        <li class="font-medium">{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
 
         {% for field in form %}
         <div class="mb-4">
@@ -33,21 +72,32 @@
             {% if field.help_text %}
             <p class="text-sm text-gray-500">{{ field.help_text }}</p>
             {% endif %}
-            {{ field.errors }}
+            
+            {% if field.errors %}
+                <div class="mt-2 p-3 bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 rounded-2xl shadow-sm">
+                    {% for error in field.errors %}
+                        <p class="text-red-700 text-sm font-semibold flex items-center">
+                            <i class="fas fa-times-circle mr-2 text-red-600"></i>{{ error }}
+                        </p>
+                    {% endfor %}
+                </div>
+            {% endif %}
         </div>
         {% endfor %}
 
         <div class="flex flex-col mt-6 space-y-4">
             <button type="submit"
-                    class="w-full text-white font-semibold px-10 py-4 text-lg rounded-2xl shadow-lg
-                   bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
-                   hover:from-blue-600 hover:to-purple-900 hover:scale-105">
+                    class="w-full py-3 text-white font-semibold text-lg rounded-full bg-gradient-to-r from-green-500 to-teal-600
+                           hover:from-green-600 hover:to-teal-700 hover:scale-105 transition duration-300">
                 Uložit změny
             </button>
-            <a href="{% url 'trener_settings' %}"
-               class="block mt-4 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
-                Zpět
-            </a>
+            <div class="pt-4 text-center">
+                <a href="{% url 'trener_settings' %}"
+                   class="inline-flex items-center justify-center bg-gray-200 text-gray-700 hover:bg-green-400 hover:text-green-900
+                                   font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+                    <i class="fas fa-arrow-left mr-2"></i> Zpět
+                </a>
+            </div>
         </div>
 
     </form>
