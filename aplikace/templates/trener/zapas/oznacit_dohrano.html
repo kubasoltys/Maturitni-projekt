@@ -1,86 +1,132 @@
 {% extends 'base.html' %}
 
-{% block content %}
-<div class="flex items-center justify-center min-h-screen p-32">
-    <div class="bg-white p-8 rounded-3xl shadow-2xl w-full max-w-7xl">
-        <h2 class="text-4xl font-extrabold mb-6 text-center drop-shadow-lg">Zadat výsledky</h2>
+{% load static %}
 
-        <form method="post" class="space-y-10" id="main_form">
+{% block content %}
+
+<!-- navbar -->
+{% include "page/trener_navbar.html" %}
+
+
+<!-- obsah -->
+<div class="flex items-center justify-center min-h-screen p-4 md:p-10 lg:p-40 pt-20 md:pt-32">
+    <div class="bg-white p-4 md:p-6 lg:p-8 rounded-3xl shadow-2xl w-full max-w-7xl">
+        <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-4 md:mb-6 text-center drop-shadow-lg">Zadat výsledky</h2>
+
+        <form method="post" class="space-y-6 md:space-y-8 lg:space-y-10" id="main_form">
             {% csrf_token %}
 
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == 'error' %}
+                        <div class="p-3 md:p-4 lg:p-5 bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-400 text-red-800 rounded-2xl shadow-lg mb-4 animate-pulse" role="alert">
+                            <p class="font-bold text-sm md:text-base lg:text-lg flex items-center">
+                                <i class="fas fa-exclamation-circle mr-2 md:mr-3 text-red-600"></i>{{ message }}
+                            </p>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% if form.non_field_errors %}
+                <div class="p-3 md:p-4 lg:p-5 bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-400 text-red-800 rounded-2xl shadow-lg mb-4" role="alert">
+                    <p class="font-bold text-sm md:text-base lg:text-lg mb-2 md:mb-3 flex items-center">
+                        <i class="fas fa-exclamation-triangle mr-2 md:mr-3 text-red-600"></i>CHYBA PŘI ZADÁNÍ ÚDAJŮ!
+                    </p>
+                    <ul class="list-disc list-inside space-y-1 md:space-y-2 ml-2 text-sm md:text-base">
+                        {% for error in form.non_field_errors %}
+                            <li class="font-medium">{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
             <!-- sloupce -->
-            <div class="grid grid-cols-[1fr_2px_1fr] gap-8 items-start">
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_2px_1fr] gap-6 md:gap-8 items-start">
 
                 <!-- goly a karty tymu -->
                 <div>
-                    <h3 class="text-2xl font-bold mb-3 text-center drop-shadow-lg">Výsledky vašeho týmu</h3>
+                    <h3 class="text-xl md:text-2xl font-bold mb-3 text-center drop-shadow-lg">Výsledky vašeho týmu</h3>
 
-                    <h4 class="text-xl font-semibold mb-3 text-center drop-shadow-lg">Góly</h4>
+                    <h4 class="text-lg md:text-xl font-semibold mb-3 text-center drop-shadow-lg">Góly</h4>
                     <div id="goly_wrapper" class="space-y-2"></div>
 
                     <input type="hidden" id="pocet_golu" name="pocet_golu" value="0">
 
                     <button id="pridat_gol_btn"
                         type="button"
-                        class="w-auto mx-auto text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
+                        class="w-full sm:w-auto mx-auto text-white font-semibold px-6 md:px-8 py-2 md:py-3 text-base md:text-lg rounded-full shadow-lg
                                bg-gradient-to-r from-blue-500 to-purple-800 transform transition duration-300
-                               hover:from-blue-600 hover:to-purple-900 hover:scale-105 mt-6 block">
+                               hover:from-blue-600 hover:to-purple-900 hover:scale-105 mt-4 md:mt-6 block">
                         + Přidat gól
                     </button>
 
                     <!-- karty -->
-                    <div class="mt-6">
-                        <h4 class="text-xl font-semibold mb-3 text-center drop-shadow-lg">Žluté a červené karty</h4>
+                    <div class="mt-6 md:mt-8">
+                        <h4 class="text-lg md:text-xl font-semibold mb-3 text-center drop-shadow-lg">Žluté a červené karty</h4>
                         <div id="karty_wrapper" class="space-y-2"></div>
 
                         <input type="hidden" id="pocet_karet" name="pocet_karet" value="0">
 
                         <button id="pridat_kartu_btn" type="button"
-                            class="w-auto mx-auto text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
+                            class="w-full sm:w-auto mx-auto text-white font-semibold px-6 md:px-8 py-2 md:py-3 text-base md:text-lg rounded-full shadow-lg
                                    bg-gradient-to-r from-yellow-500 to-red-600 transform transition duration-300
-                                   hover:from-yellow-600 hover:to-red-700 hover:scale-105 mt-6 block">
+                                   hover:from-yellow-600 hover:to-red-700 hover:scale-105 mt-4 md:mt-6 block">
                             + Přidat kartu
                         </button>
                     </div>
 
                 </div>
 
-                <div class="w-full h-full bg-gray-300 rounded"></div>
+                <div class="hidden lg:block w-full h-full bg-gray-300 rounded"></div>
 
                 <!-- goly soupere -->
                 <div>
-                    <h3 class="text-2xl font-bold pb-9 drop-shadow-lg text-center">Výsledky soupeře</h3>
-                    {{ form.non_field_errors }}
+                    <h3 class="text-xl md:text-2xl font-bold pb-4 md:pb-9 drop-shadow-lg text-center">Výsledky soupeře</h3>
                     <div>
                         {{ form.vysledek_soupere }}
                         {% if form.vysledek_soupere.errors %}
-                            <p class="text-red-500 text-sm">{{ form.vysledek_soupere.errors.0 }}</p>
+                            <div class="mt-2 p-3 bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 rounded-2xl shadow-sm">
+                                {% for error in form.vysledek_soupere.errors %}
+                                    <p class="text-red-700 text-sm font-semibold flex items-center">
+                                        <i class="fas fa-times-circle mr-2 text-red-600"></i>{{ error }}
+                                    </p>
+                                {% endfor %}
+                            </div>
                         {% endif %}
                     </div>
                 </div>
 
             </div>
 
-            <p id="neulozene_error" class="text-red-600 font-semibold text-center hidden">
-                Dokončete rozpracované góly nebo karty!
-            </p>
+            <div id="neulozene_error" class="p-3 md:p-4 lg:p-5 bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-400 text-red-800 rounded-2xl shadow-lg mb-4 hidden" role="alert">
+                <p class="font-bold text-sm md:text-base lg:text-lg flex items-center">
+                    <i class="fas fa-exclamation-circle mr-2 md:mr-3 text-red-600"></i>Dokončete rozpracované góly nebo karty!
+                </p>
+            </div>
 
             <button type="submit" id="ulozit_btn"
-                    class="w-auto mx-auto text-white font-semibold px-8 py-3 text-lg rounded-2xl shadow-lg
-                           bg-gradient-to-r from-green-500 to-emerald-700 transform transition duration-300
-                           hover:from-green-600 hover:to-emerald-800 hover:scale-105 block">
+                    class="w-full sm:w-auto mx-auto py-2 md:py-3 text-white font-semibold text-base md:text-lg rounded-full bg-gradient-to-r from-green-500 to-teal-600
+                           hover:from-green-600 hover:to-teal-700 hover:scale-105 transition duration-300 px-6 md:px-8 block">
                 Uložit výsledek
             </button>
 
         </form>
 
-        <a href="{% url 'trener_zapas' %}"
-           class="block mt-6 text-center text-gray-600 hover:text-gray-900 font-semibold transition transform hover:scale-105">
-            Zpět
-        </a>
+        <div class="pt-4 text-center">
+            <a href="{% url 'trener_zapas' %}"
+               class="inline-flex items-center justify-center bg-gray-200 text-gray-700 hover:bg-green-400 hover:text-green-900
+                               font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105 text-sm md:text-base">
+                <i class="fas fa-arrow-left mr-2"></i> Zpět
+            </a>
+        </div>
     </div>
 </div>
 
+{% endblock %}
+
+
+{% block js %}
 <script>
     let gol_pocet = 0;
     let karta_pocet = 0;
@@ -102,7 +148,7 @@
         formDiv.dataset.golId = gol_pocet;
 
         formDiv.innerHTML = `
-            <select class="p-2 border border-gray-300 rounded-xl min-w-[150px]" name="gol_hrac">
+            <select class="p-2 border border-gray-300 rounded-xl w-full sm:min-w-[150px] sm:w-auto text-sm md:text-base" name="gol_hrac">
                 <option value="">-- hráč --</option>
                 {% for hrac in hraci %}
                     <option value="{{ hrac.id }}">
@@ -114,7 +160,7 @@
                 {% endfor %}
             </select>
 
-            <select name="gol_asistent" class="p-2 border border-gray-300 rounded-xl min-w-[150px]">
+            <select name="gol_asistent" class="p-2 border border-gray-300 rounded-xl w-full sm:min-w-[150px] sm:w-auto text-sm md:text-base">
                 <option value="">-- asistence --</option>
                 {% for hrac in hraci %}
                     <option value="{{ hrac.id }}">
@@ -126,31 +172,33 @@
                 {% endfor %}
             </select>
 
-            <select name="gol_typ" class="p-2 border border-gray-300 rounded-xl min-w-[100px]">
+            <select name="gol_typ" class="p-2 border border-gray-300 rounded-xl w-full sm:min-w-[100px] sm:w-auto text-sm md:text-base">
                 <option value="">-- typ --</option>
                 <option value="normalni">Normální</option>
                 <option value="penalta">Penalta</option>
                 <option value="primak">Přímý kop</option>
             </select>
 
-            <input type="text" name="gol_minuta" placeholder="min" class="w-16 p-2 border rounded-xl text-center">
+            <input type="text" name="gol_minuta" placeholder="min" class="w-16 p-2 border rounded-xl text-center text-sm md:text-base">
 
             <button type="button" class="apply-gol bg-gradient-to-r from-blue-500 to-purple-800 text-white
-                px-3 py-1 rounded-xl font-semibold hover:from-blue-600 hover:to-purple-900 hover:scale-105 transition">
+                px-3 py-1.5 rounded-full font-semibold hover:from-blue-600 hover:to-purple-900 hover:scale-105 transition text-sm md:text-base">
                 Přidat
             </button>
 
-            <button type="button" class="cancel-gol text-gray-600 px-3 py-1 rounded-xl hover:text-gray-900 hover:scale-105 transition">
+            <button type="button" class="cancel-gol text-gray-600 px-3 py-1.5 rounded-full hover:text-gray-900 hover:scale-105 transition text-sm md:text-base">
                 Zrušit
             </button>
 
-            <p class="text-red-600 font-semibold drop-shadow-lg text-sm mt-1 hidden text-center w-full">
-                Vyplňte všechna data!
-            </p>
+            <div class="w-full mt-2 p-3 bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 rounded-2xl shadow-sm hidden">
+                <p class="text-red-700 text-xs md:text-sm font-semibold flex items-center">
+                    <i class="fas fa-times-circle mr-2 text-red-600"></i>Vyplňte všechna data!
+                </p>
+            </div>
         `;
 
         wrapper.appendChild(formDiv);
-        const errorText = formDiv.querySelector('p');
+        const errorText = formDiv.querySelector('div');
         const hracSelect = formDiv.querySelector('select[name="gol_hrac"]');
         const asistentSelect = formDiv.querySelector('select[name="gol_asistent"]');
         const typSelect = formDiv.querySelector('select[name="gol_typ"]');
@@ -217,13 +265,13 @@
 
         goly.forEach((gol, index) => {
             const div = document.createElement('div');
-            div.className = "flex items-center justify-between p-3 mb-1 border rounded-2xl bg-white shadow-md";
+            div.className = "flex flex-col sm:flex-row items-start sm:items-center justify-between p-2 md:p-3 mb-1 border rounded-2xl bg-white shadow-md gap-2 sm:gap-0";
             div.dataset.golId = gol.golId;
 
             const asistentText = gol.asistentId ? ` <span class="text-gray-400">(${gol.asistentName})</span>` : '';
 
             div.innerHTML = `
-                <span class="text-gray-500">${index + 1}.
+                <span class="text-gray-500 text-xs md:text-sm break-words">${index + 1}.
                     <span class="font-semibold text-black">
                         <span class="font-normal text-gray-400">${gol.typ === 'penalta' ? '(Penalta)' : ''}</span>
                          ⚽︎
@@ -232,7 +280,7 @@
                     <span class="text-gray-700">${gol.hracName}</span>
                     ${asistentText}
                 </span>
-                <button type="button" class="delete-gol text-red-600 text-sm font-semibold hover:scale-110 transition">
+                <button type="button" class="delete-gol text-red-600 text-xs md:text-sm font-semibold hover:scale-110 transition whitespace-nowrap">
                     Smazat
                 </button>
                 <input type="hidden" name="gol_hrac_${gol.golId}" value="${gol.hracId}">
@@ -316,7 +364,7 @@
         const min = existingKarta ? existingKarta.minuta : '';
 
         formDiv.innerHTML = `
-            <select name="karta_hrac" class="p-2 border border-gray-300 rounded-xl min-w-[150px]">
+            <select name="karta_hrac" class="p-2 border border-gray-300 rounded-xl w-full sm:min-w-[150px] sm:w-auto text-sm md:text-base">
                 <option value="">Hráč</option>
                 {% for hrac in hraci %}
                     <option value="{{ hrac.id }}" ${hrac.id == hrac ? 'selected' : ''}>
@@ -328,31 +376,33 @@
                 {% endfor %}
             </select>
 
-            <select name="karta_typ" class="p-2 border border-gray-300 rounded-xl min-w-[80px]">
+            <select name="karta_typ" class="p-2 border border-gray-300 rounded-xl w-full sm:min-w-[80px] sm:w-auto text-sm md:text-base">
                 <option value="">Typ</option>
                 <option value="zluta" ${typ=='zluta'?'selected':''}>Žlutá</option>
                 <option value="cervena" ${typ=='cervena'?'selected':''}>Červená</option>
             </select>
 
             <input name="karta_minuta" type="text" placeholder="min" value="${min}"
-                class="w-16 p-2 border rounded-xl text-center">
+                class="w-16 p-2 border rounded-xl text-center text-sm md:text-base">
 
             <button type="button" class="apply-karta bg-gradient-to-r from-yellow-500 to-red-600 text-white
-                px-3 py-1 rounded-xl font-semibold hover:from-yellow-600 hover:to-red-700 hover:scale-105 transition">
+                px-3 py-1.5 rounded-full font-semibold hover:from-yellow-600 hover:to-red-700 hover:scale-105 transition text-sm md:text-base">
                 Přidat
             </button>
 
-            <button type="button" class="cancel-karta text-gray-600 px-3 py-1 rounded-xl hover:text-gray-900 hover:scale-105 transition">
+            <button type="button" class="cancel-karta text-gray-600 px-3 py-1.5 rounded-full hover:text-gray-900 hover:scale-105 transition text-sm md:text-base">
                 Zrušit
             </button>
 
-            <p class="text-red-600 font-semibold drop-shadow-lg text-sm mt-1 hidden text-center w-full">
-                Vyplňte všechna data!
-            </p>
+            <div class="w-full mt-2 p-3 bg-gradient-to-r from-red-50 to-red-100 border-l-4 border-red-500 rounded-2xl shadow-sm hidden">
+                <p class="text-red-700 text-xs md:text-sm font-semibold flex items-center">
+                    <i class="fas fa-times-circle mr-2 text-red-600"></i>Vyplňte všechna data!
+                </p>
+            </div>
         `;
         wrapper.appendChild(formDiv);
 
-        const errorText = formDiv.querySelector("p");
+        const errorText = formDiv.querySelector("div");
 
         formDiv.querySelector('.apply-karta').addEventListener('click', () => applyKarta(formDiv, errorText));
         formDiv.querySelector('.cancel-karta').addEventListener('click', () => {
@@ -393,12 +443,12 @@
             cervenaDiv.dataset.typ = 'cervena_zlute';
 
             cervenaDiv.innerHTML = `
-                <span class="text-gray-500 flex items-center gap-1">
-                    <img src="/media/stranka/zluta_a_cervena.png" alt="Červená ze žlutých" class="w-4 h-6">
-                    <span class="font-semibold text-black">${minuta}’</span>
+                <span class="text-gray-500 flex items-center gap-1 text-xs md:text-sm break-words">
+                    <img src="{% static 'img/zluta_a_cervena.png' %}" alt="Červená ze žlutých" class="w-3 h-5 md:w-4 md:h-6 flex-shrink-0">
+                    <span class="font-semibold text-black">${minuta}'</span>
                     <span class="text-gray-700">${hracSelect.options[hracSelect.selectedIndex].text}</span>
                 </span>
-                <button type="button" class="delete-karta text-red-600 text-sm font-semibold hover:scale-110 transition">
+                <button type="button" class="delete-karta text-red-600 text-xs md:text-sm font-semibold hover:scale-110 transition whitespace-nowrap">
                     Smazat
                 </button>
                 <input type="hidden" name="karta_typ_${karta_pocet}" value="zluta_cervena">
@@ -422,17 +472,17 @@
         displayDiv.dataset.typ = typ;
 
         let imgSrc = '';
-        if (typ === 'zluta') imgSrc = '/media/stranka/zluta_karta.png';
-        else if (typ === 'cervena') imgSrc = '/media/stranka/cervena_karta.png';
-        else if (typ === 'cervena_zlute') imgSrc = '/media/stranka/zluta_a_cervena.png';
+        if (typ === 'zluta') imgSrc = "{% static 'img/zluta_karta.png' %}";
+        else if (typ === 'cervena') imgSrc = "{% static 'img/cervena_karta.png' %}";
+        else if (typ === 'cervena_zlute') imgSrc = "{% static 'img/zluta_a_cervena.png' %}";
 
         displayDiv.innerHTML = `
-            <span class="text-gray-500 flex items-center gap-1">
-                ${imgSrc ? `<img src="${imgSrc}" class="w-4 h-6" alt="${typ}">` : ''}
-                <span class="font-semibold text-black">${minuta}’</span>
+            <span class="text-gray-500 flex items-center gap-1 text-xs md:text-sm break-words">
+                ${imgSrc ? `<img src="${imgSrc}" class="w-3 h-5 md:w-4 md:h-6 flex-shrink-0" alt="${typ}">` : ''}
+                <span class="font-semibold text-black">${minuta}'</span>
                 <span class="text-gray-700">${hracSelect.options[hracSelect.selectedIndex].text}</span>
             </span>
-            <button type="button" class="delete-karta text-red-600 text-sm font-semibold hover:scale-110 transition">
+            <button type="button" class="delete-karta text-red-600 text-xs md:text-sm font-semibold hover:scale-110 transition whitespace-nowrap">
                 Smazat
             </button>
             <input type="hidden" name="karta_hrac_${karta_pocet}" value="${hracId}">
@@ -479,6 +529,4 @@
     });
 
 </script>
-
-
-{% endblock %}
+{% endblock js %}

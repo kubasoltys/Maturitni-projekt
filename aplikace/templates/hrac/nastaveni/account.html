@@ -8,33 +8,33 @@
 {% include "page/hrac_navbar.html" %}
 
 <!-- obsah -->
-<div class="flex flex-col items-center justify-center min-h-screen space-y-8 py-10 pt-32">
+<div class="flex flex-col items-center justify-center min-h-screen space-y-6 md:space-y-8 py-6 md:py-10 mt-20 md:mt-28 lg:mt-32 px-4">
 
-    <div class="text-center mb-6">
-        <h1 class="text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2">
+    <div class="text-center mb-4 md:mb-6">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2 break-words">
             Detail účtu
         </h1>
     </div>
 
-    <div class="max-w-3xl w-full mx-auto bg-white p-8 rounded-3xl shadow-xl border border-gray-200 mb-10">
+    <div class="max-w-3xl w-full mx-auto bg-white p-4 md:p-6 lg:p-8 rounded-2xl md:rounded-3xl shadow-xl border border-gray-200 mb-6 md:mb-10">
 
-        <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-6 pb-6 mb-6 border-b border-gray-200">
+        <div class="flex flex-col md:flex-row items-center md:items-start md:space-x-6 pb-4 md:pb-6 mb-4 md:mb-6 border-b border-gray-200">
 
-            <div class="flex-shrink-0 mb-4 md:mb-0">
+            <div class="flex-shrink-0 mb-3 md:mb-0">
                 {% if user.hracprofile.photo %}
                 <img src="{{ user.hracprofile.photo.url }}"
                      alt="Profilová fotka"
-                     class="w-24 h-24 rounded-full object-cover shadow-lg border border-gray-300">
+                     class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-lg border border-gray-300">
                 {% else %}
-                <img src="/media/stranka/default_profile_picture.webp"
+                <img src="{% static 'img/default_profile_picture.webp' %}"
                      alt="Výchozí profilová fotka"
-                     class="w-24 h-24 rounded-full object-cover shadow-lg border border-gray-300">
+                     class="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-lg border border-gray-300">
                 {% endif %}
             </div>
 
             <div class="text-center md:text-left space-y-1">
-                <p class="text-2xl font-bold">
-                <span class="text-gray-800">
+                <p class="text-xl md:text-2xl font-bold">
+                <span class="text-gray-800 break-words">
                     {% if user.hracprofile.first_name and user.hracprofile.last_name %}
                         {{ user.hracprofile.first_name }} {{ user.hracprofile.last_name }}
                     {% elif user.hracprofile.first_name %}
@@ -46,9 +46,9 @@
                     {% endif %}
                 </span>
                 </p>
-                <p class="bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent text-lg font-medium">@{{ user.username }}</p>
+                <p class="bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent text-base md:text-lg font-medium break-all">@{{ user.username }}</p>
 
-                <p class="text-gray-500 text-md">
+                <p class="text-gray-500 text-sm md:text-base break-all">
                     <span class="font-medium text-gray-700">Email:</span>
                     {% if user.email %}
                         {{ user.email }}
@@ -56,7 +56,7 @@
                         Nezadáno
                     {% endif %}
                 </p>
-                <p class="text-gray-700 text-md font-medium">
+                <p class="text-gray-700 text-sm md:text-base font-medium">
                     <span class="font-medium text-gray-500">Pozice:</span>
                     {% if user.hracprofile.pozice %}
                         {{ user.hracprofile.pozice }}
@@ -67,13 +67,13 @@
             </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4 mb-6 md:mb-8">
 
-            <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
-                <p class="text-gray-500 text-sm flex items-center mb-1">
+            <div class="bg-gray-200 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-sm">
+                <p class="text-gray-500 text-xs md:text-sm flex items-center mb-1">
                     <i class="fas fa-user-tie mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Trenér
                 </p>
-                <p class="text-gray-800 font-bold text-lg">
+                <p class="text-gray-800 font-bold text-base md:text-lg break-words">
                     {% if user.hracprofile.trener %}
                     {{ user.hracprofile.trener }}
                     {% else %}
@@ -82,11 +82,11 @@
                 </p>
             </div>
 
-            <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
-                <p class="text-gray-500 text-sm flex items-center mb-1">
+            <div class="bg-gray-200 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-sm">
+                <p class="text-gray-500 text-xs md:text-sm flex items-center mb-1">
                     <i class="fas fa-phone mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Telefonní číslo
                 </p>
-                <p class="text-gray-800 font-bold text-lg">
+                <p class="text-gray-800 font-bold text-base md:text-lg break-all">
                     {% if user.hracprofile.phone %}
                     {{ user.hracprofile.phone }}
                     {% else %}
@@ -95,11 +95,11 @@
                 </p>
             </div>
 
-            <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
-                <p class="text-gray-500 text-sm flex items-center mb-1">
+            <div class="bg-gray-200 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-sm">
+                <p class="text-gray-500 text-xs md:text-sm flex items-center mb-1">
                     <i class="fas fa-birthday-cake mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Datum narození
                 </p>
-                <p class="text-gray-800 font-bold text-lg">
+                <p class="text-gray-800 font-bold text-base md:text-lg">
                     {% if user.hracprofile.birth_date %}
                     {{ user.hracprofile.birth_date|date:"d.m.Y" }}
                     {% else %}
@@ -108,11 +108,11 @@
                 </p>
             </div>
 
-            <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
-                <p class="text-gray-500 text-sm flex items-center mb-1">
+            <div class="bg-gray-200 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-sm">
+                <p class="text-gray-500 text-xs md:text-sm flex items-center mb-1">
                     <i class="fas fa-clock mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Věk
                 </p>
-                <p class="text-gray-800 font-bold text-lg">
+                <p class="text-gray-800 font-bold text-base md:text-lg">
                     {% if user.hracprofile.vek %}
                     {{ user.hracprofile.vek }}
                     {% else %}
@@ -121,11 +121,11 @@
                 </p>
             </div>
 
-            <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
-                <p class="text-gray-500 text-sm flex items-center mb-1">
+            <div class="bg-gray-200 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-sm">
+                <p class="text-gray-500 text-xs md:text-sm flex items-center mb-1">
                     <i class="fas fa-ruler-vertical mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Výška
                 </p>
-                <p class="text-gray-800 font-bold text-lg">
+                <p class="text-gray-800 font-bold text-base md:text-lg">
                     {% if user.hracprofile.height %}
                     {{ user.hracprofile.height }} cm
                     {% else %}
@@ -134,11 +134,11 @@
                 </p>
             </div>
 
-            <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
-                <p class="text-gray-500 text-sm flex items-center mb-1">
+            <div class="bg-gray-200 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-sm">
+                <p class="text-gray-500 text-xs md:text-sm flex items-center mb-1">
                     <i class="fas fa-weight mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Váha
                 </p>
-                <p class="text-gray-800 font-bold text-lg">
+                <p class="text-gray-800 font-bold text-base md:text-lg">
                     {% if user.hracprofile.weight %}
                     {{ user.hracprofile.weight }} kg
                     {% else %}
@@ -147,11 +147,11 @@
                 </p>
             </div>
 
-            <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
-                <p class="text-gray-500 text-sm flex items-center mb-1">
+            <div class="bg-gray-200 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-sm">
+                <p class="text-gray-500 text-xs md:text-sm flex items-center mb-1">
                     <i class="fas fa-tshirt mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Číslo dresu
                 </p>
-                <p class="text-gray-800 font-bold text-lg">
+                <p class="text-gray-800 font-bold text-base md:text-lg">
                     {% if user.hracprofile.cislo_dresu %}
                     {{ user.hracprofile.cislo_dresu }}
                     {% else %}
@@ -160,11 +160,11 @@
                 </p>
             </div>
 
-            <div class="bg-gray-200 rounded-2xl p-4 shadow-sm">
-                <p class="text-gray-500 text-sm flex items-center mb-1">
+            <div class="bg-gray-200 rounded-xl md:rounded-2xl p-3 md:p-4 shadow-sm">
+                <p class="text-gray-500 text-xs md:text-sm flex items-center mb-1">
                     <i class="fas fa-shoe-prints mr-2 text-green-500 bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent"></i> Preferovaná noha
                 </p>
-                <p class="text-gray-800 font-bold text-lg">
+                <p class="text-gray-800 font-bold text-base md:text-lg">
                     {% if user.hracprofile.preferred_foot %}
                     {{ user.hracprofile.preferred_foot }}
                     {% else %}
@@ -174,21 +174,21 @@
             </div>
         </div>
 
-        <div class="text-center pt-4 border-t border-gray-200 text-sm text-gray-600">
-            <p>
+        <div class="text-center pt-3 md:pt-4 border-t border-gray-200 text-xs md:text-sm text-gray-600 space-y-1">
+            <p class="break-words">
                 <i class="fas fa-calendar-alt mr-1"></i> Účet vytvořen:
                 <span class="font-semibold text-gray-800">{{ user.hracprofile.created_at|date:"d.m.Y H:i" }}</span>
             </p>
-            <p class="mt-1">
+            <p class="break-words">
                 <i class="fas fa-history mr-1"></i> Naposledy upraven:
                 <span class="font-semibold text-gray-800">{{ user.hracprofile.updated_at|date:"d.m.Y H:i" }}</span>
             </p>
         </div>
 
-        <div class="mt-6 text-center">
+        <div class="mt-4 md:mt-6 text-center">
             <a href="{% url 'hrac_settings' %}"
-               class="inline-flex items-center justify-center bg-gray-200 text-gray-700 hover:bg-green-400 hover:text-green-900
-                           font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+               class="w-full sm:w-auto inline-flex items-center justify-center bg-gray-200 text-gray-700 hover:bg-green-400 hover:text-green-900
+                           font-semibold py-2.5 md:py-3 px-5 md:px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105 text-sm md:text-base">
                 <i class="fas fa-arrow-left mr-2"></i> Zpět do nastavení
             </a>
         </div>

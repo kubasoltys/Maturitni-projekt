@@ -6,7 +6,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.utils import timezone
 from datetime import datetime, time
-from django.db.models import Q
 from django.utils.timezone import now
 from .forms import LoginForm, TrenerProfileForm, HracProfileForm, TreninkForm, ZapasForm, DohranyZapasForm
 from .models import TrenerProfile, HracProfile, Trenink, DochazkaTreninky, Zapas, DochazkaZapasy, Tym, Gol, Karta
@@ -331,9 +330,26 @@ def trener_dashboard(request):
         if vybrany_tym:
             request.session["selected_tym"] = str(vybrany_tym.id)
         else:
-            hraci = []
-            now = timezone.now()
-            context = {...}
+            context = {
+                'trener': trener,
+                'vybrany_tym': None,
+                'hraci': [],
+                'treninky_data': [],
+                'zapasy': [],
+                'tymy': tymy,
+                'celkove_goly': 0,
+                'vyhry': 0,
+                'prohry': 0,
+                'remizy': 0,
+                'prumer_golu': 0,
+                'posledni_zapasy_data': [],
+                'posledni_zapas_data': None,
+                'posledni_zapas': None,
+                'hraci_stats': [],
+                'hraci_data': [],
+                'vt': None,
+                'vs': None,
+            }
             return render(request, 'trener/dashboard.html', context)
 
     hraci = HracProfile.objects.filter(tym=vybrany_tym).distinct()
@@ -592,8 +608,6 @@ def trener_hraci_view(request):
     hraci = HracProfile.objects.filter(tym=vybrany_tym).select_related("user", "tym")
 
     hraci_data = []
-
-    from .models import Gol
 
     for hrac in hraci:
         goly_count = Gol.objects.filter(
@@ -1944,61 +1958,6 @@ def hrac_dohrane_zapasy(request):
     }
 
     return render(request, 'hrac/zapas/zapas_dohrano.html', context)
-
-
-
-#----------------------------------------------------------------------------------------------
-# trener - detail zapasu
-#----------------------------------------------------------------------------------------------
-@login_required
-def trener_zapas_detail(request, zapas_id):
-    zapas = get_object_or_404(Zapas, id=zapas_id)
-
-    hrac = getattr(request.user, "hracprofile", None)
-    trener = getattr(request.user, "trenerprofile", None)
-
-    vybrany_tym_id = request.session.get("selected_tym")
-    vybrany_tym = None
-
-    if hrac:
-        vybrany_tym = hrac.tym
-    elif trener and vybrany_tym_id:
-        vybrany_tym = trener.tymy.filter(id=vybrany_tym_id).first()
-    elif trener:
-        vybrany_tym = trener.tymy.first()
-
-    if vybrany_tym is None:
-        raise Http404("Nemáte přiřazený tým nebo nevybrali jste tým.")
-
-    if zapas.tym != vybrany_tym:
-        raise Http404("Tento zápas nepatří do vybraného týmu.")
-
-    hraci = HracProfile.objects.filter(tym=vybrany_tym).order_by('user__first_name', 'user__last_name')
-
-    dochazka_dict = {d.hrac.id: d for d in zapas.dochazka.all()}
-
-    dochazka_list = [
-        dochazka_dict.get(
-            hrac.id,
-            SimpleNamespace(hrac=hrac, pritomen=None, poznamka=None)
-        )
-        for hrac in hraci
-    ]
-
-    pocet_hracu = len(dochazka_list)
-    pocet_pritomnych = sum(1 for d in dochazka_list if d.pritomen)
-    procento_pritomnych = round((pocet_pritomnych / pocet_hracu) * 100, 1) if pocet_hracu > 0 else 0.0
-
-    context = {
-        'zapas': zapas,
-        'vybrany_tym': vybrany_tym,
-        'hrac': hrac,
-        'dochazka_list': dochazka_list,
-        'trener': trener,
-        'procento_pritomnych': procento_pritomnych,
-    }
-
-    return render(request, 'trener/zapas/detail.html', context)
 
 
 

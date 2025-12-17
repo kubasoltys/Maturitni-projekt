@@ -8,19 +8,19 @@
 {% include "page/hrac_navbar.html" %}
 
 <!-- zapasy -->
-<div class="flex flex-col items-center min-h-screen py-10 pt-32">
+<div class="flex flex-col items-center min-h-screen py-6 md:py-10 mt-20 md:mt-28 lg:mt-32 px-4">
 
-    <div class="max-w-4xl mx-auto mb-8 text-center">
-        <h1 class="text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2">Odehrané zápasy</h1>
-        <p class="text-gray-600 font-medium">Přehled tvé účasti a výsledků.</p>
+    <div class="max-w-4xl mx-auto mb-6 md:mb-8 text-center">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2 break-words">Odehrané zápasy</h1>
+        <p class="text-sm md:text-base text-gray-600 font-medium">Přehled tvé účasti a výsledků.</p>
     </div>
 
     <!-- ucast -->
-    <div class="w-full max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-6 flex flex-col items-center space-y-4">
-        <p class="text-xl font-semibold text-gray-700">Má účast:</p>
+    <div class="w-full max-w-3xl mx-auto bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 md:p-6 flex flex-col items-center space-y-3 md:space-y-4">
+        <p class="text-lg md:text-xl font-semibold text-gray-700">Má účast:</p>
 
-        <div class="flex space-x-6">
-            <p class="text-4xl font-extrabold drop-shadow-lg">
+        <div class="flex space-x-4 md:space-x-6">
+            <p class="text-3xl md:text-4xl font-extrabold drop-shadow-lg">
                 {% if hrac.dochazka_zapasy > 50 %}
                 <span class="text-green-600">{{ hrac.dochazka_zapasy }}%</span>
                 {% elif hrac.dochazka_zapasy == 50 %}
@@ -31,37 +31,37 @@
             </p>
         </div>
 
-        <div class="grid grid-cols-2 gap-6 text-lg font-medium text-gray-700 pt-4 border-t border-gray-200 w-full">
-            <div class="flex items-center justify-center gap-3 p-3 bg-green-100 rounded-2xl shadow-inner border-2 border-green-400">
-                <i class="fa-solid fa-check-circle text-green-600 text-xl"></i>
-                <p class="text-gray-800">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-6 text-base md:text-lg font-medium text-gray-700 pt-3 md:pt-4 border-t border-gray-200 w-full">
+            <div class="flex items-center justify-center gap-2 md:gap-3 p-2.5 md:p-3 bg-green-100 rounded-2xl shadow-inner border-2 border-green-400">
+                <i class="fa-solid fa-check-circle text-green-600 text-lg md:text-xl"></i>
+                <p class="text-gray-800 text-sm md:text-base">
                     Přítomen: <span class="font-bold text-green-700">{{ hrac.zapasy_pritomen }}</span>
                 </p>
             </div>
 
-            <div class="flex items-center justify-center gap-3 p-3 bg-red-100 rounded-2xl shadow-inner border-2 border-red-400">
-                <i class="fa-solid fa-times-circle text-red-600 text-xl"></i>
-                <p class="text-gray-800">
+            <div class="flex items-center justify-center gap-2 md:gap-3 p-2.5 md:p-3 bg-red-100 rounded-2xl shadow-inner border-2 border-red-400">
+                <i class="fa-solid fa-times-circle text-red-600 text-lg md:text-xl"></i>
+                <p class="text-gray-800 text-sm md:text-base">
                     Nepřítomen: <span class="font-bold text-red-700">{{ hrac.zapasy_nepritomen }}</span>
                 </p>
             </div>
         </div>
     </div>
 
-    <div class="p-8 text-center">
+    <div class="p-4 md:p-8 text-center">
         <a href="{% url 'hrac_zapas' %}"
-           class="inline-flex items-center justify-center bg-white text-gray-700 hover:bg-green-400 hover:text-green-900
-                       font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+           class="w-full sm:w-auto inline-flex items-center justify-center bg-white text-gray-700 hover:bg-green-400 hover:text-green-900
+                       font-semibold py-2.5 md:py-3 px-5 md:px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105 text-sm md:text-base">
             <i class="fas fa-arrow-left mr-2"></i> Zpět na nadcházející zápasy
         </a>
     </div>
 
 
-    <div class="w-full max-w-6xl px-4 space-y-4 bg-white rounded-3xl shadow-xl p-8">
+    <div class="w-full max-w-6xl space-y-3 md:space-y-4 bg-white rounded-2xl md:rounded-3xl shadow-xl p-4 md:p-8">
 
         {% if zapasy_data %}
 
-        <div class="flex flex-col space-y-3">
+        <div class="flex flex-col space-y-2 md:space-y-3">
 
             {% for z in zapasy_data %}
 
@@ -76,22 +76,22 @@
             {% endif %}
             {% endwith %}
 
-            <div class="flex items-center p-3 rounded-3xl shadow-md transition-all duration-300 text-sm bg-gray-200
-                        hover:bg-gray-300 duration-500">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center p-2 md:p-3 rounded-2xl md:rounded-3xl shadow-md transition-all duration-300 text-xs md:text-sm bg-gray-200
+                        hover:bg-gray-300 duration-500 gap-2 sm:gap-0">
 
-                <div class="flex-shrink-0 w-12 text-xs text-gray-600 font-semibold mr-3">
+                <div class="flex-shrink-0 w-full sm:w-12 text-xs text-gray-600 font-semibold sm:mr-3 text-center sm:text-left">
                     {{ z.zapas.datum|date:"d.m" }}
                 </div>
 
-                <div class="flex-grow min-w-0 mr-4">
+                <div class="flex-grow min-w-0 sm:mr-4 w-full sm:w-auto">
                     {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
-                    <div class="flex items-center text-gray-700 gap-2">
+                    <div class="flex items-center text-gray-700 gap-1 md:gap-2">
                         {% if tym.logo.url %}
-                        <img src="{{ tym.logo.url }}" alt="Logo týmu" class="w-5 h-5 object-cover flex-shrink-0">
+                        <img src="{{ tym.logo.url }}" alt="Logo týmu" class="w-4 h-4 md:w-5 md:h-5 object-cover flex-shrink-0">
                         {% else %}
-                        <div class="w-5 h-5 flex-shrink-0"></div>
+                        <div class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0"></div>
                         {% endif %}
-                        <span class="truncate
+                        <span class="truncate text-xs md:text-sm
                                     {% if z.vysledek_tymu > z.vysledek_soupere %}
                                         font-bold text-gray-800
                                     {% else %}
@@ -101,9 +101,9 @@
                                 </span>
                     </div>
 
-                    <div class="flex items-center text-gray-700 gap-2">
-                        <div class="w-5 h-5 flex-shrink-0"></div>
-                        <span class="truncate
+                    <div class="flex items-center text-gray-700 gap-1 md:gap-2">
+                        <div class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0"></div>
+                        <span class="truncate text-xs md:text-sm
                                     {% if z.vysledek_tymu < z.vysledek_soupere %}
                                         font-bold text-gray-800
                                     {% else %}
@@ -115,9 +115,9 @@
 
                     {% else %}
 
-                    <div class="flex items-center text-gray-700 gap-2">
-                        <div class="w-5 h-5 flex-shrink-0"></div>
-                        <span class="truncate
+                    <div class="flex items-center text-gray-700 gap-1 md:gap-2">
+                        <div class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0"></div>
+                        <span class="truncate text-xs md:text-sm
                                     {% if z.vysledek_tymu < z.vysledek_soupere %}
                                         font-bold text-gray-800
                                     {% else %}
@@ -127,13 +127,13 @@
                                 </span>
                     </div>
 
-                    <div class="flex items-center text-gray-700 gap-2">
+                    <div class="flex items-center text-gray-700 gap-1 md:gap-2">
                         {% if tym.logo.url %}
-                        <img src="{{ tym.logo.url }}" alt="Logo týmu" class="w-5 h-5 object-cover flex-shrink-0">
+                        <img src="{{ tym.logo.url }}" alt="Logo týmu" class="w-4 h-4 md:w-5 md:h-5 object-cover flex-shrink-0">
                         {% else %}
-                        <div class="w-5 h-5 flex-shrink-0"></div>
+                        <div class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0"></div>
                         {% endif %}
-                        <span class="truncate
+                        <span class="truncate text-xs md:text-sm
                                     {% if z.vysledek_tymu > z.vysledek_soupere %}
                                         font-bold text-gray-800
                                     {% else %}
@@ -145,7 +145,7 @@
                     {% endif %}
                 </div>
 
-                <div class="flex items-center flex-shrink-0 mr-4">
+                <div class="flex items-center flex-shrink-0 sm:mr-2 md:mr-4 w-full sm:w-auto justify-start sm:justify-end">
                     {% if not z.pritomen %}
                     <span class="text-xs font-medium text-gray-700 py-1 px-2 flex-shrink-0 whitespace-nowrap font-semibold">
                             Nezúčastnil ses
@@ -155,11 +155,11 @@
                     {# GÓLY #}
                     {% if z.goly_hrace %}
                     {% with gol_count=z.goly_hrace|length %}
-                    <div class="relative z-10 bg-gray-200 border border-gray-400 w-7 h-7 rounded-lg shadow-sm flex items-center justify-center p-1"
+                    <div class="relative z-10 bg-gray-200 border border-gray-400 w-6 h-6 md:w-7 md:h-7 rounded-lg shadow-sm flex items-center justify-center p-0.5 md:p-1"
                          title="{{ gol_count }} gólů v zápase">
-                        <span class="text-base text-gray-800">⚽︎</span>
+                        <span class="text-sm md:text-base text-gray-800">⚽︎</span>
                         {% if gol_count > 1 %}
-                        <span class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center shadow">
+                        <span class="absolute -top-1 -right-1 md:-top-1.5 md:-right-1.5 bg-red-500 text-white text-xs font-bold w-3 h-3 md:w-4 md:h-4 rounded-full flex items-center justify-center shadow">
                                         {{ gol_count }}
                                     </span>
                         {% endif %}
@@ -170,11 +170,11 @@
                     {# ASISTENCE #}
                     {% if z.asistence_hrace %}
                     {% with asist_count=z.asistence_hrace|length %}
-                    <div class="relative -ml-2 bg-gray-200 border border-gray-400 w-7 h-7 rounded-lg shadow-sm flex items-center justify-center p-1"
+                    <div class="relative -ml-1.5 md:-ml-2 bg-gray-200 border border-gray-400 w-6 h-6 md:w-7 md:h-7 rounded-lg shadow-sm flex items-center justify-center p-0.5 md:p-1"
                          title="{{ asist_count }} asistencí v zápase">
-                        <span class="text-base text-gray-800 font-semibold">A</span>
+                        <span class="text-sm md:text-base text-gray-800 font-semibold">A</span>
                         {% if asist_count > 1 %}
-                        <span class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center shadow">
+                        <span class="absolute -top-1 -right-1 md:-top-1.5 md:-right-1.5 bg-red-500 text-white text-xs font-bold w-3 h-3 md:w-4 md:h-4 rounded-full flex items-center justify-center shadow">
                                         {{ asist_count }}
                                     </span>
                         {% endif %}
@@ -184,14 +184,14 @@
 
                     {# KARTY #}
                     {% for k in z.karty_hrace %}
-                    <div class="relative -ml-2 w-7 h-7 rounded-lg shadow-sm flex items-center justify-center p-1 bg-gray-200 border border-gray-400"
+                    <div class="relative -ml-1.5 md:-ml-2 w-6 h-6 md:w-7 md:h-7 rounded-lg shadow-sm flex items-center justify-center p-0.5 md:p-1 bg-gray-200 border border-gray-400"
                          title="Karta ({{ k.minuta }}')">
                         {% if k.typ|lower == 'zluta' %}
-                        <img src="/media/stranka/zluta_karta.png" alt="Žlutá" class="w-3 h-5">
+                        <img src="{% static 'img/zluta_karta.png' %}" alt="Žlutá" class="w-2 h-4 md:w-3 md:h-5">
                         {% elif k.typ|lower == 'cervena' %}
-                        <img src="/media/stranka/cervena_karta.png" alt="Červená" class="w-3 h-5">
+                        <img src="{% static 'img/cervena_karta.png' %}" alt="Červená" class="w-2 h-4 md:w-3 md:h-5">
                         {% else %}
-                        <img src="/media/stranka/zluta_a_cervena.png" alt="Červená ze žlutých" class="w-3 h-5">
+                        <img src="{% static 'img/zluta_a_cervena.png' %}" alt="Červená ze žlutých" class="w-2 h-4 md:w-3 md:h-5">
                         {% endif %}
                     </div>
                     {% endfor %}
@@ -199,39 +199,41 @@
                     {% endif %}
                 </div>
 
-                <div class="flex-shrink-0 w-10 text-right font-bold mr-3">
-                    {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
-                    <p class="text-gray-800">{{ vt }}</p>
-                    <p class="text-gray-800">{{ vs }}</p>
-                    {% else %}
-                    <p class="text-gray-800">{{ vs }}</p>
-                    <p class="text-gray-800">{{ vt }}</p>
-                    {% endif %}
-                </div>
+                <div class="flex items-center gap-2 sm:gap-0 w-full sm:w-auto justify-between sm:justify-end">
+                    <div class="flex-shrink-0 w-8 sm:w-10 text-right font-bold text-sm md:text-base sm:mr-3">
+                        {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
+                        <p class="text-gray-800">{{ vt }}</p>
+                        <p class="text-gray-800">{{ vs }}</p>
+                        {% else %}
+                        <p class="text-gray-800">{{ vs }}</p>
+                        <p class="text-gray-800">{{ vt }}</p>
+                        {% endif %}
+                    </div>
 
-                <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white font-semibold text-xs ml-auto
-                            {% if vt > vs %}
-                                bg-green-500
-                            {% elif vt < vs %}
-                                bg-red-500
-                            {% else %}
-                                bg-yellow-500
-                            {% endif %}">
-                    {% if vt > vs %}
-                    V
-                    {% elif vt < vs %}
-                    P
-                    {% else %}
-                    R
-                    {% endif %}
-                </div>
+                    <div class="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg flex items-center justify-center text-white font-semibold text-xs
+                                {% if vt > vs %}
+                                    bg-green-500
+                                {% elif vt < vs %}
+                                    bg-red-500
+                                {% else %}
+                                    bg-yellow-500
+                                {% endif %}">
+                        {% if vt > vs %}
+                        V
+                        {% elif vt < vs %}
+                        P
+                        {% else %}
+                        R
+                        {% endif %}
+                    </div>
 
-                <div class="flex-shrink-0 ml-4">
-                    <button onclick="openMatchModal('matchModal_{{ z.zapas.id }}')"
-                            class="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-white text-xs font-semibold rounded-2xl shadow-md hover:scale-105 transition duration-300 flex items-center gap-1 whitespace-nowrap">
-                        <i class="fa-solid fa-eye"></i>
-                        Detail
-                    </button>
+                    <div class="flex-shrink-0 sm:ml-4">
+                        <button onclick="openMatchModal('matchModal_{{ z.zapas.id }}')"
+                                class="px-2 md:px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-white text-xs font-semibold rounded-full sm:rounded-2xl shadow-md hover:scale-105 transition duration-300 flex items-center gap-1 whitespace-nowrap">
+                            <i class="fa-solid fa-eye"></i>
+                            Detail
+                        </button>
+                    </div>
                 </div>
 
             </div>
@@ -241,7 +243,7 @@
         </div>
 
         {% else %}
-        <p class="text-gray-400 text-center py-6">Žádné odehrané zápasy.</p>
+        <p class="text-gray-400 text-center py-4 md:py-6 text-sm md:text-base">Žádné odehrané zápasy.</p>
         {% endif %}
 
     </div>
@@ -252,51 +254,51 @@
 {% for data in zapasy_data %}
 <div id="matchModal_{{ data.zapas.id }}"
      class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm
-                        flex items-center justify-center hidden z-50">
+                        flex items-center justify-center hidden z-50 p-4">
 
-    <div class="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-4xl relative">
+    <div class="bg-white rounded-2xl md:rounded-3xl shadow-2xl p-4 md:p-6 w-full max-w-xs sm:max-w-md md:max-w-2xl lg:max-w-4xl relative max-h-[90vh] overflow-y-auto">
 
         <button onclick="closeMatchModal('matchModal_{{ data.zapas.id }}')"
-                class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">
+                class="absolute top-2 md:top-3 right-2 md:right-3 text-gray-500 hover:text-gray-700 text-xl md:text-2xl">
             &times;
         </button>
 
         {% with vt=data.vysledek_tymu vs=data.vysledek_soupere %}
-        <div class="rounded-3xl p-6 relative">
+        <div class="rounded-2xl md:rounded-3xl p-4 md:p-6 relative">
 
             {% if vt is not None and vs is not None %}
             {% if vt > vs %}
-            <p class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1
-                          bg-gradient-to-r from-green-500 to-emerald-700 text-white text-sm font-semibold
-                          rounded-xl shadow-lg">Výhra!</p>
+            <p class="absolute -top-2.5 md:-top-3 left-1/2 -translate-x-1/2 px-3 md:px-4 py-0.5 md:py-1
+                          bg-gradient-to-r from-green-500 to-emerald-700 text-white text-xs md:text-sm font-semibold
+                          rounded-xl shadow-lg whitespace-nowrap">Výhra!</p>
             {% elif vt < vs %}
-            <p class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1
-                          bg-gradient-to-r from-red-500 to-rose-700 text-white text-sm font-semibold
-                          rounded-xl shadow-lg">Prohra!</p>
+            <p class="absolute -top-2.5 md:-top-3 left-1/2 -translate-x-1/2 px-3 md:px-4 py-0.5 md:py-1
+                          bg-gradient-to-r from-red-500 to-rose-700 text-white text-xs md:text-sm font-semibold
+                          rounded-xl shadow-lg whitespace-nowrap">Prohra!</p>
             {% else %}
-            <p class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1
-                          bg-gradient-to-r from-amber-400 to-amber-600 text-white text-sm font-semibold
-                          rounded-xl shadow-lg">Remíza!</p>
+            <p class="absolute -top-2.5 md:-top-3 left-1/2 -translate-x-1/2 px-3 md:px-4 py-0.5 md:py-1
+                          bg-gradient-to-r from-amber-400 to-amber-600 text-white text-xs md:text-sm font-semibold
+                          rounded-xl shadow-lg whitespace-nowrap">Remíza!</p>
             {% endif %}
             {% else %}
-            <p class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1
-                          bg-gradient-to-r from-gray-500 to-gray-700 text-white text-sm font-semibold
-                          rounded-xl shadow-lg">Trenér ještě nezapsal výsledky</p>
+            <p class="absolute -top-2.5 md:-top-3 left-1/2 -translate-x-1/2 px-3 md:px-4 py-0.5 md:py-1
+                          bg-gradient-to-r from-gray-500 to-gray-700 text-white text-xs md:text-sm font-semibold
+                          rounded-xl shadow-lg whitespace-nowrap">Trenér ještě nezapsal výsledky</p>
             {% endif %}
 
-            <div class="grid grid-cols-3 text-center items-center gap-x-2 mt-4">
+            <div class="grid grid-cols-3 text-center items-center gap-x-2 mt-3 md:mt-4">
                 {% if data.zapas.domaci_hoste|lower == "domácí"|lower %}
-                <p class="text-2xl font-bold text-gray-800 drop-shadow-lg">{{ tym.nazev }}</p>
-                <p class="text-lg font-semibold">vs</p>
-                <p class="text-2xl font-bold text-gray-800 drop-shadow-lg">{{ data.zapas.souper }}</p>
+                <p class="text-base md:text-xl lg:text-2xl font-bold text-gray-800 drop-shadow-lg break-words">{{ tym.nazev }}</p>
+                <p class="text-sm md:text-base lg:text-lg font-semibold">vs</p>
+                <p class="text-base md:text-xl lg:text-2xl font-bold text-gray-800 drop-shadow-lg break-words">{{ data.zapas.souper }}</p>
                 {% else %}
-                <p class="text-2xl font-bold text-gray-800 drop-shadow-lg">{{ data.zapas.souper }}</p>
-                <p class="text-lg font-semibold">vs</p>
-                <p class="text-2xl font-bold text-gray-800 drop-shadow-lg">{{ tym.nazev }}</p>
+                <p class="text-base md:text-xl lg:text-2xl font-bold text-gray-800 drop-shadow-lg break-words">{{ data.zapas.souper }}</p>
+                <p class="text-sm md:text-base lg:text-lg font-semibold">vs</p>
+                <p class="text-base md:text-xl lg:text-2xl font-bold text-gray-800 drop-shadow-lg break-words">{{ tym.nazev }}</p>
                 {% endif %}
             </div>
 
-            <div class="grid grid-cols-3 text-center items-center gap-x-2 mt-2 text-3xl font-bold text-gray-700 drop-shadow-lg">
+            <div class="grid grid-cols-3 text-center items-center gap-x-2 mt-2 text-2xl md:text-3xl font-bold text-gray-700 drop-shadow-lg">
                 {% if vt is not None and vs is not None %}
                 {% if data.zapas.domaci_hoste == "Domácí" %}
                 <p>{{ vt }}</p>
@@ -311,9 +313,9 @@
             </div>
 
             {% if data.goly %}
-            <div class="flex justify-between pt-8 text font-semibold text-gray-800 space-y-1 drop-shadow-lg">
+            <div class="flex justify-between pt-4 md:pt-8 text-sm md:text-base font-semibold text-gray-800 space-y-1 drop-shadow-lg">
 
-                <div class="w-1/2 text-left">
+                <div class="w-1/2 text-left pr-2">
                     {% for gol in data.goly %}
                     {% if data.zapas.domaci_hoste == "Domácí" %}
                     {% if gol.hrac.tym.id == tym.id %}
@@ -431,9 +433,9 @@
             {% endif %}
 
             {% if data.karty %}
-            <div class="flex justify-between pt-2 text font-semibold text-gray-800 space-y-1 drop-shadow-lg">
+            <div class="flex justify-between pt-2 text-sm md:text-base font-semibold text-gray-800 space-y-1 drop-shadow-lg">
 
-                <div class="w-1/2 text-left">
+                <div class="w-1/2 text-left pr-2">
 
                     {% if data.zapas.domaci_hoste == "Domácí" %}
                     {% if data.karty %}
@@ -444,11 +446,11 @@
                     {% if karta.hrac.tym.id == tym.id %}
                     <p class="flex items-center gap-2 mb-1">
                         {% if karta.typ == "zluta" %}
-                        <img src="/media/stranka/zluta_karta.png" alt="Žlutá" class="w-3 h-5">
+                        <img src="{% static 'img/zluta_karta.png' %}" alt="Žlutá" class="w-3 h-5">
                         {% elif karta.typ == "cervena" %}
-                        <img src="/media/stranka/cervena_karta.png" alt="Červená" class="w-3 h-5">
+                        <img src="{% static 'img/cervena_karta.png' %}" alt="Červená" class="w-3 h-5">
                         {% else %}
-                        <img src="/media/stranka/zluta_a_cervena.png" alt="Červená ze žlutých" class="w-3 h-5">
+                        <img src="{% static 'img/zluta_a_cervena.png' %}" alt="Červená ze žlutých" class="w-3 h-5">
                         {% endif %}
 
                         <span class="font-extrabold">{{ karta.minuta }}’</span>
@@ -468,7 +470,7 @@
                     {% endif %}
                 </div>
 
-                <div class="w-1/2 text-right">
+                <div class="w-1/2 text-right pl-2">
 
                     {% if data.zapas.domaci_hoste != "Domácí" %}
                     {% if data.karty %}
@@ -491,11 +493,11 @@
                         <span class="font-extrabold">{{ karta.minuta }}’</span>
 
                         {% if karta.typ == "zluta" %}
-                        <img src="/media/stranka/zluta_karta.png" alt="Žlutá" class="w-3 h-5">
+                        <img src="{% static 'img/zluta_karta.png' %}" alt="Žlutá" class="w-3 h-5">
                         {% elif karta.typ == "cervena" %}
-                        <img src="/media/stranka/cervena_karta.png" alt="Červená" class="w-3 h-5">
+                        <img src="{% static 'img/cervena_karta.png' %}" alt="Červená" class="w-3 h-5">
                         {% else %}
-                        <img src="/media/stranka/zluta_a_cervena.png" alt="Červená ze žlutých" class="w-3 h-5">
+                        <img src="{% static 'img/zluta_a_cervena.png' %}" alt="Červená ze žlutých" class="w-3 h-5">
                         {% endif %}
                     </p>
                     {% endif %}
@@ -506,11 +508,11 @@
             </div>
             {% endif %}
 
-            <p class="text-gray-800 mb-2 font-semibold text-center">
+            <p class="text-gray-800 mb-2 font-semibold text-center text-sm md:text-base break-words">
                 {{ data.zapas.misto|default:"-" }}
             </p>
 
-            <div class="text-center space-y-1 text-gray-600 font-medium text-sm">
+            <div class="text-center space-y-1 text-gray-600 font-medium text-xs md:text-sm">
                 <p>{{ data.zapas.datum|date:"l, d.m.Y" }}</p>
                 <p>{{ data.zapas.cas|time:"H:i" }}</p>
             </div>
@@ -522,7 +524,17 @@
 </div>
 {% endfor %}
 
+{% endblock %}
+
+
+{% block js %}
 <script>
+    document.addEventListener("click", function (e) {
+        if (e.target.classList.contains("fixed")) {
+            e.target.classList.add("hidden");
+        }
+    });
+    
     // okno detailu zapasu
     function openMatchModal(id) {
         document.getElementById(id).classList.remove('hidden');
@@ -531,12 +543,5 @@
     function closeMatchModal(id) {
         document.getElementById(id).classList.add('hidden');
     }
-
-    document.addEventListener("click", function (e) {
-        if (e.target.classList.contains("fixed")) {
-            e.target.classList.add("hidden");
-        }
-    });
 </script>
-
-{% endblock %}
+{% endblock js %}

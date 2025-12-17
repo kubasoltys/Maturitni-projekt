@@ -20,6 +20,14 @@
     <!-- footer -->
     {% include 'page/footer.html' %}
 
+    <!-- css -->
+    {% block css %}
+    {% endblock css %}
+
+    <!-- js -->
+    {% block js %}
+    {% endblock js %}
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

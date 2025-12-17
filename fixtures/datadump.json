@@ -954,14 +954,6 @@
   }
 },
 {
-  "model": "sessions.session",
-  "pk": "eeszu1kvup99ih78hk3rd64wkhc2gltb",
-  "fields": {
-    "session_data": ".eJxVjEEOwiAQRe_C2hAYpkBduvcMZJgBWzVtUtqV8e7apAvd_vfef6lE2zqkrZUljaLOyqrT75aJH2Xagdxpus2a52ldxqx3RR-06ess5Xk53L-DgdrwrQuizZk8OCMIEJm5hxyMEwdeQjRoPWIEj7WrPRpyUIm64ECYDVb1_gDGAjcp:1vVWCD:yuQkfsgHz814yClSqrRQGw71s0UGwnevOxqa_LSXVCc",
-    "expire_date": "2025-12-30T14:38:37.630Z"
-  }
-},
-{
   "model": "aplikace.user",
   "pk": 1,
   "fields": {
@@ -986,7 +978,7 @@
   "pk": 2,
   "fields": {
     "password": "pbkdf2_sha256$1000000$XreQ6pS2MP61ju8dGi5YrM$jluoJeXBNebRzpi7eyNBDkDdrm9MUnWDC3LvedoFsAc=",
-    "last_login": "2025-12-16T14:27:54.931Z",
+    "last_login": "2025-12-17T22:25:53.439Z",
     "is_superuser": false,
     "username": "trener1",
     "first_name": "",
@@ -1006,7 +998,7 @@
   "pk": 4,
   "fields": {
     "password": "pbkdf2_sha256$1000000$xqpg5oqf8ID83Nzv2qrIUE$UoViHaQwwwCayltK+XOJETF6n3CpDysSWHk7an4HHvo=",
-    "last_login": "2025-12-16T09:04:22.135Z",
+    "last_login": "2025-12-17T20:12:12.141Z",
     "is_superuser": false,
     "username": "hrac1",
     "first_name": "",

@@ -8,35 +8,36 @@
 {% include "page/trener_navbar.html" %}
 
 
-<div class="flex flex-col items-center min-h-screen py-10 pt-32">
+<!-- obsah -->
+<div class="flex flex-col items-center min-h-screen py-6 md:py-10 pt-20 md:pt-32 px-4">
 
-    <div class="text-center">
-        <h1 class="text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2">
+    <div class="text-center mb-4 md:mb-0">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-800 drop-shadow-lg mb-2">
             Nadcházející tréninky
         </h1>
-        <p class="text-gray-600 font-medium">Plánuj a spravuj své tréninky.</p>
+        <p class="text-sm md:text-base text-gray-600 font-medium">Plánuj a spravuj své tréninky.</p>
     </div>
 
-    <div class="p-12 text-center">
+    <div class="p-4 md:p-8 lg:p-12 text-center">
         <a href="{% url 'trener_dashboard' %}"
            class="inline-flex items-center justify-center bg-white text-gray-700 hover:bg-green-400 hover:text-green-900
-                           font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+                           font-semibold py-2 md:py-3 px-4 md:px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105 text-sm md:text-base">
             <i class="fas fa-arrow-left mr-2"></i> Zpět na dashboard
         </a>
     </div>
 
-    <div class="w-full max-w-6xl px-4 space-y-10">
+    <div class="w-full max-w-6xl px-4 space-y-6 md:space-y-8 lg:space-y-10">
 
         <!-- tlacitka -->
-        <div class="flex flex-col md:flex-row justify-center gap-6 mb-8">
+        <div class="flex flex-col sm:flex-row justify-center gap-3 md:gap-6 mb-6 md:mb-8">
             <a href="{% url 'add_trenink' %}"
-               class="flex-1 py-3 text-white font-semibold text-center rounded-2xl shadow-lg
+               class="flex-1 py-2.5 md:py-3 text-white font-semibold text-center rounded-full md:rounded-2xl shadow-lg text-sm md:text-base
                       bg-gradient-to-r from-green-500 to-teal-600 hover:from-green-600 hover:to-teal-700 transition duration-300 hover:scale-105">
                 + Naplánovat trénink
             </a>
 
             <a href="{% url 'trener_trenink_historie' %}"
-               class="flex-1 py-3 text-white font-semibold text-center rounded-2xl shadow-lg
+               class="flex-1 py-2.5 md:py-3 text-white font-semibold text-center rounded-full md:rounded-2xl shadow-lg text-sm md:text-base
                       bg-gray-700 hover:bg-gray-600 transition duration-300 hover:scale-105">
                 Historie tréninků
             </a>
@@ -45,31 +46,31 @@
 
         <!-- bloky -->
         {% for data in treninky_data %}
-        <div class="flex items-start gap-6">
+        <div class="flex items-start gap-3 md:gap-6">
 
             <!-- data -->
-            <div class="flex flex-col items-center">
-                <div class="bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold rounded-2xl px-5 py-3 shadow-lg">
-                    <span class="text-xl">{{ data.trenink.datum|date:"d.m." }}</span>
+            <div class="flex flex-col items-center flex-shrink-0">
+                <div class="bg-gradient-to-r from-green-500 to-teal-600 text-white font-bold rounded-2xl px-3 md:px-5 py-2 md:py-3 shadow-lg">
+                    <span class="text-base md:text-xl">{{ data.trenink.datum|date:"d.m." }}</span>
                     <span class="block text-xs opacity-80 text-center">{{ data.trenink.datum|date:"Y" }}</span>
                 </div>
 
                 {% if not forloop.last %}
-                <div class="w-1 h-24 bg-green-300 rounded-full mt-2"></div>
+                <div class="w-0.5 md:w-1 h-16 md:h-24 bg-green-300 rounded-full mt-2"></div>
                 {% endif %}
             </div>
 
 
-            <div class="flex-1 bg-white rounded-3xl shadow-xl p-6 hover:shadow-2xl transition">
+            <div class="flex-1 bg-white rounded-3xl shadow-xl p-4 md:p-6 hover:shadow-2xl transition">
 
-                <div class="flex flex-col md:flex-row md:justify-between md:items-center mb-4">
-                    <p class="text-2xl font-extrabold text-gray-800">
+                <div class="flex flex-col space-y-2 md:space-y-0 md:flex-row md:justify-between md:items-center mb-4">
+                    <p class="text-xl md:text-2xl font-extrabold text-gray-800 break-words">
                         {{ data.trenink.typ }}
                     </p>
 
-                    <div class="text-gray-700 font-medium text-center md:text-right space-y-1">
-                        <p class="text-lg">{{ data.trenink.datum|date:"l, d.m.Y" }}</p>
-                        <p class="text-lg">
+                    <div class="text-gray-700 font-medium text-left md:text-right space-y-1">
+                        <p class="text-sm md:text-base lg:text-lg">{{ data.trenink.datum|date:"l, d.m.Y" }}</p>
+                        <p class="text-sm md:text-base lg:text-lg">
                             <i class="fa-regular fa-clock"></i>
                             {{ data.trenink.cas|time:"H:i" }}
                         </p>
@@ -77,33 +78,33 @@
                 </div>
 
                 {% if data.trenink.poznamka %}
-                <p class="text-gray-600 italic mb-4 border-l-4 border-green-400 pl-3">
+                <p class="text-sm md:text-base text-gray-600 italic mb-4 border-l-4 border-green-400 pl-3 break-words">
                     {{ data.trenink.poznamka }}
                 </p>
                 {% endif %}
 
                 <!-- tlacitka -->
-                <div class="flex flex-wrap justify-end gap-3 mt-6">
+                <div class="flex flex-col sm:flex-row sm:flex-wrap justify-end gap-2 md:gap-3 mt-4 md:mt-6">
 
                     <!-- ucast -->
-                    <div>
+                    <div class="w-full sm:w-auto">
                         <button onclick="openDochazkaTreninkModal({{ data.trenink.id }})"
-                                class="px-5 py-2.5 mb-8 bg-gray-700 hover:bg-gray-600 text-white font-semibold
-                                       rounded-2xl shadow-md hover:shadow-lg hover:scale-105
-                                       transition flex items-center gap-2 duration-300">
+                                class="w-full sm:w-auto px-4 md:px-5 py-2 md:py-2.5 mb-4 sm:mb-8 bg-gray-700 hover:bg-gray-600 text-white font-semibold
+                                       rounded-full sm:rounded-2xl shadow-md hover:shadow-lg hover:scale-105
+                                       transition flex items-center justify-center gap-2 duration-300 text-sm md:text-base">
                             <i class="fa-solid fa-user-check"></i>
                              Účast hráčů
                         </button>
 
                         <!-- okno pro dochazku -->
                         <div id="dochazkaTreninkModal-{{ data.trenink.id }}"
-                             class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden z-50">
-                            <div class="bg-white rounded-3xl shadow-2xl p-6 w-full max-w-3xl relative">
+                             class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center hidden z-50 p-4">
+                            <div class="bg-white rounded-3xl shadow-2xl p-4 md:p-6 w-full max-w-3xl relative max-h-[90vh] overflow-y-auto">
 
-                                <h2 class="text-2xl font-bold text-gray-700 mb-6 text-center">Účast na tréninku</h2>
+                                <h2 class="text-xl md:text-2xl font-bold text-gray-700 mb-4 md:mb-6 text-center">Účast na tréninku</h2>
 
                                 <button onclick="closeDochazkaTreninkModal({{ data.trenink.id }})"
-                                        class="absolute top-3 right-3 text-gray-500 hover:text-gray-700 text-2xl">
+                                        class="absolute top-2 md:top-3 right-2 md:right-3 text-gray-500 hover:text-gray-700 text-2xl md:text-3xl">
                                     &times;
                                 </button>
 
@@ -111,17 +112,17 @@
 
                                     {% if data.trenink_dochazka %}
                                     <div class="overflow-x-auto rounded-2xl border border-gray-200 shadow-inner mt-4">
-                                        <table class="w-full text-left rounded-xl divide-y divide-gray-300">
+                                        <table class="w-full text-left rounded-xl divide-y divide-gray-300 min-w-[250px]">
                                             <thead class="bg-gray-300 text-gray-700">
                                             <tr>
-                                                <th class="py-2 px-3 text-base md:text-lg">Hráč</th>
-                                                <th class="py-2 px-3 text-base md:text-lg">Zúčastní se</th>
+                                                <th class="py-2 px-2 md:px-3 text-sm md:text-base lg:text-lg">Hráč</th>
+                                                <th class="py-2 px-2 md:px-3 text-sm md:text-base lg:text-lg">Zúčastní se</th>
                                             </tr>
                                             </thead>
                                             <tbody>
                                             {% for dochazka in data.dochazka_list %}
                                             <tr class="bg-gray-200 hover:bg-gray-100 transition-colors">
-                                                <td class="py-1 px-3 text-sm md:text-base">
+                                                <td class="py-1 px-2 md:px-3 text-xs md:text-sm lg:text-base break-words">
                                                     {% if dochazka.hrac.first_name and dochazka.hrac.last_name %}
                                                     {{ dochazka.hrac.first_name }} {{ dochazka.hrac.last_name }}
                                                     {% elif dochazka.hrac.first_name %}
@@ -132,7 +133,7 @@
                                                     (bez jména)
                                                     {% endif %}
                                                 </td>
-                                                <td class="py-1 px-3 text-sm md:text-base">
+                                                <td class="py-1 px-2 md:px-3 text-xs md:text-sm lg:text-base whitespace-nowrap">
                                                     {% if dochazka.pritomen == True %}
                                                     <span class="text-green-500 font-semibold">Ano</span>
                                                     {% elif dochazka.pritomen == False %}
@@ -147,8 +148,8 @@
                                         </table>
                                     </div>
 
-                                    <div class="flex space-x-6 mt-6 justify-center rounded-2xl">
-                                        <p class="text-2xl text-gray-700 font-extrabold p-4">
+                                    <div class="flex space-x-6 mt-4 md:mt-6 justify-center rounded-2xl">
+                                        <p class="text-lg md:text-xl lg:text-2xl text-gray-700 font-extrabold p-2 md:p-4 text-center">
                                             Účast hráčů na tréninku:
                                             {% if data.procento_pritomnych > 50 %}
                                             <span class="text-green-500">{{ data.procento_pritomnych }}%</span>
@@ -160,7 +161,7 @@
                                         </p>
                                     </div>
                                     {% else %}
-                                    <p class="text-center text-gray-400 p-6 text-base">Zatím nemáte přiřazené žádné
+                                    <p class="text-center text-gray-400 p-4 md:p-6 text-sm md:text-base">Zatím nemáte přiřazené žádné
                                         hráče.</p>
                                     {% endif %}
                                 </div>
@@ -169,29 +170,29 @@
                         </div>
                     </div>
 
-                    <form method="get" action="{% url 'edit_trenink' data.trenink.id %}">
+                    <form method="get" action="{% url 'edit_trenink' data.trenink.id %}" class="w-full sm:w-auto">
                         <button type="submit"
-                                class="px-5 py-2.5 bg-gray-700 text-white font-semibold rounded-2xl shadow-md
+                                class="w-full sm:w-auto px-4 md:px-5 py-2 md:py-2.5 bg-gray-700 text-white font-semibold rounded-full sm:rounded-2xl shadow-md
                                            hover:bg-gray-600 hover:shadow-lg hover:scale-105
-                                           transition flex items-center gap-2 duration-300">
+                                           transition flex items-center justify-center gap-2 duration-300 text-sm md:text-base">
                             <i class="fa-solid fa-pencil"></i>
                             Upravit
                         </button>
                     </form>
 
-                    <form method="post" action="{% url 'delete_trenink' data.trenink.id %}">
+                    <form method="post" action="{% url 'delete_trenink' data.trenink.id %}" class="w-full sm:w-auto">
                         {% csrf_token %}
                         <button type="submit"
-                                class="px-5 py-2.5 bg-red-700 text-white font-semibold rounded-2xl shadow-md
+                                class="w-full sm:w-auto px-4 md:px-5 py-2 md:py-2.5 bg-red-700 text-white font-semibold rounded-full sm:rounded-2xl shadow-md
                                            hover:bg-red-600 hover:shadow-lg hover:scale-105
-                                           transition flex items-center gap-2 duration-300">
+                                           transition flex items-center justify-center gap-2 duration-300 text-sm md:text-base">
                             <i class="fa-solid fa-trash"></i>
                             Smazat
                         </button>
                     </form>
                 </div>
 
-                <p class="text-gray-400 text-xs mt-4">
+                <p class="text-gray-400 text-xs md:text-sm mt-4">
                     Vytvořeno:
                     <span class="font-semibold text-gray-700">
                         {{ data.trenink.created_at|date:"d.m.Y H:i" }}
@@ -202,25 +203,27 @@
         </div>
 
         {% if not forloop.last %}
-        <hr class="border-t-2 border-gray-300 my-6 rounded-full">
+        <hr class="border-t-2 border-gray-300 my-4 md:my-6 rounded-full">
         {% endif %}
         {% empty %}
-        <p class="text-center text-gray-400">Zatím nemáte naplánované žádné tréninky.</p>
+        <p class="text-center text-gray-400 text-sm md:text-base">Zatím nemáte naplánované žádné tréninky.</p>
         {% endfor %}
     </div>
 
-    <div class="mt-10">
+    <div class="mt-6 md:mt-10">
         <a href="{% url 'trener_trenink' %}"
            class="block mt-2 text-center text-gray-700 hover:text-gray-900 font-medium
-                  hover:scale-105 transition">
+                  hover:scale-105 transition text-sm md:text-base">
             Zpět na dashboard
         </a>
     </div>
 
 </div>
 
+{% endblock %}
 
 
+{% block js %}
 <script>
     document.addEventListener("click", function (e) {
         if (e.target.classList.contains("fixed")) {
@@ -237,5 +240,4 @@
         document.getElementById(`dochazkaTreninkModal-${id}`).classList.add("hidden");
     }
 </script>
-
-{% endblock %}
+{% endblock js %}

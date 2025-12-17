@@ -9,105 +9,136 @@
 
 
 <!-- obsah-->
-<div class="pt-4 pb-16 min-h-screen">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+<div class="pt-4 pb-10 md:pb-16 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 md:space-y-16 lg:space-y-20">
 
-        <section class="text-center py-10 lg:py-32">
+        <section class="text-center py-8 md:py-16 lg:py-32">
 
-            <p class="text-lg font-medium text-green-600 mb-4 animate-fadeIn delay-200">
+            <p class="text-base md:text-lg font-medium text-green-600 mb-3 md:mb-4 animate-fadeIn delay-200">
                 PRO FOTBALOVÉ TÝMY A TRENÉRY
             </p>
 
-            <h1 class="text-5xl md:text-8xl font-extrabold text-gray-900 leading-tight drop-shadow-xl animate-fadeIn delay-400">
+            <h1
+                class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-extrabold text-gray-900 leading-tight drop-shadow-xl animate-fadeIn delay-400 px-2 break-words">
                 Zvládněte svůj tým se
                 <span class="bg-gradient-to-r from-green-500 to-teal-600 bg-clip-text text-transparent">
                     SQUADROU
                 </span>
             </h1>
 
-            <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto animate-fadeIn delay-600">
-                Moderní nástroj pro efektivní správu docházky, zápasů, tréninků a statistik. Připojte se a spravujte si svoje fotbalové týmy!
+            <p class="mt-4 md:mt-6 text-base md:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto animate-fadeIn delay-600 px-4">
+                Moderní nástroj pro efektivní správu docházky, zápasů, tréninků a statistik. Připojte se a spravujte si
+                svoje fotbalové týmy!
             </p>
 
-            <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4 animate-fadeIn delay-800">
-                <a href="{% url 'login' %}"
-                   class="inline-flex items-center justify-center text-white text-xl font-semibold px-10 py-4 rounded-full shadow-xl
+            <div class="mt-8 md:mt-10 flex flex-col sm:flex-row justify-center items-center gap-4 animate-fadeIn delay-800 px-4">
+                <a href="{% url 'login' %}" class="w-full sm:w-auto inline-flex items-center justify-center text-white text-lg md:text-xl font-semibold px-8 md:px-10 py-3 md:py-4 rounded-full shadow-xl
                           bg-gradient-to-r from-green-500 to-teal-600 transform transition duration-300
                           hover:from-green-600 hover:to-teal-700 hover:scale-[1.05] drop-shadow-lg">
                     <i class="fa-solid fa-right-to-bracket mr-2"></i> Přihlásit se
                 </a>
             </div>
 
-            <div class="mt-16 relative w-full h-80 bg-white rounded-3xl shadow-2xl overflow-hidden transform rotate-1 transition duration-500 hover:rotate-0 hover:shadow-3xl animate-fadeIn delay-1000">
-                <p class="text-center pt-36 text-gray-500 font-bold text-lg">
+            <div
+                class="mt-12 md:mt-16 relative w-full h-48 md:h-64 lg:h-80 bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden transform rotate-1 transition duration-500 hover:rotate-0 hover:shadow-3xl animate-fadeIn delay-1000">
+                <p class="text-center pt-20 md:pt-28 lg:pt-36 text-gray-500 font-bold text-base md:text-lg">
                     screenshots
                 </p>
             </div>
         </section>
 
 
-        <section class="">
-            <h2 class="text-4xl font-extrabold text-gray-800 text-center mb-12">
+        <section class="px-4">
+            <h2 class="text-3xl md:text-4xl font-extrabold text-gray-800 text-center mb-8 md:mb-12 break-words">
                 Co v aplikaci máte k dispozici?
             </h2>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
 
-                <div class="bg-white p-8 rounded-3xl shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <i class="fa-solid fa-user-check text-4xl text-blue-600 mb-4 drop-shadow-md"></i>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Snadná docházka</h3>
-                    <p class="text-gray-600">Hráči potvrdí účast jediným kliknutím. Trenéři mají přehled v reálném čase.</p>
+                <div class="bg-white p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <i class="fa-solid fa-user-check text-3xl md:text-4xl text-blue-600 mb-3 md:mb-4 drop-shadow-md"></i>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2 md:mb-3">Snadná docházka</h3>
+                    <p class="text-sm md:text-base text-gray-600">Hráči potvrdí účast jediným kliknutím. Trenéři mají přehled v reálném čase.
+                    </p>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <i class="fa-solid fa-calendar-check text-4xl text-purple-600 mb-4 drop-shadow-md"></i>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Plánování tréniků a zápasů</h3>
-                    <p class="text-gray-600">Vytvářejte tréninky a zápasy, které se ihned zobrazí hráčům.</p>
+                <div class="bg-white p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <i class="fa-solid fa-calendar-check text-3xl md:text-4xl text-purple-600 mb-3 md:mb-4 drop-shadow-md"></i>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2 md:mb-3">Plánování tréniků a zápasů</h3>
+                    <p class="text-sm md:text-base text-gray-600">Vytvářejte tréninky a zápasy, které se ihned zobrazí hráčům.</p>
                 </div>
 
-                <div class="bg-white p-8 rounded-3xl shadow-xl transform hover:scale-[1.02] transition duration-300">
-                    <i class="fa-solid fa-chart-line text-4xl text-green-600 mb-4 drop-shadow-md"></i>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-3">Týmové statistiky</h3>
-                    <p class="text-gray-600">Sledujte výhry, prohry, góly a individuální statistiky hráčů na jednom místě.</p>
+                <div class="bg-white p-6 md:p-8 rounded-2xl md:rounded-3xl shadow-xl transform hover:scale-[1.02] transition duration-300">
+                    <i class="fa-solid fa-chart-line text-3xl md:text-4xl text-green-600 mb-3 md:mb-4 drop-shadow-md"></i>
+                    <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-2 md:mb-3">Týmové statistiky</h3>
+                    <p class="text-sm md:text-base text-gray-600">Sledujte výhry, prohry, góly a individuální statistiky hráčů na jednom
+                        místě.</p>
                 </div>
             </div>
         </section>
 
-        <section class="text-center py-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-3xl shadow-2xl">
-            <h2 class="text-4xl font-extrabold text-white mb-4">
+        <section class="text-center py-10 md:py-16 bg-gradient-to-r from-green-500 to-teal-600 rounded-2xl md:rounded-3xl shadow-2xl px-4">
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white mb-3 md:mb-4 break-words">
                 Začněte dnes, je to zdarma!
             </h2>
-            <p class="text-xl text-green-200 mb-8">
+            <p class="text-base md:text-lg lg:text-xl text-green-200 mb-6 md:mb-8 break-words">
                 Chcete-li se přidat, stačí mě kontaktovat.
             </p>
 
-            <a href="{% url 'kontakt' %}"
-               class="inline-block text-gray-800 text-xl font-bold px-12 py-5 rounded-full shadow-2xl
+            <a href="{% url 'kontakt' %}" class="w-full sm:w-auto inline-block text-gray-800 text-lg md:text-xl font-bold px-8 md:px-12 py-4 md:py-5 rounded-full shadow-2xl
                       bg-yellow-400 transform transition duration-300
                       hover:bg-yellow-300 hover:scale-105">
-               <i class="fa-solid fa-comments mr-2"></i> Kontakt
+                <i class="fa-solid fa-comments mr-2"></i> Kontakt
             </a>
         </section>
 
     </div>
 </div>
 
-<style>
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-.animate-fadeIn { animation: fadeIn 1s ease forwards; opacity: 0; }
-.animate-fadeIn.delay-200 { animation-delay: 0.2s; }
-.animate-fadeIn.delay-400 { animation-delay: 0.4s; }
-.animate-fadeIn.delay-600 { animation-delay: 0.6s; }
-.animate-fadeIn.delay-800 { animation-delay: 0.8s; }
-.animate-fadeIn.delay-1000 { animation-delay: 1s; }
-
-/* Custom shadow pro hlubší efekt na vizuálním prvku */
-.shadow-3xl {
-    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
-}
-</style>
-
 {% endblock %}
+
+
+{% block css %}
+<style>
+    @keyframes fadeIn {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .animate-fadeIn {
+        animation: fadeIn 1s ease forwards;
+        opacity: 0;
+    }
+
+    .animate-fadeIn.delay-200 {
+        animation-delay: 0.2s;
+    }
+
+    .animate-fadeIn.delay-400 {
+        animation-delay: 0.4s;
+    }
+
+    .animate-fadeIn.delay-600 {
+        animation-delay: 0.6s;
+    }
+
+    .animate-fadeIn.delay-800 {
+        animation-delay: 0.8s;
+    }
+
+    .animate-fadeIn.delay-1000 {
+        animation-delay: 1s;
+    }
+
+    .shadow-3xl {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+    }
+</style>
+{% endblock css %}

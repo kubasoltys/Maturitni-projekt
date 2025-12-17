@@ -5,18 +5,9 @@
 
         <a href="{% url 'index' %}" class="flex items-center gap-4 hover:scale-105 transition transform duration-300">
 
-            <img src="../../../media/stranka/logo.png"
+            <img src="{% static 'img/squadra_logo.png' %}"
                  alt="Logo aplikace"
-                 class="h-14 w-14 object-contain p-1 drop-shadow-lg transition transform">
-
-            <div class="leading-tight">
-                <p class="text-gray-900 font-extrabold text-xl drop-shadow-lg tracking-wide">
-                    Squadra
-                </p>
-                <p class="text-gray-600 font-semibold text-sm drop-shadow-lg">
-                    Systém pro správu týmů
-                </p>
-            </div>
+                 class="h-40 w-40 object-contain p-1 drop-shadow-lg transition transform">
         </a>
 
         <div class="hidden lg:flex items-center gap-8">
@@ -72,6 +63,7 @@
     </div>
 </nav>
 
+{% block js %}
 <script>
     const menuButton = document.getElementById('menuButton');
     const mobileMenu = document.getElementById('mobileMenu');
@@ -88,3 +80,4 @@
         });
     });
 </script>
+{% endblock js %}

@@ -130,13 +130,6 @@ urlpatterns = [
     # trener - odehrane zapasy
     path('trener/zapasy/odehrane-zapasy/', views.trener_dohrane_zapasy, name='trener_dohrane_zapasy'),
 
-    # trener - detail zapasu
-    path('trener/zapasy/detail/<int:zapas_id>/', views.trener_zapas_detail, name='trener_zapas_detail'),
-
     # hrac - odehrane zapasy
     path('hrac/zapasy/odehrane-zapasy/', views.hrac_dohrane_zapasy, name='hrac_dohrane_zapasy'),
-
 ]
-if settings.DEBUG:
-    urlpatterns += static(settings.STATIC_URL, document_root=BASE_DIR / 'static')
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

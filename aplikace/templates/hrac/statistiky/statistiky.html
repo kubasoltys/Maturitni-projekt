@@ -7,38 +7,38 @@
 <!-- navbar -->
 {% include "page/hrac_navbar.html" %}
 
-<div class="max-w-7xl mx-auto space-y-10 pt-32 pb-12 px-4 lg:px-6">
+<div class="max-w-7xl mx-auto space-y-6 md:space-y-10 mt-20 md:mt-28 lg:mt-32 pb-8 md:pb-12 px-4 md:px-6 lg:px-8">
 
     <div class="text-center">
         <a href="{% url 'hrac_dashboard' %}"
-           class="inline-flex items-center justify-center bg-white text-gray-700 hover:bg-green-400 hover:text-green-900
-                           font-semibold py-3 px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105">
+           class="w-full sm:w-auto inline-flex items-center justify-center bg-white text-gray-700 hover:bg-green-400 hover:text-green-900
+                           font-semibold py-2.5 md:py-3 px-5 md:px-6 rounded-full transition duration-300 shadow-md transform hover:scale-105 text-sm md:text-base">
             <i class="fas fa-arrow-left mr-2"></i> Zpět na dashboard
         </a>
     </div>
 
-    <div class="bg-white p-6 md:p-10 rounded-3xl shadow-2xl flex flex-col md:flex-row items-center space-y-6 md:space-y-0 md:space-x-10 relative">
+    <div class="bg-white p-4 md:p-6 lg:p-10 rounded-2xl md:rounded-3xl shadow-2xl flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-10 relative">
 
         <div class="relative flex-shrink-0">
-            <div class="w-32 h-32 md:w-40 md:h-40 rounded-full overflow-hidden shadow-xl">
+            <div class="w-28 h-28 md:w-32 md:h-32 lg:w-40 lg:h-40 rounded-full overflow-hidden shadow-xl">
                 {% if hrac.photo %}
                 <img src="{{ hrac.photo.url }}" alt="{{ hrac.first_name }} {{ hrac.last_name }}"
                      class="object-cover w-full h-full">
                 {% else %}
-                <img src="{% static 'stranka/user.png' %}" alt="Bez fotky" class="object-cover w-full h-full">
+                <img src="{% static 'img/default_profile_picture.webp' %}" alt="Bez fotky" class="object-cover w-full h-full">
                 {% endif %}
             </div>
 
-            <span class="absolute bottom-0 right-0 bg-rose-500 text-white text-lg font-extrabold px-3 py-1 rounded-full shadow-lg">
+            <span class="absolute bottom-0 right-0 bg-rose-500 text-white text-base md:text-lg font-extrabold px-2 md:px-3 py-0.5 md:py-1 rounded-full shadow-lg">
                 #{{ hrac.cislo_dresu|default:"?" }}
             </span>
         </div>
 
         <div class="text-center md:text-left">
-            <p class="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">
+            <p class="text-xs md:text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">
                 {{ hrac.pozice|default:"Neznámá pozice" }}
             </p>
-            <h1 class="text-4xl md:text-6xl font-extrabold text-gray-800 leading-tight">
+            <h1 class="text-3xl md:text-4xl lg:text-6xl font-extrabold text-gray-800 leading-tight break-words">
                 {% if hrac.first_name and hrac.last_name %}
                 {{ hrac.first_name }} {{ hrac.last_name }}
                 {% elif hrac.first_name %}
@@ -49,54 +49,54 @@
                 Moje statistiky
                 {% endif %}
             </h1>
-            <p class="text-xl text-gray-600 mt-2">
+            <p class="text-base md:text-lg lg:text-xl text-gray-600 mt-2 break-words">
                 <span class="font-semibold text-gray-600">{{ tym.nazev }} {{ tym.kategorie }}</span>
             </p>
         </div>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
 
-        <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-3xl p-6 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
-            <p class="text-sm font-semibold opacity-80 mb-1">Góly a asistence (G/A)</p>
-            <p class="text-5xl font-extrabold">
+        <div class="bg-gradient-to-br from-blue-500 to-purple-600 text-white rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+            <p class="text-xs md:text-sm font-semibold opacity-80 mb-1">Góly a asistence (G/A)</p>
+            <p class="text-4xl md:text-5xl font-extrabold">
                 {{ gol_count|add:asistence_count }}
             </p>
             <p class="text-xs opacity-70 mt-1">{{ gol_count }} Gólů / {{ asistence_count }} Asistencí</p>
         </div>
 
-        <div class="bg-gradient-to-br from-teal-500 to-green-600 text-white rounded-3xl p-6 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
-            <p class="text-sm font-semibold opacity-80 mb-1">Účast - Zápasy</p>
-            <p class="text-5xl font-extrabold">
+        <div class="bg-gradient-to-br from-teal-500 to-green-600 text-white rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+            <p class="text-xs md:text-sm font-semibold opacity-80 mb-1">Účast - Zápasy</p>
+            <p class="text-4xl md:text-5xl font-extrabold">
                 {{ hrac.dochazka_zapasy }}%
             </p>
         </div>
 
-        <div class="bg-gradient-to-br from-orange-400 to-red-500 text-white rounded-3xl p-6 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
-            <p class="text-sm font-semibold opacity-80 mb-1">Účast - Tréninky</p>
-            <p class="text-5xl font-extrabold">
+        <div class="bg-gradient-to-br from-orange-400 to-red-500 text-white rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl transform hover:scale-[1.02] transition-transform duration-300">
+            <p class="text-xs md:text-sm font-semibold opacity-80 mb-1">Účast - Tréninky</p>
+            <p class="text-4xl md:text-5xl font-extrabold">
                 {{ hrac.dochazka_treninky }}%
             </p>
         </div>
 
-        <div class="bg-gradient-to-br from-gray-50 to-gray-300 text-gray-800 rounded-3xl p-6 shadow-xl
+        <div class="bg-gradient-to-br from-gray-50 to-gray-300 text-gray-800 rounded-2xl md:rounded-3xl p-4 md:p-6 shadow-xl
                     transform hover:scale-[1.02] transition-transform duration-300">
-            <p class="text-sm font-semibold opacity-80 mb-1">Karty hráče</p>
+            <p class="text-xs md:text-sm font-semibold opacity-80 mb-1">Karty hráče</p>
 
-            <div class="flex items-center justify-start space-x-6 mt-1">
+            <div class="flex items-center justify-start space-x-4 md:space-x-6 mt-1">
 
-                <div class="flex items-center space-x-2">
-                    <div class="w-12 h-12 flex items-center justify-center">
-                        <img src="/media/stranka/zluta_karta.png" alt="Žlutá karta" class="w-7 h-9 object-contain">
+                <div class="flex items-center space-x-1 md:space-x-2">
+                    <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <img src="{% static 'img/zluta_karta.png' %}" alt="Žlutá karta" class="w-6 h-8 md:w-7 md:h-9 object-contain">
                     </div>
-                    <p class="text-5xl font-extrabold text-yellow-500 leading-none">{{ zlute }}</p>
+                    <p class="text-4xl md:text-5xl font-extrabold text-yellow-500 leading-none">{{ zlute }}</p>
                 </div>
 
-                <div class="flex items-center space-x-2">
-                    <div class="w-12 h-12 flex items-center justify-center">
-                        <img src="/media/stranka/cervena_karta.png" alt="Červená karta" class="w-7 h-9 object-contain">
+                <div class="flex items-center space-x-1 md:space-x-2">
+                    <div class="w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
+                        <img src="{% static 'img/cervena_karta.png' %}" alt="Červená karta" class="w-6 h-8 md:w-7 md:h-9 object-contain">
                     </div>
-                    <p class="text-5xl font-extrabold text-red-500 leading-none">{{ cervene }}</p>
+                    <p class="text-4xl md:text-5xl font-extrabold text-red-500 leading-none">{{ cervene }}</p>
                 </div>
 
             </div>
@@ -104,51 +104,51 @@
 
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
 
-        <div class="lg:col-span-1 bg-white p-6 rounded-3xl shadow-xl space-y-4">
-            <h2 class="text-2xl font-bold text-gray-800 mb-4">Průměrné výkony</h2>
+        <div class="lg:col-span-1 bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-xl space-y-3 md:space-y-4">
+            <h2 class="text-xl md:text-2xl font-bold text-gray-800 mb-3 md:mb-4">Průměrné výkony</h2>
 
-            <div class="p-3 border-l-4 border-blue-500 bg-blue-50 rounded-lg">
-                <p class="text-sm text-gray-600">Průměr gólů na zápas</p>
-                <p class="text-3xl font-extrabold text-blue-700">{{ prumer_golu }}</p>
+            <div class="p-2.5 md:p-3 border-l-4 border-blue-500 bg-blue-50 rounded-lg">
+                <p class="text-xs md:text-sm text-gray-600">Průměr gólů na zápas</p>
+                <p class="text-2xl md:text-3xl font-extrabold text-blue-700">{{ prumer_golu }}</p>
             </div>
 
-            <div class="p-3 border-l-4 border-teal-500 bg-teal-50 rounded-lg">
-                <p class="text-sm text-gray-600">Průměr asistencí na zápas</p>
-                <p class="text-3xl font-extrabold text-teal-700">{{ prumer_asistenci }}</p>
+            <div class="p-2.5 md:p-3 border-l-4 border-teal-500 bg-teal-50 rounded-lg">
+                <p class="text-xs md:text-sm text-gray-600">Průměr asistencí na zápas</p>
+                <p class="text-2xl md:text-3xl font-extrabold text-teal-700">{{ prumer_asistenci }}</p>
             </div>
 
         </div>
 
-        <div class="lg:col-span-2 bg-white p-6 rounded-3xl shadow-xl">
-            <h2 class="text-2xl font-bold mb-4 text-gray-800">Historie gólů na zápas</h2>
+        <div class="lg:col-span-2 bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-xl">
+            <h2 class="text-xl md:text-2xl font-bold mb-3 md:mb-4 text-gray-800">Historie gólů na zápas</h2>
             <canvas id="golyGraf" height="100"></canvas>
         </div>
 
     </div>
 
 
-    <div class="bg-white p-6 rounded-3xl shadow-xl border border-gray-200">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800">Účast na posledních trénincích</h2>
+    <div class="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-xl border border-gray-200">
+        <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800">Účast na posledních trénincích</h2>
 
         {% if dochazka_treninky %}
-        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 md:gap-4">
 
             {% for d in dochazka_treninky %}
-            <div class="p-4 rounded-2xl shadow-md border-l-4
+            <div class="p-3 md:p-4 rounded-xl md:rounded-2xl shadow-md border-l-4
                         {% if d.pritomen %} border-green-500 bg-green-50 {% else %} border-red-500 bg-red-50 {% endif %}">
 
-                <p class="text-gray-600 font-semibold text-sm mb-1">
+                <p class="text-gray-600 font-semibold text-xs md:text-sm mb-1">
                     {{ d.trenink.datum }}
                 </p>
 
                 {% if d.pritomen %}
-                <p class="text-green-700 font-bold text-lg">
+                <p class="text-green-700 font-bold text-base md:text-lg">
                     <i class="fa-solid fa-check"></i> Přítomen
                 </p>
                 {% else %}
-                <p class="text-red-700 font-bold text-lg">
+                <p class="text-red-700 font-bold text-base md:text-lg">
                     <i class="fa-solid fa-xmark"></i> Nepřítomen
                 </p>
                 {% endif %}
@@ -157,17 +157,17 @@
 
         </div>
         {% else %}
-        <p class="text-gray-400 text-center py-6">Žádné záznamy o docházce na tréninky.</p>
+        <p class="text-gray-400 text-center py-4 md:py-6 text-sm md:text-base">Žádné záznamy o docházce na tréninky.</p>
         {% endif %}
     </div>
 
 
-    <div class="bg-white p-6 rounded-3xl shadow-xl">
-        <h2 class="text-2xl font-bold mb-6 text-gray-800">Odehrané zápasy</h2>
+    <div class="bg-white p-4 md:p-6 rounded-2xl md:rounded-3xl shadow-xl">
+        <h2 class="text-xl md:text-2xl font-bold mb-4 md:mb-6 text-gray-800">Odehrané zápasy</h2>
 
         {% if zapasy_data %}
 
-        <div class="flex flex-col space-y-3">
+        <div class="flex flex-col space-y-2 md:space-y-3">
 
             {% for z in zapasy_data %}
 
@@ -181,24 +181,24 @@
             {% endif %}
             {% endwith %}
 
-            <div class="flex items-center p-3 rounded-3xl shadow-sm transition-all duration-300 text-sm bg-gray-200
-                        hover:bg-gray-300 duration-500">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center p-2 md:p-3 rounded-2xl md:rounded-3xl shadow-sm transition-all duration-300 text-xs md:text-sm bg-gray-200
+                        hover:bg-gray-300 duration-500 gap-2 sm:gap-0">
 
-                <div class="flex-shrink-0 w-16 text-xs text-gray-600 font-semibold mr-3">
+                <div class="flex-shrink-0 w-full sm:w-12 md:w-16 text-xs text-gray-600 font-semibold sm:mr-3 text-center sm:text-left">
                     {{ z.zapas.datum|date:"d.m" }}
                 </div>
 
-                <div class="flex-grow min-w-0 mr-4">
+                <div class="flex-grow min-w-0 sm:mr-4 w-full sm:w-auto">
 
                     {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
 
-                    <div class="flex items-center text-gray-700 gap-2 leading-tight">
+                    <div class="flex items-center text-gray-700 gap-1 md:gap-2 leading-tight">
                         {% if tym.logo.url %}
-                            <img src="{{ tym.logo.url }}" alt="Logo týmu" class="w-5 h-5 object-cover flex-shrink-0">
+                            <img src="{{ tym.logo.url }}" alt="Logo týmu" class="w-4 h-4 md:w-5 md:h-5 object-cover flex-shrink-0">
                         {% else %}
-                            <div class="w-5 h-5 flex-shrink-0"></div>
+                            <div class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0"></div>
                         {% endif %}
-                        <span class="truncate
+                        <span class="truncate text-xs md:text-sm
                             {% if z.vysledek_tymu > z.vysledek_soupere %}
                                 font-bold text-gray-800
                             {% else %}
@@ -208,9 +208,9 @@
                         </span>
                     </div>
 
-                    <div class="flex items-center text-gray-700 gap-2 leading-tight">
-                        <div class="w-5 h-5 flex-shrink-0"></div>
-                        <span class="truncate
+                    <div class="flex items-center text-gray-700 gap-1 md:gap-2 leading-tight">
+                        <div class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0"></div>
+                        <span class="truncate text-xs md:text-sm
                             {% if z.vysledek_tymu < z.vysledek_soupere %}
                                 font-bold text-gray-800
                             {% else %}
@@ -222,9 +222,9 @@
 
                     {% else %}
 
-                    <div class="flex items-center text-gray-700 gap-2 leading-tight">
-                        <div class="w-5 h-5 flex-shrink-0"></div>
-                        <span class="truncate
+                    <div class="flex items-center text-gray-700 gap-1 md:gap-2 leading-tight">
+                        <div class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0"></div>
+                        <span class="truncate text-xs md:text-sm
                             {% if z.vysledek_tymu < z.vysledek_soupere %}
                                 font-bold text-gray-800
                             {% else %}
@@ -234,13 +234,13 @@
                         </span>
                     </div>
 
-                    <div class="flex items-center text-gray-700 gap-2 leading-tight">
+                    <div class="flex items-center text-gray-700 gap-1 md:gap-2 leading-tight">
                         {% if tym.logo.url %}
-                            <img src="{{ tym.logo.url }}" alt="Logo týmu" class="w-5 h-5 object-cover flex-shrink-0">
+                            <img src="{{ tym.logo.url }}" alt="Logo týmu" class="w-4 h-4 md:w-5 md:h-5 object-cover flex-shrink-0">
                         {% else %}
-                            <div class="w-5 h-5 flex-shrink-0"></div>
+                            <div class="w-4 h-4 md:w-5 md:h-5 flex-shrink-0"></div>
                         {% endif %}
-                        <span class="truncate
+                        <span class="truncate text-xs md:text-sm
                             {% if z.vysledek_tymu > z.vysledek_soupere %}
                                 font-bold text-gray-800
                             {% else %}
@@ -253,19 +253,19 @@
                     {% endif %}
                 </div>
 
-                <div class="flex items-center flex-shrink-0 mr-4">
+                <div class="flex items-center flex-shrink-0 sm:mr-2 md:mr-4 w-full sm:w-auto justify-start sm:justify-end">
                     {% if not z.pritomen %}
-                    <span class="text-xs font-medium text-gray-500 py-1 px-2 flex-shrink-0">
+                    <span class="text-xs font-medium text-gray-500 py-1 px-2 flex-shrink-0 whitespace-nowrap">
                             Nezúčastnil se
                         </span>
                     {% else %}
                     {% if z.goly_hrace %}
                     {% with gol_count=z.goly_hrace|length %}
-                    <div class="relative z-10 bg-gray-200 border border-gray-400 w-7 h-7 rounded-lg shadow-sm flex items-center justify-center p-1"
+                    <div class="relative z-10 bg-gray-200 border border-gray-400 w-6 h-6 md:w-7 md:h-7 rounded-lg shadow-sm flex items-center justify-center p-0.5 md:p-1"
                          title="{{ gol_count }} gólů v zápase">
-                        <span class="text-base text-gray-800">⚽︎</span>
+                        <span class="text-sm md:text-base text-gray-800">⚽︎</span>
                         {% if gol_count > 1 %}
-                        <span class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center shadow">
+                        <span class="absolute -top-1 -right-1 md:-top-1.5 md:-right-1.5 bg-red-500 text-white text-xs font-bold w-3 h-3 md:w-4 md:h-4 rounded-full flex items-center justify-center shadow">
                                         {{ gol_count }}
                                     </span>
                         {% endif %}
@@ -275,11 +275,11 @@
 
                     {% if z.asistence_hrace %}
                     {% with asist_count=z.asistence_hrace|length %}
-                    <div class="relative -ml-2 bg-gray-200 border border-gray-400 w-7 h-7 rounded-lg shadow-sm flex items-center justify-center p-1"
+                    <div class="relative -ml-1.5 md:-ml-2 bg-gray-200 border border-gray-400 w-6 h-6 md:w-7 md:h-7 rounded-lg shadow-sm flex items-center justify-center p-0.5 md:p-1"
                          title="{{ asist_count }} asistencí v zápase">
-                        <span class="text-base text-gray-800 font-semibold">A</span>
+                        <span class="text-sm md:text-base text-gray-800 font-semibold">A</span>
                         {% if asist_count > 1 %}
-                        <span class="absolute -top-1.5 -right-1.5 bg-red-500 text-white text-xs font-bold w-4 h-4 rounded-full flex items-center justify-center shadow">
+                        <span class="absolute -top-1 -right-1 md:-top-1.5 md:-right-1.5 bg-red-500 text-white text-xs font-bold w-3 h-3 md:w-4 md:h-4 rounded-full flex items-center justify-center shadow">
                                         {{ asist_count }}
                                     </span>
                         {% endif %}
@@ -288,14 +288,14 @@
                     {% endif %}
 
                     {% for k in z.karty_hrace %}
-                    <div class="relative -ml-2 w-7 h-7 rounded-lg shadow-sm flex items-center justify-center p-1 bg-gray-200 border border-gray-400"
+                    <div class="relative -ml-1.5 md:-ml-2 w-6 h-6 md:w-7 md:h-7 rounded-lg shadow-sm flex items-center justify-center p-0.5 md:p-1 bg-gray-200 border border-gray-400"
                          title="Karta ({{ k.minuta }}')">
                         {% if k.typ == 'zluta' %}
-                        <img src="/media/stranka/zluta_karta.png" alt="Žlutá" class="w-3 h-5">
+                        <img src="{% static 'img/zluta_karta.png' %}" alt="Žlutá" class="w-2 h-4 md:w-3 md:h-5">
                         {% elif k.typ == 'cervena' %}
-                        <img src="/media/stranka/cervena_karta.png" alt="Červená" class="w-3 h-5">
+                        <img src="{% static 'img/cervena_karta.png' %}" alt="Červená" class="w-2 h-4 md:w-3 md:h-5">
                         {% else %}
-                        <img src="/media/stranka/zluta_a_cervena.png" alt="Červená ze žlutých" class="w-3 h-5">
+                        <img src="{% static 'img/zluta_a_cervena.png' %}" alt="Červená ze žlutých" class="w-2 h-4 md:w-3 md:h-5">
                         {% endif %}
                     </div>
                     {% endfor %}
@@ -303,31 +303,33 @@
                     {% endif %}
                 </div>
 
-                <div class="flex-shrink-0 w-10 text-right font-bold mr-3">
-                    {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
-                    <p class="text-gray-800">{{ z.vysledek_tymu }}</p>
-                    <p class="text-gray-800">{{ z.vysledek_soupere }}</p>
-                    {% else %}
-                    <p class="text-gray-800">{{ z.vysledek_soupere }}</p>
-                    <p class="text-gray-800">{{ z.vysledek_tymu }}</p>
-                    {% endif %}
-                </div>
+                <div class="flex items-center gap-2 sm:gap-0 w-full sm:w-auto justify-between sm:justify-end">
+                    <div class="flex-shrink-0 w-8 sm:w-10 text-right font-bold text-sm md:text-base sm:mr-3">
+                        {% if z.zapas.domaci_hoste|lower == "domácí"|lower %}
+                        <p class="text-gray-800">{{ z.vysledek_tymu }}</p>
+                        <p class="text-gray-800">{{ z.vysledek_soupere }}</p>
+                        {% else %}
+                        <p class="text-gray-800">{{ z.vysledek_soupere }}</p>
+                        <p class="text-gray-800">{{ z.vysledek_tymu }}</p>
+                        {% endif %}
+                    </div>
 
-                <div class="flex-shrink-0 w-6 h-6 rounded-lg flex items-center justify-center text-white font-semibold text-xs ml-auto
-                            {% if z.vysledek_tymu > z.vysledek_soupere %}
-                                bg-green-500
-                            {% elif z.vysledek_tymu < z.vysledek_soupere %}
-                                bg-red-500
-                            {% else %}
-                                bg-yellow-500
-                            {% endif %}">
-                    {% if z.vysledek_tymu > z.vysledek_soupere %}
-                    V
-                    {% elif z.vysledek_tymu < z.vysledek_soupere %}
-                    P
-                    {% else %}
-                    R
-                    {% endif %}
+                    <div class="flex-shrink-0 w-5 h-5 sm:w-6 sm:h-6 rounded-lg flex items-center justify-center text-white font-semibold text-xs
+                                {% if z.vysledek_tymu > z.vysledek_soupere %}
+                                    bg-green-500
+                                {% elif z.vysledek_tymu < z.vysledek_soupere %}
+                                    bg-red-500
+                                {% else %}
+                                    bg-yellow-500
+                                {% endif %}">
+                        {% if z.vysledek_tymu > z.vysledek_soupere %}
+                        V
+                        {% elif z.vysledek_tymu < z.vysledek_soupere %}
+                        P
+                        {% else %}
+                        R
+                        {% endif %}
+                    </div>
                 </div>
 
             </div>
@@ -335,15 +337,16 @@
         </div>
 
         {% else %}
-        <p class="text-gray-400 text-center py-6">Žádné odehrané zápasy v databázi.</p>
+        <p class="text-gray-400 text-center py-4 md:py-6 text-sm md:text-base">Žádné odehrané zápasy v databázi.</p>
         {% endif %}
     </div>
 
 </div>
 
+{% endblock %}
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+{% block js %}
 <script>
     document.addEventListener("DOMContentLoaded", function () {
 
@@ -402,6 +405,4 @@
 
     });
 </script>
-
-
-{% endblock %}
+{% endblock js %}

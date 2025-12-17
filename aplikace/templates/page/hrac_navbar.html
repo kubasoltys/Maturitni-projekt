@@ -9,7 +9,7 @@
                  alt="{{ tym.nazev }}"
                  class="h-14 w-14 object-contain p-1 drop-shadow-lg">
             {% else %}
-            <img src="../../../media/stranka/logo.png"
+            <img src="{% static 'img/squadra_logo.png' %}"
                  alt="Logo"
                  class="h-14 w-14 object-contain p-1 drop-shadow-lg">
             {% endif %}
@@ -71,7 +71,7 @@
                     <img src="{{ hrac.photo.url }}"
                          class="w-10 h-10 rounded-full object-cover border border-gray-400 drop-shadow-lg">
                     {% else %}
-                    <img src="{% static 'stranka/default_profile_picture.webp' %}"
+                    <img src="{% static 'img/default_profile_picture.webp' %}"
                          class="w-10 h-10 rounded-full object-cover border border-gray-400 drop-shadow-lg">
                     {% endif %}
 
@@ -112,7 +112,7 @@
                 {% if hrac.photo %}
                     <img src="{{ hrac.photo.url }}" class="w-8 h-8 rounded-full object-cover border border-gray-400">
                 {% else %}
-                    <img src="{% static 'stranka/default_profile_picture.webp' %}" class="w-8 h-8 rounded-full object-cover border border-gray-400">
+                    <img src="{% static 'img/default_profile_picture.webp' %}" class="w-8 h-8 rounded-full object-cover border border-gray-400">
                 {% endif %}
                 {% if hrac.first_name and hrac.last_name %}
                     {{ hrac.first_name }} {{ hrac.last_name }}
@@ -141,6 +141,8 @@
     </div>
 </nav>
 
+
+{% block js %}
 <script>
     const openBtn = document.getElementById('openTeamModal');
     const closeBtn = document.getElementById('closeTeamModal');
@@ -164,3 +166,4 @@
         }
     });
 </script>
+{% endblock js %}
