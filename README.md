@@ -15,10 +15,14 @@ Projekt bude využívat:
 - **Frontend:**
   - `HTML` – Struktura webových stránek
   - `Tailwind CSS` – Moderní utility-first framework pro stylování
+  - `Chart.js` – Grafy pro vizualizaci statistik
+  - `Font Awesome` – Ikony pro lepší vizuální přehlednost
+  - `JavaScript` – Interaktivita a dynamické prvky na stránce
 
 - **Backend:**
   - `Python` – Jako hlavní programovací jazyk
   - `Django` – Webový framework pro správu databáze, uživatelských účtů a logiky aplikace
+  - `Docker` – Kontejnerizace aplikace pro zajištění stejného vývojového prostředí a snadnou správu závislostí.'
 
 - **Databáze:**
   - `SQLite` – (Zkušební) Ukládání dat o hráčích, zápasech, statistikách a uživatelích
@@ -32,7 +36,7 @@ Chtěl bych, aby aplikace obsahovala:
 
 - **Uživatelský systém**
   - Registrace a přihlášení uživatelů
-  - Role: trenér (admin) a hráč
+  - Role: trenér, admin a hráč
   - Základní správa profilu (heslo, kontaktní údaje, profilová fotka)
 
 - **Správa hráčů**

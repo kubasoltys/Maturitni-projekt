@@ -79,7 +79,7 @@ DATABASES = {
         'NAME': 'maturitni_projekt',
         'USER': 'postgres',
         'PASSWORD': 'admin',
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432'
     }
 }
