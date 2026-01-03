@@ -1,0 +1,762 @@
+% ŠABLONA PRO PSANÍ ZÁVĚREČNÉ STUDIJNÍ PRÁCE
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Autor: Jakub Dokulil (kubadokulil99@gmail.com)
+% Tato šablona byla vytvořena tak, aby pomocí ní mohli v systému LaTeX soutěžící sázet své práce a zároveň odpovídala požadavkům na formátování vyplývajícím z wordové šablony umístěné na webu soc.cz.
+%
+\documentclass[12pt, a4paper,
+oneside,      %% -- odkomentujte, pokud chcete svou práci mít pouze jednostrannou, mezera pro hřbet pak automaticky bude pouze na levé straně
+%twoside,        %% -- pro oboustranné práce, mezera pro hřbet následně střídá strany.
+openright
+]{report}
+
+
+% --- odstraneni zbytkoveho textu "superiorSup" a pod. ---
+\AtBeginDocument{%
+	% pojistka proti nechtenemu textu nactenemu z aux/toc
+	\immediate\write16{(cleaning stray figureversions output...)}%
+	%\clearpage
+	\thispagestyle{empty}
+	% uplne vyprazdneni vseho, co by se objevilo mimo hlavni text
+	\let\superiorSup\relax
+	\let\textOsF\relax
+	\let\textTOsF\relax
+	\let\liningLF\relax
+	\let\liningTLF\relax
+	\let\tabularTab\relax
+	\let\proportionalProp\relax
+	\let\tabularmath\relax
+	\let\proportionalmath\relax
+	\let\fontspechyperref\relax
+	% zajisteni, ze se nic nezobrazi pred titulni stranou
+	%\null
+	%\newpage
+}
+%% Nutné balíčky a nastavení
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Proměnné
+\newcommand\obor{INFORMAČNÍ TECHNOLOGIE} %% -- napiš číslo a název tvého oboru
+\newcommand\kodOboru{18-20-M/01} %% -- napiš číslo a název tvého oboru
+\newcommand\zamereni{se zaměřením na počítačové sítě a programování} %% -- napiš číslo a název tvého oboru
+\newcommand\skola{Střední škola průmyslová a umělecká, Opava} %% vyplň název školy
+\newcommand\trida{IT4} %% vyplň jméno svého konzultanta
+\newcommand\jmenoAutora{Jakub Šoltys}  %% vyplň své jméno
+\newcommand\skolniRok{2025/26} %% vyplň rok
+\newcommand\datumOdevzdani{5. 1. 2026} %% vyplň rok
+\newcommand\nazevPrace{Webová aplikace pro správu fotbalového týmu} %% vyplň název své práce
+
+\title{\nazevPrace} %% -- Název tvé práce
+\author{\jmenoAutora} %% -- tvé jméno
+\date{\datumOdevzdani} %% -- rok, kdy píšeš SOČku
+
+\usepackage[top=2.5cm, bottom=2.5cm, left=3.5cm, right=1.5cm]{geometry} %% nastaví okraje, left -- vnitřní okraj, right -- vnější okraj
+
+\usepackage[czech]{babel} %% balík babel pro sazbu v češtině
+\usepackage[utf8]{inputenc} %% balíky pro kódování textu
+\usepackage[T1]{fontenc}
+\usepackage{cmap} %% balíček zajišťující, že vytvořené PDF bude prohledávatelné a kopírovatelné
+
+\usepackage{graphicx} %% balík pro vkládání obrázků
+
+\usepackage{subcaption} %% balíček pro vkládání podobrázků
+
+\usepackage{hyperref} %% balíček, který v PDF vytváří odkazy
+
+\linespread{1.25} %% řádkování
+\setlength{\parskip}{0.5em} %% odsazení mezi odstavci
+
+
+\usepackage[pagestyles]{titlesec} %% balíček pro úpravu stylu kapitol a sekcí
+\titleformat{\chapter}[block]{\scshape\bfseries\LARGE}{\thechapter}{10pt}{\vspace{0pt}}[\vspace{-22pt}]
+\titleformat{\section}[block]{\scshape\bfseries\Large}{\thesection}{10pt}{\vspace{0pt}}
+\titleformat{\subsection}[block]{\bfseries\large}{\thesubsection}{10pt}{\vspace{0pt}}
+
+
+\usepackage{tocloft} % Balíček umožní přizpůsobit vzhled tabulky obsahu
+\setlength{\cftbeforechapskip}{0pt}  % Menší rozestup pro kapitoly
+\setlength{\cftbeforesecskip}{0pt}   % Menší rozestup pro sekce
+
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{1}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.025pt}
+
+\usepackage{booktabs}
+
+\usepackage{url}
+
+%% Balíčky co se můžou hodit :) 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{pdfpages} %% Balíček umožňující vkládat stránky z PDF souborů, 
+
+\usepackage{upgreek} %% Balíček pro sazbu stojatých řeckých písmen, třeba u jednotky mikrometr. Například stojaté mí: \upmu, stojaté pí: \uppi
+
+\usepackage{amsmath}    %% Balíčky amsmath a amsfonts 
+\usepackage{amsfonts}   %% pro sazbu matematických symbolů
+\usepackage{esint}     %% pro sazbu různých integrálů (např \oiint)
+\usepackage{mathrsfs}
+\usepackage{helvet} % Helvet font
+\usepackage{mathptmx} % Times New Roman
+\makeatletter
+\@namedef{ver@figureversions.sty}{9999/99/99}
+\newcommand{\DeclareFigureVersion}[2]{}
+\newcommand{\figureversion}[1]{}
+\makeatother
+
+
+\makeatletter
+\providecommand{\superiorSup}{}
+\providecommand{\textOsF}{}
+\providecommand{\textTOsF}{}
+\providecommand{\liningLF}{}
+\providecommand{\liningTLF}{}
+\providecommand{\tabularTab}{}
+\providecommand{\proportionalProp}{}
+\makeatother
+\makeatletter
+\providecommand{\superiorSup}{}
+\providecommand{\textOsF}{}
+\providecommand{\textTOsF}{}
+\providecommand{\liningLF}{}
+\providecommand{\liningTLF}{}
+\providecommand{\tabularTab}{}
+\providecommand{\proportionalProp}{}
+\providecommand{\tabularmath}{}
+\providecommand{\proportionalmath}{}
+\makeatother
+
+\usepackage{Oswald} % Oswald font
+
+
+%% makra pro sazbu matematiky
+\newcommand{\dif}{\mathrm{d}} %% makro pro sazbu diferenciálu, místo toho
+%% abych musel psát '\mathrm{d}' mi stačí napsat '\dif' což je mnohem 
+%% kratší a mohu si tak usnadnit práci
+
+\usepackage{listings}
+\usepackage{xcolor}
+
+\renewcommand{\lstlistingname}{Kód}% Listing -> Algorithm
+\renewcommand{\lstlistlistingname}{Seznam programových kódů}% List of Listings -> List of Algorithms
+
+%% Definice 
+\lstdefinelanguage{JavaScript}{
+	morekeywords=[1]{break, continue, delete, else, for, function, if, in,
+		new, return, this, typeof, var, void, while, with},
+	% Literals, primitive types, and reference types.
+	morekeywords=[2]{false, null, true, boolean, number, undefined,
+		Array, Boolean, Date, Math, Number, String, Object},
+	% Built-ins.
+	morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
+	sensitive,
+	morecomment=[s]{/*}{*/},
+	morecomment=[l]//,
+	morecomment=[s]{/**}{*/}, % JavaDoc style comments
+	morestring=[b]',
+	morestring=[b]"
+}[keywords, comments, strings]
+
+
+\lstdefinelanguage[ECMAScript2015]{JavaScript}[]{JavaScript}{
+	morekeywords=[1]{await, async, case, catch, class, const, default, do,
+		enum, export, extends, finally, from, implements, import, instanceof,
+		let, static, super, switch, throw, try},
+	morestring=[b]` % Interpolation strings.
+}
+
+\lstalias[]{ES6}[ECMAScript2015]{JavaScript}
+
+% Nastavení barev
+% Requires package: color.
+\definecolor{mediumgray}{rgb}{0.3, 0.4, 0.4}
+\definecolor{mediumblue}{rgb}{0.0, 0.0, 0.8}
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+\definecolor{darkviolet}{rgb}{0.58, 0.0, 0.83}
+\definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
+\definecolor{crimson}{rgb}{0.86, 0.8, 0.24}
+
+% Nastavení pro Python
+\lstdefinestyle{Python}{
+	language=Python,
+	backgroundcolor=\color{white},
+	basicstyle=\ttfamily,
+	breakatwhitespace=false,
+	breaklines=false,
+	captionpos=b,
+	columns=fullflexible,
+	commentstyle=\color{mediumgray}\upshape,
+	emph={},
+	emphstyle=\color{crimson},
+	extendedchars=true,  % requires inputenc
+	fontadjust=true,
+	frame=single,
+	identifierstyle=\color{black},
+	keepspaces=true,
+	keywordstyle=\color{mediumblue},
+	keywordstyle={[2]\color{darkviolet}},
+	keywordstyle={[3]\color{royalblue}},
+	literate=%
+	{á}{{\'a}}1 {č}{{\v{c}}}1 {ď}{{\v{d}}}1 {é}{{\'e}}1 {ě}{{\v{e}}}1
+	{í}{{\'i}}1 {ň}{{\v{n}}}1 {ó}{{\'o}}1 {ř}{{\v{r}}}1 {š}{{\v{s}}}1
+	{ť}{{\v{t}}}1 {ú}{{\'u}}1 {ů}{{\r{u}}}1 {ý}{{\'y}}1 {ž}{{\v{z}}}1,		
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{black},
+	rulecolor=\color{black},
+	showlines=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{forestgreen},
+	tabsize=2,
+	title=\lstname,
+	upquote=true  % requires textcomp	
+}
+
+
+\lstdefinestyle{JSES6Base}{
+	backgroundcolor=\color{white},
+	basicstyle=\ttfamily,
+	breakatwhitespace=false,
+	breaklines=false,
+	captionpos=b,
+	columns=fullflexible,
+	commentstyle=\color{mediumgray}\upshape,
+	emph={},
+	emphstyle=\color{crimson},
+	extendedchars=true,  % requires inputenc
+	fontadjust=true,
+	frame=single,
+	identifierstyle=\color{black},
+	keepspaces=true,
+	keywordstyle=\color{mediumblue},
+	keywordstyle={[2]\color{darkviolet}},
+	keywordstyle={[3]\color{royalblue}},
+ literate=%
+{á}{{\'a}}1 {č}{{\v{c}}}1 {ď}{{\v{d}}}1 {é}{{\'e}}1 {ě}{{\v{e}}}1
+{í}{{\'i}}1 {ň}{{\v{n}}}1 {ó}{{\'o}}1 {ř}{{\v{r}}}1 {š}{{\v{s}}}1
+{ť}{{\v{t}}}1 {ú}{{\'u}}1 {ů}{{\r{u}}}1 {ý}{{\'y}}1 {ž}{{\v{z}}}1,		
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{black},
+	rulecolor=\color{black},
+	showlines=true,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{forestgreen},
+	tabsize=2,
+	title=\lstname,
+	upquote=true  % requires textcomp
+}
+
+\lstdefinestyle{JavaScript}{
+	language=JavaScript,
+	style=JSES6Base,
+}
+\lstdefinestyle{ES6}{
+	language=ES6,
+	style=JSES6Base
+}
+
+\setlength{\headheight}{15pt}
+
+%% Bordel pro práci - můžeš smáznout :) 
+%%%%%%%%%%%%%%%%%%%
+
+\usepackage{lipsum} %% balíček který píše lipsum (nesmyslný text, který se používá pro kontrolu typografie)
+
+%\AtBeginDocument{\clearpage\pagestyle{empty}}
+
+%% Začátek dokumentu
+%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	
+	\pagestyle{empty}
+	\pagenumbering{Roman}
+	
+	\cleardoublepage
+
+%% Titulní stránka s informacemi
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	{\fontfamily{phv}\selectfont
+		%% Logo školy
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.6\linewidth]{image/logo-skoly.png} 
+		\end{figure}
+		
+		
+		%% Hlavička práce a její název (viz proměnná \nazev prace)
+		%% \sffamily %%% bezpatkové písmo - sans serif
+		{\bfseries %%% písmo na stránce je tučně
+			\begin{center}
+				\vspace{0.025 \textheight}
+				\LARGE{ZÁVĚREČNÁ STUDIJNÍ PRÁCE}\\
+				\large{dokumentace}\\
+				\vspace{0.075 \textheight}
+				\LARGE {\nazevPrace}\\
+			\end{center}  
+		}%%%
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.8\linewidth]{image/squadra_logo.png} 
+		\end{figure}
+		
+		\vspace{0.02 \textheight}
+		\begin{table}[h!]
+			\begin{tabular}{ll}
+				\textbf{Autor:} & \jmenoAutora\\ 
+				\textbf{Obor:} & \kodOboru { } \obor\\
+				\textbf{} & \zamereni\\
+				\textbf{Třída:} & \trida\\
+				\textbf{Školní rok:} & \skolniRok\\
+			\end{tabular}
+			
+		\end{table}		
+	}
+	
+\cleardoublepage %% Zalomení dvojstránky
+	
+%% Stránka obsahující poděkování a prohlášení
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Poděkování - nepovinné
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	
+	\noindent{\large{\bfseries{Poděkování}\\}}
+	\noindent Chtěl bych poděkovat panu učiteli Mgr. Marku Lučnému za cenné rady a pomoc s porjektem a Ing. Petru Grussmannovi za objektivní názory.
+	
+	\vspace*{0.7\textheight} %% Vertikální mezeru je možné upravit
+
+%% Prohlášení - povinné
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\noindent{\large{\bfseries{Prohlášení}\\}}  %% uprav si koncovky podle toho na jaký rod se cítíš, vypadá to pak lépe :) 
+	\noindent{Prohlašuji, že jsem závěrečnou práci vypracoval samostatně a uvedl veškeré použité 
+		informační zdroje.\\}
+	\noindent{Souhlasím, aby tato studijní práce byla použita k výukovým a prezentačním účelům na Střední průmyslové a umělecké škole v Opavě, Praskova 399/8.}
+	\vfill
+	\noindent{V Opavě \datumOdevzdani\\}
+	\noindent
+	\begin{minipage}{\linewidth}
+		\hspace{9.5cm} 
+		\begin{tabular}{@{}p{6cm}@{}}
+			\dotfill \\
+			Podpis autora
+		\end{tabular}
+	\end{minipage}
+	
+	\cleardoublepage %% Zalomení dvojstránky
+
+%% Stránka obsahující abstrakt (anotaci)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+
+%% Abstrakt v češtině
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	\noindent{\Large{\bfseries{Abstrakt}\\}}
+	Tato práce se věnuje vytvoření webové aplikace SQUADRA, která slouží jako komplexní nástroj pro správu fotbalových týmů. Hlavním cílem bylo vyvinout platformu, která umožní trenérům efektivně organizovat sportovní činnost a hráčům poskytne okamžitý přístup ke všem důležitým informacím. Aplikace nabízí širokou škálu funkcí pro každodenní chod klubu, počínaje plnou kontrolou nad plánováním tréninků a zápasů, které může trenér v reálném čase vytvářet, upravovat nebo mazat. Hráči vidí naplánované akce ihned po jejich zveřejnění a mohou jednoduše hlasovat o své účasti, díky čemuž má trenér okamžitý přehled o aktuální docházce. Systém dále umožňuje detailní zápis výsledků proběhlých utkání včetně evidence vstřelených gólů a udělených karet. Veškerá tato data se automaticky propisují do celkových statistik, takže hráči i trenéři mohou sledovat dlouhodobý vývoj výkonnosti jednotlivců i celého týmu v přehledných tabulkách. Výsledkem je intuitivní a responzivní systém, který digitalizuje administrativu spojenou s vedením fotbalového týmu a umožňuje všem členům sledovat sportovní pokroky na jednom místě.
+	
+	\vspace{18pt}
+	
+	\noindent{\large{\bfseries{Klíčová slova}}}
+	
+	\noindent Správa fotbalového týmu, tréninky, zápasy, docházka, statistiky, webová aplikace
+	
+	\vspace{18pt}
+
+%% Abstrakt v angličtině
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	\noindent{\Large{\bfseries{Abstract}}}
+	
+	This thesis focuses on the development of a web application called SQUADRA, which serves as a comprehensive tool for managing football teams. The primary objective was to develop a platform that enables coaches to efficiently organize sporting activities while providing players with immediate access to all essential information. The application offers a wide range of features for the day-to-day operation of a club, starting with full control over the planning of practices and matches, which the coach can create, edit, or delete in real time. Players can view scheduled events immediately after they are published and can easily vote on their attendance, giving the coach an instant overview of current availability. Furthermore, the system allows for detailed recording of match results, including goal scorers and disciplinary cards. All such data is automatically processed into comprehensive statistics, allowing both players and coaches to track the long-term performance development of individuals and the entire team through clear tables. The result is an intuitive and responsive system that digitizes the administration associated with managing a football team and allows all members to monitor sporting progress in one place.
+	
+	\vspace{18pt}
+	
+	\noindent{\large{\bfseries{Keywords}}}
+	
+	\noindent Football team management, practice, matches, attendance, statistics, web application
+	
+	\clearpage %% Zalomení stránky
+
+%% Stránka s generovaným obsahem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
+	
+	\tableofcontents %% Vygeneruje tabulku s obsahem
+
+	\pagenumbering{arabic} %% Nastavení způsobu číslování stránek (alternativy roman | Roman)
+	\setcounter{page}{1} %% Nastavení počitadla stránek
+
+%% Stránka s úvodem - povinná část
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%		
+	\chapter*{Úvod}
+%Tento příkaz vytvoří novou kapitolu s názvem "Úvod" ve vašem dokumentu.
+%Hvězdička * u příkazu \chapter* znamená, že tato kapitola nebude mít číslo. Ve výsledném dokumentu se tedy objeví jako "Úvod" bez předcházejícího čísla kapitoly, které se obvykle zobrazuje u číslovaných kapitol.
+%Tento příkaz také znamená, že kapitola se automaticky neobjeví v obsahu, protože LaTeX standardně zahrnuje do obsahu pouze číslované kapitoly.
+	\addcontentsline{toc}{chapter}{Úvod}
+%Tento příkaz ručně přidává záznam do obsahu.
+%První parametr toc označuje, že přidáváme záznam do Table of Contents (obsahu).
+%Druhý parametr chapter specifikuje úroveň záznamu. V tomto případě říkáme, že přidávaný záznam má být považován za kapitolu.
+%Třetí parametr Úvod je text, který se objeví v obsahu. V tomto případě bude v obsahu zobrazen název "Úvod".	
+V současném profesionálním sportu již nestačí pouze tvrdě trénovat; klíčem k maximálním výsledkům je precizní analýza a systematické plánování. Trenérství je disciplína založená na datech, kde správné rozvržení tréninků a zápasů rozhoduje o tom, zda sportovec dosáhne svého vrcholu. Zatímco dříve se používaly zprávy přes různé aplikace, dnešní doba vyžaduje lepší nástroje, které dokážou surová data přeměnit v přehledné a srozumitelné informace.
+
+Cílem mé maturitní práce bylo vyvinout komplexní webovou aplikaci, která fotbalistům a trenérům tento proces usnadní. Systém umožňuje nejen bezpečný management uživatelských účtů, ale především přehlednou evidenci tréninků a zápasů. Klíčovými prvky aplikace je přehled historie aktivit a sledování statistik i výkonnosti, které se vizualizují i pomocí dynamických grafů. Kladl jsem velký důraz na plnou responzivitu, aby byla aplikace plnohodnotně použitelná jak na počítači, tak na mobilních zařízeních.  
+
+V rámci této dokumentace podrobně popisuji celý proces vývoje. Začínám architekturou databázového modelu, pokračuji přes implementaci uživatelské logiky a formulářů až po tvorbu vizualizačních nástrojů. Závěrečná část je věnována frontendovému řešení, stylování a zajištění adaptivity pro různé typy obrazovek. 
+
+%Tipy k psaní úvodu
+%Je povinný, nadpis neměňte, rozsah - max. 1 strana. 
+%Tato část práce obsahuje: 
+%* náhled do řešené problematiky, zdůvodnění volby problematiky, 
+%* předem definované cíle práce, 
+%* motivaci pro další čtení textu včetně stručného uvedení obsahu následujících kapitol 
+
+
+\chapter{Teoretická východiska a analýza projektu}
+
+\section{Účel aplikace}
+\label{sec:uvod}
+
+V současné době existuje na trhu celá řada pokročilých platforem zaměřených na správu fotbalových klubů. Většina těchto profesionálních řešení je však primárně cílena na velké organizace a prvoligové týmy, což se často odráží v jejich vysoké pořizovací ceně, náročné administraci nebo přílišné robustnosti, která může být pro menší týmy náročná. Hlavním záměrem mého projektu bylo tuto bariéru prolomit a vytvořit aplikaci, která bude univerzálně dostupná pro každou úroveň fotbalu. Chtěl jsem nabídnout funkční nástroj, který najde své uplatnění jak v profesionálnšjších týmech, tak i v nižších regionálních soutěžích, kde je kladen důraz především na jednoduchost, přehlednost a rychlou evidenci tréninkového procesu bez nutnosti složitého školení personálu.
+
+
+\section{Architektura databáze}
+\label{sec:zakladni_struktura}
+
+Moderní webové aplikace jsou stavěny jako vícevrstvé systémy, které zajišťují efektivní komunikaci mezi uživatelem a daty. Moje aplikace využívá architekturu Client-Server, kde na straně klienta stojí webový prohlížeč a na straně serveru běží aplikační logika propojená s databází. Systém je postaven na návrhovém vzoru MVT (Model-View-Template), což je specifická variace rozšířeného vzoru MVC (Model-View-Controller). Tento princip funguje na rozdělení aplikace do tří spolupracujících vrstev:
+
+\begin{itemize}
+	\item Model (Datová vrstva): Tato část definuje strukturu dat. Každý model v kódu odpovídá tabulce v databázi. Díky technologii ORM aplikace komunikuje s databází pomocí objektů.
+	\item View (Logická vrstva): Přijímá požadavky od uživatele, rozhoduje, jaká data je potřeba vytáhnout z Modelu, provádí nad nimi výpočty a výsledek posílá dál k zobrazení.
+	\item Template (Prezentační vrstva): Jedná se o šablony psané v HTML doplněné o speciální značky, které umožňují dynamicky zobrazovat data poslaná z View. Tato vrstva se stará o to, aby uživatel viděl přehledné prostředí.
+\end{itemize}
+
+
+\section{Počáteční zkušenosti}
+\label{sec:prace_s_textem}
+
+V tomto projektu vycházím z praktických dovedností, které jsem se naučil v průběhu studia. Již ve třetím ročníku jsem pracoval na vývoji jednoduché webové aplikace postavené na čistém frameworku Django. Tato předchozí zkušenost mi umožnila pochopit základní principy fungování MVT architektury, manipulaci s databázovými modely a základy šablonovacího systému.
+
+Díky znalosti těchto základům jsem se mohl při tvorbě maturitního projektu soustředit na komplexnější výzvy, jako je logika docházkového systému, vizualizace výkonnostních dat pomocí grafů nebo funkčnost účtů uživatelů. Počáteční znalost frameworku Django mi tak dala náskok, který byl ve vývoji této aplikace nezbytný.
+
+
+
+
+
+
+	
+
+	\chapter{Využité technologie}
+	\pagestyle{fancy}
+	
+	\section[Django framework]{Django} %%[Text, který bude v obsahu]{Text, který se vytiskne na stránce} Zkus měnit jednotlivé závorky a uvidíš :) 
+	Hlavním technologickým pilířem aplikace je Django, vysokoúrovňový webový framework napsaný v jazyce Python. Django využívá architekturu MVT a disponuje výkonným nástrojem ORM, který umožňuje efektivní správu databáze pomocí Python objektů bez nutnosti přímého psaní SQL dotazů.
+	
+	
+	\section[PostgreSQL]{PostgreSQL}
+	
+	Jako databázový systém jsem zvolil PostgreSQL, což je pokročilá open-source objektově-relační databáze. Tento systém disponuje velkou spolehlivostí, integritou dat a schopností efektivně zpracovávat komplexní dotazy nad rozsáhlými soubory dat. PostgreSQL plně podporuje standardy SQL a v kombinaci s frameworkem Django nabízí vynikající výkon při správě relačních vazeb mezi uživateli, týmy a jejich statistikami. Pro projekt tohoto typu dostačující.
+	
+	
+	\section[Tailwind CSS]{Tailwind CSS}
+	
+	Pro stylování uživatelského rozhraní jsem využil moderní framework Tailwind CSS. Na rozdíl od tradičních frameworků s předpřipravenými komponentami mi Tailwind umožnil tvořit design přímo v HTML kódu pomocí nízkoúrovňových tříd. Tento přístup výrazně urychlil vývoj responzivního vzhledu, zajistil vysokou konzistenci grafických prvků.
+	
+	
+	\section[Charts.js]{Charts.js}
+	
+	Pro generování grafů jsem použil Chart.js, což je populární JavaScriptová knihovna určená pro tvorbu responzivních grafů. Tato technologie mi umožnila transformovat data z databáze (např. počet gólů na zápas) do přehledné grafické podoby. Knihovna využívá element HTML5 Canvas, díky čemuž je vykreslování grafů rychlé a plynulé i na mobilních zařízeních, přičemž nabízí širokou škálu prvků, jako jsou sloupcové, koláčové nebo spojnicové grafy.
+	
+	
+	\section[Font Awesome]{Font Awesome}
+	
+	Pro zvýšení přehlednosti a vylepšení vzhledu jsem použil knihovnu Font Awesome. Poskytuje sadu vektorových ikon, které v aplikaci slouží jako jednoduché symboly pro tlačítka a nadpisy. Použití SVG formátu zajišťuje ostrost ikon při jakémkoliv rozlišení a minimální dopad na rychlost načítání stránek.
+	
+	
+	\section[Django Authentication System]{Django Authentication System}
+	
+	Pro správu uživatelů využívám vestavěný autentizační systém frameworku Django. Tento modul řeší kompletní proces přihlašování, odhlášení a bezpečné ukládání uživatelských dat. Klíčovým prvkem je automatické hashování hesel pomocí algoritmu PBKDF2, který zajišťuje, že citlivé údaje nejsou v databázi čitelné ani v případě jejího úniku.
+	
+	
+	\section[Python]{Python}
+	
+	Celá aplikace je postavena na programovacím jazyce Python, který je oceňován pro svou vysokou čitelnost, čistou syntaxi a efektivitu vývoje. V projektu slouží jako základní kámen pro veškerou logiku na straně serveru. Python jsem zvolil především kvůli mé znalosti tohoto jazyka z mého studia a rozsáhlému ekosystému knihoven, což mi umožnilo snadno používat pokročilé funkce, jako jsou třeba automatické výpočty statistik docházky.
+	
+	
+	\section[JavaScript]{JavaScript}
+		
+	Jazyk JavaScript tvoří interaktivní vrstvu aplikace na straně klienta. V mém projektu slouží především k dynamickému ovládání prvků uživatelského rozhraní bez nutnosti znovunačítání celé stránky a k zajištění funkčnosti zapisování zápasů. JavaScript také využívám pro inicializaci a konfiguraci grafů v knihovně Chart.js.
+	
+	
+	\section[Docker]{Docker}
+	
+	Pro zajištění konzistentního vývojového a produkčního prostředí jsem využil platformu Docker. Ta umožňuje izolovat aplikaci a její závislosti do kontejnerů, což zajišťuje, že systém běží identicky na jakémkoliv zařízení.
+	
+	
+	
+	
+	
+	\chapter{Pracovní postupy}
+	
+	
+	\section[Založení projektu]{Založení projektu}
+	
+	Prvním krokem realizace bylo vytvoření projektové struktury a nastavení izolovaného vývojového prostředí. V nově vytvořené složce projektu jsem inicializoval virtuální prostředí, což je standardní postup pro zajištění nezávislosti knihoven projektu na globálním nastavení systému. Následovala instalace jazyka Python a frameworku Django pomocí správce balíčků \textit{pip}.
+	
+	Poté následovala základní konfigurace frameworku, která zahrnovala:
+	\begin{itemize}
+		\item Inicializace projektu: Pomocí příkazu \textit{django-admin startproject} byla vytvořena základní kostra aplikace.
+		\item Vytvoření superuživatele: Skrze příkaz \textit{createsuperuser} jsem založil administrátorský účet pro přístup do interní správy systému.
+		\item Zprovoznění hlavní stránky: Vytvořil jsem první pohled ve \textit{views.py} a v šabloně \textit{index.html} jsem definoval domovskou stránku aplikace.
+	\end{itemize}
+	
+	Vzhledem k tomu, že jsem se se všemi těmito postupy podrobně seznámil již v předchozích ročnících, proběhla tato fáze bez jakýchkoli potíží.
+	
+	
+	
+	\newpage
+	\section[Databázová struktura]{Databázová struktura}
+	
+	Návrh databáze je srdcem celého projektu. K její realizaci jsem využil relační model, který je v rámci frameworku Django definován přímo v souborech models.py.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\linewidth]{image/er_diagram.png} 
+		\caption{ER diagram databázové struktury}
+	\end{figure}
+	
+	Jakmile byly definovány všechny třídy a vztahy v souboru \textit{models.py}, využil jsem vestavěný systém migrací. Proces proběhl ve dvou krocích: nejprve příkazem \textit{makemigrations}, který analyzoval změny v kódu a vytvořil instrukční soubory, a následně příkazem \textit{migrate}. Tímto krokem se nadefinovaná struktura fyzicky propsala do databáze PostgreSQL. Výsledkem je plně funkční a optimalizovaná databázová struktura, která je připravena na ukládání reálných dat aplikace.
+	
+	
+	\newpage
+	\section[Tvorba aplikační logiky a šablon]{Tvorba aplikační logiky a šablon}
+	
+	V této fázi jsem propojil databázový model s uživatelským rozhraním. Využil jsem k tomu architekturu MVT, kde hlavní logiku zpracovávají pohledy v souboru \textit{views.py}.
+	
+	\subsection[Aplikační logika]{Aplikační logika}
+	
+	V této části jsem se zaměřil na vývoj backendové logiky, která slouží jako spojovací článek mezi databází a uživatelským rozhraním. Pro obsluhu požadavků jsem využil kombinaci funkcionálních pohledů a tříd. Kladl jsem důraz na přehlednost a bezpečnost kódu.
+	
+	Klíčové prvky, které jsem v rámci \textit{views.py} implementoval:
+	\begin{itemize}
+		\item Distribuce dat: Naprogramoval jsem logiku, která efektivně získává potřebné informace z databáze a předává je ve formě kontextu do šablon k vykreslení.
+		\item Zpracování dat: Naprogramoval jsem funkce pro výpočet statistik, jako je procentuální úspěšnost docházky nebo tabulky střelců.
+		\item Dynamické dotazy: Využil jsem Django ORM pro efektivní filtrování dat, například zobrazení pouze nadcházejících tréninků.
+	\end{itemize}
+	
+	\subsection[Šablony]{Šablony}
+	
+	Pro uživatelské rozhraní jsem vytvořil systém HTML šablon. Využil jsem Django Template Language, který mi umožnil vkládat logiku (cykly, podmínky) přímo do HTML kódu.
+	\begin{itemize}
+		\item Základní šablona (\textit{base.html}): Obsahuje společné prvky. Ostatní stránky z ní dědí pomocí bloku \{\% extends \%\}, což zajišťuje jednotný vzhled a snadnou údržbu. Stejně tak i \textit{navbar.html} nebo \textit{footer.html}
+		\item Práce s daty: Například pomocí cyklů \{\% for \%\} dynamicky generuji tabulky s výsledky zápasů nebo seznamy hráčů na základě dat dodaných z \textit{views.py}.
+	\end{itemize}
+	
+	
+	\section[Vizuální zpracování a stylování]{Vizuální zpracování a stylování}
+	
+	Pro dosažení moderního vzhledu a plné responzivity aplikace jsem zvolil framework Tailwind CSS. Na rozdíl od klasického psaní CSS pravidel jsem využíval utility třídy přímo v HTML šablonách, což výrazně urychlilo proces stylování a zajistilo konzistenci napříč celým systémem.
+	
+	
+	\section[Zpracování formulářů a uživatelských vstupů]{Zpracování formulářů a uživatelských vstupů}
+	
+	Formuláře jsou klíčovým prvkem pro interakci uživatele se systémem, ať už jde o přihlášení, zadávání výsledků zápasů nebo vytváření nových tréninků. Pro jejich realizaci jsem využil vestavěný systém Django Forms.
+	\begin{itemize}
+		\item Automatická validace: Django samo kontroluje, zda jsou zadaná data ve správném formátu (např. platné datum, číselné hodnoty u gólů), což předchází chybám v databázi.
+		\item Bezpečnost: Každý formulář obsahuje CSRF token, který chrání aplikaci před útoky typu Cross-Site Request Forgery.
+		\item Propojení s modely: Pro většinu funkcí jsem použil ModelForm, který automaticky generuje pole formuláře podle definice v databázi, což mi ušetřilo čas a eliminovalo duplicitu kódu.
+	\end{itemize}
+	
+	Všechny formuláře se vytvářejí v souboru \textit{forms.py}.
+	
+	
+	\newpage
+	\section[Autentizace a autorizace uřivatelů]{Autentizace a autorizace uřivatelů}
+	
+	Zajištění bezpečnosti dat a správné rozdělení uživatelských rolí je prioritou systému. Pro tento účel jsem využil vestavěný autentizační systém frameworku Django, který jsem přizpůsobil potřebám interního loginu sportovního klubu.
+	
+	\subsection[Proces autentizace]{Proces autentizace}
+	
+	Systém nevyužívá registraci třetích stran; účty vytváří výhradně administrátor v interním rozhraní. Uživatelé se přihlašují pomocí přiděleného uživatelského jména a hesla.
+	\begin{itemize}
+		\item Přihlašovací cyklus: Funkce \textit{login\_view} zpracovává požadavky typu POST, validuje údaje pomocí LoginForm a skrze metodu \textit{authenticate()} ověřuje identitu uživatele proti databázi. Po úspěšném ověření funkce \textit{login()} vytvoří session a uloží uživatele do objektu \textit{request.user}.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.6\linewidth]{image/login.png} 
+			\caption{Přihlášení}
+		\end{figure}
+		
+		\item První přihlášení: Implementoval jsem speciální logiku pro nově vytvořené účty. Pokud je u uživatele příznak \textit{first\_login=True}, je automaticky přesměrován na pohled \textit{first\_login\_view}. Zde musí uživatel doplnit své osobní údaje do profilu, čímž se příznak změní na False a účet se aktivuje.
+		\item Odhlášení: Proces \textit{logout\_view} bezpečně ukončí session a přesměruje uživatele na úvodní stránku.
+	\end{itemize}
+	
+	\subsection[Řízení přístupu a autorizace]{Řízení přístupu a autorizace}
+	
+	Autorizace určuje, k jakým datům a funkcím má přihlášený uživatel oprávnění. V projektu využívám model RBAC (Role-Based Access Control) rozdělený do tří úrovní:
+	\begin{itemize}
+		\item Admin: Má plný přístup k Django Admin rozhraní, kde spravuje, vytváří a maže uživatelské účty.
+		\item Trenér: Má přístup k trenérskému dashboardu. Může spravovat pouze své týmy, vytvářet tréninky, zápasy a prohlížet statistiky svých hráčů.
+		\item Hráč: Má přístup k hráčskému dashboardu, kde vidí informace o svém týmu, vlastní statistiky a může hlasovat o účasti na událostech.
+	\end{itemize}
+	
+	Pro zabezpečení jednotlivých funkcí v kódu využívám:
+	\begin{itemize}
+		\item Dekorátor \textit{@login\_required}: Zajišťuje, že daná stránka je přístupná pouze přihlášeným uživatelům.
+		\item Kontrola vlastnictví zdroje: V kritických pohledech (např. editace tréninku) využívám metodu \textit{get\_object\_or\_404}, která ověřuje, zda editovaný objekt skutečně patří danému trenérovi. Tím je zabráněno neoprávněné manipulaci s daty jiných týmů.
+		\item Session-based autorizace: Pro trenéry spravující více týmů využívám \textit{request.session} k uložení ID aktuálně vybraného týmu, což zajišťuje perzistenci volby napříč různými stránkami aplikace.
+	\end{itemize}
+	
+	\subsection[Bezpečnostní standardy]{Bezpečnostní standardy}
+	
+	Aplikace splňuje moderní standardy zabezpečení webových aplikací:
+	\begin{itemize}
+		\item Hashování hesel: Hesla nejsou nikdy ukládána v prostém textu, ale jsou hashována pomocí algoritmu PBKDF2.
+		\item Validace hesel: Systém vynucuje minimální délku a složitost hesla.
+		\item Ochrana proti útokům: Django automaticky chrání aplikaci proti CSRF pomocí tokenů ve formulářích.
+	\end{itemize}
+	
+	
+	
+	\chapter{Funkční procesy aplikace}
+	
+	
+	\section[Dashboard]{Dashboard}
+	
+	Dashboard představuje klíčový prvek uživatelského rozhraní, který slouží jako dynamický rozcestník a poskytuje uživateli okamžitý přehled o nejdůležitějším dění v týmu ihned po přihlášení. Celý obsah je generován v reálném čase a přizpůsobuje se roli přihlášeného uživatele, přičemž prioritu mají časově nejbližší události a aktuální data.
+	
+	
+	\section[Nastavení a úpravy účtu]{Nastavení a úpravy účtu}
+	
+	Prostřednictvím ovládacích prvků může uživatel podrobně prohlížet a aktualizovat své profilové údaje, spravovat zabezpečení účtu pomocí změny hesla nebo bezpečně ukončit aktivní relaci. Díky propojení s databázovým modelem se veškeré úpravy okamžitě promítají do celého systému, což zaručuje aktuálnost informací pro trenéry i spoluhráče.
+	
+	
+	\section[Statistiky]{Statistiky}
+	
+	Tato část aplikace slouží k tomu, aby všichni v týmu měli jasnou představu o tom, jak se jim daří. Data se v grafech a tabulkách mění podle toho, kdo je zrovna přihlášený. Hráč po přihlášení vidí hlavně svůj vlastní profil – tedy úspěšnost v zápasech, jakou má docházku na tréninky a kolik dal v sezóně gólů. Kromě toho jsou k dispozici i celkové statistiky týmu, kde je vidět, jak se skupině daří jako celku, například jaká je průměrná účast na trénincích nebo kolik gólů tým průměrně nastřílí za zápas. Trenér má pak nejširší přístup; může si rozkliknout statistiky kteréhokoli svého hráče.
+	
+	
+	\newpage
+	\section[Vytváření zápasů a tréninků]{Vytváření zápasů a tréninků}
+	
+	Celý proces organizace začíná u trenéra, který skrze jednoduchý formulář zadá klíčové údaje, jako je datum, čas a místo konání události. Jakmile trenér formulář potvrdí, systém data okamžitě zpracuje a nově vytvořený zápas nebo trénink se v reálném čase zobrazí všem hráčům. Hráči tak mají k informacím okamžitý přístup a mohou rovnou hlasovat o své účasti, zatímco trenér má ihned k dispozici přehlednou listinu pro sledování docházky. Tato automatizace zajišťuje, že se informace k hráčům dostanou bez prodlení a bez nutnosti další komunikace přes jiné kanály.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\linewidth]{image/vytvareni_zapasu.png} 
+		\caption{Vytváření zápasu}
+	\end{figure}
+	
+	
+	\section[Hlasování o účasti]{Hlasování o účasti}
+	
+	Pro hráče je v systému připraven jednoduchý způsob, jak dát trenérovi vědět, zda na akci dorazí. U každého nadcházejícího tréninku nebo zápasu mají na výběr dvě rychlé možnosti: „Přijdu“ nebo „Nepřijdu“. Výběr se do databáze uloží okamžitě po kliknutí, bez nutnosti cokoli dalšího potvrzovat. Pokud si to hráč rozmyslí, může svou volbu kdykoliv změnit nebo ji úplně zrušit, čímž se záznam z databáze opět vymaže. Trenér díky tomu v reálném čase vidí aktuální soupisku pro daný den.
+	
+	
+	\section[Zobrazení docházky]{Zobrazení docházky}
+	
+	Pro trenéra je klíčová stránka s detailem docházky, kde má k dispozici kompletní seznam všech svých hráčů. U každého jména přehledně vidí aktuální stav: zda hráč účast potvrdil, omluvil se, nebo zatím vůbec nehlasoval. Tato tabulka funguje dynamicky a automaticky se aktualizuje podle toho, jak hráči postupně odesílají své odpovědi. Trenér tak nemusí ručně nic sčítat, protože má na jednom místě okamžitý a přesný přehled o tom, v jakém složení se tým na zápas nebo trénink sejde.
+	
+	
+	\section[Zapisování výsledku zápasu]{Zapisování výsledku zápasu}
+	
+	Jakmile zápas skončí, systém na to trenéra automaticky upozorní přímo na jeho nástěnce i v celkovém přehledu zápasů nápisem i červeným obtáhnutím bloku zápasu. U daného utkání se objeví tlačítko pro zápis výsledků, které trenéra přenese do detailního formuláře. Zde může ke každému vstřelenému gólu přiřadit konkrétního střelce, asistenta, čas a jeho typ. Podobně lze evidovat i udělené karty, u nichž se zaznamenává jméno hráče, minuta a typ karty. U soupeře se pro zjednodušení zadává pouze konečný počet vstřelených branek.
+	
+	Po potvrzení se všechna data ihned uloží do databáze a výsledek zápasu se okamžitě zobrazí všem hráčům i trenérovi. Velkou výhodou je, že systém v tento moment automaticky přepočítá veškeré individuální i týmové statistiky. Góly, asistence i karty se tak ihned promítnou do profilů hráčů a tabulek úspěšnosti, aniž by bylo nutné cokoli dalšího ručně zpracovávat.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.8\linewidth]{image/zapis_vysledku.png} 
+		\caption{Zapisování výsledku}
+	\end{figure}
+	
+	
+	\section[Trenér a více týmů]{Trenér a více týmů}
+	
+	Pro trenéry, kteří vedou více než jednu věkovou kategorii nebo skupinu, obsahuje aplikace funkci pro rychlé přepínání mezi týmy. V horní části rozhraní si může trenér jednoduše zvolit, který ze svých týmů chce aktuálně spravovat. Po výběru se celý systém – včetně dashboardu, zápasů a statistik – okamžitě přizpůsobí a zobrazí data příslušná pouze pro daný tým. Tato funkce zajišťuje přehlednost a zabraňuje záměně informací mezi různými skupinami hráčů.
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.5\linewidth]{image/vyber_tymu.png} 
+		\caption{Výběr týmu}
+	\end{figure}
+	
+	
+	
+	
+	\chapter{Shrnutí a výsledky práce}
+	
+	
+	\section[Funkce aplikace]{Funkce aplikace}
+	
+	
+	Funkce aplikace začíná u manažera týmu (administrátora). Ten má výhradní přístup do administračního rozhraní, kde zakládá profily pro všechny své hráče i trenéry a definuje strukturu klubu vytvořením jednotlivých týmů podle věkových kategorií. Prozatím pouze v administrátorském prostředí.
+	
+	Jakmile manažer účty vytvoří, uživatelé se do systému přihlašují pomocí přiděleného jména a hesla. Po prvním vstupu si každý člen může v nastavení zvolit vlastní bezpečné heslo a doplnit své osobní údaje. Tím se aktivuje plnohodnotný přístup k funkcím aplikace:
+	\begin{itemize}
+		\item Pro trenéry: Možnost zakládat a spravovat tréninky či zápasy a sledovat docházku a statistiky svého týmu.
+		\item Pro hráče: Přehled o nadcházejících událostech, jednoduché hlasování o účasti a přehled svých statistik.
+		\item Pro celý tým: Automatické zaznamenávání výsledků, statistik a historie všech aktivit na jednom místě.
+	\end{itemize}
+	
+	
+	\newpage
+	\section[Splněné a nesplněné cíle]{Splněné a nesplněné cíle}
+	
+	Hlavním cílem této práce bylo vytvořit funkční webovou aplikaci, která by usnadnila organizaci tréninků, zápasů a sledování výkonů, a to především týmům v nižších soutěžích. Tento záměr se podařilo naplnit. Výsledkem je jednoduchý systém, který pokrývá celý proces od plánování událostí až po automatické generování statistik. Velkým přínosem je plná responzivita rozhraní, díky které mohou uživatelé s aplikací pohodlně pracovat na počítači i na mobilních telefonech přímo na hřišti.
+	
+	Při zpětném pohledu však vnímám i určité nedostatky, které jsou dány rozsahem projektu. Mezi ty hlavní patří:
+	\begin{itemize}
+		\item Administrační prostředí: Současná správa uživatelů a týmů probíhá v základním rozhraní, které by si zasloužilo uživatelsky přívětivější zpracování.
+		\item Struktura dat:Chybí pevné rozdělení historie do jednotlivých sezón a systém zatím neumožňuje, aby byl jeden hráč zaregistrován ve více týmech současně.
+		\item Technický dluh: Jako u každého většího projektu vidím prostor pro zlepšení čistoty kódu a jeho optimalizaci.
+	\end{itemize}
+	
+	Téma správy fotbalových klubů nabízí téměř nekonečné možnosti rozšiřování, ať už jde o pokročilé exporty dat, automatické notifikace nebo detailnější analýzu výkonů. Práce na této aplikaci pro mě byla obrovským přínosem. Naučil jsem se pracovat s novými technologiemi a řešit komplexní logické celky. Věřím, že tato verze je pevným základem, na kterém lze v budoucnu dále stavět.
+	
+	
+	
+	\chapter*{Závěr}
+	
+	Cílem této práce bylo navrhnout a realizovat webovou aplikaci SQUADRA, která by digitalizovala a zjednodušila každodenní problémy amatérského fotbalového klubu. Výsledkem je funkční platforma, která efektivně propojuje trenéry a hráče skrze moduly správy týmu, docházky a statistik.
+	
+	Vytvořený systém řeší nejčastější problémy malých klubů – roztříštěnost informací a náročné ruční zpracovávání statistik. Díky responzivnímu designu a okamžité synchronizaci dat s databází získává trenér do rukou nástroj, který mu šetří čas a umožňuje se plně soustředit na sportovní stránku vedení týmu.
+	
+	Práce na tomto projektu pro mě byla významnou zkušeností. Musel jsem se vypořádat s návrhem komplexní databázové struktury a zajistit, aby bylo uživatelské rozhraní přívětivé i pro technicky méně zdatné uživatele. I když systém nabízí prostor pro další rozšiřování, například vlastní administrátorské prostředí, současná verze představuje stabilní a plně použitelný produkt. Věřím, že aplikace SQUADRA najde své uplatnění v praxi a stane se užitečným pomocníkem pro efektivnější fungování sportovních kolektivů.
+	
+	Aplikace je zálohovaná na GitHub adrese https://github.com/kubasoltys/Maturitni-projekt.
+	
+	
+	
+	%% literatura
+	\begin{thebibliography}{99}
+		\bibitem{sablonaSOC} DOKULIL, Jakub. \textit{Šablona pro psaní SOČ v programu \LaTeX} [online]. Brno, 2020 [cit. 2026-01-03]. Dostupné z: \url{https://github.com/Kubiczek36/SOC_sablona}
+		\bibitem{sspuLogo} \textit{Střední škola průmyslová a umělecká Opava} [online]. [cit. 2026-01-03]. Dostupné z: \url{https://www.sspu-opava.cz}
+		
+		\bibitem{djangoAuth} DJANGO SOFTWARE FOUNDATION. \textit{User authentication in Django} [online]. [cit. 2026-01-03]. Dostupné z: \url{https://docs.djangoproject.com/en/5.2/topics/auth/}
+		\bibitem{postgresDoc} POSTGRESQL GLOBAL DEVELOPMENT GROUP. \textit{PostgreSQL Tutorial} [online]. [cit. 2026-01-03]. Dostupné z: \url{https://www.postgresql.org/docs/current/tutorial.html}
+		\bibitem{tailwindCSS} TAILWIND LABS INC. \textit{Tailwind CSS Documentation} [online]. [cit. 2026-01-03]. Dostupné z: \url{https://tailwindcss.com/}
+		\bibitem{dockerDjango} DOCKER INC. \textit{How to Dockerize a Django App} [online]. [cit. 2026-01-03]. Dostupné z: \url{https://www.docker.com/blog/how-to-dockerize-django-app/}
+		\bibitem{chartJS} CHART.JS. \textit{Chart.js Documentation and Samples} [online]. [cit. 2026-01-03]. Dostupné z: \url{https://www.chartjs.org/docs/latest/}
+		\bibitem{fontAwesome} FONTAWESOME. \textit{Font Awesome Docs} [online]. [cit. 2026-01-03]. Dostupné z: \url{https://fontawesome.com/docs}
+		\bibitem{w3schools} W3SCHOOLS. \textit{Online Web Tutorials and CSS Modals} [online]. [cit. 2026-01-03]. Dostupné z: \url{https://www.w3schools.com/}
+		
+		\bibitem{testDrivenUser} HERMAN, Michael. \textit{Django Custom User Model}. TestDriven.io [online]. [cit. 2026-01-03]. Dostupné z: \url{https://testdriven.io/blog/django-custom-user-model/}
+		\bibitem{ytVeryAcademy} VERY ACADEMY. \textit{Django PostgreSQL Migration from SQLite} [online video]. YouTube, 2020 [cit. 2026-01-03]. Dostupné z: \url{https://www.youtube.com/watch?v=ZgRkGfoy2nE}
+		\bibitem{ytCodeTomi} CODE WITH TOMI. \textit{Docker With Django Tutorial} [online video]. YouTube, 2021 [cit. 2026-01-03]. Dostupné z: \url{https://www.youtube.com/watch?v=BoM-7VMdo7s}
+		\bibitem{mermaidJS} MERMAID.JS. \textit{Mermaid: Diagramming and charting tool} [online]. [cit. 2026-01-03]. Dostupné z: \url{https://mermaid.js.org/}
+	\end{thebibliography}
+	
+	%% obrázky 
+	\listoffigures
+	
+	%% tabulky
+	%\listoftables
+	
+	\appendix %% začínají přílohy
+	
+	\titleformat{\chapter}[block]{\scshape\bfseries\LARGE}{Příloha \thechapter}{10pt}{\vspace{0pt}}[\vspace{-22pt}] %% nastavení nadpisu u příloh
+	
+	
+	
+\end{document}

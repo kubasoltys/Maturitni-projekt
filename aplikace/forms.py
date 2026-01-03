@@ -190,12 +190,9 @@ class HracProfileForm(forms.ModelForm):
         if self.instance and self.instance.birth_date:
             self.fields['birth_date'].initial = self.instance.birth_date
         
-        # Filtrování týmů podle trenéra
         if self.instance and self.instance.trener:
-            # Pokud už má trenéra přiřazeného, zobrazit pouze jeho týmy
             self.fields['tym'].queryset = Tym.objects.filter(trener=self.instance.trener)
         elif args and args[0]:
-            # Pokud je formulář odeslán s daty, zkusit získat trenéra z POST dat
             trener_id = args[0].get('trener')
             if trener_id:
                 try:
@@ -206,7 +203,6 @@ class HracProfileForm(forms.ModelForm):
             else:
                 self.fields['tym'].queryset = Tym.objects.none()
         else:
-            # Pokud není trenér vybrán, zobrazit prázdný seznam týmů
             self.fields['tym'].queryset = Tym.objects.none()
 
     def save(self, commit=True):

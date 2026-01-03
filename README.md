@@ -67,8 +67,17 @@ Chtěl bych, aby aplikace obsahovala:
 
 ## 📚 Zdroje
 
-- **Jak změnit databázi na PostgreSQL** - https://www.youtube.com/watch?v=ZgRkGfoy2nE&t=589s
-- **Jak používat Tailwind** - https://tailwindcss.com/
-- **Django Authentication** - https://docs.djangoproject.com/en/5.2/topics/auth/
-                              https://docs.djangoproject.com/en/5.2/topics/auth/default/#groups
-- **Custom Userm Model v Djangu** - https://testdriven.io/blog/django-custom-user-model/
+* [PostgreSQL Tutorial](https://www.postgresql.org/docs/current/tutorial.html)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [Django Authentication - Topics](https://docs.djangoproject.com/en/5.2/topics/auth/)
+* [Django Authentication - Groups](https://docs.djangoproject.com/en/5.2/topics/auth/default/#groups)
+* [Chart.js - Getting Started](https://www.chartjs.org/docs/latest/getting-started/)
+* [Chart.js - Samples](https://www.chartjs.org/docs/latest/samples/)
+* [Font Awesome Docs](https://fontawesome.com/docs)
+* [Mermaid.js](https://mermaid.js.org/)
+* [Django Custom User Model (TestDriven.io)](https://testdriven.io/blog/django-custom-user-model/)
+* [W3Schools Online Web Tutorials](https://www.w3schools.com/)
+* [W3Schools - CSS Modals](https://www.w3schools.com/howto/howto_css_modals.asp)
+* [How to Dockerize a Django App (Docker Blog)](https://www.docker.com/blog/how-to-dockerize-django-app/)
+* [Django PostgreSQL Migration from SQLite](https://www.youtube.com/watch?v=ZgRkGfoy2nE&t=589s)
+* [Docker With Django Tutorial | How To Dockerize A Django Application](https://www.youtube.com/watch?v=BoM-7VMdo7s)

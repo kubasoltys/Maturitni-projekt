@@ -303,9 +303,6 @@ class HracProfile(models.Model):
             )
 
             if zapas_datetime < now:
-                if hasattr(zapas, "doplnit_nehlasujici_hrace"):
-                    zapas.doplnit_nehlasujici_hrace()
-
                 probehle.append(zapas)
 
         if not probehle:
@@ -423,13 +420,6 @@ class Trenink(models.Model):
     def __str__(self):
         return f"{self.get_typ_display()} — {self.datum} {self.cas.strftime('%H:%M')} ({self.tym})"
 
-    def dochazka_summary(self):
-        total = self.dochazka.count()
-        ano = self.dochazka.filter(pritomen=True).count()
-        ne = self.dochazka.filter(pritomen=False).count()
-        nehlasoval = self.dochazka.filter(pritomen__isnull=True).count()
-        return {'total': total, 'ano': ano, 'ne': ne, 'nehlasoval': nehlasoval}
-
     def doplnit_nehlasujici_hrace(self):
         if not self.tym:
             return
@@ -543,10 +533,6 @@ class Zapas(models.Model):
 
     def __str__(self):
         return f"{self.souper} ({self.datum})"
-
-    @property
-    def je_dokonceny(self):
-        return self.stav == 'Dohráno'
 
 
 # dochazka na zapasy
