@@ -1,0 +1,6399 @@
+[
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-01-03T19:52:32.277Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "2",
+    "object_repr": "p_lyko_trener (Trenér)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-01-03T19:56:24.828Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "1",
+    "object_repr": "SK Komárov \"B\" (Muži)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-01-03T21:28:43.103Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "3",
+    "object_repr": "j_novak_trener (Trenér)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-01-03T21:37:02.561Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Tvůj tým",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-01-03T21:37:54.278Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "4",
+    "object_repr": "hrac1 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-01-03T21:38:16.712Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "5",
+    "object_repr": "hrac2 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-01-03T21:38:48.316Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "6",
+    "object_repr": "hrac3 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-01-03T21:39:07.096Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "7",
+    "object_repr": "hrac4 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-01-03T21:39:22.895Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "8",
+    "object_repr": "hrac5 (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-01-03T22:04:17.838Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Tvůj tým",
+    "action_flag": 2,
+    "change_message": "[{\"changed\": {\"fields\": [\"Stadion\"]}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-01-03T22:27:28.628Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "4",
+    "object_repr": "hrac1 (Hráč)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-01-03T22:27:28.628Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "5",
+    "object_repr": "hrac2 (Hráč)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-01-03T22:27:28.628Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "6",
+    "object_repr": "hrac3 (Hráč)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-01-03T22:27:28.628Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "7",
+    "object_repr": "hrac4 (Hráč)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-01-03T22:27:28.629Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "8",
+    "object_repr": "hrac5 (Hráč)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-01-03T22:27:28.629Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "3",
+    "object_repr": "j_novak_trener (Trenér)",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-01-03T22:27:41.551Z",
+    "user": 1,
+    "content_type": 8,
+    "object_id": "2",
+    "object_repr": "Tvůj tým",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-01-03T22:44:35.785Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "9",
+    "object_repr": "p_beinhauer (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-01-03T22:44:55.404Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "10",
+    "object_repr": "p_kubik (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-01-03T22:45:10.651Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "11",
+    "object_repr": "v_pawlik (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-01-03T22:45:27.879Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "12",
+    "object_repr": "d_straznicky (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-01-03T22:45:50.618Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "13",
+    "object_repr": "d_grabias (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-01-03T22:46:09.628Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "14",
+    "object_repr": "m_novak (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-01-03T22:46:30.396Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "15",
+    "object_repr": "m_binar (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-01-03T22:46:46.643Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "16",
+    "object_repr": "o_hecko (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-01-03T22:47:23.997Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "17",
+    "object_repr": "p_maculik (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-01-03T22:47:44.877Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "18",
+    "object_repr": "m_lexa (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-01-03T22:48:00.651Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "19",
+    "object_repr": "s_hecko (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-01-03T22:48:33.307Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "20",
+    "object_repr": "p_holan (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2026-01-03T22:48:48.484Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "21",
+    "object_repr": "a_tomas (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2026-01-03T22:49:04.319Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "22",
+    "object_repr": "a_kirchner (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2026-01-03T22:49:24.528Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "23",
+    "object_repr": "p_vrba (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 33,
+  "fields": {
+    "action_time": "2026-01-03T22:49:41.006Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "24",
+    "object_repr": "r_kohan (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 34,
+  "fields": {
+    "action_time": "2026-01-03T22:49:57.985Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "25",
+    "object_repr": "l_kerlin (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 35,
+  "fields": {
+    "action_time": "2026-01-03T22:50:24.327Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "26",
+    "object_repr": "s_adamcik (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 36,
+  "fields": {
+    "action_time": "2026-01-03T22:50:40.336Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "27",
+    "object_repr": "a_martinek (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 37,
+  "fields": {
+    "action_time": "2026-01-03T22:50:55.452Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "28",
+    "object_repr": "d_klapetek (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 38,
+  "fields": {
+    "action_time": "2026-01-03T22:51:10.755Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "29",
+    "object_repr": "t_vojkuvka (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 39,
+  "fields": {
+    "action_time": "2026-01-03T22:51:30.498Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "30",
+    "object_repr": "j_duskevic (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 40,
+  "fields": {
+    "action_time": "2026-01-03T22:51:51.907Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "31",
+    "object_repr": "d_reptisak (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 41,
+  "fields": {
+    "action_time": "2026-01-03T22:52:07.324Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "32",
+    "object_repr": "t_kyjovsky (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 42,
+  "fields": {
+    "action_time": "2026-01-03T22:52:21.925Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "33",
+    "object_repr": "m_subert (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 43,
+  "fields": {
+    "action_time": "2026-01-03T22:52:39.510Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "34",
+    "object_repr": "v_dietrich (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 44,
+  "fields": {
+    "action_time": "2026-01-03T22:52:53.436Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "35",
+    "object_repr": "j_srubek (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 45,
+  "fields": {
+    "action_time": "2026-01-03T22:53:14.931Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "36",
+    "object_repr": "s_n_nguyen (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 46,
+  "fields": {
+    "action_time": "2026-01-03T22:53:39.639Z",
+    "user": 1,
+    "content_type": 6,
+    "object_id": "37",
+    "object_repr": "i_n_nguyen (Hráč)",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 1,
+  "fields": {
+    "name": "Can add log entry",
+    "content_type": 1,
+    "codename": "add_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 2,
+  "fields": {
+    "name": "Can change log entry",
+    "content_type": 1,
+    "codename": "change_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 3,
+  "fields": {
+    "name": "Can delete log entry",
+    "content_type": 1,
+    "codename": "delete_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 4,
+  "fields": {
+    "name": "Can view log entry",
+    "content_type": 1,
+    "codename": "view_logentry"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 5,
+  "fields": {
+    "name": "Can add permission",
+    "content_type": 2,
+    "codename": "add_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 6,
+  "fields": {
+    "name": "Can change permission",
+    "content_type": 2,
+    "codename": "change_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 7,
+  "fields": {
+    "name": "Can delete permission",
+    "content_type": 2,
+    "codename": "delete_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 8,
+  "fields": {
+    "name": "Can view permission",
+    "content_type": 2,
+    "codename": "view_permission"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 9,
+  "fields": {
+    "name": "Can add group",
+    "content_type": 3,
+    "codename": "add_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 10,
+  "fields": {
+    "name": "Can change group",
+    "content_type": 3,
+    "codename": "change_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 11,
+  "fields": {
+    "name": "Can delete group",
+    "content_type": 3,
+    "codename": "delete_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 12,
+  "fields": {
+    "name": "Can view group",
+    "content_type": 3,
+    "codename": "view_group"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 13,
+  "fields": {
+    "name": "Can add content type",
+    "content_type": 4,
+    "codename": "add_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 14,
+  "fields": {
+    "name": "Can change content type",
+    "content_type": 4,
+    "codename": "change_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 15,
+  "fields": {
+    "name": "Can delete content type",
+    "content_type": 4,
+    "codename": "delete_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 16,
+  "fields": {
+    "name": "Can view content type",
+    "content_type": 4,
+    "codename": "view_contenttype"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 17,
+  "fields": {
+    "name": "Can add session",
+    "content_type": 5,
+    "codename": "add_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 18,
+  "fields": {
+    "name": "Can change session",
+    "content_type": 5,
+    "codename": "change_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 19,
+  "fields": {
+    "name": "Can delete session",
+    "content_type": 5,
+    "codename": "delete_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 20,
+  "fields": {
+    "name": "Can view session",
+    "content_type": 5,
+    "codename": "view_session"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 21,
+  "fields": {
+    "name": "Can add user",
+    "content_type": 6,
+    "codename": "add_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 22,
+  "fields": {
+    "name": "Can change user",
+    "content_type": 6,
+    "codename": "change_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 23,
+  "fields": {
+    "name": "Can delete user",
+    "content_type": 6,
+    "codename": "delete_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 24,
+  "fields": {
+    "name": "Can view user",
+    "content_type": 6,
+    "codename": "view_user"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 25,
+  "fields": {
+    "name": "Can add Trenér",
+    "content_type": 7,
+    "codename": "add_trenerprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 26,
+  "fields": {
+    "name": "Can change Trenér",
+    "content_type": 7,
+    "codename": "change_trenerprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 27,
+  "fields": {
+    "name": "Can delete Trenér",
+    "content_type": 7,
+    "codename": "delete_trenerprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 28,
+  "fields": {
+    "name": "Can view Trenér",
+    "content_type": 7,
+    "codename": "view_trenerprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 29,
+  "fields": {
+    "name": "Can add Tým",
+    "content_type": 8,
+    "codename": "add_tym"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 30,
+  "fields": {
+    "name": "Can change Tým",
+    "content_type": 8,
+    "codename": "change_tym"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 31,
+  "fields": {
+    "name": "Can delete Tým",
+    "content_type": 8,
+    "codename": "delete_tym"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 32,
+  "fields": {
+    "name": "Can view Tým",
+    "content_type": 8,
+    "codename": "view_tym"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 33,
+  "fields": {
+    "name": "Can add Trénink",
+    "content_type": 9,
+    "codename": "add_trenink"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 34,
+  "fields": {
+    "name": "Can change Trénink",
+    "content_type": 9,
+    "codename": "change_trenink"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 35,
+  "fields": {
+    "name": "Can delete Trénink",
+    "content_type": 9,
+    "codename": "delete_trenink"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 36,
+  "fields": {
+    "name": "Can view Trénink",
+    "content_type": 9,
+    "codename": "view_trenink"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 37,
+  "fields": {
+    "name": "Can add Hráč",
+    "content_type": 10,
+    "codename": "add_hracprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 38,
+  "fields": {
+    "name": "Can change Hráč",
+    "content_type": 10,
+    "codename": "change_hracprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 39,
+  "fields": {
+    "name": "Can delete Hráč",
+    "content_type": 10,
+    "codename": "delete_hracprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 40,
+  "fields": {
+    "name": "Can view Hráč",
+    "content_type": 10,
+    "codename": "view_hracprofile"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 41,
+  "fields": {
+    "name": "Can add Zápas",
+    "content_type": 11,
+    "codename": "add_zapas"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 42,
+  "fields": {
+    "name": "Can change Zápas",
+    "content_type": 11,
+    "codename": "change_zapas"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 43,
+  "fields": {
+    "name": "Can delete Zápas",
+    "content_type": 11,
+    "codename": "delete_zapas"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 44,
+  "fields": {
+    "name": "Can view Zápas",
+    "content_type": 11,
+    "codename": "view_zapas"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 45,
+  "fields": {
+    "name": "Can add Docházka na trénink",
+    "content_type": 12,
+    "codename": "add_dochazkatreninky"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 46,
+  "fields": {
+    "name": "Can change Docházka na trénink",
+    "content_type": 12,
+    "codename": "change_dochazkatreninky"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 47,
+  "fields": {
+    "name": "Can delete Docházka na trénink",
+    "content_type": 12,
+    "codename": "delete_dochazkatreninky"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 48,
+  "fields": {
+    "name": "Can view Docházka na trénink",
+    "content_type": 12,
+    "codename": "view_dochazkatreninky"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 49,
+  "fields": {
+    "name": "Can add Docházka na zápas",
+    "content_type": 13,
+    "codename": "add_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 50,
+  "fields": {
+    "name": "Can change Docházka na zápas",
+    "content_type": 13,
+    "codename": "change_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 51,
+  "fields": {
+    "name": "Can delete Docházka na zápas",
+    "content_type": 13,
+    "codename": "delete_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 52,
+  "fields": {
+    "name": "Can view Docházka na zápas",
+    "content_type": 13,
+    "codename": "view_dochazkazapasy"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 53,
+  "fields": {
+    "name": "Can add Gól",
+    "content_type": 14,
+    "codename": "add_gol"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 54,
+  "fields": {
+    "name": "Can change Gól",
+    "content_type": 14,
+    "codename": "change_gol"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 55,
+  "fields": {
+    "name": "Can delete Gól",
+    "content_type": 14,
+    "codename": "delete_gol"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 56,
+  "fields": {
+    "name": "Can view Gól",
+    "content_type": 14,
+    "codename": "view_gol"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 57,
+  "fields": {
+    "name": "Can add Karta",
+    "content_type": 15,
+    "codename": "add_karta"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 58,
+  "fields": {
+    "name": "Can change Karta",
+    "content_type": 15,
+    "codename": "change_karta"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 59,
+  "fields": {
+    "name": "Can delete Karta",
+    "content_type": 15,
+    "codename": "delete_karta"
+  }
+},
+{
+  "model": "auth.permission",
+  "pk": 60,
+  "fields": {
+    "name": "Can view Karta",
+    "content_type": 15,
+    "codename": "view_karta"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 1,
+  "fields": {
+    "app_label": "admin",
+    "model": "logentry"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 2,
+  "fields": {
+    "app_label": "auth",
+    "model": "permission"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 3,
+  "fields": {
+    "app_label": "auth",
+    "model": "group"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 4,
+  "fields": {
+    "app_label": "contenttypes",
+    "model": "contenttype"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 5,
+  "fields": {
+    "app_label": "sessions",
+    "model": "session"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 6,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "user"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 7,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "trenerprofile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 8,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "tym"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 9,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "trenink"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 10,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "hracprofile"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 11,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "zapas"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 12,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "dochazkatreninky"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 13,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "dochazkazapasy"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 14,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "gol"
+  }
+},
+{
+  "model": "contenttypes.contenttype",
+  "pk": 15,
+  "fields": {
+    "app_label": "aplikace",
+    "model": "karta"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "q8b9xk154vcvhkltzi8d79p5ad23mym3",
+  "fields": {
+    "session_data": ".eJxVjDEOwyAQBP9CHSHAhzEp0_sN6IC74CTCkrGrKH-PLblImi12ZvctAm5rCVujJUxZXEUnLr9dxPSkeoD8wHqfZZrrukxRHoo8aZPjnOl1O92_g4Kt7OvBGcWgGI13Hgh6YKIYlVGaLEZIWSfs9rQaeh7IE1iFlJVjnYBZfL7pBjiH:1uLpj4:myY1aRQOROwgT9NqvKAmP7j7Pz04lzGWcQd8vt-1lio",
+    "expire_date": "2025-06-15T20:56:14.273Z"
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$FwCBKdZjqEe4Tpt1LMJacy$gpxmrZZu2uBuL99CNMBbEs3Zv+YanrrnyeJ+AYAVrAU=",
+    "last_login": "2026-01-03T22:26:58.077Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "it2227@sspu-opava.cz",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2026-01-03T19:42:24.251Z",
+    "role": "admin",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$PftkUQnAQmFy70QoP3aA5F$VzzrGIqJVk/DBF3bWyJcny2g67jsUkbMVgH71JJ8dZI=",
+    "last_login": "2026-01-04T00:39:41.725Z",
+    "is_superuser": false,
+    "username": "p_lyko_trener",
+    "first_name": "",
+    "last_name": "",
+    "email": "p.lyko@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T19:52:32.128Z",
+    "role": "trener",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$QxVBWIvUXL8lA9IaxYH8KA$5Jbg7zBdk3A1FYvjAHzo6PsmW3Ii7amPEs2daTn9U0Y=",
+    "last_login": "2025-07-03T22:09:08.003Z",
+    "is_superuser": false,
+    "username": "p_beinhauer",
+    "first_name": "",
+    "last_name": "",
+    "email": "p.beinhauer@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:44:35.600Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 10,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$THLa6el1huqWSoLr37nk13$FfPYUl+uTGEMe1qogoTy0LWq8yKnVv4fLxYlBSQk9QA=",
+    "last_login": "2025-07-03T22:12:39.057Z",
+    "is_superuser": false,
+    "username": "p_kubik",
+    "first_name": "",
+    "last_name": "",
+    "email": "p.kubik@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:44:55.229Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 11,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$7aMEiSc1aDaGKt3jCufjf4$0eBDe+H4/AfQx382SnhBS6DzlMzGF4R9xrzFn8TUPy0=",
+    "last_login": "2025-07-03T22:20:54.539Z",
+    "is_superuser": false,
+    "username": "v_pawlik",
+    "first_name": "",
+    "last_name": "",
+    "email": "v.pawlik@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:45:10.473Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 12,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$BTABS9eV7XDllgBetYMZUa$JRh55g5HHXRWEhguVh1OSRnOS9YhYqKk9/HPP22+rt0=",
+    "last_login": "2025-07-03T22:21:26.668Z",
+    "is_superuser": false,
+    "username": "d_straznicky",
+    "first_name": "",
+    "last_name": "",
+    "email": "d.straznicky@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:45:27.705Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 13,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$44J0qGXtew2yeJ0EiTWWBW$bqXQCzBORzpMmBhOoRXAFXr2QKO9kRJP/jhR9crGN1k=",
+    "last_login": "2025-07-03T22:25:43.592Z",
+    "is_superuser": false,
+    "username": "d_grabias",
+    "first_name": "",
+    "last_name": "",
+    "email": "d.grabias@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:45:50.440Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 14,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$yKttmVR6yDttpsInDnxQrQ$1a2ZHy7pkLv6gZAUPN10cNT16pms79nFlE8g2l/R3JE=",
+    "last_login": "2025-07-03T22:28:18.194Z",
+    "is_superuser": false,
+    "username": "m_novak",
+    "first_name": "",
+    "last_name": "",
+    "email": "m.novak@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:46:09.453Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 15,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$EUy5ABBApzvsOzxLTdINaD$IDGKeyAMNPkwvwREp+IgPRMiWlUfYwsUHXQiohBu/Dk=",
+    "last_login": "2025-07-03T22:31:04.325Z",
+    "is_superuser": false,
+    "username": "m_binar",
+    "first_name": "",
+    "last_name": "",
+    "email": "m.binar@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:46:30.220Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 16,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$6GMgPlrnx5wbaTqcxZcvpy$uDAja5jtNm+YwdQLF0ZSqyZHUD0a0+fOhMKZg3tJE4Y=",
+    "last_login": "2025-07-03T22:33:32.919Z",
+    "is_superuser": false,
+    "username": "o_hecko",
+    "first_name": "",
+    "last_name": "",
+    "email": "o.hecko@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:46:46.468Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 17,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$BGAnRHoc1s0nHieEjIm4Sw$RnHr44oY90g0OIHbM+VYf4OcoZjmAUG9aHkMO0yxD2U=",
+    "last_login": "2025-07-03T22:36:18.879Z",
+    "is_superuser": false,
+    "username": "p_maculik",
+    "first_name": "",
+    "last_name": "",
+    "email": "p.maculik@gmailc.om",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:47:23.820Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 18,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$qAkgWEWYubArpe3jLeJ1UO$wD6W3A+iaYEj619DURLZOVD/RJJJQr+ECZNxX5iAv6M=",
+    "last_login": "2025-07-03T22:39:30.785Z",
+    "is_superuser": false,
+    "username": "m_lexa",
+    "first_name": "",
+    "last_name": "",
+    "email": "m.lexa@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:47:44.702Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 19,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$QfEP8DFkRe5aZDJP30OBXm$ZFFQgPgqjqL6I3qRfiKeR8ARW+MeHAmmFimr3YbeqQ0=",
+    "last_login": "2025-07-03T22:42:32.223Z",
+    "is_superuser": false,
+    "username": "s_hecko",
+    "first_name": "",
+    "last_name": "",
+    "email": "s.hecko@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:48:00.470Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 20,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$0eWTZODhLkfPXkXjXEowMB$jIrgbiV9SIxEjoVQVhSc4mK2PLBFO8Qh2yVvdmxiG+c=",
+    "last_login": "2025-07-03T22:45:22.218Z",
+    "is_superuser": false,
+    "username": "p_holan",
+    "first_name": "",
+    "last_name": "",
+    "email": "p.holan@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:48:33.134Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 21,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$iBHoHDyiGELii7Xyg8nSKl$+arN8l9V7cbLGmILSM+tEU74058oedYVfMmh4Xu7ncs=",
+    "last_login": "2025-07-03T22:48:12.334Z",
+    "is_superuser": false,
+    "username": "a_tomas",
+    "first_name": "",
+    "last_name": "",
+    "email": "a.tomas@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:48:48.307Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 22,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$MU4Z7QSw2klOS2sdlakLv6$ahmSq1S7KM7DeK9s9M8/iJS6dP6qtQYWofkdyahHhaU=",
+    "last_login": "2025-07-03T22:50:45.075Z",
+    "is_superuser": false,
+    "username": "a_kirchner",
+    "first_name": "",
+    "last_name": "",
+    "email": "a.kirchner@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:49:04.144Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 23,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$mGfummNMJ6bBONe1DTHk5A$c/bXNWVLhukk9TBb/jfnaXMRs45Uw7iojzbR+6PIlS8=",
+    "last_login": "2025-07-03T22:53:15.939Z",
+    "is_superuser": false,
+    "username": "p_vrba",
+    "first_name": "",
+    "last_name": "",
+    "email": "p.vrba@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:49:24.348Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 24,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$nHRXi5Sr5qgTetK144WEqf$ZIjpF8qX40Skn3YLw9It2mLG6Az3OXL85aiQM+b4NCI=",
+    "last_login": "2025-07-03T22:56:42.806Z",
+    "is_superuser": false,
+    "username": "r_kohan",
+    "first_name": "",
+    "last_name": "",
+    "email": "r.kohan@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:49:40.829Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 25,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$QfalzIjZdS4CWAoJNSeEyI$t7zKAFUv0RDSwXzb7kPNl5KDVUqXF26nPd4B1lpuc6g=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "l_kerlin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:49:57.807Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 26,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$pHSBzOjQkr0Zq8yAozjfSE$2EDbboIaU+6rl6SH8dEkxu3VQ3cb8QjKXDDJMKIBo5w=",
+    "last_login": "2025-07-03T23:02:37.737Z",
+    "is_superuser": false,
+    "username": "s_adamcik",
+    "first_name": "",
+    "last_name": "",
+    "email": "s.adamcik@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:50:24.151Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 27,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$Zq6rCExOvMbqLYrMHcq1Ws$R5x9BUdkR79ojuBU0NwkaLqOOP5d0klpl2nwHDuLbSc=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "a_martinek",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:50:40.156Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 28,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$sXWZxEc5vNt9wNymFOsocg$k6QwJwQ/J/y9ryIEa2CtMquSF14YXKq6CNxTyobiEIM=",
+    "last_login": "2025-07-03T23:06:05.355Z",
+    "is_superuser": false,
+    "username": "d_klapetek",
+    "first_name": "",
+    "last_name": "",
+    "email": "d.klapetek@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:50:55.277Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 29,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$oyI5gcwZQOn9uijJp8lDSh$Iyiy0KZe7cEwCWDCT6W8FMTthjTcSf0H8ptMMr+7+e8=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "t_vojkuvka",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:51:10.577Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 30,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$SaX6kx4N8CymGnNa75F6HD$SuSw7v+E3npakWmcYHFkKlMamaiVsZEnM5qcyW+B5Ao=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "j_duskevic",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:51:30.325Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 31,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$CoqAaR3BEz2jcmb6VjdlmO$9MGhAzmNqUYYraYd3ggfTXekeIXi4+2iCBr1kmdibKM=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "d_reptisak",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:51:51.730Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 32,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$x4BTYXpsCZYgZnEPuFBd19$lGwU1VTXGylh6r318QEWYcndr9kSjeNreoEQSbO5bLg=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "t_kyjovsky",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:52:07.150Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 33,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$1uWQLbIKUeVMf1ON13fpcl$qIZOFTgATWesNDHtjKDB75rrlHWuFGHXmp6+158vPm0=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "m_subert",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:52:21.747Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 34,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$do80TwrCAN3FWfTXHt8iMI$8KNNanzaHyJSMPZ4IOYCTqQcMWa9T1xwRVaXFcgC/nw=",
+    "last_login": "2025-07-03T22:59:28.262Z",
+    "is_superuser": false,
+    "username": "v_dietrich",
+    "first_name": "",
+    "last_name": "",
+    "email": "v.dietrich@gmail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:52:39.336Z",
+    "role": "hrac",
+    "first_login": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 35,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$cHB3QwUSUcULrwIkuw7EMS$X4Ur2C26o7LOQxIrn69xaDvyqrKE3kWjz4ZrkUKuG1s=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "j_srubek",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:52:53.259Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 36,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$1T36zw4wpzfuoe9EBJJ33h$xI7G8o46y4nlkm3oxFI9R5p0DLtVZpoF2QCBrWwweac=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "s_n_nguyen",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:53:14.755Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.user",
+  "pk": 37,
+  "fields": {
+    "password": "pbkdf2_sha256$1000000$4imHWUv8wFcruLPzQR510P$y/MYZX//YechJSett/9eDyD91A5QYCCkvTBAOvJXBmo=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "i_n_nguyen",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2026-01-03T22:53:39.460Z",
+    "role": "hrac",
+    "first_login": true,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "aplikace.trenerprofile",
+  "pk": 1,
+  "fields": {
+    "user": 2,
+    "first_name": "Pavel",
+    "last_name": "Lyko",
+    "phone": "7375355795",
+    "birth_date": "1980-12-03",
+    "photo": "trener_photo/sk_komarov_Y698IT6.png",
+    "created_at": "2026-01-03T19:52:32.276Z",
+    "updated_at": "2026-01-04T00:43:02.460Z"
+  }
+},
+{
+  "model": "aplikace.tym",
+  "pk": 1,
+  "fields": {
+    "nazev": "SK Komárov \"B\"",
+    "kategorie": "Muži",
+    "trener": 1,
+    "stadion": "Tovární 342/2",
+    "mesto": "Opava, Komárov",
+    "logo": "klub_photo/sk_komarov_YJduxlO.png"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 6,
+  "fields": {
+    "user": 9,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Petr",
+    "last_name": "Beinhauer",
+    "phone": "7358523816",
+    "birth_date": "2006-06-30",
+    "height": 186,
+    "weight": 88,
+    "cislo_dresu": 1,
+    "pozice": "GK",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:44:35.783Z",
+    "updated_at": "2025-07-03T22:09:59.632Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 7,
+  "fields": {
+    "user": 10,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Petr",
+    "last_name": "Kubík",
+    "phone": "7358523816",
+    "birth_date": "2005-09-11",
+    "height": 178,
+    "weight": 75,
+    "cislo_dresu": 13,
+    "pozice": "LB",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:44:55.403Z",
+    "updated_at": "2025-07-03T22:14:05.966Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 8,
+  "fields": {
+    "user": 11,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Vojtěch",
+    "last_name": "Pawlik",
+    "phone": "7358523816",
+    "birth_date": "2006-07-13",
+    "height": 192,
+    "weight": 90,
+    "cislo_dresu": 14,
+    "pozice": "CB",
+    "preferred_foot": "Levá",
+    "photo": "",
+    "created_at": "2026-01-03T22:45:10.649Z",
+    "updated_at": "2025-07-03T22:17:50.731Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 9,
+  "fields": {
+    "user": 12,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "David",
+    "last_name": "Strážnický",
+    "phone": "7358523816",
+    "birth_date": "2005-05-24",
+    "height": 186,
+    "weight": 85,
+    "cislo_dresu": 17,
+    "pozice": "CB",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:45:27.878Z",
+    "updated_at": "2025-07-03T22:22:20.529Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 10,
+  "fields": {
+    "user": 13,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Daniel",
+    "last_name": "Grabiáš",
+    "phone": "7358523816",
+    "birth_date": "2004-06-08",
+    "height": 169,
+    "weight": 70,
+    "cislo_dresu": 27,
+    "pozice": "RB",
+    "preferred_foot": "Levá",
+    "photo": "",
+    "created_at": "2026-01-03T22:45:50.616Z",
+    "updated_at": "2025-07-03T22:26:28.860Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 11,
+  "fields": {
+    "user": 14,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Martin",
+    "last_name": "Novák",
+    "phone": "7358523816",
+    "birth_date": "2001-07-07",
+    "height": 187,
+    "weight": 79,
+    "cislo_dresu": 30,
+    "pozice": "LM",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:46:09.627Z",
+    "updated_at": "2025-07-03T22:29:09.322Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 12,
+  "fields": {
+    "user": 15,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Matěj",
+    "last_name": "Binar",
+    "phone": "7358523816",
+    "birth_date": "2005-09-28",
+    "height": 180,
+    "weight": 78,
+    "cislo_dresu": 37,
+    "pozice": "CB",
+    "preferred_foot": "Levá",
+    "photo": "",
+    "created_at": "2026-01-03T22:46:30.395Z",
+    "updated_at": "2025-07-03T22:32:06.431Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 13,
+  "fields": {
+    "user": 16,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Ondřej",
+    "last_name": "Hečko",
+    "phone": "7358523816",
+    "birth_date": "2001-05-04",
+    "height": 174,
+    "weight": 76,
+    "cislo_dresu": 41,
+    "pozice": "RM",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:46:46.641Z",
+    "updated_at": "2025-07-03T22:34:32.531Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 14,
+  "fields": {
+    "user": 17,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Patrik",
+    "last_name": "Maculík",
+    "phone": "7358523816",
+    "birth_date": "2006-10-14",
+    "height": 179,
+    "weight": 71,
+    "cislo_dresu": 42,
+    "pozice": "LW",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:47:23.995Z",
+    "updated_at": "2025-07-03T22:37:22.182Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 15,
+  "fields": {
+    "user": 18,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Matěj",
+    "last_name": "Lexa",
+    "phone": "7358523816",
+    "birth_date": "2005-06-30",
+    "height": 185,
+    "weight": 87,
+    "cislo_dresu": 66,
+    "pozice": "ST",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:47:44.876Z",
+    "updated_at": "2025-07-03T22:40:20.808Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 16,
+  "fields": {
+    "user": 19,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Štěpán",
+    "last_name": "Hečko",
+    "phone": "7358523816",
+    "birth_date": "2006-05-21",
+    "height": 170,
+    "weight": 70,
+    "cislo_dresu": 69,
+    "pozice": "RW",
+    "preferred_foot": "Levá",
+    "photo": "",
+    "created_at": "2026-01-03T22:48:00.650Z",
+    "updated_at": "2025-07-03T22:43:30.988Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 17,
+  "fields": {
+    "user": 20,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Patrik",
+    "last_name": "Holaň",
+    "phone": "7358523816",
+    "birth_date": "2005-09-04",
+    "height": 178,
+    "weight": 77,
+    "cislo_dresu": 3,
+    "pozice": "CM",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:48:33.306Z",
+    "updated_at": "2025-07-03T22:46:09.040Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 18,
+  "fields": {
+    "user": 21,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Adam",
+    "last_name": "Tomáš",
+    "phone": "7358523816",
+    "birth_date": "2007-07-16",
+    "height": 193,
+    "weight": 94,
+    "cislo_dresu": 5,
+    "pozice": "ST",
+    "preferred_foot": "Levá",
+    "photo": "",
+    "created_at": "2026-01-03T22:48:48.483Z",
+    "updated_at": "2025-07-03T22:49:05.758Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 19,
+  "fields": {
+    "user": 22,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Adam",
+    "last_name": "Kirchner",
+    "phone": "7358523816",
+    "birth_date": "2003-05-27",
+    "height": 186,
+    "weight": 82,
+    "cislo_dresu": 6,
+    "pozice": "CB",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:49:04.317Z",
+    "updated_at": "2025-07-03T22:51:34.205Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 20,
+  "fields": {
+    "user": 23,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Patrik",
+    "last_name": "Vrba",
+    "phone": "7358523816",
+    "birth_date": "2004-12-12",
+    "height": 175,
+    "weight": 80,
+    "cislo_dresu": 8,
+    "pozice": "RM",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:49:24.527Z",
+    "updated_at": "2025-07-03T22:54:07.542Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 21,
+  "fields": {
+    "user": 24,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Radek",
+    "last_name": "Kohan",
+    "phone": "7358523816",
+    "birth_date": "2006-05-14",
+    "height": 170,
+    "weight": 71,
+    "cislo_dresu": 9,
+    "pozice": "LW",
+    "preferred_foot": "Levá",
+    "photo": "",
+    "created_at": "2026-01-03T22:49:41.004Z",
+    "updated_at": "2025-07-03T22:57:29.814Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 22,
+  "fields": {
+    "user": 25,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:49:57.984Z",
+    "updated_at": "2026-01-03T22:49:57.984Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 23,
+  "fields": {
+    "user": 26,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Šimon",
+    "last_name": "Adamčík",
+    "phone": "7358523816",
+    "birth_date": "2004-02-09",
+    "height": 175,
+    "weight": 76,
+    "cislo_dresu": 4,
+    "pozice": "RB",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:50:24.326Z",
+    "updated_at": "2025-07-03T23:04:23.303Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 24,
+  "fields": {
+    "user": 27,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:50:40.333Z",
+    "updated_at": "2026-01-03T22:50:40.333Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 25,
+  "fields": {
+    "user": 28,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Dominik",
+    "last_name": "Klapetek",
+    "phone": "7358523816",
+    "birth_date": "2006-06-23",
+    "height": 178,
+    "weight": 75,
+    "cislo_dresu": 15,
+    "pozice": "ST",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:50:55.451Z",
+    "updated_at": "2025-07-03T23:07:00.992Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 26,
+  "fields": {
+    "user": 29,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:51:10.754Z",
+    "updated_at": "2026-01-03T22:51:10.754Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 27,
+  "fields": {
+    "user": 30,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:51:30.497Z",
+    "updated_at": "2026-01-03T22:51:30.497Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 28,
+  "fields": {
+    "user": 31,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:51:51.906Z",
+    "updated_at": "2026-01-03T22:51:51.906Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 29,
+  "fields": {
+    "user": 32,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:52:07.322Z",
+    "updated_at": "2026-01-03T22:52:07.323Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 30,
+  "fields": {
+    "user": 33,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:52:21.923Z",
+    "updated_at": "2026-01-03T22:52:21.923Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 31,
+  "fields": {
+    "user": 34,
+    "trener": 1,
+    "tym": 1,
+    "first_name": "Vít",
+    "last_name": "Dietrich",
+    "phone": "7358523816",
+    "birth_date": "2007-08-30",
+    "height": 190,
+    "weight": 87,
+    "cislo_dresu": 23,
+    "pozice": "LM",
+    "preferred_foot": "Pravá",
+    "photo": "",
+    "created_at": "2026-01-03T22:52:39.508Z",
+    "updated_at": "2025-07-03T23:00:59.211Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 32,
+  "fields": {
+    "user": 35,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:52:53.434Z",
+    "updated_at": "2026-01-03T22:52:53.434Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 33,
+  "fields": {
+    "user": 36,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:53:14.930Z",
+    "updated_at": "2026-01-03T22:53:14.930Z"
+  }
+},
+{
+  "model": "aplikace.hracprofile",
+  "pk": 34,
+  "fields": {
+    "user": 37,
+    "trener": null,
+    "tym": null,
+    "first_name": null,
+    "last_name": null,
+    "phone": null,
+    "birth_date": null,
+    "height": null,
+    "weight": null,
+    "cislo_dresu": null,
+    "pozice": null,
+    "preferred_foot": null,
+    "photo": "",
+    "created_at": "2026-01-03T22:53:39.638Z",
+    "updated_at": "2026-01-03T22:53:39.638Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 2,
+  "fields": {
+    "tym": 1,
+    "datum": "2025-08-15",
+    "cas": "11:00:00",
+    "typ": "Fyzická příprava",
+    "poznamka": "Výběh",
+    "stav": "Naplánováno",
+    "created_at": "2025-07-03T22:06:39.738Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 3,
+  "fields": {
+    "tym": 1,
+    "datum": "2025-08-22",
+    "cas": "12:00:00",
+    "typ": "Taktická připrava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-07-03T22:07:01.183Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 4,
+  "fields": {
+    "tym": 1,
+    "datum": "2025-08-30",
+    "cas": "10:30:00",
+    "typ": "Fyzická příprava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-07-03T22:07:36.150Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 5,
+  "fields": {
+    "tym": 1,
+    "datum": "2025-09-05",
+    "cas": "14:00:00",
+    "typ": "Jiný",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2025-07-03T22:07:59.570Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 6,
+  "fields": {
+    "tym": 1,
+    "datum": "2026-01-17",
+    "cas": "11:30:00",
+    "typ": "Fyzická příprava",
+    "poznamka": "Výběh",
+    "stav": "Naplánováno",
+    "created_at": "2026-01-04T00:41:44.976Z"
+  }
+},
+{
+  "model": "aplikace.trenink",
+  "pk": 7,
+  "fields": {
+    "tym": 1,
+    "datum": "2026-02-09",
+    "cas": "09:30:00",
+    "typ": "Taktická připrava",
+    "poznamka": "",
+    "stav": "Naplánováno",
+    "created_at": "2026-01-04T00:42:07.308Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 6,
+  "fields": {
+    "trenink": 2,
+    "hrac": 6,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:11:40.243Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 7,
+  "fields": {
+    "trenink": 3,
+    "hrac": 6,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:11:42.019Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 8,
+  "fields": {
+    "trenink": 4,
+    "hrac": 6,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:11:43.746Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 9,
+  "fields": {
+    "trenink": 5,
+    "hrac": 6,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:11:48.427Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 10,
+  "fields": {
+    "trenink": 2,
+    "hrac": 7,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:16:31.775Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 11,
+  "fields": {
+    "trenink": 3,
+    "hrac": 7,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:16:34.042Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 12,
+  "fields": {
+    "trenink": 4,
+    "hrac": 7,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:16:35.792Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 13,
+  "fields": {
+    "trenink": 5,
+    "hrac": 7,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:16:37.753Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 14,
+  "fields": {
+    "trenink": 2,
+    "hrac": 8,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:21:03.125Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 15,
+  "fields": {
+    "trenink": 3,
+    "hrac": 8,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:21:05.073Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 16,
+  "fields": {
+    "trenink": 4,
+    "hrac": 8,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:21:07.366Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 17,
+  "fields": {
+    "trenink": 5,
+    "hrac": 8,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:21:09.673Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 18,
+  "fields": {
+    "trenink": 2,
+    "hrac": 9,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:25:19.802Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 19,
+  "fields": {
+    "trenink": 3,
+    "hrac": 9,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:25:21.923Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 20,
+  "fields": {
+    "trenink": 4,
+    "hrac": 9,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:25:23.941Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 21,
+  "fields": {
+    "trenink": 5,
+    "hrac": 9,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:25:26.622Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 22,
+  "fields": {
+    "trenink": 2,
+    "hrac": 10,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:27:53.148Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 23,
+  "fields": {
+    "trenink": 3,
+    "hrac": 10,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:27:54.859Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 24,
+  "fields": {
+    "trenink": 4,
+    "hrac": 10,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:27:57.633Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 25,
+  "fields": {
+    "trenink": 5,
+    "hrac": 10,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:28:00.350Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 26,
+  "fields": {
+    "trenink": 2,
+    "hrac": 11,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:30:39.866Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 27,
+  "fields": {
+    "trenink": 3,
+    "hrac": 11,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:30:42.651Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 28,
+  "fields": {
+    "trenink": 4,
+    "hrac": 11,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:30:44.752Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 29,
+  "fields": {
+    "trenink": 5,
+    "hrac": 11,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:30:46.831Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 30,
+  "fields": {
+    "trenink": 2,
+    "hrac": 12,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:33:08.019Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 31,
+  "fields": {
+    "trenink": 3,
+    "hrac": 12,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:33:09.529Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 32,
+  "fields": {
+    "trenink": 4,
+    "hrac": 12,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:33:11.446Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 33,
+  "fields": {
+    "trenink": 5,
+    "hrac": 12,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:33:13.886Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 34,
+  "fields": {
+    "trenink": 2,
+    "hrac": 13,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:35:47.239Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 35,
+  "fields": {
+    "trenink": 3,
+    "hrac": 13,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:35:49.534Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 36,
+  "fields": {
+    "trenink": 4,
+    "hrac": 13,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:35:51.747Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 37,
+  "fields": {
+    "trenink": 5,
+    "hrac": 13,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:35:53.729Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 38,
+  "fields": {
+    "trenink": 2,
+    "hrac": 14,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:38:57.796Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 39,
+  "fields": {
+    "trenink": 3,
+    "hrac": 14,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:38:59.490Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 40,
+  "fields": {
+    "trenink": 4,
+    "hrac": 14,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:39:02.221Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 41,
+  "fields": {
+    "trenink": 5,
+    "hrac": 14,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:39:04.398Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 42,
+  "fields": {
+    "trenink": 2,
+    "hrac": 15,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:42:03.004Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 43,
+  "fields": {
+    "trenink": 3,
+    "hrac": 15,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:42:04.939Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 44,
+  "fields": {
+    "trenink": 4,
+    "hrac": 15,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:42:07.454Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 45,
+  "fields": {
+    "trenink": 5,
+    "hrac": 15,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:42:10.196Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 46,
+  "fields": {
+    "trenink": 2,
+    "hrac": 16,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:44:55.944Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 47,
+  "fields": {
+    "trenink": 3,
+    "hrac": 16,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:44:57.633Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 48,
+  "fields": {
+    "trenink": 4,
+    "hrac": 16,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:45:00.287Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 49,
+  "fields": {
+    "trenink": 5,
+    "hrac": 16,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:45:02.051Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 50,
+  "fields": {
+    "trenink": 2,
+    "hrac": 17,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:47:44.766Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 51,
+  "fields": {
+    "trenink": 3,
+    "hrac": 17,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:47:45.772Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 52,
+  "fields": {
+    "trenink": 4,
+    "hrac": 17,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:47:48.399Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 53,
+  "fields": {
+    "trenink": 5,
+    "hrac": 17,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:47:50.729Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 54,
+  "fields": {
+    "trenink": 2,
+    "hrac": 18,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:50:17.923Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 55,
+  "fields": {
+    "trenink": 3,
+    "hrac": 18,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:50:20.161Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 56,
+  "fields": {
+    "trenink": 4,
+    "hrac": 18,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:50:22.321Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 57,
+  "fields": {
+    "trenink": 5,
+    "hrac": 18,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:50:24.951Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 58,
+  "fields": {
+    "trenink": 2,
+    "hrac": 19,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:52:42.712Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 59,
+  "fields": {
+    "trenink": 3,
+    "hrac": 19,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:52:44.107Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 60,
+  "fields": {
+    "trenink": 4,
+    "hrac": 19,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:52:46.260Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 61,
+  "fields": {
+    "trenink": 5,
+    "hrac": 19,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:52:48.638Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 62,
+  "fields": {
+    "trenink": 2,
+    "hrac": 20,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:56:15.818Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 63,
+  "fields": {
+    "trenink": 3,
+    "hrac": 20,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:56:17.670Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 64,
+  "fields": {
+    "trenink": 4,
+    "hrac": 20,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:56:19.282Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 65,
+  "fields": {
+    "trenink": 5,
+    "hrac": 20,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:56:22.164Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 66,
+  "fields": {
+    "trenink": 2,
+    "hrac": 21,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:58:43.648Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 67,
+  "fields": {
+    "trenink": 3,
+    "hrac": 21,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:58:46.222Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 68,
+  "fields": {
+    "trenink": 4,
+    "hrac": 21,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:58:47.958Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 69,
+  "fields": {
+    "trenink": 5,
+    "hrac": 21,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T22:58:50.107Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 70,
+  "fields": {
+    "trenink": 2,
+    "hrac": 31,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:02:13.041Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 71,
+  "fields": {
+    "trenink": 3,
+    "hrac": 31,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:02:14.317Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 72,
+  "fields": {
+    "trenink": 4,
+    "hrac": 31,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:02:17.948Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 73,
+  "fields": {
+    "trenink": 5,
+    "hrac": 31,
+    "pritomen": false,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:02:19.873Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 74,
+  "fields": {
+    "trenink": 2,
+    "hrac": 23,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:05:30.160Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 75,
+  "fields": {
+    "trenink": 3,
+    "hrac": 23,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:05:32.194Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 76,
+  "fields": {
+    "trenink": 4,
+    "hrac": 23,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:05:34.601Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 77,
+  "fields": {
+    "trenink": 5,
+    "hrac": 23,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:05:38.647Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 78,
+  "fields": {
+    "trenink": 2,
+    "hrac": 25,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:08:01.804Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 79,
+  "fields": {
+    "trenink": 3,
+    "hrac": 25,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:08:03.709Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 80,
+  "fields": {
+    "trenink": 4,
+    "hrac": 25,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:08:06.277Z"
+  }
+},
+{
+  "model": "aplikace.dochazkatreninky",
+  "pk": 81,
+  "fields": {
+    "trenink": 5,
+    "hrac": 25,
+    "pritomen": true,
+    "duvod": null,
+    "hlasoval_v": "2025-07-03T23:08:09.952Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 5,
+  "fields": {
+    "tym": 1,
+    "souper": "Opabrum",
+    "datum": "2025-08-16",
+    "cas": "15:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Nové Sedlice",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 0,
+    "created_at": "2025-07-03T21:57:30.410Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 6,
+  "fields": {
+    "tym": 1,
+    "souper": "Větřkovice",
+    "datum": "2025-08-23",
+    "cas": "15:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Opava, Komárov",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 2,
+    "created_at": "2025-07-03T21:58:29.865Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 7,
+  "fields": {
+    "tym": 1,
+    "souper": "Opava Patriots",
+    "datum": "2025-08-31",
+    "cas": "15:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Opava",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 0,
+    "created_at": "2025-07-03T21:59:32.313Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 8,
+  "fields": {
+    "tym": 1,
+    "souper": "Budišov n/B",
+    "datum": "2025-09-06",
+    "cas": "15:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Budišov nad Budišovkou",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 3,
+    "created_at": "2025-07-03T22:00:23.342Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 9,
+  "fields": {
+    "tym": 1,
+    "souper": "Palhanec",
+    "datum": "2025-09-13",
+    "cas": "15:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Opava, Komárov",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 1,
+    "created_at": "2025-07-03T22:01:00.911Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 10,
+  "fields": {
+    "tym": 1,
+    "souper": "Radkov",
+    "datum": "2025-09-21",
+    "cas": "15:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Radkov",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 3,
+    "created_at": "2025-07-03T22:01:29.334Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 11,
+  "fields": {
+    "tym": 1,
+    "souper": "Sosnová",
+    "datum": "2025-09-27",
+    "cas": "15:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Opava, Komárov",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 4,
+    "created_at": "2025-07-03T22:02:06.005Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 12,
+  "fields": {
+    "tym": 1,
+    "souper": "Melč",
+    "datum": "2025-10-04",
+    "cas": "15:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Melč",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 1,
+    "created_at": "2025-07-03T22:02:41.626Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 13,
+  "fields": {
+    "tym": 1,
+    "souper": "Březová",
+    "datum": "2025-10-11",
+    "cas": "15:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Opava, Komárov",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 3,
+    "created_at": "2025-07-03T22:03:31.056Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 14,
+  "fields": {
+    "tym": 1,
+    "souper": "Deštné",
+    "datum": "2025-10-18",
+    "cas": "15:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Jakartovice, Deštné",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 2,
+    "created_at": "2025-07-03T22:04:05.248Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 15,
+  "fields": {
+    "tym": 1,
+    "souper": "Hradec n/M \"B\"",
+    "datum": "2025-10-25",
+    "cas": "15:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Opava, Komárov",
+    "stav": "Dohráno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 3,
+    "created_at": "2025-07-03T22:04:46.501Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 16,
+  "fields": {
+    "tym": 1,
+    "souper": "Budišov n/B",
+    "datum": "2026-03-15",
+    "cas": "15:00:00",
+    "domaci_hoste": "Domácí",
+    "misto": "Opava, Komárov",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 0,
+    "created_at": "2026-01-04T00:40:27.165Z"
+  }
+},
+{
+  "model": "aplikace.zapas",
+  "pk": 17,
+  "fields": {
+    "tym": 1,
+    "souper": "Hradec n/M \"B\"",
+    "datum": "2026-03-08",
+    "cas": "15:00:00",
+    "domaci_hoste": "Hosté",
+    "misto": "Hradec nad Moravicí",
+    "stav": "Naplánováno",
+    "vysledek_tymu": null,
+    "vysledek_soupere": 0,
+    "created_at": "2026-01-04T00:41:11.070Z"
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 21,
+  "fields": {
+    "zapas": 5,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 22,
+  "fields": {
+    "zapas": 6,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 23,
+  "fields": {
+    "zapas": 7,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 24,
+  "fields": {
+    "zapas": 8,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 25,
+  "fields": {
+    "zapas": 9,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 26,
+  "fields": {
+    "zapas": 10,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 27,
+  "fields": {
+    "zapas": 12,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 28,
+  "fields": {
+    "zapas": 11,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 29,
+  "fields": {
+    "zapas": 15,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 30,
+  "fields": {
+    "zapas": 13,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 31,
+  "fields": {
+    "zapas": 14,
+    "hrac": 6,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 32,
+  "fields": {
+    "zapas": 5,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 33,
+  "fields": {
+    "zapas": 6,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 34,
+  "fields": {
+    "zapas": 7,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 35,
+  "fields": {
+    "zapas": 8,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 36,
+  "fields": {
+    "zapas": 9,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 37,
+  "fields": {
+    "zapas": 10,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 38,
+  "fields": {
+    "zapas": 11,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 39,
+  "fields": {
+    "zapas": 12,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 40,
+  "fields": {
+    "zapas": 13,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 41,
+  "fields": {
+    "zapas": 14,
+    "hrac": 7,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 42,
+  "fields": {
+    "zapas": 15,
+    "hrac": 7,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 43,
+  "fields": {
+    "zapas": 5,
+    "hrac": 8,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 44,
+  "fields": {
+    "zapas": 6,
+    "hrac": 8,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 45,
+  "fields": {
+    "zapas": 7,
+    "hrac": 8,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 46,
+  "fields": {
+    "zapas": 8,
+    "hrac": 8,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 47,
+  "fields": {
+    "zapas": 9,
+    "hrac": 8,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 48,
+  "fields": {
+    "zapas": 10,
+    "hrac": 8,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 49,
+  "fields": {
+    "zapas": 11,
+    "hrac": 8,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 50,
+  "fields": {
+    "zapas": 12,
+    "hrac": 8,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 51,
+  "fields": {
+    "zapas": 13,
+    "hrac": 8,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 52,
+  "fields": {
+    "zapas": 14,
+    "hrac": 8,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 53,
+  "fields": {
+    "zapas": 15,
+    "hrac": 8,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 54,
+  "fields": {
+    "zapas": 5,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 55,
+  "fields": {
+    "zapas": 6,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 56,
+  "fields": {
+    "zapas": 7,
+    "hrac": 9,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 57,
+  "fields": {
+    "zapas": 8,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 58,
+  "fields": {
+    "zapas": 9,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 59,
+  "fields": {
+    "zapas": 10,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 60,
+  "fields": {
+    "zapas": 11,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 61,
+  "fields": {
+    "zapas": 12,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 62,
+  "fields": {
+    "zapas": 13,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 63,
+  "fields": {
+    "zapas": 14,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 64,
+  "fields": {
+    "zapas": 15,
+    "hrac": 9,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 65,
+  "fields": {
+    "zapas": 5,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 66,
+  "fields": {
+    "zapas": 6,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 67,
+  "fields": {
+    "zapas": 7,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 68,
+  "fields": {
+    "zapas": 8,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 69,
+  "fields": {
+    "zapas": 9,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 70,
+  "fields": {
+    "zapas": 10,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 71,
+  "fields": {
+    "zapas": 11,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 72,
+  "fields": {
+    "zapas": 12,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 73,
+  "fields": {
+    "zapas": 13,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 74,
+  "fields": {
+    "zapas": 14,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 75,
+  "fields": {
+    "zapas": 15,
+    "hrac": 10,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 76,
+  "fields": {
+    "zapas": 5,
+    "hrac": 11,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 77,
+  "fields": {
+    "zapas": 6,
+    "hrac": 11,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 78,
+  "fields": {
+    "zapas": 7,
+    "hrac": 11,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 79,
+  "fields": {
+    "zapas": 8,
+    "hrac": 11,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 80,
+  "fields": {
+    "zapas": 9,
+    "hrac": 11,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 81,
+  "fields": {
+    "zapas": 10,
+    "hrac": 11,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 82,
+  "fields": {
+    "zapas": 11,
+    "hrac": 11,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 83,
+  "fields": {
+    "zapas": 12,
+    "hrac": 11,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 84,
+  "fields": {
+    "zapas": 13,
+    "hrac": 11,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 85,
+  "fields": {
+    "zapas": 14,
+    "hrac": 11,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 86,
+  "fields": {
+    "zapas": 15,
+    "hrac": 11,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 87,
+  "fields": {
+    "zapas": 5,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 88,
+  "fields": {
+    "zapas": 6,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 89,
+  "fields": {
+    "zapas": 7,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 90,
+  "fields": {
+    "zapas": 8,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 91,
+  "fields": {
+    "zapas": 9,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 92,
+  "fields": {
+    "zapas": 10,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 93,
+  "fields": {
+    "zapas": 11,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 94,
+  "fields": {
+    "zapas": 12,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 95,
+  "fields": {
+    "zapas": 13,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 96,
+  "fields": {
+    "zapas": 14,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 97,
+  "fields": {
+    "zapas": 15,
+    "hrac": 12,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 98,
+  "fields": {
+    "zapas": 5,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 99,
+  "fields": {
+    "zapas": 6,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 100,
+  "fields": {
+    "zapas": 7,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 101,
+  "fields": {
+    "zapas": 8,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 102,
+  "fields": {
+    "zapas": 9,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 103,
+  "fields": {
+    "zapas": 10,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 104,
+  "fields": {
+    "zapas": 11,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 105,
+  "fields": {
+    "zapas": 12,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 106,
+  "fields": {
+    "zapas": 13,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 107,
+  "fields": {
+    "zapas": 14,
+    "hrac": 13,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 108,
+  "fields": {
+    "zapas": 15,
+    "hrac": 13,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 109,
+  "fields": {
+    "zapas": 5,
+    "hrac": 14,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 110,
+  "fields": {
+    "zapas": 6,
+    "hrac": 14,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 111,
+  "fields": {
+    "zapas": 7,
+    "hrac": 14,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 112,
+  "fields": {
+    "zapas": 8,
+    "hrac": 14,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 113,
+  "fields": {
+    "zapas": 9,
+    "hrac": 14,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 114,
+  "fields": {
+    "zapas": 10,
+    "hrac": 14,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 115,
+  "fields": {
+    "zapas": 11,
+    "hrac": 14,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 116,
+  "fields": {
+    "zapas": 12,
+    "hrac": 14,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 117,
+  "fields": {
+    "zapas": 13,
+    "hrac": 14,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 118,
+  "fields": {
+    "zapas": 14,
+    "hrac": 14,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 119,
+  "fields": {
+    "zapas": 15,
+    "hrac": 14,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 120,
+  "fields": {
+    "zapas": 5,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 121,
+  "fields": {
+    "zapas": 6,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 122,
+  "fields": {
+    "zapas": 7,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 123,
+  "fields": {
+    "zapas": 8,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 124,
+  "fields": {
+    "zapas": 9,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 125,
+  "fields": {
+    "zapas": 10,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 126,
+  "fields": {
+    "zapas": 11,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 127,
+  "fields": {
+    "zapas": 12,
+    "hrac": 15,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 128,
+  "fields": {
+    "zapas": 13,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 129,
+  "fields": {
+    "zapas": 14,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 130,
+  "fields": {
+    "zapas": 15,
+    "hrac": 15,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 131,
+  "fields": {
+    "zapas": 5,
+    "hrac": 16,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 132,
+  "fields": {
+    "zapas": 6,
+    "hrac": 16,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 133,
+  "fields": {
+    "zapas": 7,
+    "hrac": 16,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 134,
+  "fields": {
+    "zapas": 8,
+    "hrac": 16,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 135,
+  "fields": {
+    "zapas": 9,
+    "hrac": 16,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 136,
+  "fields": {
+    "zapas": 10,
+    "hrac": 16,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 137,
+  "fields": {
+    "zapas": 11,
+    "hrac": 16,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 138,
+  "fields": {
+    "zapas": 12,
+    "hrac": 16,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 139,
+  "fields": {
+    "zapas": 13,
+    "hrac": 16,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 140,
+  "fields": {
+    "zapas": 14,
+    "hrac": 16,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 141,
+  "fields": {
+    "zapas": 15,
+    "hrac": 16,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 142,
+  "fields": {
+    "zapas": 5,
+    "hrac": 17,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 143,
+  "fields": {
+    "zapas": 6,
+    "hrac": 17,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 144,
+  "fields": {
+    "zapas": 7,
+    "hrac": 17,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 145,
+  "fields": {
+    "zapas": 8,
+    "hrac": 17,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 146,
+  "fields": {
+    "zapas": 9,
+    "hrac": 17,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 147,
+  "fields": {
+    "zapas": 10,
+    "hrac": 17,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 148,
+  "fields": {
+    "zapas": 11,
+    "hrac": 17,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 149,
+  "fields": {
+    "zapas": 12,
+    "hrac": 17,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 150,
+  "fields": {
+    "zapas": 13,
+    "hrac": 17,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 151,
+  "fields": {
+    "zapas": 14,
+    "hrac": 17,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 152,
+  "fields": {
+    "zapas": 15,
+    "hrac": 17,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 153,
+  "fields": {
+    "zapas": 5,
+    "hrac": 18,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 154,
+  "fields": {
+    "zapas": 6,
+    "hrac": 18,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 155,
+  "fields": {
+    "zapas": 7,
+    "hrac": 18,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 156,
+  "fields": {
+    "zapas": 8,
+    "hrac": 18,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 157,
+  "fields": {
+    "zapas": 9,
+    "hrac": 18,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 158,
+  "fields": {
+    "zapas": 10,
+    "hrac": 18,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 159,
+  "fields": {
+    "zapas": 11,
+    "hrac": 18,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 160,
+  "fields": {
+    "zapas": 12,
+    "hrac": 18,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 161,
+  "fields": {
+    "zapas": 13,
+    "hrac": 18,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 162,
+  "fields": {
+    "zapas": 15,
+    "hrac": 18,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 163,
+  "fields": {
+    "zapas": 5,
+    "hrac": 19,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 164,
+  "fields": {
+    "zapas": 6,
+    "hrac": 19,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 165,
+  "fields": {
+    "zapas": 7,
+    "hrac": 19,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 166,
+  "fields": {
+    "zapas": 8,
+    "hrac": 19,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 167,
+  "fields": {
+    "zapas": 9,
+    "hrac": 19,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 168,
+  "fields": {
+    "zapas": 10,
+    "hrac": 19,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 169,
+  "fields": {
+    "zapas": 11,
+    "hrac": 19,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 170,
+  "fields": {
+    "zapas": 12,
+    "hrac": 19,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 171,
+  "fields": {
+    "zapas": 13,
+    "hrac": 19,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 172,
+  "fields": {
+    "zapas": 14,
+    "hrac": 19,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 173,
+  "fields": {
+    "zapas": 15,
+    "hrac": 19,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 174,
+  "fields": {
+    "zapas": 5,
+    "hrac": 20,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 175,
+  "fields": {
+    "zapas": 6,
+    "hrac": 20,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 176,
+  "fields": {
+    "zapas": 7,
+    "hrac": 20,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 177,
+  "fields": {
+    "zapas": 8,
+    "hrac": 20,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 178,
+  "fields": {
+    "zapas": 9,
+    "hrac": 20,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 179,
+  "fields": {
+    "zapas": 10,
+    "hrac": 20,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 180,
+  "fields": {
+    "zapas": 11,
+    "hrac": 20,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 181,
+  "fields": {
+    "zapas": 12,
+    "hrac": 20,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 182,
+  "fields": {
+    "zapas": 13,
+    "hrac": 20,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 183,
+  "fields": {
+    "zapas": 14,
+    "hrac": 20,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 184,
+  "fields": {
+    "zapas": 15,
+    "hrac": 20,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 185,
+  "fields": {
+    "zapas": 5,
+    "hrac": 21,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 186,
+  "fields": {
+    "zapas": 6,
+    "hrac": 21,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 187,
+  "fields": {
+    "zapas": 7,
+    "hrac": 21,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 188,
+  "fields": {
+    "zapas": 8,
+    "hrac": 21,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 189,
+  "fields": {
+    "zapas": 9,
+    "hrac": 21,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 190,
+  "fields": {
+    "zapas": 10,
+    "hrac": 21,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 191,
+  "fields": {
+    "zapas": 11,
+    "hrac": 21,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 192,
+  "fields": {
+    "zapas": 12,
+    "hrac": 21,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 193,
+  "fields": {
+    "zapas": 13,
+    "hrac": 21,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 194,
+  "fields": {
+    "zapas": 14,
+    "hrac": 21,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 195,
+  "fields": {
+    "zapas": 15,
+    "hrac": 21,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 196,
+  "fields": {
+    "zapas": 5,
+    "hrac": 31,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 197,
+  "fields": {
+    "zapas": 6,
+    "hrac": 31,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 198,
+  "fields": {
+    "zapas": 7,
+    "hrac": 31,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 199,
+  "fields": {
+    "zapas": 8,
+    "hrac": 31,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 200,
+  "fields": {
+    "zapas": 9,
+    "hrac": 31,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 201,
+  "fields": {
+    "zapas": 10,
+    "hrac": 31,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 202,
+  "fields": {
+    "zapas": 11,
+    "hrac": 31,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 203,
+  "fields": {
+    "zapas": 12,
+    "hrac": 31,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 204,
+  "fields": {
+    "zapas": 13,
+    "hrac": 31,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 205,
+  "fields": {
+    "zapas": 14,
+    "hrac": 31,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 206,
+  "fields": {
+    "zapas": 15,
+    "hrac": 31,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 207,
+  "fields": {
+    "zapas": 5,
+    "hrac": 23,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 208,
+  "fields": {
+    "zapas": 6,
+    "hrac": 23,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 209,
+  "fields": {
+    "zapas": 7,
+    "hrac": 23,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 210,
+  "fields": {
+    "zapas": 8,
+    "hrac": 23,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 211,
+  "fields": {
+    "zapas": 9,
+    "hrac": 23,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 212,
+  "fields": {
+    "zapas": 10,
+    "hrac": 23,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 213,
+  "fields": {
+    "zapas": 11,
+    "hrac": 23,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 214,
+  "fields": {
+    "zapas": 12,
+    "hrac": 23,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 215,
+  "fields": {
+    "zapas": 13,
+    "hrac": 23,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 216,
+  "fields": {
+    "zapas": 14,
+    "hrac": 23,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 217,
+  "fields": {
+    "zapas": 15,
+    "hrac": 23,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 218,
+  "fields": {
+    "zapas": 5,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 219,
+  "fields": {
+    "zapas": 6,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 220,
+  "fields": {
+    "zapas": 7,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 221,
+  "fields": {
+    "zapas": 8,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 222,
+  "fields": {
+    "zapas": 9,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 223,
+  "fields": {
+    "zapas": 10,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 224,
+  "fields": {
+    "zapas": 11,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 225,
+  "fields": {
+    "zapas": 12,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 226,
+  "fields": {
+    "zapas": 13,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 227,
+  "fields": {
+    "zapas": 14,
+    "hrac": 25,
+    "pritomen": true,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.dochazkazapasy",
+  "pk": 228,
+  "fields": {
+    "zapas": 15,
+    "hrac": 25,
+    "pritomen": false,
+    "poznamka": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 8,
+  "fields": {
+    "zapas": 5,
+    "hrac": 12,
+    "minuta": 22,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 9,
+  "fields": {
+    "zapas": 5,
+    "hrac": 10,
+    "minuta": 60,
+    "typ": "normalni",
+    "asistence": 16
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 10,
+  "fields": {
+    "zapas": 5,
+    "hrac": 31,
+    "minuta": 66,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 11,
+  "fields": {
+    "zapas": 5,
+    "hrac": 8,
+    "minuta": 70,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 12,
+  "fields": {
+    "zapas": 5,
+    "hrac": 31,
+    "minuta": 72,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 13,
+  "fields": {
+    "zapas": 5,
+    "hrac": 16,
+    "minuta": 85,
+    "typ": "primak",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 14,
+  "fields": {
+    "zapas": 6,
+    "hrac": 7,
+    "minuta": 49,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 15,
+  "fields": {
+    "zapas": 6,
+    "hrac": 9,
+    "minuta": 57,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 16,
+  "fields": {
+    "zapas": 6,
+    "hrac": 9,
+    "minuta": 73,
+    "typ": "normalni",
+    "asistence": 15
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 17,
+  "fields": {
+    "zapas": 6,
+    "hrac": 31,
+    "minuta": 90,
+    "typ": "normalni",
+    "asistence": 19
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 18,
+  "fields": {
+    "zapas": 7,
+    "hrac": 31,
+    "minuta": 5,
+    "typ": "normalni",
+    "asistence": 16
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 19,
+  "fields": {
+    "zapas": 7,
+    "hrac": 6,
+    "minuta": 9,
+    "typ": "penalta",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 20,
+  "fields": {
+    "zapas": 7,
+    "hrac": 31,
+    "minuta": 32,
+    "typ": "normalni",
+    "asistence": 25
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 21,
+  "fields": {
+    "zapas": 7,
+    "hrac": 10,
+    "minuta": 56,
+    "typ": "normalni",
+    "asistence": 21
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 22,
+  "fields": {
+    "zapas": 7,
+    "hrac": 23,
+    "minuta": 57,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 23,
+  "fields": {
+    "zapas": 7,
+    "hrac": 21,
+    "minuta": 62,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 24,
+  "fields": {
+    "zapas": 7,
+    "hrac": 23,
+    "minuta": 68,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 25,
+  "fields": {
+    "zapas": 7,
+    "hrac": 31,
+    "minuta": 70,
+    "typ": "normalni",
+    "asistence": 16
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 26,
+  "fields": {
+    "zapas": 7,
+    "hrac": 31,
+    "minuta": 86,
+    "typ": "normalni",
+    "asistence": 15
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 27,
+  "fields": {
+    "zapas": 7,
+    "hrac": 12,
+    "minuta": 88,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 28,
+  "fields": {
+    "zapas": 8,
+    "hrac": 23,
+    "minuta": 1,
+    "typ": "normalni",
+    "asistence": 17
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 29,
+  "fields": {
+    "zapas": 8,
+    "hrac": 10,
+    "minuta": 3,
+    "typ": "normalni",
+    "asistence": 25
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 30,
+  "fields": {
+    "zapas": 8,
+    "hrac": 14,
+    "minuta": 19,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 31,
+  "fields": {
+    "zapas": 8,
+    "hrac": 12,
+    "minuta": 24,
+    "typ": "primak",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 32,
+  "fields": {
+    "zapas": 8,
+    "hrac": 18,
+    "minuta": 43,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 33,
+  "fields": {
+    "zapas": 8,
+    "hrac": 14,
+    "minuta": 67,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 34,
+  "fields": {
+    "zapas": 9,
+    "hrac": 12,
+    "minuta": 17,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 35,
+  "fields": {
+    "zapas": 9,
+    "hrac": 9,
+    "minuta": 34,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 36,
+  "fields": {
+    "zapas": 9,
+    "hrac": 11,
+    "minuta": 39,
+    "typ": "normalni",
+    "asistence": 16
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 37,
+  "fields": {
+    "zapas": 9,
+    "hrac": 8,
+    "minuta": 47,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 38,
+  "fields": {
+    "zapas": 9,
+    "hrac": 25,
+    "minuta": 54,
+    "typ": "normalni",
+    "asistence": 11
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 39,
+  "fields": {
+    "zapas": 9,
+    "hrac": 10,
+    "minuta": 60,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 40,
+  "fields": {
+    "zapas": 10,
+    "hrac": 19,
+    "minuta": 51,
+    "typ": "normalni",
+    "asistence": 15
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 41,
+  "fields": {
+    "zapas": 11,
+    "hrac": 9,
+    "minuta": 7,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 42,
+  "fields": {
+    "zapas": 11,
+    "hrac": 12,
+    "minuta": 12,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 43,
+  "fields": {
+    "zapas": 11,
+    "hrac": 7,
+    "minuta": 15,
+    "typ": "normalni",
+    "asistence": 20
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 44,
+  "fields": {
+    "zapas": 11,
+    "hrac": 15,
+    "minuta": 16,
+    "typ": "normalni",
+    "asistence": 18
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 45,
+  "fields": {
+    "zapas": 11,
+    "hrac": 12,
+    "minuta": 25,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 46,
+  "fields": {
+    "zapas": 11,
+    "hrac": 8,
+    "minuta": 27,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 47,
+  "fields": {
+    "zapas": 11,
+    "hrac": 10,
+    "minuta": 30,
+    "typ": "normalni",
+    "asistence": 14
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 48,
+  "fields": {
+    "zapas": 11,
+    "hrac": 8,
+    "minuta": 41,
+    "typ": "primak",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 49,
+  "fields": {
+    "zapas": 11,
+    "hrac": 15,
+    "minuta": 55,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 50,
+  "fields": {
+    "zapas": 11,
+    "hrac": 14,
+    "minuta": 57,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 51,
+  "fields": {
+    "zapas": 11,
+    "hrac": 18,
+    "minuta": 68,
+    "typ": "normalni",
+    "asistence": 16
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 52,
+  "fields": {
+    "zapas": 11,
+    "hrac": 14,
+    "minuta": 78,
+    "typ": "normalni",
+    "asistence": null
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 53,
+  "fields": {
+    "zapas": 11,
+    "hrac": 20,
+    "minuta": 81,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 54,
+  "fields": {
+    "zapas": 11,
+    "hrac": 14,
+    "minuta": 86,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 55,
+  "fields": {
+    "zapas": 12,
+    "hrac": 9,
+    "minuta": 39,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 56,
+  "fields": {
+    "zapas": 13,
+    "hrac": 14,
+    "minuta": 79,
+    "typ": "normalni",
+    "asistence": 25
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 57,
+  "fields": {
+    "zapas": 14,
+    "hrac": 9,
+    "minuta": 5,
+    "typ": "normalni",
+    "asistence": 15
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 58,
+  "fields": {
+    "zapas": 15,
+    "hrac": 12,
+    "minuta": 51,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 59,
+  "fields": {
+    "zapas": 15,
+    "hrac": 14,
+    "minuta": 42,
+    "typ": "normalni",
+    "asistence": 8
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 60,
+  "fields": {
+    "zapas": 15,
+    "hrac": 8,
+    "minuta": 56,
+    "typ": "normalni",
+    "asistence": 16
+  }
+},
+{
+  "model": "aplikace.gol",
+  "pk": 61,
+  "fields": {
+    "zapas": 15,
+    "hrac": 14,
+    "minuta": 74,
+    "typ": "normalni",
+    "asistence": 20
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 6,
+  "fields": {
+    "zapas": 5,
+    "hrac": 16,
+    "typ": "zluta",
+    "minuta": 70
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 7,
+  "fields": {
+    "zapas": 5,
+    "hrac": 12,
+    "typ": "zluta",
+    "minuta": 74
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 8,
+  "fields": {
+    "zapas": 8,
+    "hrac": 10,
+    "typ": "zluta",
+    "minuta": 72
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 9,
+  "fields": {
+    "zapas": 11,
+    "hrac": 19,
+    "typ": "zluta",
+    "minuta": 52
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 10,
+  "fields": {
+    "zapas": 12,
+    "hrac": 20,
+    "typ": "zluta",
+    "minuta": 23
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 11,
+  "fields": {
+    "zapas": 12,
+    "hrac": 20,
+    "typ": "zluta_cervena",
+    "minuta": 45
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 12,
+  "fields": {
+    "zapas": 13,
+    "hrac": 7,
+    "typ": "cervena",
+    "minuta": 68
+  }
+},
+{
+  "model": "aplikace.karta",
+  "pk": 13,
+  "fields": {
+    "zapas": 14,
+    "hrac": 10,
+    "typ": "zluta",
+    "minuta": 80
+  }
+}
+]
