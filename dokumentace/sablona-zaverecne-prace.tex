@@ -417,7 +417,7 @@ V rámci této dokumentace podrobně popisuji celý proces vývoje. Začínám a
 %* motivaci pro další čtení textu včetně stručného uvedení obsahu následujících kapitol 
 
 
-\chapter{Teoretická východiska a analýza projektu}
+\chapter{Analýza projektu}
 
 \section{Účel aplikace}
 \label{sec:uvod}
@@ -532,13 +532,12 @@ Téma správy fotbalových klubů nabízí téměř nekonečné možnosti rozši
 	
 	Návrh databáze je srdcem celého projektu. K její realizaci jsem využil relační model, který je v~rámci frameworku Django definován přímo v souborech models.py.
 	
+	Jakmile byly definovány všechny třídy a vztahy v souboru \textit{models.py}, využil jsem vestavěný systém migrací. Proces proběhl ve dvou krocích: nejprve příkazem \textit{makemigrations}, který analyzoval změny v kódu a vytvořil instrukční soubory, a následně příkazem \textit{migrate}. Tímto krokem se nadefinovaná struktura fyzicky propsala do databáze PostgreSQL. Výsledkem je plně funkční a optimalizovaná databázová struktura, která je připravena na ukládání reálných dat aplikace.
 	\begin{figure}[h]
 		\centering
 		\includegraphics[width=0.8\linewidth]{image/er_diagram.png} 
 		\caption{ER diagram databázové struktury}
 	\end{figure}
-	
-	Jakmile byly definovány všechny třídy a vztahy v souboru \textit{models.py}, využil jsem vestavěný systém migrací. Proces proběhl ve dvou krocích: nejprve příkazem \textit{makemigrations}, který analyzoval změny v kódu a vytvořil instrukční soubory, a následně příkazem \textit{migrate}. Tímto krokem se nadefinovaná struktura fyzicky propsala do databáze PostgreSQL. Výsledkem je plně funkční a optimalizovaná databázová struktura, která je připravena na ukládání reálných dat aplikace.
 	
 	
 	\section[Tvorba aplikační logiky a šablon]{Tvorba aplikační logiky a šablon}
