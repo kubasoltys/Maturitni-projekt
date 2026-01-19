@@ -1,5 +1,7 @@
 # Squadra – Webová aplikace pro správu fotbalového týmu
 
+# Video prezentace o tomto projektu na YouTube: https://youtu.be/7fVLDrNe0TE
+
 ## 📌 Cíl projektu
 
 Cílem projektu **Squadra** je vytvořit moderní, přehlednou a responzivní webovou aplikaci, která umožní fotbalovým týmům efektivně spravovat své hráče, plánovat zápasy a tréninky, sledovat docházku a uchovávat základní statistiky.
